@@ -16,3 +16,20 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 
+# Hva er R?
+
+# Demo av RStudio
+
+# Grunnleggende bruk av R 
+
+# Datastrukturer i R 
+
+# Innebygde funksjoner i R 
+
+# Innlesing av data
+
+# Kontrollflyt 
+
+# Egne funksjoner 
+
+# God kodepraksis 
