@@ -1,0 +1,18 @@
+---
+title: "Introduksjon til R"
+author: "Ove Haugland Jakobsen og Aleksander Eilertsen"
+date: "29 januar 2020"
+always_allow_html: yes
+output:
+  ioslides_presentation:
+    fig_retina: 2
+    widescreen: yes
+    css: ../assets/styles.min.css
+    logo: ../assets/rr-logo.svg
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+

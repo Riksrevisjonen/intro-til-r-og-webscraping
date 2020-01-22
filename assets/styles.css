@@ -1,0 +1,36 @@
+slides > slide.backdrop {
+  background: #eee;
+}
+
+blockquote {
+  margin: auto 2.8em;
+  font-size: 1.2em;
+}
+
+blockquote .quoteby {
+  text-align: right;
+  font-size: .8em;
+  margin-top: .5em;
+}
+
+.small {
+  font-size: .8em;
+}
+
+.small-code pre {
+  font-size: .6em;
+  line-height: 1.2em;
+}
+
+.standout {
+  margin: 1em 2em;
+  font-size: 1.5em;
+}
+
+.rrimage {
+  max-width: 100%;
+}
+
+.extraspace li {
+  margin-bottom: 1em;
+}
