@@ -66,6 +66,25 @@ Den (litt) lengre versjonen:
 
 # Grunnleggende bruk av R 
 
+## R som kalkulator
+
+```{r, echo=TRUE}
+# Vi kan utføre enkel aritmetikk med +, -, *, /, og ^
+3 + 3  # Addisjon
+3 * 3  # Multiplikasjon
+3 ^ 3  # Eksponent
+3 %% 3 # Modulus
+```
+
+## R som kalkulator
+
+```{r, echo=TRUE}
+3 + 3 * 3
+(3 + 3) * 3
+```
+
+## Prøv selv!
+
 # Datastrukturer i R 
 
 # Innebygde funksjoner i R 
