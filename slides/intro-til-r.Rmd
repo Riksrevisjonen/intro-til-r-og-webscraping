@@ -20,6 +20,12 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # Demo av RStudio
 
+## RStudio 
+
+```{r out.width='80%', fig.align='center'}
+knitr::include_graphics('../assets/rstudio.png')
+```
+
 # Grunnleggende bruk av R 
 
 # Datastrukturer i R 
