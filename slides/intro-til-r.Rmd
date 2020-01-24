@@ -123,6 +123,127 @@ To viktige funksjoner:
 
 # Kontrollflyt 
 
+## Likhet
+
+I R kan vi teste for likhet med `==` og ulikhet med `!=`:
+
+```{r, echo=TRUE}
+TRUE == FALSE
+TRUE == TRUE
+FALSE != TRUE
+FALSE != FALSE
+```
+
+## Likhet
+
+```{r, echo=TRUE}
+# Vi kan teste om tekst er lik
+'Riksrevisjonen' == 'riksrevisjonen'
+# Eller om numeriske verdier er like
+16 ^ 4 == 1024 * 64
+# Eller sammenligne logiske verdier med numeriske (TRUE er 1)
+TRUE != 0
+```
+
+
+## Større og mindre enn
+
+Vi tester om en verdi er større med `>`, større eller lik med `>=`, mindre med `<` og mindre eller lik med `<=`:
+
+```{r, echo=TRUE}
+16 ^ 4 >= 8 * 1024
+```
+
+
+## Større og mindre enn
+
+Vi kan også sammenligne vektorer:
+
+```{r, echo=TRUE}
+x <- c(4, 20, 16, 34, 18, 32, 28, 31)
+x > 25
+x <= 20
+```
+
+
+## Oppgaver!
+
+* Er uttrykket `-6 * 4 + 5` **større enn** `-3 * 8 - 4`?
+
+## Logiske operatorer
+
+I R bruker vi følgende logiske operatorer
+
+* `&` for OG
+* `|` for ELLER
+* `!` for IKKE
+
+## Logiske operatorer
+
+```{r, echo=TRUE}
+TRUE & TRUE
+TRUE | FALSE
+!FALSE
+```
+
+
+## Hvis
+
+```
+if (condition) {
+  uttrykk
+}
+```
+
+## Hvis
+
+```
+if (condition) {
+  uttrykk
+} else if (condition) {
+  uttrykk
+} else {
+  
+}
+```
+
+## Hvis
+
+```{r, echo=TRUE}
+if (FALSE) {
+  print('Sant')
+}
+else {
+  print('Ikke sant')
+}
+```
+
+
+## Looper
+
+`for` og `while`
+
+```{r, echo=TRUE}
+for (x in 1:5) {
+  print(paste(rep('a', x), collapse = ''))
+}
+```
+
+## Apply-familien {.flexbox .vleft}
+
+* Looper kan være praktiske, men de er også veldig _ineffektive_
+* R har en serie med funksjoner som gjentar en funksjon over en `list`e eller `vector`
+* `lapply` bruker en funksjon over en liste av elementer og returnerer en liste
+* `sapply` er lik `lapply`, men returnerer en vektor eller matrise (alt etter hva funksjonen får som input)
+
+## lapply
+
+```{r, echo=TRUE}
+# Opprett en liste x med 3 elementer og ta gjennomsnittet av hvert element
+x <- list(a = 1:10, b = runif(10, 0, 10), c = seq(1, 28, 3))
+lapply(x, mean)
+```
+
 # Egne funksjoner 
 
 # God kodepraksis 
