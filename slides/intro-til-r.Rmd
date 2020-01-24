@@ -95,6 +95,53 @@ knitr::include_graphics('../assets/rstudio.png')
 
 # Innebygde funksjoner i R 
 
+## Bruk av funksjoner
+
+R har en rekke innebygde funksjoner. Noen eksempler er:
+
+* Summer verdiene i en vektor med `sum()` 
+* Finn unike verdier i en vektor med `unique()`
+* Vis innholdet i en variabel med `print()` 
+* Opprett en matrise med `matrix()`
+
+For en liste over viktige basisfunksjoner, se 
+[http://adv-r.had.co.nz/Vocabulary.html](http://adv-r.had.co.nz/Vocabulary.html)
+
+## Argumenter
+
+- Funksjoner kan ha en eller flere _argumenter_
+- Noen argumenter må angis, andre er valgfrie
+- Du kan bruke `help()` eller `?` for å få informasjon om en funksjon og alle argumenter
+- Se hva som skjer hvis du prøver å skrive `dim()` i konsollen
+
+## Argumenter
+```{r, eval=TRUE, echo=TRUE, error=TRUE}
+dim()
+```
+
+Få mer informasjon om funksjonen `dim()`
+```{r, eval=FALSE, echo=TRUE}
+?dim
+```
+
+## Oppgave 1 {.flexbox .vleft .extraspace}
+
+* Sjekk ut hjelpesiden til funksjonen `sum`. Hvilke argumenter tar funksjonen?
+* Lag en vektor `x <- c(1:10, NA)`. 
+* Hva er summen av `x` ? 
+* Hva er gjennomsnittet av `x` ? 
+* Hva er standardavviket til `x` ? 
+
+
+## Oppgave 2 
+
+* Sjekk ut funksjonen `sample`. Hvilke argumenter tar funksjonen?
+* Lag en vektor `my_vec` med 5 tilfeldig heltall trukket fra en vektor med alle tallene fra `1` til `10`. 
+* Hva skjer hvis du setter `replace` til `TRUE`? 
+* Hva skjer hvis du setter et seed, `set.seed(42)`, før du kjører funksjonen? 
+
+## Standardverdier for argumenter 
+
 # Innlesing av data
 
 ## Kilder til data {.flexbox .vleft .extraspace}
@@ -252,18 +299,48 @@ lapply(x, mean)
 
 # Egne funksjoner 
 
+## Egne funksjoner 
+
+```{r, echo=TRUE}
+# Lag funksjonen  
+myHello <- function(){
+ print('Hello world!') 
+}
+```
+```{r, echo=TRUE}
+# Bruk funksjonen  
+myHello()
+```
+```{r, echo=TRUE, error=TRUE}
+# Bruk funksjonen  
+myHello("Code is poetry.")
+```
+
+## Egne funksjoner 
+
+```{r, echo=TRUE}
+myFun <- function(x){
+ print(x)
+}
+```
+```{r, echo=TRUE}
+myFun("Hello world! ")
+myFun("Code is poetry.")
+```
+
+
 ## Lag din første funksjon I 
 
-Her definerer vi en funksjon, `square_number`, som tar et argument `n` og returnerer resultatet av dette tallet multiplisert med seg selv. 
+Her definerer vi en funksjon, `square`, som tar et argument `n` og returnerer resultatet av dette tallet multiplisert med seg selv. 
 
 ```{r, echo=TRUE, comment='#>', collapse=TRUE}
 # En funksjon for å gange et tall med seg selv 
-square_number <- function(n){
+square <- function(n){
   n * n  
 } 
-square_number(2)
-square_number(16)
-square_number(-4)
+square(2)
+square(16)
+square(-4)
 ```
 
 
@@ -273,11 +350,11 @@ I utgangspunktet returnerer funksjoner i R den siste kommandoen i funksjonen. V�
 
 ```{r, echo=TRUE, comment='#>', collapse=TRUE}
 # NB! Denne funksjonen returnerer ikke riktig resultat.  
-square_number <- function(n){
+square <- function(n){
   n * n  # Dette returneres ikke 
   print(paste("Returning the square of", n)) # Dette returneres 
 } 
-square_number(2) 
+square(2) 
 ```
 
 ## Lag din første funksjon III  
@@ -285,11 +362,11 @@ square_number(2)
 Pass derfor på at det du vil at funksjonen skal returnere står til slutt. 
 
 ```{r, echo=TRUE, comment='#>', collapse=TRUE}
-square_number <- function(n){
+square <- function(n){
   print(paste("Returning the square of", n))
   n * n  
 } 
-square_number(2)
+square(2)
 
 ```
 
@@ -298,50 +375,50 @@ square_number(2)
 Et alternativ er å eksplisitt opprette ett objekt som skal returneres.  
 
 ```{r, echo=TRUE, comment='#>', collapse=TRUE}
-square_number <- function(n){
+square <- function(n){
   out <-  n * n  # Vi definerer et objekt som skal returneres 
   print(paste("Returning the square of", n))
   out
 } 
-square_number(2)
+square(2)
 ```
 
-## Bruk av Rs innebygde `return` funksjon I 
+## Bruk av Rs innebygde `return` funksjon  
 
 I en del tilfeller vil du se eksplisitte kall til Rs innebygde `return()` funksjon. Dette er strengt tatt ikke nødvendig når du kun vil returnere det siste objektet i en funksjon, men er en skrivemåte dere vil komme til å se. 
 
 ```{r, echo=TRUE, comment='#>', collapse=TRUE}
-square_number <- function(n){
+square <- function(n){
   out <-  n * n  
   print(paste("Returning the square of", n))
   return(out) 
 } 
-square_number(2)
+square(2)
 ```
 
-## Bruk av Rs innebygde `return` funksjon II
+## Bruk av Rs innebygde `return` funksjon 
 
 Det er imidlertid viktig å merke seg at bruk av `return` vil kaste deg ut av funksjonen. Resterende kodelinjer vil derfor ikke kjøres.
 
 ```{r, echo=TRUE, comment='#>', collapse=TRUE}
 # NB! Denne funksjonen returnerer ikke riktig resultat.  
 # Funksjonen stopper opp når 'return' kalles. 
-square_number <- function(n){
+square <- function(n){
   out <-  n * n  
   return('Hello world') # Dette vil være den siste kodelinjen som funksjonen utfører
   print(paste("Returning the square of", n))
   out
 } 
-square_number(2)
+square(2)
 ```
 
 
 ## Function scoping 
 
-Et annet viktig poeng når det gjelder funksjoner er at objekter som defineres inne i en funksjonen kun er tilgjenglig inne i funksjonen. Eksempelvis vil objektet `out` **ikke** være tilgjengelig utenfor funksjonen `square_number`.  
+Et annet viktig poeng når det gjelder funksjoner er at objekter som defineres inne i en funksjonen kun er tilgjenglig inne i funksjonen. Eksempelvis vil objektet `out` **ikke** være tilgjengelig utenfor funksjonen `square`.  
 
 ```{r, echo=TRUE, comment='#>', collapse=TRUE, error=TRUE}
-square_number <- function(n){
+square <- function(n){
   out <-  n * n  
   print(paste("Returning the square of", n))
   out
@@ -399,10 +476,10 @@ power(2)
 
 ## En funksjons robusthet
 
-Funksjonen `square_number` fungerer kun på faktiske tall. 
+Funksjonen `square` fungerer kun på faktiske tall. 
 
 ```{r, echo=TRUE, comment='#>', collapse=TRUE, error=TRUE}
-square_number("2") 
+square("2") 
 ```
 
 ## Kontrollflyt i en funksjon 
@@ -410,7 +487,7 @@ square_number("2")
 Vi kan legge til kontrollstrukturer inne i en funksjon. Her bruker vi en `if` betingelse for å konvertere `n` til en numerisk verdi **dersom** det i utgangspunktet er en tekststreng. 
 
 ```{r, echo=TRUE, comment='#>', collapse=TRUE}
-square_number <- function(n){
+square <- function(n){
   # Konverter tekst til numerisk  
   if(is.character(n)){
     n <- as.numeric(n)
@@ -418,7 +495,7 @@ square_number <- function(n){
   # Multipliser 
   n * n  
 } 
-square_number("2")
+square("2")
 ```
 
 ## Oppgaver 
