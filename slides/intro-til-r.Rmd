@@ -32,4 +32,180 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # Egne funksjoner 
 
+## Lag din første funksjon I 
+
+Her definerer vi en funksjon, `square_number`, som tar et argument `n` og returnerer resultatet av dette tallet multiplisert med seg selv. 
+
+```{r, echo=TRUE, comment='#>', collapse=TRUE}
+# En funksjon for å gange et tall med seg selv 
+square_number <- function(n){
+  n * n  
+} 
+square_number(2)
+square_number(16)
+square_number(-4)
+```
+
+
+## Lag din første funksjon II 
+
+I utgangspunktet returnerer funksjoner i R den siste kommandoen i funksjonen. Vær derfor oppmerksom på følgende: 
+
+```{r, echo=TRUE, comment='#>', collapse=TRUE}
+# NB! Denne funksjonen returnerer ikke riktig resultat.  
+square_number <- function(n){
+  n * n  # Dette returneres ikke 
+  print(paste("Returning the square of", n)) # Dette returneres 
+} 
+square_number(2) 
+```
+
+## Lag din første funksjon III  
+
+Pass derfor på at det du vil at funksjonen skal returnere står til slutt. 
+
+```{r, echo=TRUE, comment='#>', collapse=TRUE}
+square_number <- function(n){
+  print(paste("Returning the square of", n))
+  n * n  
+} 
+square_number(2)
+
+```
+
+## Lag din første funksjon IV  
+
+Et alternativ er å eksplisitt opprette ett objekt som skal returneres.  
+
+```{r, echo=TRUE, comment='#>', collapse=TRUE}
+square_number <- function(n){
+  out <-  n * n  # Vi definerer et objekt som skal returneres 
+  print(paste("Returning the square of", n))
+  out
+} 
+square_number(2)
+```
+
+## Bruk av Rs innebygde `return` funksjon I 
+
+I en del tilfeller vil du se eksplisitte kall til Rs innebygde `return()` funksjon. Dette er strengt tatt ikke nødvendig når du kun vil returnere det siste objektet i en funksjon, men er en skrivemåte dere vil komme til å se. 
+
+```{r, echo=TRUE, comment='#>', collapse=TRUE}
+square_number <- function(n){
+  out <-  n * n  
+  print(paste("Returning the square of", n))
+  return(out) 
+} 
+square_number(2)
+```
+
+## Bruk av Rs innebygde `return` funksjon II
+
+Det er imidlertid viktig å merke seg at bruk av `return` vil kaste deg ut av funksjonen. Resterende kodelinjer vil derfor ikke kjøres.
+
+```{r, echo=TRUE, comment='#>', collapse=TRUE}
+# NB! Denne funksjonen returnerer ikke riktig resultat.  
+# Funksjonen stopper opp når 'return' kalles. 
+square_number <- function(n){
+  out <-  n * n  
+  return('Hello world') # Dette vil være den siste kodelinjen som funksjonen utfører
+  print(paste("Returning the square of", n))
+  out
+} 
+square_number(2)
+```
+
+
+## Function scoping 
+
+Et annet viktig poeng når det gjelder funksjoner er at objekter som defineres inne i en funksjonen kun er tilgjenglig inne i funksjonen. Eksempelvis vil objektet `out` **ikke** være tilgjengelig utenfor funksjonen `square_number`.  
+
+```{r, echo=TRUE, comment='#>', collapse=TRUE, error=TRUE}
+square_number <- function(n){
+  out <-  n * n  
+  print(paste("Returning the square of", n))
+  out
+} 
+out
+```
+
+## Oppgaver 
+
+1. Lag en funksjon `power_two` som tar et argument `x` og opphøyer dette i tallet 2. 
+2. Definerer et objekt `y` inne i funksjonen med resultatet som skal returneres. 
+3. Legg til en `print` statement med hva funksjonen gjør.  
+4. Prøv å få tak i objektene `x` og `y` utenfor funksjonen. 
+
+## Flere argumenter i samme funksjon 
+
+Her definerer vi en funksjon `power` som tar to argumenter `x` og `y` og returnerer resultatet av `x` opphøyd i `y`. 
+
+```{r, echo=TRUE, comment='#>', collapse=TRUE, error=TRUE}
+# En funksjon for å opphøye ett tall i et annet 
+power <- function(x, y){
+  x ^ y  
+}
+# Definer verdier uten navngivning
+power(2, 3) 
+# Definer verdier med navngivning 
+power(x = 2, y = 3)
+# Du kan stokke om på argumentene  
+power(y = 3, x = 2) 
+```
+
+## Flere argumenter i samme funksjon 
+
+Men merk at du må spesifisere begge argumentene i funksjonen.
+
+```{r, echo=TRUE, comment='#>', collapse=TRUE, error=TRUE}
+# En funksjon for å opphøye ett tall i et annet 
+power <- function(x, y){
+  x ^ y  
+}
+power(2) # Dette funker ikke... 
+```
+
+## Standardverdier for argumenter i en funksjon 
+
+En løsning på dette, som du også vil se i mange av Rs innebygde funksjoner, er å sette standardverdier for argumentene i funksjonen. Her har vi definert tallet 2 som standardverdi for eksponenten (`y`). 
+
+```{r, echo=TRUE, comment='#>', collapse=TRUE, error=TRUE}
+# En funksjon for å opphøye ett tall i et annet 
+power <- function(x, y = 2){
+  x ^ y  
+}
+power(2)
+```
+
+## En funksjons robusthet
+
+Funksjonen `square_number` fungerer kun på faktiske tall. 
+
+```{r, echo=TRUE, comment='#>', collapse=TRUE, error=TRUE}
+square_number("2") 
+```
+
+## Kontrollflyt i en funksjon 
+
+Vi kan legge til kontrollstrukturer inne i en funksjon. Her bruker vi en `if` betingelse for å konvertere `n` til en numerisk verdi **dersom** det i utgangspunktet er en tekststreng. 
+
+```{r, echo=TRUE, comment='#>', collapse=TRUE}
+square_number <- function(n){
+  # Konverter tekst til numerisk  
+  if(is.character(n)){
+    n <- as.numeric(n)
+  }
+  # Multipliser 
+  n * n  
+} 
+square_number("2")
+```
+
+## Oppgaver 
+
+1. Lag en funksjon `multiply` som tar argumentene `x` og `y` og retunerer resultatet av `x` multiplisert med `y`. Skriv også ut en beskjed til brukeren om hva resultatet av multiplikasjonen blir, eks. `'1 ganget med 2 er lik 2'`.  
+2. Legg til et argument `quiet` i funksjonen med standardverdi `FALSE`. Skriv om funksjonen slik beskjeden *ikke* skrives ut dersom `quiet` settes til `TRUE`. 
+3. Skriv om funksjonen slik at den håndterer *ikke-numeriske* inputverdier. 
+4. Test funksjonen med ulike verdier for `x` og `y`, eks. `10`, `"10"`, `list("10")` og `data.frame(x = 10)`. 
+
 # God kodepraksis 
