@@ -19,6 +19,49 @@ set.seed(42)
 
 # Hva er R?
 
+## Hva er R? {.flexbox .vleft}
+
+- R er et høynivå programmeringsspråk beregnet (primært) for statistikk, men med svært mange bruksområder
+- R brukes innen en rekke sektorer og fagområder (inkludert Riksrevisjonen `r emo::ji('smiley')`) og er et av de viktigste verktøyene innen data science
+- I utgangspunktet skjer alt arbeid i R via et terminalvindu ved å skrive inn kommandoer, men verktøy som *RStudio* og *R Commander* gjør det lettere å jobbe med R
+
+## Hva kan R brukes til? {.flexbox .vleft}
+
+Kortversjonen: det meste
+
+Den (litt) lengre versjonen:
+
+- Datahøsting og datamanipulering
+- Dataanalyse og modellering, inkludert maskinlæring (kunstig intelligens)
+- Datavisualisering
+- Analyse av ustrukturerte data
+- Webapplikasjoner (med Shiny)
+- Produksjon av rapporter og dokumentasjon av analyser (med Rmarkdown)
+- Denne presentasjonen
+
+## Hva bruker vi R til i Riksrevisjonen? {.flexbox .vleft}
+
+- Innhenting av data fra nett og via APIer (webscraping)
+- Statistiske analyer og utprøving av maskinlæring
+- Bearbeiding av data, blant annet fra datafangst
+- Analyse og visualisering av geodata
+- Utvikling av mindre webapplikasjoner (slik som Løvehulen, Rapportsøk, og Kommunekart)
+- Og mye, mye, mer
+
+## Dataanalyse i R {.flexbox .vleft .extraspace}
+
+- Enorme muligheter for dataanalyse i R
+- R håndterer både _strukturerte_ og _ustrukturerte_ data
+- En rekke innebygde funksjoner for statistisk analyse, og kan utvides til de fleste analyseformål
+- God støtte for datavisualiseringer, både innebygget og via utvidelser (pakker)
+
+## Koding i R {.flexbox .vleft}
+
+- R er primært _tekstbasert_
+- Vi kan jobbe i en _konsoll_ hvor vi skriver inn kommandoer (kode) direkte, eller med et _skript_
+- Vi jobber ikke direkte med filer, men med et _miljø_ (environment) som inneholder _objekter_
+- _Objekter_ i R kan være tradisjonelle tabeller med data i rader og kolonner, men også variabler, innholdet på en nettside, geografiske data, eller mye mer
+
 # Demo av RStudio
 
 # Grunnleggende bruk av R 
