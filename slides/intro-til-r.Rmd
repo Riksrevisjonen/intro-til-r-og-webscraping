@@ -72,6 +72,36 @@ Den (litt) lengre versjonen:
 
 # Innlesing av data
 
+## Kilder til data {.flexbox .vleft .extraspace}
+
+* Lokale filer (semikomma- eller kommaseparerte filer, Excel, Stata)
+* Databaser (SQL)
+* APIer over internett (Stortingets API, SSB)
+* Skytjenester (AWS, Hadoop)
+
+## Data fra lokale filer {.flexbox .vleft}
+
+Bruk `read.csv()` for å lese inn kommaseparerte filer, og `read.csv2()` for å lese inn semikolonseparerte filer
+
+Excel-filer kan leses inn med funksjonen `read_excel()` fra pakken `readxl`
+
+Vær oppmerksom på tekstkodingen til fila. På Windows benyttes formatet Windows-1252 (`CP1252`), mens det vanlige er UTF-8. *Hvis du kan velge tekstkoding på rådata, velg alltid UTF-8*
+
+## readxl
+
+To viktige funksjoner:
+
+* `excel_sheets` og
+* `read_excel`
+
+`read_excel()` støtter både `xlsx` og `xls`-filer, og vil gjette type basert på filnavn. Hvis du vet hvilket format du skal lese, kan du bruke `read_xls()` eller `read_xlsx()`
+
+## Oppgave {.flexbox .vleft .extraspace}
+
+1. Les inn fila `carseats.csv` med `read.csv()` til objektet `carseats`
+2. Bruk `head(carseats)` for å se de første observasjonene
+3. Bruk `sum()` og `mean()` for å finne sum og gjennomsnitt på variablene `Sales` og `Price`
+
 # Kontrollflyt 
 
 # Egne funksjoner 
