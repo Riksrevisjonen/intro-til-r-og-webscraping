@@ -215,7 +215,7 @@ if (condition) {
 
 ## Hvis
 
-```{r, echo=TRUE}
+```{r, echo=TRUE, error=TRUE}
 if (FALSE) {
   print('Sant')
 }
