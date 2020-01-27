@@ -12,6 +12,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
+if (!require(tufte)) install.packages('tufte')
 knitr::opts_chunk$set(echo = FALSE)
 set.seed(42)
 ```
