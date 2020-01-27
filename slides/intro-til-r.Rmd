@@ -110,7 +110,7 @@ For en liste over viktige basisfunksjoner, se
 
 ## Argumenter
 
-- Funksjoner kan ha en eller flere _argumenter_
+- Funksjoner kan ha ett eller flere _argumenter_
 - Noen argumenter må angis, andre er valgfrie
 - Du kan bruke `help()` eller `?` for å få informasjon om en funksjon og alle argumenter
 - Se hva som skjer hvis du prøver å skrive `dim()` i konsollen
@@ -125,7 +125,7 @@ Få mer informasjon om funksjonen `dim()`
 ?dim
 ```
 
-## Oppgave 1 {.flexbox .vleft .extraspace}
+## Oppgaver {.flexbox .vleft .extraspace}
 
 * Sjekk ut hjelpesiden til funksjonen `sum`. Hvilke argumenter tar funksjonen?
 * Lag en vektor `x <- c(1:10, NA)`. 
@@ -133,15 +133,88 @@ Få mer informasjon om funksjonen `dim()`
 * Hva er gjennomsnittet av `x` ? 
 * Hva er standardavviket til `x` ? 
 
+## Argumenter 
 
-## Oppgave 2 
+Det er mulig å bruke både _posisjonsbaserte_ og _navngitte_ argumenter.   
 
-* Sjekk ut funksjonen `sample`. Hvilke argumenter tar funksjonen?
-* Lag en vektor `my_vec` med 5 tilfeldig heltall trukket fra en vektor med alle tallene fra `1` til `10`. 
+```{r echo=TRUE}
+args(sample)
+```
+
+## Posisjonsbaserte argumenter
+
+Sett verdier for de to argumentene `x` og `size` basert på deres posisjon.
+
+```{r echo=TRUE}
+args(sample)
+``` 
+```{r echo=FALSE}
+set.seed(42)
+``` 
+```{r echo=TRUE}
+sample(1:10, 1)
+```
+
+## Navngitte argumenter 
+
+Sett verdier for de to argumentene `x` og `size` basert på argumentenes navn.  
+
+```{r echo=FALSE}
+set.seed(42)
+``` 
+```{r echo=TRUE}
+# Sett verdier med navngivning 
+sample(x = 1:10, size = 1)
+```
+```{r echo=FALSE}
+set.seed(42)
+``` 
+```{r echo=TRUE}
+# Du kan stokke om på argumentene dersom du navngir dem 
+sample(size = 1, x  = 1:10)
+```
+
+
+## Standardverdier for argumenter 
+
+```{r echo=TRUE}
+args(sum)
+args(sample)
+``` 
+
+## Oppgaver {.flexbox .vleft .extraspace}
+
+* Sjekk ut hjelpesiden til funksjonen `sample`. Hvilke argumenter tar funksjonen?
+* Lag en vektor `my_vec` med 5 tilfeldig heltall trukket fra en vektor med alle tallene fra `10` til `20`. 
 * Hva skjer hvis du setter `replace` til `TRUE`? 
 * Hva skjer hvis du setter et seed, `set.seed(42)`, før du kjører funksjonen? 
 
-## Standardverdier for argumenter 
+
+## Vektoriserte funksjoner 
+
+En *vektorisert funksjon* er en funksjon som utfører en operasjon ikke bare på én enkelt verdi, men en hel vektor med verdier. R har flere slike innebygde vektoriserte funksjoner. 
+
+## Vektoriserte funksjoner  
+
+```{r echo=TRUE}
+x <- c(1,2,3)
+y <- c(4,5,3)
+```
+```{r echo=TRUE}
+x + y 
+x * y
+x / y
+```
+
+## Vektoriserte funksjoner 
+
+```{r echo=TRUE}
+my_text <- c("Hello world", "Code is poetry", "Great work!")
+print(my_text)
+my_num <- 1:10
+sqrt(my_num)
+```
+
 
 # Innlesing av data
 
