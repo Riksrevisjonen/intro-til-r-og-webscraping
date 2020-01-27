@@ -62,6 +62,12 @@ Den (litt) lengre versjonen:
 - Vi jobber ikke direkte med filer, men med et _miljø_ (environment) som inneholder _objekter_
 - _Objekter_ i R kan være tradisjonelle tabeller med data i rader og kolonner, men også variabler, innholdet på en nettside, geografiske data, eller mye mer
 
+## Pakker i R {.flexbox .vleft}
+
+* R kan utvides med _pakker_ som gir R ny funksjonalitet
+* Per i dag er det flere enn 16.000 pakker tilgjengelig via CRAN
+* Få pakker i dette kurset, men vi vil bruke flere pakker i kurset om **webscraping**
+
 # Demo av RStudio
 
 ## RStudio 
@@ -146,20 +152,40 @@ Få mer informasjon om funksjonen `dim()`
 
 ## Kilder til data {.flexbox .vleft .extraspace}
 
-* Lokale filer (semikomma- eller kommaseparerte filer, Excel, Stata)
+* Flatfiler (semikomma- eller kommaseparerte filer)
+* Excel-filer
+* Filer fra statistikkpakker (Stata, SAS, SPSS)
 * Databaser (SQL)
 * APIer over internett (Stortingets API, SSB)
 * Skytjenester (AWS, Hadoop)
 
-## Data fra lokale filer {.flexbox .vleft}
+## Les inn data med basefunksjoner {.flexbox .vleft}
 
-Bruk `read.csv()` for å lese inn kommaseparerte filer, og `read.csv2()` for å lese inn semikolonseparerte filer
+* R har innebygde funksjoner (fra `utils`) for å lese inn tekstbaserte filer
+* Vanligste dataformat for tabulære data er CSV
+* Funksjonen `read.csv` leser inn _kommaseparerte_ filer
+* Funksjonen `read.csv2` leser inn _semikolonseparerte_ filer
 
-Excel-filer kan leses inn med funksjonen `read_excel()` fra pakken `readxl`
+## Vanlige problemer {.flexbox .vleft}
 
-Vær oppmerksom på tekstkodingen til fila. På Windows benyttes formatet Windows-1252 (`CP1252`), mens det vanlige er UTF-8. *Hvis du kan velge tekstkoding på rådata, velg alltid UTF-8*
+To vanlige problemer med å lese inn data:
 
-## readxl
+1. R forsøker å konvertere tekstvariabler til faktorer
+2. Norske tegn (alle ikke-ASCII-tegn) leses inn feil på grunn av problemer med tekstkoding (encoding)
+
+Løsninger:
+
+* Les inn data med argumentet `stringsAsFactors` satt til `FALSE`
+* Tekstkodingen kan angis med `encoding`: `CP1252` er vanlig på Windows, mens `UTF-8` er vanlig på macOS og web (for det meste)
+* **Hvis du kan velge tekstkoding på rådata, velg alltid UTF-8**
+
+## Oppgaver
+
+**Husk at du kan bruke `?read.csv` for å få informasjon om funksjonen!**
+
+OPPGAVER HER!
+
+## readxl {.flexbox .vleft}
 
 To viktige funksjoner:
 
@@ -169,6 +195,9 @@ To viktige funksjoner:
 `read_excel()` støtter både `xlsx` og `xls`-filer, og vil gjette type basert på filnavn. Hvis du vet hvilket format du skal lese, kan du bruke `read_xls()` eller `read_xlsx()`
 
 ## Oppgave {.flexbox .vleft .extraspace}
+
++ eks med stringsAsFactors()
++ forklare tibble med readxl
 
 1. Les inn fila `carseats.csv` med `read.csv()` til objektet `carseats`
 2. Bruk `head(carseats)` for å se de første observasjonene
@@ -222,6 +251,7 @@ x <= 20
 ## Oppgaver!
 
 * Er uttrykket `-6 * 4 + 5` **større enn** `-3 * 8 - 4`?
+* Er summen av `c(TRUE, FALSE, TRUE)` **lik eller større enn** `2`
 
 ## Logiske operatorer
 
@@ -242,25 +272,45 @@ TRUE | FALSE
 
 ## Hvis
 
+Vi kan teste for om en betingelse er **sann** (om et uttrykk vil evaluere til `TRUE`) med `if`.
+
+`if` har følgende struktur i R:
+
 ```
-if (condition) {
+if (betingelse) {
   uttrykk
 }
 ```
 
-## Hvis
+## Hvis ... eller
 
 ```
-if (condition) {
+if (betingelse) {
   uttrykk
-} else if (condition) {
+} else if (betingelse) {
   uttrykk
 } else {
-  
+  uttrykk
 }
 ```
 
 ## Hvis
+
+```{r, echo=TRUE}
+x <- 9
+if (x %% 2) {
+  'Delelig med 2'
+} else if (x %% 3) {
+  'Delelig med 3'
+} else {
+  'Ikke delelig med 2 eller 3'
+}
+```
+
+
+## Hvis
+
+Pass på hvordan du skriver `if ... else` kode:
 
 ```{r, echo=TRUE, error=TRUE}
 if (FALSE) {
@@ -272,6 +322,35 @@ else {
 ```
 
 
+## Hvis
+
+* `if ... else` virker kun på én logisk verdi
+* For å sammenligne en _vektor_ av verdier, kan du bruke `ifelse`
+* `ifelse` tar _tre_ argumenter: en vektor, verdien som skal returneres hvis **sann** og verdien som skal returneres hvis **ikke sann**
+
+```{r, echo=TRUE}
+x <- c(14, 6, 2, 4, 5, 10)
+ifelse(x >= 10, 'Over', 'Under')
+```
+
+
+## Oppgaver (1)
+
+Bruk et R-skript for å skrive koden for disse oppgavene
+
+* Skriv kode som returerer `Sant` hvis uttrykket `abs(-20)` er **større enn** `0`
+
+## Oppgaver (2)
+
+Lag en ny vektor `x` med verdiene `17, 33, 3, 32, 29, 8, 12, 22, 29, 41`.
+
+* Skriv kode som returnerer `0` hvis verdien av hver enkel verdi av `x` er **mindre enn** 20 og `1` hvis verdien er **større eller lik** 20
+
+Lag en vektor `a` med verdiene `3, 2, 1` og en vektor `b` med verdiene `1, 2, 3` (kan forkortes til `3:1` og `1:3`).
+
+* Skriv kode som returnerer `Lik` hvis uttrykket `a == b` er **sant** og `Ulik` hvis ikke
+* Forklar resultatet av denne koden
+
 ## Looper
 
 `for` og `while`
@@ -281,6 +360,10 @@ for (x in 1:5) {
   print(paste(rep('a', x), collapse = ''))
 }
 ```
+
+## while
+
+
 
 ## Apply-familien {.flexbox .vleft}
 
