@@ -385,25 +385,20 @@ myHello <- function(){
 # Bruk funksjonen  
 myHello()
 ```
-```{r, echo=TRUE, error=TRUE}
-# Bruk funksjonen  
-myHello("Code is poetry.")
-```
 
 ## Egne funksjoner 
 
 ```{r, echo=TRUE}
-myFun <- function(x){
+myPrint <- function(x){
  print(x)
 }
 ```
 ```{r, echo=TRUE}
-myFun("Hello world! ")
-myFun("Code is poetry.")
+myPrint("Hello world!")
+myPrint("Code is poetry.")
 ```
 
-
-## Lag din første funksjon I 
+## Lag din første funksjon  
 
 Her definerer vi en funksjon, `square`, som tar et argument `n` og returnerer resultatet av dette tallet multiplisert med seg selv. 
 
@@ -417,97 +412,13 @@ square(16)
 square(-4)
 ```
 
+## Oppgaver {.flexbox .vleft .extraspace}
 
-## Lag din første funksjon II 
-
-I utgangspunktet returnerer funksjoner i R den siste kommandoen i funksjonen. Vær derfor oppmerksom på følgende: 
-
-```{r, echo=TRUE, comment='#>', collapse=TRUE}
-# NB! Denne funksjonen returnerer ikke riktig resultat.  
-square <- function(n){
-  n * n  # Dette returneres ikke 
-  print(paste("Returning the square of", n)) # Dette returneres 
-} 
-square(2) 
-```
-
-## Lag din første funksjon III  
-
-Pass derfor på at det du vil at funksjonen skal returnere står til slutt. 
-
-```{r, echo=TRUE, comment='#>', collapse=TRUE}
-square <- function(n){
-  print(paste("Returning the square of", n))
-  n * n  
-} 
-square(2)
-
-```
-
-## Lag din første funksjon IV  
-
-Et alternativ er å eksplisitt opprette ett objekt som skal returneres.  
-
-```{r, echo=TRUE, comment='#>', collapse=TRUE}
-square <- function(n){
-  out <-  n * n  # Vi definerer et objekt som skal returneres 
-  print(paste("Returning the square of", n))
-  out
-} 
-square(2)
-```
-
-## Bruk av Rs innebygde `return` funksjon  
-
-I en del tilfeller vil du se eksplisitte kall til Rs innebygde `return()` funksjon. Dette er strengt tatt ikke nødvendig når du kun vil returnere det siste objektet i en funksjon, men er en skrivemåte dere vil komme til å se. 
-
-```{r, echo=TRUE, comment='#>', collapse=TRUE}
-square <- function(n){
-  out <-  n * n  
-  print(paste("Returning the square of", n))
-  return(out) 
-} 
-square(2)
-```
-
-## Bruk av Rs innebygde `return` funksjon 
-
-Det er imidlertid viktig å merke seg at bruk av `return` vil kaste deg ut av funksjonen. Resterende kodelinjer vil derfor ikke kjøres.
-
-```{r, echo=TRUE, comment='#>', collapse=TRUE}
-# NB! Denne funksjonen returnerer ikke riktig resultat.  
-# Funksjonen stopper opp når 'return' kalles. 
-square <- function(n){
-  out <-  n * n  
-  return('Hello world') # Dette vil være den siste kodelinjen som funksjonen utfører
-  print(paste("Returning the square of", n))
-  out
-} 
-square(2)
-```
+1. Lag en funksjon `double` som tar et argument `x` og returnerer resultatet av `x` multiplisert med 2.  
+2. Bruk funksjonen på tallene 3, 4, 12 og 54.  
 
 
-## Function scoping 
-
-Et annet viktig poeng når det gjelder funksjoner er at objekter som defineres inne i en funksjonen kun er tilgjenglig inne i funksjonen. Eksempelvis vil objektet `out` **ikke** være tilgjengelig utenfor funksjonen `square`.  
-
-```{r, echo=TRUE, comment='#>', collapse=TRUE, error=TRUE}
-square <- function(n){
-  out <-  n * n  
-  print(paste("Returning the square of", n))
-  out
-} 
-out
-```
-
-## Oppgaver 
-
-1. Lag en funksjon `power_two` som tar et argument `x` og opphøyer dette i tallet 2. 
-2. Definerer et objekt `y` inne i funksjonen med resultatet som skal returneres. 
-3. Legg til en `print` statement med hva funksjonen gjør.  
-4. Prøv å få tak i objektene `x` og `y` utenfor funksjonen. 
-
-## Flere argumenter i samme funksjon 
+## Flere argumenter 
 
 Her definerer vi en funksjon `power` som tar to argumenter `x` og `y` og returnerer resultatet av `x` opphøyd i `y`. 
 
@@ -516,15 +427,11 @@ Her definerer vi en funksjon `power` som tar to argumenter `x` og `y` og returne
 power <- function(x, y){
   x ^ y  
 }
-# Definer verdier uten navngivning
-power(2, 3) 
-# Definer verdier med navngivning 
+power(2, 3)
 power(x = 2, y = 3)
-# Du kan stokke om på argumentene  
-power(y = 3, x = 2) 
 ```
 
-## Flere argumenter i samme funksjon 
+## Standardverdier for argumenter  
 
 Men merk at du må spesifisere begge argumentene i funksjonen.
 
@@ -536,9 +443,9 @@ power <- function(x, y){
 power(2) # Dette funker ikke... 
 ```
 
-## Standardverdier for argumenter i en funksjon 
+## Standardverdier for argumenter  
 
-En løsning på dette, som du også vil se i mange av Rs innebygde funksjoner, er å sette standardverdier for argumentene i funksjonen. Her har vi definert tallet 2 som standardverdi for eksponenten (`y`). 
+Som vi har satt i mange av Rs innebygde funksjoner, er det mulig å sette standardverdier for argumentene i funksjonen. Her har vi definert tallet 2 som standardverdi for eksponenten (`y`). 
 
 ```{r, echo=TRUE, comment='#>', collapse=TRUE, error=TRUE}
 # En funksjon for å opphøye ett tall i et annet 
@@ -546,15 +453,29 @@ power <- function(x, y = 2){
   x ^ y  
 }
 power(2)
+power(2, 2)
+power(2, 3)
 ```
+
+## Oppgaver {.flexbox .vleft .extraspace}
+
+1. Lag en funksjon `multiply` som tar argumentene `x` og `y` og returnerer resultatet av `x` multiplisert med `y`. 
+2. Test funksjonen med  `multiply(2, 3)`, `multiply(4, 3)` og `multiply(x = 3, y = 6)`. 
+3. Legg til `7` som standardargument for `y`. Hva er resultatet av `multiply(6)` og `multiply(y = 6)`? 
+4. Hva er resultatet av  `multiply("2", "3")`? 
 
 ## En funksjons robusthet
 
-Funksjonen `square` fungerer kun på faktiske tall. 
+Funksjonen `square` fungerer kun på numeriske tallverdier. 
 
 ```{r, echo=TRUE, comment='#>', collapse=TRUE, error=TRUE}
+# En funksjon for å gange et tall med seg selv 
+square <- function(n){
+  n * n  
+}
 square("2") 
 ```
+
 
 ## Kontrollflyt i en funksjon 
 
@@ -572,11 +493,50 @@ square <- function(n){
 square("2")
 ```
 
-## Oppgaver 
+## Oppgaver {.flexbox .vleft .extraspace}
 
-1. Lag en funksjon `multiply` som tar argumentene `x` og `y` og retunerer resultatet av `x` multiplisert med `y`. Skriv også ut en beskjed til brukeren om hva resultatet av multiplikasjonen blir, eks. `'1 ganget med 2 er lik 2'`.  
-2. Legg til et argument `quiet` i funksjonen med standardverdi `FALSE`. Skriv om funksjonen slik beskjeden *ikke* skrives ut dersom `quiet` settes til `TRUE`. 
-3. Skriv om funksjonen slik at den håndterer *ikke-numeriske* inputverdier. 
-4. Test funksjonen med ulike verdier for `x` og `y`, eks. `10`, `"10"`, `list("10")` og `data.frame(x = 10)`. 
+1. Skriv om `multiply` funksjonen slik at den håndterer tekstrenger som inputverdier for både `x` og `y`. 
+2. Test funksjonen med `multiply(2, 3)` og `multiply("2", "3")`. 
+3. Test funksjonen med verdiene `x = list("10")` og ` y = data.frame(x = 10)`.
+4. Klarer du skrive om funksjonen til å håndtere ikke numeriske verdier generelt? 
 
 # God kodepraksis 
+
+## Gode kodepraksis 
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+> *Any fool can write code that a computer can understand. Good programmers write code that
+humans can understand.*
+> `r tufte::quote_footer('--- Martin Fowler, 2008')`
+
+## God kodepraksis {.extraspace}
+
+* Koden må gjøre det den skal (altså være riktig)
+* Koden må være *reproduserbar* (bruk skript, ikke GUI)
+* Koden bør være *leselig* (også for mennesker)
+* *Ikke repeter* deg selv (funksjoner er din venn)
+* Følg gjerne en *konskevent kodestil* 
+
+## Noen tips til koding i R 
+
+* Start hvert nye skript med `rm(list = ls())` 
+* Husk på hvilket arbeidsområde du er i (bruk `getwd()` og `setwd()`) 
+* Bruk `<-` som tilordningsoperator (hurtigtast `'Alt + -'` i RStudio )  
+* Gi variabler og objekter beskrivende navn
+* Unngå navn som også er interne R funksjoner, eks. bruk `the_list <- list(1:10)` fremfor `list <- list(1:10)`
+* Skriv kommentarer til koden din underveis (med `#`)
+* Lag overskrifter i skript (hurtigtast `'Ctrl + Shift + R'` i RStudio)
+
+## Hurtigtaster i RStudio
+
+| Beskrivelse               | Hurtigtast        |       
+| --------------------------|:-----------------:|
+| Tilordningsoperator (`<-`)| `Alt + -`         |  
+| Kjør gjeldende kodelinje  | `Ctrl + Enter`    | 
+| Kjør gjeldende skript     | `Ctrl + Alt + R`  | 
+| Lagre et skript           | `Ctrl + S`        | 
+| Opprett nytt skript       | `Ctrl + Shift + N`| 
+| Kommenter ut kodelinjer   | `Ctrl + Shift + C`| 
+| Lag overskrift i skript   | `Ctrl + Shift + R`| 
+
