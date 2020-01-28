@@ -276,7 +276,7 @@ l
 
 ## Lister 
 
-Lister kan inneholder ulike typer objekter  
+Lister kan inneholde ulike typer objekter  
 
 ```{r echo=TRUE}
 class(l$tall)
