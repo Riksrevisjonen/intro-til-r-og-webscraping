@@ -109,7 +109,80 @@ $$5 ^ 2 - 8$$
 $$(2 + 10) \times -3$$
 $$2\pi \times 3$$
 
+## Datatyper i R {.flexbox .vleft .extraspace}
+
+- Heltall (integers) (`2L, 5L`)
+- Numerisk (float og double) (`2.5432, 5.343`)
+- Tekst (`'her er', 'litt tekst'`)
+- Logisk (`TRUE, FALSE`)
+- Vi kan eksplisitt skifte mellom ulike typer -- dette skjer også noen ganger automatisk
+
+## Datatyper i R
+
+Sjekk datatype med funksjonene `is.logical`, `is.numeric` og `is.character`:
+
+```{r, echo=TRUE}
+is.logical(FALSE)
+is.numeric("10")
+is.character("10")
+```
+
+## Datatyper i R
+
+Tving datatyper med funksjonene `as.logical`, `as.numeric` og `as.character`:
+
+```{r, echo=TRUE}
+as.numeric(FALSE)
+as.logical(1)
+as.character(42)
+```
+
+
+## Objektmodellen i R
+
+* I R arbeider vi med _objekter_ i et _arbeidsmiljø_
+* Vi er ikke begrenset til ett objekt eller én datatabell, kun begrenset av hva vi kan lese inn i _minne_
+
+## Tilordning
+
+* Vi kan tilordne verdier til objekter med `<-`
+* Til nå har vi kun skrevet resultatet av beregninger til _konsollen_
+
+## Tilordning
+
+```{r, echo=TRUE}
+# I R oppretter vi nye objekter med `<-`
+x <- 1:10  # en vektor med tallene 1 til 10
+y <- 2     # en vektor av lengde 1 med verdien 2
+
+# La oss opphøye tallen i `x` med verdien av `y`
+z <- x ^ y
+
+# For å få se resultatet, trenger vi bare å "printe" z til konsollen
+z
+```
+
+## Slette objekter
+
+* Vi kan slette objekter med funksjonen `rm`
+* Hvis vi vil slette alle objekter i arbeidsmiljøet, kan vi skrive `rm(list = ls())`
+
+## Oppgaver {.flexbox .vleft}
+
+
+
 # Datastrukturer i R 
+
+# Lunsj `r emo::ji('yum')`
+
+## Quiz
+
+>- Hva er forskjellen på `x <- 3` og `x <- "3"`?
+>- Hvordan får du tak i første element av en **vektor**?
+>- Hvilken datatype er verdien `64L`?
+>- Hva er den viktigste forskjellen mellom en **vektor** og en **liste**?
+>- Hva er den viktigste forskjellen mellom en **matrise** og en **data.frame**?
+>- Hvilken funksjon bruker vi i R for å slette et objekt?
 
 # Innebygde funksjoner i R 
 
