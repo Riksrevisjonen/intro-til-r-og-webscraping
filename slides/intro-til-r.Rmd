@@ -268,7 +268,9 @@ Løsninger:
 
 **Husk at du kan bruke `?read.csv` for å få informasjon om funksjonen!**
 
-OPPGAVER HER!
+1. Les inn fila `carseats.csv` som `carseats` med `read.csv()`
+2. Bruk `head(carseats)` for å se de første observasjonene
+3. Bruk `sum()` og `mean()` for å finne sum og gjennomsnitt på variablene `Sales` og `Price`
 
 ## readxl {.flexbox .vleft}
 
@@ -281,12 +283,12 @@ To viktige funksjoner:
 
 ## Oppgave {.flexbox .vleft .extraspace}
 
-+ eks med stringsAsFactors()
-+ forklare tibble med readxl
+1. Last inn pakken `readxl` med `library('readxl')`
+2. Les inn fila `carseats.xlsx` som `carseats_excel` med `read_xlsx` fra pakken `readxl`
+3. Bruk `summary` på `carseats_excel`. Hva er median for variabelen `Price`?
+4. Er `carseats` og `carseats_excel` like? Hvorfor ikke?*
 
-1. Les inn fila `carseats.csv` med `read.csv()` til objektet `carseats`
-2. Bruk `head(carseats)` for å se de første observasjonene
-3. Bruk `sum()` og `mean()` for å finne sum og gjennomsnitt på variablene `Sales` og `Price`
+* Hint: likhet kan vurderes med `identical`. Husk også funksjonene `class` og `str`.
 
 # Kontrollflyt 
 
