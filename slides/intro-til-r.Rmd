@@ -169,7 +169,13 @@ z
 
 ## Oppgaver {.flexbox .vleft}
 
-
+1. Tilordne verdiene `4` til `x` og `3` til `y`
+2. Hva blir summen av `x * y`?
+3. Hva blir summen av `x ^ y`?
+4. Tilordne summen av `x + x ^ y` til `z`. Hva er verdien av `z`?
+5. Tilordne verdiene `"14"` til `x` og `22` til `y`
+6. Hva blir summen av `x + y`? Kan du gjøre noe med `x` for at uttrykket skal evalueres til en numerisk verdi?
+7. Slett objektene `x`, `y` og `z` fra ditt arbeidsmiljø
 
 # Datastrukturer i R 
 
