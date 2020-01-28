@@ -526,7 +526,10 @@ ifelse(x >= 10, 'Over', 'Under')
 
 Bruk et R-skript for å skrive koden for disse oppgavene
 
+* Hva er resultatet av `if (nchar('riksrevisjonen') > 5) TRUE else FALSE`?
 * Skriv kode som returerer `Sant` hvis uttrykket `abs(-20)` er **større enn** `0`
+* Skriv kode som tilordner `x` verdien `"Mindre enn 5"` hvis uttrykket `runif(1, 1, 10)` er **mindre enn** `5` og verdien `"Større enn 5"` hvis ikke. Kjør koden; hva er verdien av `x`?
+* Kjør koden på nytt. Er verdien den samme?
 
 ## Oppgaver (2)
 
@@ -572,6 +575,7 @@ while (i <= 5) {
 * R har en serie med funksjoner som gjentar en funksjon over en `list`e eller `vector`
 * `lapply` bruker en funksjon over en liste av elementer og returnerer en liste
 * `sapply` er lik `lapply`, men returnerer en vektor eller matrise (alt etter hva funksjonen får som input)
+* `lapply` er nødvendig å bruke når innholdet er _heterogent_ (kan ha ulike datatyper)
 
 ## lapply
 
@@ -580,6 +584,28 @@ while (i <= 5) {
 x <- list(a = 1:10, b = runif(10, 0, 10), c = seq(1, 28, 3))
 lapply(x, mean)
 ```
+
+## sapply
+
+```{r, echo=TRUE}
+# Opprett en liste x med 3 elementer og ta gjennomsnittet av hvert element
+x <- c('Oslo', 'Bergen', 'Trondheim', 'Bodø', 'Kristiansand', 'Tromsø')
+unlist(lapply(x, nchar))
+sapply(x, nchar)
+```
+
+## sapply
+
+`sapply` vil som standard forsøke å navngi objektet som returneres. Denne oppførselen kan vi endre ved å sette argumentet `USE.NAMES` til `FALSE`.
+
+```{r}
+sapply(x, nchar, USE.NAMES = FALSE)
+```
+
+
+## Oppgaver
+
+LAG OPPGAVER!!
 
 # Egne funksjoner 
 
