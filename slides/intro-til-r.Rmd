@@ -433,7 +433,7 @@ args(sample)
 * Sjekk ut hjelpesiden til funksjonen `sample`. Hvilke argumenter tar funksjonen?
 * Lag en vektor `my_vec` med 5 tilfeldig heltall trukket fra en vektor med alle tallene fra `10` til `20`. 
 * Hva skjer hvis du setter `replace` til `TRUE`? 
-* Hva skjer hvis du setter et seed, `set.seed(42)`, før du kjører funksjonen? 
+* Hva skjer hvis du setter et seed, `set.seed(42)`, før hver gang du kjører funksjonen? 
 
 
 ## Vektoriserte funksjoner 
@@ -461,6 +461,13 @@ my_num <- 1:10
 sqrt(my_num)
 ```
 
+
+## Oppgaver {.flexbox .vleft .extraspace}
+
+1. Lag en vektor `my_numbers` med 10 tilfeldig heltall fra 0 til 20. Bruk for eksempel `round(runif(n, min, max))`. Set seed 42 før du kjører kommandoen. 
+2. Hva er resultatet av `log(my_numbers)`? 
+3. Hva er resultatet av `sum(my_numbers)`? 
+4. Hva er forskjellen på kommandoene `sum` og `log`? 
 
 # Innlesing av data
 
@@ -779,6 +786,8 @@ square(-4)
 
 ## Flere argumenter 
 
+Det er litt kjedelig med funksjoner, slik som `sqaure` og `double`, som bare gjør én ting. Det er mye kulere å lage _generaliserte_ varianter `r emo::ji('nerd')`. 
+
 Her definerer vi en funksjon `power` som tar to argumenter `x` og `y` og returnerer resultatet av `x` opphøyd i `y`. 
 
 ```{r, echo=TRUE, comment='#>', collapse=TRUE, error=TRUE}
@@ -804,7 +813,7 @@ power(2) # Dette funker ikke...
 
 ## Standardverdier for argumenter  
 
-Som vi har satt i mange av Rs innebygde funksjoner, er det mulig å sette standardverdier for argumentene i funksjonen. Her har vi definert tallet 2 som standardverdi for eksponenten (`y`). 
+Som vi har sett i mange av Rs innebygde funksjoner, er det mulig å sette standardverdier for argumentene i funksjonen. Her har vi definert tallet 2 som standardverdi for eksponenten (`y`). 
 
 ```{r, echo=TRUE, comment='#>', collapse=TRUE, error=TRUE}
 # En funksjon for å opphøye ett tall i et annet 
@@ -820,8 +829,9 @@ power(2, 3)
 
 1. Lag en funksjon `multiply` som tar argumentene `x` og `y` og returnerer resultatet av `x` multiplisert med `y`. 
 2. Test funksjonen med  `multiply(2, 3)`, `multiply(4, 3)` og `multiply(x = 3, y = 6)`. 
-3. Legg til `7` som standardargument for `y`. Hva er resultatet av `multiply(6)` og `multiply(y = 6)`? 
-4. Hva er resultatet av  `multiply("2", "3")`? 
+3. Legg til `7` som standardargument for `y`. Hva er resultatet av `multiply(6)?`. 
+4. Hvorfor får du feilmelding hvis du skriver `multiply(y = 6)`? 
+5. Hva er resultatet av  `multiply("2", "3")`? 
 
 ## En funksjons robusthet
 
@@ -869,7 +879,7 @@ square("2")
 humans can understand.*
 > `r tufte::quote_footer('--- Martin Fowler, 2008')`
 
-## God kodepraksis {.extraspace}
+## God kodepraksis {.flexbox .vleft .extraspace}
 
 * Koden må gjøre det den skal (altså være riktig)
 * Koden må være *reproduserbar* (bruk skript, ikke GUI)
@@ -877,7 +887,7 @@ humans can understand.*
 * *Ikke repeter* deg selv (funksjoner er din venn)
 * Følg gjerne en *konskevent kodestil* 
 
-## Noen tips til koding i R 
+## Noen tips til koding i R {.flexbox .vleft .extraspace}
 
 * Start hvert nye skript med `rm(list = ls())` 
 * Husk på hvilket arbeidsområde du er i (bruk `getwd()` og `setwd()`) 
