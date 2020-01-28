@@ -316,6 +316,7 @@ sqrt(my_num)
 * Databaser (SQL)
 * APIer over internett (Stortingets API, SSB)
 * Skytjenester (AWS, Hadoop)
+* Webscraping! `r emo::ji('wink')`
 
 ## Les inn data med basefunksjoner {.flexbox .vleft}
 
@@ -505,7 +506,7 @@ else {
 
 ## Hvis
 
-* `if ... else` virker kun på én logisk verdi
+* `if ... else` virker kun på én logisk verdi (den er ikke _vektorisert_)
 * For å sammenligne en _vektor_ av verdier, kan du bruke `ifelse`
 * `ifelse` tar _tre_ argumenter: en vektor, verdien som skal returneres hvis **sann** og verdien som skal returneres hvis **ikke sann**
 
