@@ -442,12 +442,25 @@ Lag en vektor `a` med verdiene `3, 2, 1` og en vektor `b` med verdiene `1, 2, 3`
 
 ```{r, echo=TRUE}
 for (x in 1:5) {
-  print(paste(rep('a', x), collapse = ''))
+  print(sprintf('Tallet er %s', x))
 }
 ```
 
 ## while
 
+* `while` er en annen type loop som kan benyttes i R
+* En `while`-loop tar en betingelse kjører loopen så lenge betingelsen evaluerer til sann
+* Merk at det er en risiko for at en `while`-loop kan gå **i det uendelige** hvis betingelsen aldri evaluerer til `FALSE`
+
+## while
+
+```{r, echo=TRUE}
+i <- 1
+while (i <= 5) {
+  print(sprintf('Tallet er %s', i))
+  i <- i + 1 # Dette er viktig!
+}
+```
 
 
 ## Apply-familien {.flexbox .vleft}
