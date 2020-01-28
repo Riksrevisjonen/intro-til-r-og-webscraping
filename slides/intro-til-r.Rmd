@@ -71,13 +71,13 @@ Den (litt) lengre versjonen:
 
 # Demo av RStudio
 
-## RStudio 
+## RStudio
 
 ```{r out.width='80%', fig.align='center'}
 knitr::include_graphics('../assets/rstudio.png')
 ```
 
-# Grunnleggende bruk av R 
+# Grunnleggende bruk av R
 
 ## R som kalkulator
 
@@ -99,6 +99,7 @@ knitr::include_graphics('../assets/rstudio.png')
 3 + 3 * 3
 (3 + 3) * 3
 ```
+
 
 ## Prøv selv! {.flexbox .vleft}
 
@@ -177,8 +178,6 @@ z
 6. Hva blir summen av `x + y`? Kan du gjøre noe med `x` for at uttrykket skal evalueres til en numerisk verdi?
 7. Slett objektene `x`, `y` og `z` fra ditt arbeidsmiljø
 
-# Datastrukturer i R 
-
 # Lunsj `r emo::ji('yum')`
 
 ## Quiz
@@ -190,18 +189,246 @@ z
 >- Hva er den viktigste forskjellen mellom en **matrise** og en **data.frame**?
 >- Hvilken funksjon bruker vi i R for å slette et objekt?
 
-# Innebygde funksjoner i R 
+# Datastrukturer i R {.flexbox .vleft}
+
+**Endimensjonale:**
+
+- Vektor: endimensjonal vektor med `n` elementer. Må være av samme type
+- Liste: en liste med `n` elementer. Kan være av ulik type, inkludert andre lister
+
+**Todimensjonale:**
+
+- Matrise: en todimensjonal struktur med ` r  *  k` elementer. Må være av samme type
+- Data frame: en todimensjonal datatabell med ` r * k` elementer. Kolonner kan være av forskjellig type
+
+## Vektorer
+
+```{r, echo=TRUE}
+# Dette er kortversjonen for tall 1 til 5
+# Vi kan også bruke c(1,2,3,4,5)
+v <- c(1:5)
+v
+```
+
+```{r, echo=TRUE}
+# NB! Vektorer må være av samme type!
+v <- c(1, 'RR', FALSE)
+v
+```
+
+## Vektorer
+
+Vi avgrenser elementer i en vektor med å bruke `[i]`
+
+```{r, echo=TRUE}
+v <- c(1:10)
+v[1]   # Få tak i første element i en vektor
+v[8]   # Og det åttende elementet
+v[4:6] # Og elementene 4 til 6
+```
+
+## Vektorer
+
+```{r, echo=TRUE}
+v[c(1,4,6)]  # Elementene 1, 4 og 6
+length(v)    # Bruk `length()` for å tak lengden på en vektor
+v[length(v)] # Det siste elementet
+```
+
+## Oppgaver {.flexbox .vleft .extraspace}
+
+1. Lag en vektor `x` med verdier fra 10 til 19.
+2. Hvor mange elementer er det i `x`?
+3. Hva er den tredje verdien i `x`?
+4. Hva inneholder elementene 5 til 8?.
+5. Hva inneholder elementene 2, 3, og 7?
+
+## Matriser
+
+```{r, echo=TRUE}
+# Vi må angi hvor mange rader eller kolonner matrisen skal ha
+m <- matrix(1:10, ncol = 2)
+m
+```
+
+## Matriser
+
+Vi avgrenser elementer i en matrise med å bruke `[r, k]`
+
+```{r, echo=TRUE}
+m <- matrix(1:10, ncol = 2)
+m[2, 2] # Hent verdien i rad 2, kolonne 2
+m[, 2]  # Hent verdiene i kolonne 4
+```
+
+## Matriser
+
+```{r, echo=TRUE}
+m[1:3, ]  # Hent verdiene i rad 1 til 3
+m[3:5, 2] # Hent verdiene i rad 3 til 5 som er i kolonne 2
+```
+
+## Data frame
+
+Data frames -- datatabeller -- ligner matriser, men vi kan ha ulike datatyper i hver kolonne.
+```{r, echo=TRUE}
+df <- data.frame(tall = 1:4, bokstaver = letters[1:4])
+df
+```
+
+## Inspiser data
+
+```{r, echo=TRUE}
+head(mtcars)
+```
+
+## Inspiser data
+
+```{r, echo=TRUE}
+head(mtcars, n = 10)
+```
+
+## Inspiser data
+
+```{r, echo=TRUE}
+str(mtcars)
+```
+
+## Kolonnenavn
+
+```{r echo=TRUE}
+names(mtcars)     # Kolonnenavn
+colnames(mtcars)  # Kolonnenavn
+```
+
+## Radnavn
+
+```{r echo=TRUE}
+rownames(mtcars) # Radnavn
+```
+
+## Oppgaver {.flexbox .vleft .extraspace}
+
+1. Last inn datasettet `USArrests` med `data(USArrests)`.
+2. Ta en titt på de fem øverste radene.  
+3. Ta en titt på de ti øverste radene.
+4. Hvilke kolonnenavn har datasettet?
+5. Hvilke radnavn har datasettet?
+
+## Velg deler av data
+
+```{r, echo=TRUE}
+mtcars$mpg       # Velg en kolonne basert på navn
+mtcars[2, ]       # Velg en rad basert på indeks
+mtcars$mpg[4]    # Velg en konkret verdi i en kolonne
+```
+
+## Velg deler av data
+
+```{r, echo=TRUE}
+mtcars[mtcars$gear == 5,] # Avgrens datasettet til rader hvor gear er lik 5
+```
+
+## Velg deler av data
+
+```{r, echo=TRUE}
+mtcars[mtcars$gear == 5, 'mpg'] # Velg kun mpg for rader hvor gear er lik 5
+mtcars[mtcars$gear == 5,]$mpg   # Velg kun mpg for rader hvor gear er lik 5
+```
+
+## Oppgaver {.flexbox .vleft .extraspace}
+
+1. Jobb videre med datasettet `USArrests`. Kjør `?USArrests` eller `help(USArrests)` for mer informasjon om datasettet.
+2. Hva er verdien i rad 1, kolonne 2?
+2. Hvilken delstat finner du i rad 3?  
+3. Hva er mordraten i denne delstaten?
+4. I hvilke delstater bor 66 % av populasjonen i urbane områder?
+
+## Lister
+
+```{r, echo=TRUE}
+l <- list(tall = 1:5, bokstaver = letters[1:5])  # Liste
+l
+```
+
+## Lister
+
+Lister kan inneholde ulike typer objekter  
+
+```{r echo=TRUE}
+class(l$tall)
+class(l$bokstaver)
+```
+
+
+## Lister
+
+Det er mulig å inspisere lister på samme måte som andre objekter
+
+```{r echo=TRUE}
+head(l)
+str(l)
+```
+
+## Lister
+
+Men det er viktig å merke seg at lister har en litt annen struktur når man skal jobbe med dem
+
+```{r,echo=TRUE, error=TRUE}
+l[1]
+l[1,1]
+```
+
+## Lister
+
+Bli venn med dobbeltklammen `[[]]`
+
+```{r, echo=TRUE}
+l[[1]]    # Det første listeelementet
+l[[1]][1] # Den første verdien i det første listeelementet
+l[[2]][2] # Den andre verdien i det andre listeelementet
+```
+
+## Lister
+
+Det er flere ulike måter å få tak i verdiene i en liste på
+
+```{r, echo=TRUE}
+l$tall
+l[["tall"]]
+l[[1]]
+```
+
+
+## Lister
+
+Elementene i en liste trenger dog ikke å ha navn
+
+```{r, echo=TRUE}
+l <- list(1:5, letters[1:5])
+l
+```
+
+## Oppgaver {.flexbox .vleft .extraspace}
+
+1. Lage et listeobjekt `my_list` med elementene `x = 1`, `y = c("R", "er gøy")` og `z = 1:20` (i denne rekkefølgen)
+2. Hva inneholder `my_list[2]`? Hva inneholder `my_list[[2]]`? Hva inneholder `my_list[[2]][2]`?
+3. Hvorfor gir `my_list[[1]][2]` en feilmelding?
+4. Hva er den fjerde verdien i det tredje listeelementet?  
+
+
+# Innebygde funksjoner i R
 
 ## Bruk av funksjoner
 
 R har en rekke innebygde funksjoner. Noen eksempler er:
 
-* Summer verdiene i en vektor med `sum()` 
+* Summer verdiene i en vektor med `sum()`
 * Finn unike verdier i en vektor med `unique()`
-* Vis innholdet i en variabel med `print()` 
+* Vis innholdet i en variabel med `print()`
 * Opprett en matrise med `matrix()`
 
-For en liste over viktige basisfunksjoner, se 
+For en liste over viktige basisfunksjoner, se
 [http://adv-r.had.co.nz/Vocabulary.html](http://adv-r.had.co.nz/Vocabulary.html)
 
 ## Argumenter
@@ -224,12 +451,12 @@ Få mer informasjon om funksjonen `dim()`
 ## Oppgaver {.flexbox .vleft .extraspace}
 
 * Sjekk ut hjelpesiden til funksjonen `sum`. Hvilke argumenter tar funksjonen?
-* Lag en vektor `x <- c(1:10, NA)`. 
-* Hva er summen av `x` ? 
-* Hva er gjennomsnittet av `x` ? 
-* Hva er standardavviket til `x` ? 
+* Lag en vektor `x <- c(1:10, NA)`.
+* Hva er summen av `x` ?
+* Hva er gjennomsnittet av `x` ?
+* Hva er standardavviket til `x` ?
 
-## Argumenter 
+## Argumenter
 
 Det er mulig å bruke både _posisjonsbaserte_ og _navngitte_ argumenter.   
 
@@ -243,52 +470,52 @@ Sett verdier for de to argumentene `x` og `size` basert på deres posisjon.
 
 ```{r echo=TRUE}
 args(sample)
-``` 
+```
 ```{r echo=FALSE}
 set.seed(42)
-``` 
+```
 ```{r echo=TRUE}
 sample(1:10, 1)
 ```
 
-## Navngitte argumenter 
+## Navngitte argumenter
 
 Sett verdier for de to argumentene `x` og `size` basert på argumentenes navn.  
 
 ```{r echo=FALSE}
 set.seed(42)
-``` 
+```
 ```{r echo=TRUE}
-# Sett verdier med navngivning 
+# Sett verdier med navngivning
 sample(x = 1:10, size = 1)
 ```
 ```{r echo=FALSE}
 set.seed(42)
-``` 
+```
 ```{r echo=TRUE}
-# Du kan stokke om på argumentene dersom du navngir dem 
+# Du kan stokke om på argumentene dersom du navngir dem
 sample(size = 1, x  = 1:10)
 ```
 
 
-## Standardverdier for argumenter 
+## Standardverdier for argumenter
 
 ```{r echo=TRUE}
 args(sum)
 args(sample)
-``` 
+```
 
 ## Oppgaver {.flexbox .vleft .extraspace}
 
 * Sjekk ut hjelpesiden til funksjonen `sample`. Hvilke argumenter tar funksjonen?
-* Lag en vektor `my_vec` med 5 tilfeldig heltall trukket fra en vektor med alle tallene fra `10` til `20`. 
-* Hva skjer hvis du setter `replace` til `TRUE`? 
-* Hva skjer hvis du setter et seed, `set.seed(42)`, før du kjører funksjonen? 
+* Lag en vektor `my_vec` med 5 tilfeldig heltall trukket fra en vektor med alle tallene fra `10` til `20`.
+* Hva skjer hvis du setter `replace` til `TRUE`?
+* Hva skjer hvis du setter et seed, `set.seed(42)`, før hver gang du kjører funksjonen?
 
 
-## Vektoriserte funksjoner 
+## Vektoriserte funksjoner
 
-En *vektorisert funksjon* er en funksjon som utfører en operasjon ikke bare på én enkelt verdi, men en hel vektor med verdier. R har flere slike innebygde vektoriserte funksjoner. 
+En *vektorisert funksjon* er en funksjon som utfører en operasjon ikke bare på én enkelt verdi, men en hel vektor med verdier. R har flere slike innebygde vektoriserte funksjoner.
 
 ## Vektoriserte funksjoner  
 
@@ -297,12 +524,12 @@ x <- c(1,2,3)
 y <- c(4,5,3)
 ```
 ```{r echo=TRUE}
-x + y 
+x + y
 x * y
 x / y
 ```
 
-## Vektoriserte funksjoner 
+## Vektoriserte funksjoner
 
 ```{r echo=TRUE}
 my_text <- c("Hello world", "Code is poetry", "Great work!")
@@ -311,6 +538,13 @@ my_num <- 1:10
 sqrt(my_num)
 ```
 
+
+## Oppgaver {.flexbox .vleft .extraspace}
+
+1. Lag en vektor `my_numbers` med 10 tilfeldig heltall fra 0 til 20. Bruk for eksempel `round(runif(n, min, max))`. Set seed 42 før du kjører kommandoen.
+2. Hva er resultatet av `log(my_numbers)`?
+3. Hva er resultatet av `sum(my_numbers)`?
+4. Hva er forskjellen på kommandoene `sum` og `log`?
 
 # Innlesing av data
 
@@ -370,7 +604,7 @@ To viktige funksjoner:
 
 * Hint: likhet kan vurderes med `identical`. Husk også funksjonene `class` og `str`.
 
-# Kontrollflyt 
+# Kontrollflyt
 
 ## Likhet
 
@@ -607,14 +841,14 @@ sapply(x, nchar, USE.NAMES = FALSE)
 
 LAG OPPGAVER!!
 
-# Egne funksjoner 
+# Egne funksjoner
 
-## Egne funksjoner 
+## Egne funksjoner
 
 ```{r, echo=TRUE}
 # Lag funksjonen  
 myHello <- function(){
- print('Hello world!') 
+ print('Hello world!')
 }
 ```
 ```{r, echo=TRUE}
@@ -622,7 +856,7 @@ myHello <- function(){
 myHello()
 ```
 
-## Egne funksjoner 
+## Egne funksjoner
 
 ```{r, echo=TRUE}
 myPrint <- function(x){
@@ -636,13 +870,13 @@ myPrint("Code is poetry.")
 
 ## Lag din første funksjon  
 
-Her definerer vi en funksjon, `square`, som tar et argument `n` og returnerer resultatet av dette tallet multiplisert med seg selv. 
+Her definerer vi en funksjon, `square`, som tar et argument `n` og returnerer resultatet av dette tallet multiplisert med seg selv.
 
 ```{r, echo=TRUE, comment='#>', collapse=TRUE}
-# En funksjon for å gange et tall med seg selv 
+# En funksjon for å gange et tall med seg selv
 square <- function(n){
   n * n  
-} 
+}
 square(2)
 square(16)
 square(-4)
@@ -654,12 +888,14 @@ square(-4)
 2. Bruk funksjonen på tallene 3, 4, 12 og 54.  
 
 
-## Flere argumenter 
+## Flere argumenter
 
-Her definerer vi en funksjon `power` som tar to argumenter `x` og `y` og returnerer resultatet av `x` opphøyd i `y`. 
+Det er litt kjedelig med funksjoner, slik som `sqaure` og `double`, som bare gjør én ting. Det er mye kulere å lage _generaliserte_ varianter `r emo::ji('nerd')`.
+
+Her definerer vi en funksjon `power` som tar to argumenter `x` og `y` og returnerer resultatet av `x` opphøyd i `y`.
 
 ```{r, echo=TRUE, comment='#>', collapse=TRUE, error=TRUE}
-# En funksjon for å opphøye ett tall i et annet 
+# En funksjon for å opphøye ett tall i et annet
 power <- function(x, y){
   x ^ y  
 }
@@ -672,19 +908,19 @@ power(x = 2, y = 3)
 Men merk at du må spesifisere begge argumentene i funksjonen.
 
 ```{r, echo=TRUE, comment='#>', collapse=TRUE, error=TRUE}
-# En funksjon for å opphøye ett tall i et annet 
+# En funksjon for å opphøye ett tall i et annet
 power <- function(x, y){
   x ^ y  
 }
-power(2) # Dette funker ikke... 
+power(2) # Dette funker ikke...
 ```
 
 ## Standardverdier for argumenter  
 
-Som vi har satt i mange av Rs innebygde funksjoner, er det mulig å sette standardverdier for argumentene i funksjonen. Her har vi definert tallet 2 som standardverdi for eksponenten (`y`). 
+Som vi har sett i mange av Rs innebygde funksjoner, er det mulig å sette standardverdier for argumentene i funksjonen. Her har vi definert tallet 2 som standardverdi for eksponenten (`y`).
 
 ```{r, echo=TRUE, comment='#>', collapse=TRUE, error=TRUE}
-# En funksjon for å opphøye ett tall i et annet 
+# En funksjon for å opphøye ett tall i et annet
 power <- function(x, y = 2){
   x ^ y  
 }
@@ -695,27 +931,28 @@ power(2, 3)
 
 ## Oppgaver {.flexbox .vleft .extraspace}
 
-1. Lag en funksjon `multiply` som tar argumentene `x` og `y` og returnerer resultatet av `x` multiplisert med `y`. 
-2. Test funksjonen med  `multiply(2, 3)`, `multiply(4, 3)` og `multiply(x = 3, y = 6)`. 
-3. Legg til `7` som standardargument for `y`. Hva er resultatet av `multiply(6)` og `multiply(y = 6)`? 
-4. Hva er resultatet av  `multiply("2", "3")`? 
+1. Lag en funksjon `multiply` som tar argumentene `x` og `y` og returnerer resultatet av `x` multiplisert med `y`.
+2. Test funksjonen med  `multiply(2, 3)`, `multiply(4, 3)` og `multiply(x = 3, y = 6)`.
+3. Legg til `7` som standardargument for `y`. Hva er resultatet av `multiply(6)?`.
+4. Hvorfor får du feilmelding hvis du skriver `multiply(y = 6)`?
+5. Hva er resultatet av  `multiply("2", "3")`?
 
 ## En funksjons robusthet
 
-Funksjonen `square` fungerer kun på numeriske tallverdier. 
+Funksjonen `square` fungerer kun på numeriske tallverdier.
 
 ```{r, echo=TRUE, comment='#>', collapse=TRUE, error=TRUE}
-# En funksjon for å gange et tall med seg selv 
+# En funksjon for å gange et tall med seg selv
 square <- function(n){
   n * n  
 }
-square("2") 
+square("2")
 ```
 
 
-## Kontrollflyt i en funksjon 
+## Kontrollflyt i en funksjon
 
-Vi kan legge til kontrollstrukturer inne i en funksjon. Her bruker vi en `if` betingelse for å konvertere `n` til en numerisk verdi **dersom** det i utgangspunktet er en tekststreng. 
+Vi kan legge til kontrollstrukturer inne i en funksjon. Her bruker vi en `if` betingelse for å konvertere `n` til en numerisk verdi **dersom** det i utgangspunktet er en tekststreng.
 
 ```{r, echo=TRUE, comment='#>', collapse=TRUE}
 square <- function(n){
@@ -723,22 +960,22 @@ square <- function(n){
   if(is.character(n)){
     n <- as.numeric(n)
   }
-  # Multipliser 
+  # Multipliser
   n * n  
-} 
+}
 square("2")
 ```
 
 ## Oppgaver {.flexbox .vleft .extraspace}
 
-1. Skriv om `multiply` funksjonen slik at den håndterer tekstrenger som inputverdier for både `x` og `y`. 
-2. Test funksjonen med `multiply(2, 3)` og `multiply("2", "3")`. 
+1. Skriv om `multiply` funksjonen slik at den håndterer tekstrenger som inputverdier for både `x` og `y`.
+2. Test funksjonen med `multiply(2, 3)` og `multiply("2", "3")`.
 3. Test funksjonen med verdiene `x = list("10")` og ` y = data.frame(x = 10)`.
-4. Klarer du skrive om funksjonen til å håndtere ikke numeriske verdier generelt? 
+4. Klarer du skrive om funksjonen til å håndtere ikke numeriske verdier generelt?
 
-# God kodepraksis 
+# God kodepraksis
 
-## Gode kodepraksis 
+## Gode kodepraksis
 
 <p>&nbsp;</p>
 <p>&nbsp;</p>
@@ -746,18 +983,18 @@ square("2")
 humans can understand.*
 > `r tufte::quote_footer('--- Martin Fowler, 2008')`
 
-## God kodepraksis {.extraspace}
+## God kodepraksis {.flexbox .vleft .extraspace}
 
 * Koden må gjøre det den skal (altså være riktig)
 * Koden må være *reproduserbar* (bruk skript, ikke GUI)
 * Koden bør være *leselig* (også for mennesker)
 * *Ikke repeter* deg selv (funksjoner er din venn)
-* Følg gjerne en *konskevent kodestil* 
+* Følg gjerne en *konskevent kodestil*
 
-## Noen tips til koding i R 
+## Noen tips til koding i R {.flexbox .vleft .extraspace}
 
-* Start hvert nye skript med `rm(list = ls())` 
-* Husk på hvilket arbeidsområde du er i (bruk `getwd()` og `setwd()`) 
+* Start hvert nye skript med `rm(list = ls())`
+* Husk på hvilket arbeidsområde du er i (bruk `getwd()` og `setwd()`)
 * Bruk `<-` som tilordningsoperator (hurtigtast `'Alt + -'` i RStudio )  
 * Gi variabler og objekter beskrivende navn
 * Unngå navn som også er interne R funksjoner, eks. bruk `the_list <- list(1:10)` fremfor `list <- list(1:10)`
@@ -769,10 +1006,9 @@ humans can understand.*
 | Beskrivelse               | Hurtigtast        |       
 | --------------------------|:-----------------:|
 | Tilordningsoperator (`<-`)| `Alt + -`         |  
-| Kjør gjeldende kodelinje  | `Ctrl + Enter`    | 
-| Kjør gjeldende skript     | `Ctrl + Alt + R`  | 
-| Lagre et skript           | `Ctrl + S`        | 
-| Opprett nytt skript       | `Ctrl + Shift + N`| 
-| Kommenter ut kodelinjer   | `Ctrl + Shift + C`| 
-| Lag overskrift i skript   | `Ctrl + Shift + R`| 
-
+| Kjør gjeldende kodelinje  | `Ctrl + Enter`    |
+| Kjør gjeldende skript     | `Ctrl + Alt + R`  |
+| Lagre et skript           | `Ctrl + S`        |
+| Opprett nytt skript       | `Ctrl + Shift + N`|
+| Kommenter ut kodelinjer   | `Ctrl + Shift + C`|
+| Lag overskrift i skript   | `Ctrl + Shift + R`|
