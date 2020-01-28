@@ -321,12 +321,15 @@ Vi tester om en verdi er større med `>`, større eller lik med `>=`, mindre med
 
 ```{r, echo=TRUE}
 16 ^ 4 >= 8 * 1024
+9 * 7 < 8 * 8
+64 < 8 ^ 2
+8 ^ 2 >= 64
 ```
 
 
 ## Større og mindre enn
 
-Vi kan også sammenligne vektorer:
+Sammenligninger kan også gjøres over vektorer
 
 ```{r, echo=TRUE}
 x <- c(4, 20, 16, 34, 18, 32, 28, 31)
@@ -334,11 +337,29 @@ x > 25
 x <= 20
 ```
 
+## Kontrollflyt og vektorer
+
+Hva blir resultatet av følgende?
+
+```{r, echo=TRUE, eval=FALSE}
+1:7 > 7:1
+1:7 == 7:1
+```
+
+## Kontrollflyt og vektorer
+
+Hva blir resultatet av følgende?
+
+```{r, echo=TRUE, eval=TRUE}
+1:7 > 7:1
+1:7 == 7:1
+```
 
 ## Oppgaver!
 
 * Er uttrykket `-6 * 4 + 5` **større enn** `-3 * 8 - 4`?
-* Er summen av `c(TRUE, FALSE, TRUE)` **lik eller større enn** `2`
+* Er summen av `c(TRUE, FALSE, TRUE)` **større enn** `2`
+* Er uttrykket `ceiling(2.2 * 4.7)` **større eller lik** uttrykket `floor(2.2 * 5.2)`
 
 ## Logiske operatorer
 
