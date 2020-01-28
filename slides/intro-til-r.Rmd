@@ -86,17 +86,28 @@ knitr::include_graphics('../assets/rstudio.png')
 3 + 3  # Addisjon
 3 * 3  # Multiplikasjon
 3 ^ 3  # Eksponent
-3 %% 3 # Modulus
 ```
 
-## R som kalkulator
+## Regnerekkefølge i R
+
+1. parenteser
+2. potenser og røtter
+3. multiplikasjon og divisjon
+4. addisjon og subtraksjon
 
 ```{r, echo=TRUE}
 3 + 3 * 3
 (3 + 3) * 3
 ```
 
-## Prøv selv!
+## Prøv selv! {.flexbox .vleft}
+
+Løs følgende i R:
+
+$$3.75 \times 4$$
+$$5 ^ 2 - 8$$
+$$(2 + 10) \times -3$$
+$$2\pi \times 3$$
 
 # Datastrukturer i R 
 
