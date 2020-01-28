@@ -100,6 +100,7 @@ knitr::include_graphics('../assets/rstudio.png')
 (3 + 3) * 3
 ```
 
+
 ## Prøv selv! {.flexbox .vleft}
 
 Løs følgende i R:
@@ -110,6 +111,234 @@ $$(2 + 10) \times -3$$
 $$2\pi \times 3$$
 
 # Datastrukturer i R 
+
+## Datastrukturer i R {.flexbox .vleft}
+
+**Endimensjonale:**
+
+- Vektor: endimensjonal vektor med `n` elementer. Må være av samme type
+- Liste: en liste med `n` elementer. Kan være av ulik type, inkludert andre lister
+
+**Todimensjonale:**
+
+- Matrise: en todimensjonal struktur med ` r  *  k` elementer. Må være av samme type
+- Data frame: en todimensjonal datatabell med ` r * k` elementer. Kolonner kan være av forskjellig type
+
+## Vektorer
+
+```{r, echo=TRUE}
+# Dette er kortversjonen for tall 1 til 5
+# Vi kan også bruke c(1,2,3,4,5)
+v <- c(1:5)
+v
+```
+
+```{r, echo=TRUE}
+# NB! Vektorer må være av samme type!
+v <- c(1, 'RR', FALSE)
+v
+```
+
+## Vektorer
+
+Vi avgrenser elementer i en vektor med å bruke `[i]`
+
+```{r, echo=TRUE}
+v <- c(1:10)
+v[1]   # Få tak i første element i en vektor
+v[8]   # Og det åttende elementet
+v[4:6] # Og elementene 4 til 6
+```
+
+## Vektorer 
+
+```{r, echo=TRUE}
+v[c(1,4,6)]  # Elementene 1, 4 og 6
+length(v)    # Bruk `length()` for å tak lengden på en vektor
+v[length(v)] # Det siste elementet 
+```
+
+## Oppgaver {.flexbox .vleft .extraspace}
+
+1. Lag en vektor `x` med verdier fra 10 til 19. 
+2. Hvor mange elementer er det i `x`? 
+3. Hva er den tredje verdien i `x`?
+4. Hva inneholder elementene 5 til 8?.
+5. Hva inneholder elementene 2, 3, og 7? 
+
+## Matriser
+
+```{r, echo=TRUE}
+# Vi må angi hvor mange rader eller kolonner matrisen skal ha
+m <- matrix(1:10, ncol = 2)
+m
+```
+
+## Matriser
+
+Vi avgrenser elementer i en matrise med å bruke `[r, k]`
+
+```{r, echo=TRUE}
+m <- matrix(1:10, ncol = 2)
+m[2, 2] # Hent verdien i rad 2, kolonne 2
+m[, 2]  # Hent verdiene i kolonne 4
+```
+
+## Matriser
+
+```{r, echo=TRUE}
+m[1:3, ]  # Hent verdiene i rad 1 til 3
+m[3:5, 2] # Hent verdiene i rad 3 til 5 som er i kolonne 2
+```
+
+## Data frame
+
+Data frames -- datatabeller -- ligner matriser, men vi kan ha ulike datatyper i hver kolonne.
+```{r, echo=TRUE}
+df <- data.frame(tall = 1:4, bokstaver = letters[1:4])
+df
+```
+
+## Inspiser data
+
+```{r, echo=TRUE}
+head(mtcars)
+```
+
+## Inspiser data
+
+```{r, echo=TRUE}
+head(mtcars, n = 10)
+```
+
+## Inspiser data
+
+```{r, echo=TRUE}
+str(mtcars)
+```
+
+## Kolonnenavn 
+
+```{r echo=TRUE}
+names(mtcars)     # Kolonnenavn 
+colnames(mtcars)  # Kolonnenavn 
+```
+
+## Radnavn 
+
+```{r echo=TRUE}
+rownames(mtcars) # Radnavn 
+```
+
+## Oppgaver {.flexbox .vleft .extraspace}
+
+1. Last inn datasettet `USArrests` med `data(USArrests)`. 
+2. Ta en titt på de fem øverste radene.  
+3. Ta en titt på de ti øverste radene.
+4. Hvilke kolonnenavn har datasettet? 
+5. Hvilke radnavn har datasettet? 
+
+## Velg deler av data
+
+```{r, echo=TRUE}
+mtcars$mpg       # Velg en kolonne basert på navn
+mtcars[2, ]       # Velg en rad basert på indeks
+mtcars$mpg[4]    # Velg en konkret verdi i en kolonne
+```
+
+## Velg deler av data
+
+```{r, echo=TRUE}
+mtcars[mtcars$gear == 5,] # Avgrens datasettet til rader hvor gear er lik 5
+```
+
+## Velg deler av data
+
+```{r, echo=TRUE}
+mtcars[mtcars$gear == 5, 'mpg'] # Velg kun mpg for rader hvor gear er lik 5
+mtcars[mtcars$gear == 5,]$mpg   # Velg kun mpg for rader hvor gear er lik 5
+```
+
+## Oppgaver {.flexbox .vleft .extraspace}
+
+1. Jobb videre med datasettet `USArrests`. Kjør `?USArrests` eller `help(USArrests)` for mer informasjon om datasettet. 
+2. Hva er verdien i rad 1, kolonne 2? 
+2. Hvilken delstat finner du i rad 3?  
+3. Hva er mordraten i denne delstaten?
+4. I hvilke delstater bor 66 % av populasjonen i urbane områder? 
+
+## Lister
+
+```{r, echo=TRUE}
+l <- list(tall = 1:5, bokstaver = letters[1:5])  # Liste
+l
+```
+
+## Lister 
+
+Lister kan inneholder ulike typer objekter  
+
+```{r echo=TRUE}
+class(l$tall)
+class(l$bokstaver)
+```
+
+
+## Lister 
+
+Det er mulig å inspisere lister på samme måte som andre objekter 
+
+```{r echo=TRUE}
+head(l)
+str(l)
+```
+
+## Lister 
+
+Men det er viktig å merke seg at lister har en litt annen struktur når man skal jobbe med dem 
+
+```{r,echo=TRUE, error=TRUE}
+l[1]
+l[1,1]
+```
+
+## Lister 
+
+Bli venn med dobbeltklammen `[[]]`
+
+```{r, echo=TRUE}
+l[[1]]    # Det første listeelementet 
+l[[1]][1] # Den første verdien i det første listeelementet 
+l[[2]][2] # Den andre verdien i det andre listeelementet 
+```
+
+## Lister 
+
+Det er flere ulike måter å få tak i verdiene i en liste på
+
+```{r, echo=TRUE}
+l$tall
+l[["tall"]]
+l[[1]]
+```
+
+
+## Lister 
+
+Elementene i en liste trenger dog ikke å ha navn 
+
+```{r, echo=TRUE}
+l <- list(1:5, letters[1:5])
+l
+```
+
+## Oppgaver {.flexbox .vleft .extraspace}
+
+1. Lage et listeobjekt `my_list` med elementene `x = 1`, `y = c("R", "er gøy")` og `z = 1:20` (i denne rekkefølgen) 
+2. Hva inneholder `my_list[2]`? Hva inneholder `my_list[[2]]`? Hva inneholder `my_list[[2]][2]`? 
+3. Hvorfor gir `my_list[[1]][2]` en feilmelding? 
+4. Hva er den fjerde verdien i det tredje listeelementet?  
+
 
 # Innebygde funksjoner i R 
 
