@@ -178,18 +178,9 @@ z
 6. Hva blir summen av `x + y`? Kan du gjøre noe med `x` for at uttrykket skal evalueres til en numerisk verdi?
 7. Slett objektene `x`, `y` og `z` fra ditt arbeidsmiljø
 
-# Lunsj `r emo::ji('yum')`
+# Datastrukturer i R 
 
-## Quiz
-
->- Hva er forskjellen på `x <- 3` og `x <- "3"`?
->- Hvordan får du tak i første element av en **vektor**?
->- Hvilken datatype er verdien `64L`?
->- Hva er den viktigste forskjellen mellom en **vektor** og en **liste**?
->- Hva er den viktigste forskjellen mellom en **matrise** og en **data.frame**?
->- Hvilken funksjon bruker vi i R for å slette et objekt?
-
-# Datastrukturer i R {.flexbox .vleft}
+## Datastrukturer i R {.flexbox .vleft}
 
 **Endimensjonale:**
 
@@ -415,6 +406,17 @@ l
 2. Hva inneholder `my_list[2]`? Hva inneholder `my_list[[2]]`? Hva inneholder `my_list[[2]][2]`?
 3. Hvorfor gir `my_list[[1]][2]` en feilmelding?
 4. Hva er den fjerde verdien i det tredje listeelementet?  
+
+# Lunsj `r emo::ji('yum')`
+
+## Quiz
+
+>- Hva er forskjellen på `x <- 3` og `x <- "3"`?
+>- Hvordan får du tak i første element av en **vektor**?
+>- Hvilken datatype er verdien `64L`?
+>- Hva er den viktigste forskjellen mellom en **vektor** og en **liste**?
+>- Hva er den viktigste forskjellen mellom en **matrise** og en **data.frame**?
+>- Hvilken funksjon bruker vi i R for å slette et objekt?
 
 
 # Innebygde funksjoner i R
