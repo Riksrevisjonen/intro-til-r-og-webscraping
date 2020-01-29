@@ -22,8 +22,8 @@ set.seed(42)
 
 ## Hva er R? {.flexbox .vleft}
 
-- R er et høynivå programmeringsspråk beregnet (primært) for statistikk, men med svært mange bruksområder
-- R brukes innen en rekke sektorer og fagområder (inkludert Riksrevisjonen `r emo::ji('smiley')`) og er et av de viktigste verktøyene innen data science
+- R er et høynivå **programmeringsspråk** beregnet (primært) for **statistikk**, men med svært mange bruksområder
+- R brukes innen en rekke sektorer og fagområder (inkludert Riksrevisjonen `r emo::ji('smiley')`) og er et av de viktigste verktøyene innen **data science**
 - I utgangspunktet skjer alt arbeid i R via et terminalvindu ved å skrive inn kommandoer, men verktøy som *RStudio* og *R Commander* gjør det lettere å jobbe med R
 
 ## Hva kan R brukes til? {.flexbox .vleft}
@@ -42,7 +42,7 @@ Kortversjonen: **det meste**
 
 ## Hva bruker vi R til i Riksrevisjonen? {.flexbox .vleft}
 
-- Innhenting av data fra nett og via APIer (webscraping)
+- Innhenting av data fra nett (webscraping) og via APIer
 - Statistiske analyer og utprøving av maskinlæring
 - Bearbeiding av data, blant annet fra datafangst
 - Analyse og visualisering av geodata
@@ -63,7 +63,7 @@ Kortversjonen: **det meste**
 - Vi jobber ikke direkte med filer, men med et _miljø_ (environment) som inneholder _objekter_
 - _Objekter_ i R kan være tradisjonelle tabeller med data i rader og kolonner, men også variabler, innholdet på en nettside, geografiske data, eller mye mer
 
-## Pakker i R {.flexbox .vleft}
+## Pakker i R {.flexbox .vleft .extraspace}
 
 * R kan utvides med _pakker_ som gir R ny funksjonalitet
 * Per i dag er det flere enn 16.000 pakker tilgjengelig via CRAN
@@ -110,8 +110,7 @@ R følger standard rekkefølge for aritmetikk:
 ## Regnerekkefølge i R {.flexbox .vleft}
 
 ```{r, echo=TRUE}
-3 + 3 * 3
-(3 + 3) * 3
+4 + 3 / 10 ^ 2
 (4 + 3 / 10) ^ 2
 ((4 + 3) / 10) ^ 2
 ```
@@ -165,7 +164,7 @@ as.character(42)
 ```
 
 
-## Tilordning {.flexbox .vleft}
+## Tilordning {.flexbox .vleft .extraspace}
 
 * Vi kan lagre verdier til et objekt som vi kan bruke i nye beregninger
 * Vi tilordner verdier et navn med `<-`
@@ -626,7 +625,7 @@ To viktige funksjoner:
 
 ## Oppgaver {.flexbox .vleft .extraspace}
 
-1. Last inn pakken `readxl` med `library('readxl')`
+1. Last inn pakken `readxl` med `library(readxl)`
 2. Les inn fila `carseats.xlsx` som `carseats_excel` med `read_xlsx` fra pakken `readxl`
 3. Bruk `summary` på `carseats_excel`. Hva er median for variabelen `Price`?
 4. Er `carseats` og `carseats_excel` like? Hvorfor ikke?*
@@ -634,6 +633,12 @@ To viktige funksjoner:
 * Hint: likhet kan vurderes med `identical`. Husk også funksjonene `class` og `str`.
 
 # Kontrollflyt
+
+## Likhet {.flexbox .vleft .extraspace}
+
+* Vi kan sjekke for **likhet** med `==` (merk bruk av to likhetstegn!)
+* Vi kan sjekke for **ulikhet** med `!=`
+* Vi kan sjekke for om en verdi er **lik en eller flere** verdier med `%in%`
 
 ## Likhet
 
@@ -655,6 +660,30 @@ FALSE != FALSE  # Test for ulikhet
 TRUE != 0
 ```
 
+## Bruk av `%in%`
+
+```{r, echo=TRUE, eval=FALSE}
+test_vec <- c(10, 20, 30)
+x <- seq(5, 30, 5)
+x %in% test_vec
+```
+
+## Bruk av `%in%`
+
+```{r, echo=TRUE, eval=TRUE}
+test_vec <- c(10, 20, 30)
+x <- seq(5, 30, 5)
+x %in% test_vec
+```
+
+## Bruk av `%in%`
+
+```{r, echo=TRUE, eval=TRUE}
+test_vec <- c(10, 20, 30)
+x <- seq(5, 30, 5)
+x %in% test_vec
+x %in% test_vec
+```
 
 ## Større og mindre enn
 
@@ -664,7 +693,6 @@ Vi tester om en verdi er større med `>`, større eller lik med `>=`, mindre med
 16 ^ 4 >= 8 * 1024
 9 * 7 < 8 * 8
 64 < 8 ^ 2
-8 ^ 2 >= 64
 ```
 
 
@@ -676,6 +704,7 @@ Sammenligninger kan også gjøres over vektorer
 x <- c(4, 20, 16, 34, 18, 32, 28, 31)
 x > 25
 x <= 20
+which(x > 20)
 ```
 
 ## Kontrollflyt og vektorer
@@ -734,6 +763,8 @@ if (betingelse) {
 
 ## Hvis ... eller
 
+Hvis/eller følger følgende struktur:
+
 ```
 if (betingelse) {
   uttrykk
@@ -772,6 +803,18 @@ else {
 ```
 
 
+## Hvis ... eller
+
+Hvis-uttrykk returnerer en verdi, og kan derfor tilordnes et objekt:
+
+```{r, echo=TRUE}
+x1 <- if (TRUE) 1 else 2
+x2 <- if (FALSE) 1 else 2
+x1
+x2
+```
+
+
 ## Vektorisering av hvis/eller
 
 * `if ... else` virker kun på én logisk verdi (den er ikke _vektorisert_)
@@ -806,7 +849,24 @@ Lag en vektor `a` med verdiene `3, 2, 1` og en vektor `b` med verdiene `1, 2, 3`
 
 ## Looper
 
-Det finnes flere typer looper i R. De viktigste er `for` og `while`:
+Det finnes flere typer looper i R. De viktigste er `for` og `while`
+
+`for` følger følgende form:
+
+```
+for (element in vektor) handling
+```
+
+Det er vanlig å bruke en enkelt bokstav (for eksempel `i`, `x`, `j` eller `k`) som element i en `for`-loop. Merk at eksisterende objekter med samme navn **vil bli overskrevet**.
+
+```{r, echo=TRUE}
+i <- 100
+for (i in 1:3) {}
+i
+```
+
+
+## for
 
 ```{r, echo=TRUE}
 for (x in 1:5) {
@@ -819,6 +879,11 @@ for (x in 1:5) {
 * `while` er en annen type loop som kan benyttes i R
 * En `while`-loop tar en betingelse kjører loopen så lenge betingelsen evaluerer til sann
 * Merk at det er en risiko for at en `while`-loop kan gå **i det uendelige** hvis betingelsen aldri evaluerer til `FALSE`
+* `while` følger følgende form:
+
+```
+while (betingelse) handling
+```
 
 ## while
 
@@ -860,7 +925,8 @@ sapply(x, nchar)
 
 `sapply` vil som standard forsøke å navngi objektet som returneres. Denne oppførselen kan vi endre ved å sette argumentet `USE.NAMES` til `FALSE`.
 
-```{r}
+```{r, echo=TRUE}
+sapply(x, nchar, USE.NAMES = TRUE)
 sapply(x, nchar, USE.NAMES = FALSE)
 ```
 
