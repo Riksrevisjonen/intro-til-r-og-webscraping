@@ -1113,7 +1113,7 @@ humans can understand.*
 | Lag overskrift i skript   | `Ctrl + Shift + R`|
 
 
-## Valgfrie hjemmeoppave 
+## Valgfri hjemmeoppave 
 
 ```{r echo=TRUE, eval=FALSE}
 if(!require(swirl)) install.packages('swirl')
