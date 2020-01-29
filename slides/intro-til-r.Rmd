@@ -28,9 +28,9 @@ set.seed(42)
 
 ## Hva kan R brukes til? {.flexbox .vleft}
 
-Kortversjonen: det meste
+Kortversjonen: **det meste**
 
-Den (litt) lengre versjonen:
+**Den (litt) lengre versjonen:**
 
 - Datahøsting og datamanipulering
 - Dataanalyse og modellering, inkludert maskinlæring (kunstig intelligens)
@@ -67,6 +67,7 @@ Den (litt) lengre versjonen:
 
 * R kan utvides med _pakker_ som gir R ny funksjonalitet
 * Per i dag er det flere enn 16.000 pakker tilgjengelig via CRAN
+* SUV DS har utviklet egne pakker for bruk i Riksrevisjonen!
 * Få pakker i dette kurset, men vi vil bruke flere pakker i kurset om **webscraping**
 
 # Demo av RStudio
@@ -79,7 +80,7 @@ knitr::include_graphics('../assets/rstudio.png')
 
 # Grunnleggende bruk av R
 
-## R som kalkulator
+## R som kalkulator {.flexbox .vleft}
 
 ```{r, echo=TRUE}
 # Vi kan utføre enkel aritmetikk med +, -, *, /, og ^
@@ -88,18 +89,32 @@ knitr::include_graphics('../assets/rstudio.png')
 3 ^ 3  # Eksponent
 ```
 
-## Regnerekkefølge i R
+## R som kalkulator {.flexbox .vleft}
 
-1. parenteser
-2. potenser og røtter
-3. multiplikasjon og divisjon
-4. addisjon og subtraksjon
+R viser som standard 7 desimaler, men dette kan endres hvis nødvendig ved å sette `options(digits=n)`:
+
+```{r, echo=TRUE}
+1 / 3
+```
+
+
+## Regnerekkefølge i R {.flexbox .vleft}
+
+R følger standard rekkefølge for aritmetikk:
+
+1. Parenteser
+2. Potenser og røtter
+3. Multiplikasjon og divisjon
+4. Addisjon og subtraksjon
+
+## Regnerekkefølge i R {.flexbox .vleft}
 
 ```{r, echo=TRUE}
 3 + 3 * 3
 (3 + 3) * 3
+(4 + 3 / 10) ^ 2
+((4 + 3) / 10) ^ 2
 ```
-
 
 ## Prøv selv! {.flexbox .vleft}
 
@@ -118,7 +133,7 @@ $$2\pi \times 3$$
 - Logisk (`TRUE, FALSE`)
 - Vi kan eksplisitt skifte mellom ulike typer -- dette skjer også noen ganger automatisk
 
-## Datatyper i R
+## Datatyper i R {.flexbox .vleft}
 
 Sjekk datatype med funksjonene `is.logical`, `is.numeric` og `is.character`:
 
@@ -127,6 +142,17 @@ is.logical(FALSE)
 is.numeric("10")
 is.character("10")
 ```
+
+## Datatyper i R {.flexbox .vleft}
+
+Du kan også returnere klasse med `class`:
+
+```{r, echo=TRUE}
+class(FALSE)
+class("10")
+class(10)
+```
+
 
 ## Datatyper i R
 
@@ -139,34 +165,32 @@ as.character(42)
 ```
 
 
-## Objektmodellen i R
+## Tilordning {.flexbox .vleft}
 
-* I R arbeider vi med _objekter_ i et _arbeidsmiljø_
-* Vi er ikke begrenset til ett objekt eller én datatabell, kun begrenset av hva vi kan lese inn i _minne_
-
-## Tilordning
-
-* Vi kan tilordne verdier til objekter med `<-`
-* Til nå har vi kun skrevet resultatet av beregninger til _konsollen_
+* Vi kan lagre verdier til et objekt som vi kan bruke i nye beregninger
+* Vi tilordner verdier et navn med `<-`
+* Objekter kan ha _nesten_ hvilket som helst navn, men unntak gjelder for spesialtegn, og navn kan ikke begynne med `_` eller et tall (unngå også å begynne med `.`)
+* Hvis du skriver navnet til objektet og trykker enter, vil verdien skrives til konsollen
 
 ## Tilordning
 
 ```{r, echo=TRUE}
-# I R oppretter vi nye objekter med `<-`
+# Tilordne to objekter
 x <- 1:10  # en vektor med tallene 1 til 10
 y <- 2     # en vektor av lengde 1 med verdien 2
 
-# La oss opphøye tallen i `x` med verdien av `y`
+# For hvert element av x opphøyer vi med y og lagrer til z
 z <- x ^ y
 
-# For å få se resultatet, trenger vi bare å "printe" z til konsollen
+# Se verdien av z
 z
 ```
 
-## Slette objekter
+## Slette objekter {.flexbox .vleft .extraspace}
 
 * Vi kan slette objekter med funksjonen `rm`
 * Hvis vi vil slette alle objekter i arbeidsmiljøet, kan vi skrive `rm(list = ls())`
+* Du kan bruke funksjonen `objects` for å se hvilke objekter som er i minne
 
 ## Oppgaver {.flexbox .vleft}
 
@@ -564,8 +588,10 @@ sqrt(my_num)
 
 * R har innebygde funksjoner (fra `utils`) for å lese inn tekstbaserte filer
 * Vanligste dataformat for tabulære data er CSV
-* Funksjonen `read.csv` leser inn _kommaseparerte_ filer
-* Funksjonen `read.csv2` leser inn _semikolonseparerte_ filer
+* Vi kan lese inn tabulære data fra tekstfiler med `read.table`
+* Funksjonen `read.delim` er en variant av `read.table` som leser inn _tabulatorseparerte_ filer
+* Funksjonen `read.csv` er en variant av `read.table` som leser inn _kommaseparerte_ filer
+* Funksjonen `read.csv2` er en variant av `read.table` som leser inn _semikolonseparerte_ filer
 
 ## Vanlige problemer {.flexbox .vleft}
 
@@ -580,13 +606,14 @@ Løsninger:
 * Tekstkodingen kan angis med `encoding`: `CP1252` er vanlig på Windows, mens `UTF-8` er vanlig på macOS og web (for det meste)
 * **Hvis du kan velge tekstkoding på rådata, velg alltid UTF-8**
 
-## Oppgaver
+## Oppgaver {.flexbox .vleft}
 
 **Husk at du kan bruke `?read.csv` for å få informasjon om funksjonen!**
 
 1. Les inn fila `carseats.csv` som `carseats` med `read.csv()`
 2. Bruk `head(carseats)` for å se de første observasjonene
 3. Bruk `sum()` og `mean()` for å finne sum og gjennomsnitt på variablene `Sales` og `Price`
+4. Les inn fila på nytt som `carseats_chr` men uten konvertering av tekst til faktorer. Sjekk resultatet med `class(carseats_chr$Urban)`
 
 ## readxl {.flexbox .vleft}
 
@@ -597,7 +624,7 @@ To viktige funksjoner:
 
 `read_excel()` støtter både `xlsx` og `xls`-filer, og vil gjette type basert på filnavn. Hvis du vet hvilket format du skal lese, kan du bruke `read_xls()` eller `read_xlsx()`
 
-## Oppgave {.flexbox .vleft .extraspace}
+## Oppgaver {.flexbox .vleft .extraspace}
 
 1. Last inn pakken `readxl` med `library('readxl')`
 2. Les inn fila `carseats.xlsx` som `carseats_excel` med `read_xlsx` fra pakken `readxl`
@@ -610,13 +637,11 @@ To viktige funksjoner:
 
 ## Likhet
 
-I R kan vi teste for likhet med `==` og ulikhet med `!=`:
-
 ```{r, echo=TRUE}
-TRUE == FALSE
-TRUE == TRUE
-FALSE != TRUE
-FALSE != FALSE
+TRUE == FALSE   # Test for likhet
+TRUE == TRUE    # Test for likhet
+FALSE != TRUE   # Test for ulikhet
+FALSE != FALSE  # Test for ulikhet
 ```
 
 ## Likhet
@@ -671,11 +696,12 @@ Hva blir resultatet av følgende?
 1:7 == 7:1
 ```
 
-## Oppgaver!
+## Oppgaver {.flexbox .vleft}
 
-* Er uttrykket `-6 * 4 + 5` **større enn** `-3 * 8 - 4`?
-* Er summen av `c(TRUE, FALSE, TRUE)` **større enn** `2`
-* Er uttrykket `ceiling(2.2 * 4.7)` **større eller lik** uttrykket `floor(2.2 * 5.2)`
+1. Er uttrykket `nchar('riksrevisjonen')` **lik** 13?
+2. Er uttrykket `-6 * 4 + 5` **større enn** `-3 * 8 - 4`?
+3. Er summen av `c(TRUE, FALSE, TRUE)` **større enn** `2`
+4. Er uttrykket `ceiling(2.2 * 4.7)` **større eller lik** uttrykket `floor(2.2 * 5.2)`
 
 ## Logiske operatorer
 
@@ -718,7 +744,7 @@ if (betingelse) {
 }
 ```
 
-## Hvis
+## Hvis ... eller
 
 ```{r, echo=TRUE}
 x <- 9
@@ -732,7 +758,7 @@ if (x %% 2) {
 ```
 
 
-## Hvis
+## Hvis ... eller
 
 Pass på hvordan du skriver `if ... else` kode:
 
@@ -746,7 +772,7 @@ else {
 ```
 
 
-## Hvis
+## Vektorisering av hvis/eller
 
 * `if ... else` virker kun på én logisk verdi (den er ikke _vektorisert_)
 * For å sammenligne en _vektor_ av verdier, kan du bruke `ifelse`
@@ -780,7 +806,7 @@ Lag en vektor `a` med verdiene `3, 2, 1` og en vektor `b` med verdiene `1, 2, 3`
 
 ## Looper
 
-`for` og `while`
+Det finnes flere typer looper i R. De viktigste er `for` og `while`:
 
 ```{r, echo=TRUE}
 for (x in 1:5) {
@@ -839,9 +865,14 @@ sapply(x, nchar, USE.NAMES = FALSE)
 ```
 
 
-## Oppgaver
+## Oppgaver {.flexbox .vleft}
 
-LAG OPPGAVER!!
+Objektet `nokeur` skal være tilgjengelig i ditt arbeidmiljø. Objektet inneholder en liste med gjennomsnittverdien per måned for én euro i norske kroner etter år.
+
+1. Hva er gjennomsnittet hvor hver vektor?
+2. Hva er maksimal verdi hvor hver vektor?
+3. Hva er minimal verdi hvor hver vektor?
+4. Hva er maksimal verdi for hele datasettet?
 
 # Egne funksjoner
 
