@@ -1045,3 +1045,13 @@ humans can understand.*
 | Opprett nytt skript       | `Ctrl + Shift + N`|
 | Kommenter ut kodelinjer   | `Ctrl + Shift + C`|
 | Lag overskrift i skript   | `Ctrl + Shift + R`|
+
+
+## Valgfrie hjemmeoppave 
+
+```{r echo=TRUE, eval=FALSE}
+if(!require(swirl)) install.packages('swirl')
+swirl::install_course("The R Programming Environment")
+swirl::swirl()
+```
+
