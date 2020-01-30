@@ -1,0 +1,36 @@
+---
+title: "Introduksjon til webscraping"
+author: "Ove Haugland Jakobsen og Aleksander Eilertsen"
+date: "29 januar 2020"
+always_allow_html: yes
+output:
+  ioslides_presentation:
+    fig_retina: 2
+    widescreen: yes
+    css: ../assets/styles.min.css
+    logo: ../assets/rr-logo.svg
+---
+
+# Hva er webscraping?
+
+FYLL INN HER FOR Å UNNGÅ MERGEKONFLIKT
+
+# Strukturen til en nettside
+
+FYLL INN HER FOR Å UNNGÅ MERGEKONFLIKT
+
+# Jobbe med tekst i R
+
+FYLL INN HER FOR Å UNNGÅ MERGEKONFLIKT
+
+# Les inn webinnhold til R
+
+FYLL INN HER FOR Å UNNGÅ MERGEKONFLIKT
+
+# Trekk ut innhold fra html
+
+FYLL INN HER FOR Å UNNGÅ MERGEKONFLIKT
+
+# Funksjoner for å scrape flere nettsider
+
+FYLL INN HER FOR Å UNNGÅ MERGEKONFLIKT
