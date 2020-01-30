@@ -1,7 +1,7 @@
 ---
 title: "Introduksjon til webscraping"
 author: "Ove Haugland Jakobsen og Aleksander Eilertsen"
-date: "29 januar 2020"
+date: "4 februar 2020"
 always_allow_html: yes
 output:
   ioslides_presentation:
