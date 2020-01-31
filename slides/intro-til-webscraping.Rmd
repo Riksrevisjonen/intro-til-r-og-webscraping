@@ -1,7 +1,7 @@
 ---
 title: "Introduksjon til webscraping"
 author: "Ove Haugland Jakobsen og Aleksander Eilertsen"
-date: "29 januar 2020"
+date: "4 februar 2020"
 always_allow_html: yes
 output:
   ioslides_presentation:
@@ -159,11 +159,330 @@ URLencode("https://server.com/pass på tegnsetting")
 
 # Jobbe med tekst i R
 
-FYLL INN HER FOR Å UNNGÅ MERGEKONFLIKT
+## Tekstmanipulasjon i R {.flexbox .vleft .extraspace}
+
+* R har en rekke innebygde funksjoner for å behandle og bearbeide tekst 
+* Dere må ikke kunne alle disse til fingerspissene, men de er til stor nytte når man skal behandle resultatet fra webskraping (HTML, CSS, JS, XML, JSON)
+* De vil også være til stor nytte i generell behandling av tekstvektorer, tekstdokumenter (eks. PDF) og forberedelser til _text mining_ og *NLP*   
+
+## Funksjoner for å jobbe med tekst i R {.flexbox .vleft}
+
+| Beskrivelse                                       | Funksjon(er)         |       
+| --------------------------------------------------|:--------------------:|
+| Slå sammen tekststrenger                          | `paste`, `paste0`    |
+| Fjern mellomrom fra starten/slutten av en streng  | `trimws`             |
+| Finn antall tegn i en tekststreng                 | `nchar`              |
+| Split elementer i en tekststreng                  | `strsplit`           |
+| Konverter en streng til store/små bokstaver       | `toupper`, `tolower` | 
+| Hent ut eller erstatt deler av en tekststreng     | `substr`, `substring`|
+
+## Slå sammen strenger med `paste` og `paste0`
+
+```{r echo=TRUE}
+x <- 1:2
+y <- c('a', 'b')
+paste(x, y)
+paste0(x, y)
+```
+
+## `paste` og `paste0` (med `sep`)
+
+```{r echo=TRUE}
+x <- 1:2
+y <- c('a', 'b')
+paste(x, y, sep = ') ')
+paste(x, y, sep = '. ')
+paste0(x, y, sep = '. ') 
+```
+
+ 
+## `paste` og `paste0` (med `collapse`)
+
+```{r echo=TRUE}
+my_text <- c('R', 'er', 'et', 'godt', 'tekstbehandlingsverktøy')
+my_text
+paste(my_text, collapse = ' ')
+paste(my_text, collapse = '-')
+```
+
+## Fjern mellomrom med `trimws` 
+
+```{r echo=TRUE}
+my_text <- " \t\r\n R er et godt tekstbehandlingsverktøy \t\r "
+trimws(my_text)
+trimws(my_text, 'left')
+trimws(my_text, 'right')
+```
+
+
+## Finn antall tegn i en streng med `nchar`
+
+```{r echo=TRUE}
+my_text <- "R er et godt tekstbehandlingsverktøy"
+length(my_text)
+nchar(my_text)
+```
+
+## Del opp en tekststreng med `strsplit` 
+
+```{r echo=TRUE}
+strsplit("Hello, world", split = ",")[[1]]
+strsplit("13:10:05", split = ":")[[1]]
+```
+
+## Del opp en tekststreng med `strsplit` 
+
+```{r echo=TRUE}
+# NB! Merk at 'split' argumentet er et regulært uttrykk 
+strsplit("a.b.c", ".")[[1]]
+strsplit("a.b.c", "[.]")[[1]]
+```
+
+## Oppgaver / Quiz {.flexbox .vleft .extraspace}
+
+1. Opprett en vektor `x <- c(" Same procedure as last year, miss Sophie? ", "Same procedure as every year, James.\n")` 
+2. Hva er lengden til `x` ? Hvor mange tegn er det i elementene i `x`? 
+3. Del opp `x` i ulike deler med komma som split tegn. Del deretter opp `x` med mellomrom som split tegn. Hva blir resultatet? 
+4. Opprett en ny vektor `y` hvor du fjerner ekstra mellomrom og tilsvarende tegn fra starten og slutten av elementene i `x`. 
+5. Kombiner elementene i `y` til én enkelt tekststreng. 
+
+# Regulære uttrykk 
+
+## Regulære uttrykk {.flexbox .vleft .extrapace}
+
+* **Regulære uttrykk** er en svært nyttig metode for å finne og behandle ulike *mønster* i tekststrenger 
+
+* Kan brukes på tvers av en rekke ulike programmeringsspråk; R, Python, PHP, JavaScript etc.
+(om enn med noen mulige variasjoner) 
+
+* For en interaktiv innføring gå til [regex101.com](https://regex101.com/)
+
+* Se [Regular Expressions as used in R](https://stat.ethz.ch/R-manual/R-devel/library/base/html/regex.html) 
+for en oversikt over regulære uttrykk i R
+
+* **NB!** Dersom du bruker regulære uttrykk som `\d` og `\s` må du bruke en ekstra skråstrek i R,
+alstå `\\d` og `\\s` 
+
+## Ofte brukte regulære uttrykk {.flexbox .vleft}
+
+| Beskrivelse                | Uttrykk                               |
+| -------------------------- |:-------------------------------------:|
+| Bokstavene A-Z             | `[A-Z]` eller `[:upper:]`             |
+| Bokstavene a-z             | `[a-z]` eller `[:lower:]`             | 
+| Tallene 0-9                | `[0-9]` eller `[:digit:]` eller `\d`  |
+| Alfabetiske tegn           | `[A-Za-z]` eller `[:alpha:]`          |
+| Alfanumeriske tegn         | `[0-9A-Za-z]` eller `[:alnum:]`       |
+| Mellomrom, linjeskift etc. | `[:space:]` eller `\s`                |
+| Tegnsetting (.,?%&/ etc.)  | `[:punct:]`                           |
+
+## Ofte brukte regulære uttrykk {.flexbox .vleft}
+
+| Beskrivelse                                                                      | Uttrykk              |                 
+| ---------------------------------------------------------------------------------|:--------------------:|
+| Det forutgående uttrykket matches null eller én gang                             | `?`                  |
+| Det forutgående uttrykket matches null eller flere ganger                        | `*`                  |
+| Det forutgående uttrykket matches én eller flere ganger                          | `+`                  |
+| Det forutgående uttrykket matches `n` ganger                                     | `{n}`                |
+| Det forutgående uttrykket matches `n` eller flere ganger                         | `{n, }`              |
+| Det forutgående uttrykket matches minst `n` ganger, men ikke mer enn `m` ganger  | `{n, m}`             |
+
+
+## Ofte brukte regulære uttrykk {.flexbox .vleft}
+
+| Beskrivelse                | Uttrykk                               |
+| -------------------------- |:-------------------------------------:|
+| Jokertegn                  | `.`                                   |
+| Eller                      | `|`                                   |
+| I starten av en linje      | `^`                                   | 
+| I slutten av en linje      | `$`                                   |
+| Hva som helst              | `.*`                                  |
+
+
+## Funksjoner for regulære uttrykk i R {.flexbox .vleft}
+
+| Beskrivelse                                       | Funksjon(er)         |       
+| --------------------------------------------------|:--------------------:|
+| Søk og erstatt mønster i en teksstreng            | `sub`, `gsub`        |
+| Søk etter mønster i en teksstreng                 | `grep`, `grepl`      |
+| Finn plasseringen til mønster i en tekststreng    | `regexpr`, `gregexpr`|
+| Hent ut inneholdet fra en match basert på plassering     | `regmatches`         |
+
+
+## Søk og erstatt med `sub` og `gsub`
+
+```{r echo=TRUE}
+my_text <- 'abc_123_abc_123'
+sub('a', '', my_text)
+gsub('a', '', my_text)
+```
+
+## Søk og erstatt med `sub` og `gsub`
+
+```{r echo=TRUE}
+sub('[0-9]', '', my_text)
+sub('[0-9]{2}', '', my_text)
+gsub('[0-9]', '', my_text)
+gsub('[0-9]{2}', '', my_text)
+```
+
+
+## Søk etter mønster med `grep` og `grepl` 
+
+```{r echo=TRUE}
+my_text <- 'abc_123_abc_123'
+grep('a', my_text)
+grep('a', my_text, value = TRUE)
+grepl('a', my_text)
+```
+
+## Søk etter mønster med `grep` og `grepl` 
+
+```{r echo=TRUE}
+grep('[0-9]', my_text)
+grep('[0-9]', my_text, value = TRUE)
+grepl('[0-9]', my_text)
+grepl('[0-9]{4}', my_text)
+```
+
+## Finn plassering med `regexpr` og `gregexpr` 
+
+```{r echo=TRUE, eval=FALSE}
+my_text <- 'abc_123_abc_123'
+```
+```{r echo=TRUE, eval=FALSE}
+regexpr('a', my_text)
+## [1] 1
+## attr(,"match.length")
+## [1] 1
+``` 
+```{r echo=TRUE, eval=FALSE}
+gregexpr('a', my_text)
+## [[1]]
+## [1] 1 9
+## attr(,"match.length")
+## [1] 1 1
+```
+
+## Finn plassering med `regexpr` og `gregexpr` 
+
+```{r echo=TRUE, eval=FALSE}
+regexpr('[0-9]', my_text)
+## [1] 5
+## attr(,"match.length")
+## [1] 1
+``` 
+
+```{r echo=TRUE, eval=FALSE}
+regexpr('[0-9]{3}', my_text)
+## [1] 5
+## attr(,"match.length")
+## [1] 3
+``` 
+
+```{r echo=TRUE, eval=FALSE}
+gregexpr('[0-9]', my_text)
+## [[1]]
+## [1] 5 6 7 13 14 15
+## attr(,"match.length")
+## [1] 1 1 1 1 1 1
+```
+
+
+## Hent ut inneholdet med `regmatches` 
+
+```{r echo=TRUE}
+regmatches(my_text, regexpr('[0-9]', my_text))
+regmatches(my_text, regexpr('[0-9]{3}', my_text))
+regmatches(my_text, gregexpr('[0-9]', my_text))[[1]]
+regmatches(my_text, gregexpr('[0-9]{3}', my_text))[[1]]
+```
+
+
+## Quiz {.flexbox .vleft .extraspace}
+
+>- Hvilke mønster kan du "matche" med det regulære uttrykket `.*`? 
+>- Hva er forskjellen på `sub` og `gsub`? 
+>- Hva er forskjellen på `grep` og `grepl`? 
+>- Hva er resultatet av `grepl(pattern = '[A-Z]', x = '123')`? 
+>- Hva er forskjellen på `regexpr` og `gregexpr`? 
+>- Hva kan du bruke funksjonen `regmatches` til? 
+
 
 # Les inn webinnhold til R
 
-FYLL INN HER FOR Å UNNGÅ MERGEKONFLIKT
+## `httr` pakke
+
+`httr` er en tilleggspakke til R som er mye brukt for å sende og og motta forespørsler over HTTP. 
+
+Pakken inkluderer blant annet funksjoner for vanlige HTTP verb som `GET`, `POST`, `PUT` og `DELETE`. 
+
+Dersom du ikke har pakken fra før kan du installere den med kommandoen `install.packages()` (trengs kun gjøres én gang). 
+
+```{r echo = TRUE, eval = FALSE}
+install.packages('httr')
+```
+
+Deretter må du laste inn pakken med kommandoen `library()` (må gjøres hver gang du starter en ny R sesjon). 
+
+```{r echo = TRUE, eval = FALSE}
+library(httr)
+```
+
+
+## GET 
+```{r echo=TRUE, warning=FALSE}
+httr::GET('https://www.riksrevisjonen.no/')
+```
+
+## `GET` repsons 
+
+```{r echo=TRUE, warning = FALSE}
+library(httr)
+resp <- GET('https://www.riksrevisjonen.no/')
+```
+```{r echo=TRUE}
+# 'GET' returnerer et objekt av type 'response' (i realiteten en liste)
+class(resp)
+names(resp)
+```
+
+## `GET` respons
+
+```{r echo=TRUE}
+resp$url
+resp$status_code
+httr::content(resp)
+```
+
+
+## `GET` respons
+
+```{r echo=TRUE}
+GET("http://httpbin.org/status/404")
+GET("http://httpbin.org/status/500")
+```
+
+
+
+## HTTP statuskoder 
+
+| Beskrivelse           | Statuskode |
+|:----------------------|:----------:|
+| OK                    | 200        |
+| Feil ved anmodning    | 400        |
+| Uautorisert           | 401        |
+| Forbudt (ikke tilgang)| 403        |   
+| Ikke funnet           | 404        |
+| Serverfeil            | 500 - 505  |
+
+
+## Quiz {.flexbox .vleft .extraspace}
+
+>- Nevn én pakke som man kan bruke til å gjøre HTTP forespørsler fra R. 
+>- Hva returnerer kommandoen `httr::GET()`?  
+>- Hva gjør kommandoen `httr::content()`? 
+>- Hva betyr HTTP statuskoder i 400-serien? 
+>- Hva betyr HTTP statuskoder i 500-serien? 
 
 # Trekk ut innhold fra html
 
@@ -178,5 +497,23 @@ knitr::include_graphics('../assets/rr-organisasjon.png')
 ## Oppgave
 
 # Funksjoner for å scrape flere nettsider
+
+FYLL INN HER FOR Å UNNGÅ MERGEKONFLIKT
+
+## Bind sammen med `do.call(x, 'rbind')`
+
+En svært nyttig fremgangsmåte for å binde sammen en liste som inneholder en rekke `data.frames` er å kombinere basisfunksjonene `rbind` og `do.call`. 
+
+```{r echo=TRUE}
+the_list <- list(data.frame(v1 = 1, v2 = 1:3, v3 = LETTERS[1:3]),
+                 data.frame(v1 = 2, v2 = 4:6, v3 = LETTERS[4:6]) )
+df <- do.call('rbind', the_list)
+df
+```
+
+
+>- Protip: Sjekk også ut `data.table::rbindlist()`
+
+# RSelenium / Ikke statisk HTML 
 
 FYLL INN HER FOR Å UNNGÅ MERGEKONFLIKT
