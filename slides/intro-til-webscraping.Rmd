@@ -260,17 +260,41 @@ regmatches(my_text, gregexpr('[0-9]{3}', my_text))[[1]]
 ```
 
 
+## Quiz {.flexbox .vleft .extraspace}
+
+>- Hvilke mønster kan du "matche" med det regulære uttrykket `.*`? 
+>- Hva er forskjellen på `sub` og `gsub`? 
+>- Hva er forskjellen på `grep` og `grepl`? 
+>- Hva er resultatet av `grepl(pattern = '[A-Z]', x = '123')`? 
+>- Hva er forskjellen på `regexpr` og `gregexpr`? 
+>- Hva kan du bruke funksjonen `regmatches` til? 
+
 
 # Les inn webinnhold til R
 
-## `httr` pakken 
+## `httr` pakke
+
+`httr` er en tilleggspakke til R som er mye brukt for å sende og og motta forespørsler over HTTP. 
+
+Pakken inkluderer blant annet funksjoner for vanlige HTTP verb som `GET`, `POST`, `PUT` og `DELETE`. 
+
+Dersom du ikke har pakken fra før kan du installere den med kommandoen `install.packages()` (trengs kun gjøres én gang). 
+
+```{r echo = TRUE, eval = FALSE}
+install.packages('httr')
+```
+
+Deretter må du laste inn pakken med kommandoen `library()` (må gjøres hver gang du starter en ny R sesjon). 
+
+```{r echo = TRUE, eval = FALSE}
+library(httr)
+```
+
 
 ## GET 
 ```{r echo=TRUE, warning=FALSE}
 httr::GET('https://www.riksrevisjonen.no/')
 ```
-
-
 
 ## `GET` repsons 
 
@@ -312,6 +336,15 @@ GET("http://httpbin.org/status/500")
 | Forbudt (ikke tilgang)| 403        |   
 | Ikke funnet           | 404        |
 | Serverfeil            | 500 - 505  |
+
+
+## Quiz {.flexbox .vleft .extraspace}
+
+>- Nevn én pakke som man kan bruke til å gjøre HTTP forespørsler fra R. 
+>- Hva returnerer kommandoen `httr::GET()`?  
+>- Hva gjør kommandoen `httr::content()`? 
+>- Hva betyr HTTP statuskoder i 400-serien? 
+>- Hva betyr HTTP statuskoder i 500-serien? 
 
 # Trekk ut innhold fra html
 
