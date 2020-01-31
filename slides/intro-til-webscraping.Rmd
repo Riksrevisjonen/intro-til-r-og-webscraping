@@ -353,3 +353,7 @@ FYLL INN HER FOR Å UNNGÅ MERGEKONFLIKT
 # Funksjoner for å scrape flere nettsider
 
 FYLL INN HER FOR Å UNNGÅ MERGEKONFLIKT
+
+# RSelenium / Ikke statisk HTML 
+
+FYLL INN HER FOR Å UNNGÅ MERGEKONFLIKT
