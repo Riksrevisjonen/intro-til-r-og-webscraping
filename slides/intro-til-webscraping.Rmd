@@ -13,11 +13,149 @@ output:
 
 # Hva er webscraping?
 
-FYLL INN HER FOR Å UNNGÅ MERGEKONFLIKT
+## Webscraping
+
+## Bruk av webscraping i Riksrevisjonen
+
+* Automatisk innhenting av styredokumenter fra helseforetakene
 
 # Strukturen til en nettside
 
-FYLL INN HER FOR Å UNNGÅ MERGEKONFLIKT
+## HTML {.flexbox .vleft}
+
+* Alle nettsider er bygget opp med HTML (Hyper Text Markup Language)
+* HTML bruker en spesiell syntaks for å fortelle nettleseren hvordan en side skal vises
+* HTML-syntaks består av _elementer_ slik som `<body>`, `<p>` og `<img>`
+* Elementer i HTML har en nøstet struktur
+
+## Elementer i HTML {.flexbox .vleft}
+
+Et element i HTML består av følgende deler:
+
+* En åpningskode (tag)
+* En avslutningskode (tag)
+* Innholdet i elementet
+
+## Typer av elementer i HTML
+
+Det er to hovedtyper av elementer i HTML:
+
+* **Blokkelementer**: større, strukturelle elementer som synlig deler inn innholdet på en nettside, slik som `<p>` (avsnitt)
+* **Inline elementer**: elementer som er inne i blokkelementer og som omslutter en liten del av innholdet, slik som `<em>` (kursiv) og `<strong>` (uthevet)
+
+## HTML
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Sidetittel</title>
+  </head>
+  <body>
+    <h1>Dette er en tittel på nivå 1 i HTML</h1>
+    <p>Dette er et avsnitt i HTML</p>
+  </body>
+</html>
+```
+
+## Vanlige elementer i HTML
+
+| Element   | Beskrivelse          |       
+| ----------|:--------------------:|
+| h1-h6     | Overskrift nivå 1-6  |  
+| p         | Avsnitt              |
+| ol        | Ordnet liste         |
+| ul        | Uordnet liste        |
+| li        | Listeelement         |
+
+## Vanlige elementer i HTML
+
+| Element   | Beskrivelse          |       
+| ----------|:--------------------:|
+| em     | Overskrift nivå 1-6  |  
+| strong         | Avsnitt              |
+|         | Ordnet liste         |
+| ul        | Uordnet liste        |
+| li        | Listeelement         |
+
+## Lister i HTML
+
+```html
+<ul>
+  <li>Tromsø</li>
+  <li>Stavanger</li>
+  <li>Kristiansand</li>
+  <li>Ålesund</li>
+</ul>
+```
+
+```html
+<ol>
+  <li>Tromsø</li>
+  <li>Stavanger</li>
+  <li>Kristiansand</li>
+  <li>Ålesund</li>
+</ol>
+```
+
+## Nøstede lister i HTML
+
+```html
+<ul>
+  <li>Oslo
+    <ul>
+      <li>Alna</li>
+      <li>Bjerke</li>
+      <li>Frogner</li>
+    </ul>
+  </li>
+</ul>
+```
+
+## Attributter {.flexbox .vleft}
+
+* Elementer kan ha _attributter_
+* Attributter har normalt _verdier_, men kan også være _boolske_
+* Attributter angis innenfor åpningskoden til elementet
+
+```html
+<h1 id="title">Overskrift</h1>
+```
+
+## Attributter {.flexbox .vleft .build}
+
+```html
+<a href="https://riksrevisjonen.no/" target="_blank">Lenke til Riksrevisjonen</a>
+```
+
+* Hyperlenker lages med elementet `<a>`
+* Lenken definerer med attributtet `href`
+* Hvor lenken skal åpnes defineres med attributtet `target`
+
+## Hyperlenker
+
+```html
+<a href="en-annen-fil-i-samme-filbane.html">Klikk her</a>
+```
+
+```html
+<a href="/en-annen-fil-på-samme-server.html">Klikk her</a>
+```
+
+## URL
+
+```{r, echo=TRUE}
+URLencode("https://server.com/pass på tegnsetting")
+```
+
+
+## CSS
+
+* bruk av attributter
+* søk i struktur
+* pseudo-klasser
+
 
 # Jobbe med tekst i R
 
@@ -29,7 +167,15 @@ FYLL INN HER FOR Å UNNGÅ MERGEKONFLIKT
 
 # Trekk ut innhold fra html
 
-FYLL INN HER FOR Å UNNGÅ MERGEKONFLIKT
+## Pakken `rvest`
+
+## Et enkelt eksempel
+
+```{r out.width='80%', fig.align='center'}
+knitr::include_graphics('../assets/rr-organisasjon.png')
+```
+
+## Oppgave
 
 # Funksjoner for å scrape flere nettsider
 
