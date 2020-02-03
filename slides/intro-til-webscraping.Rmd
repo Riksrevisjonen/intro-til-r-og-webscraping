@@ -196,34 +196,68 @@ Det er flere måter å velge HTML-elementer på
 * Basert på id
 * Basert på klasse
 * Basert på attributter
+* Basert på pseudoelementer
+* En kombinasjon av disse
 
 ## Velge basert på id
 
-```{r, include=FALSE}
-x <- read_html(
-  '
-  <body>
-    <p id="first">Dette er det <strong>første</strong> elementet</p>
-    <p id="second">Dette er det <strong>andre</strong> elementet</p>
-    <p id="third">Dette er det <strong>tredje</strong> elementet</p>
-  </body>
-  ')
+```css
+#third {
+  color: red;
+}
 ```
 
-
 ```html
-<body>
+<div>
   <p id="first">Dette er det <strong>første</strong> elementet</p>
   <p id="second">Dette er det <strong>andre</strong> elementet</p>
   <p id="third">Dette er det <strong>tredje</strong> elementet</p>
-</body>
+</div>
 ```
 
-```{r, echo=TRUE, eval=TRUE}
-html_node(x, '#first')
-html_node(x, '#second')
-html_node(x, '#third')
+```{asis, eval=TRUE, echo=TRUE}
+<style>
+#ex-id-select-third-1 {
+  color: red;
+}
+</style>
 ```
+
+<div>
+  <p id="ex-id-select-first-1">Dette er det <strong>første</strong> elementet</p>
+  <p id="ex-id-select-second-1">Dette er det <strong>andre</strong> elementet</p>
+  <p id="ex-id-select-third-1">Dette er det <strong>tredje</strong> elementet</p>
+</div>
+
+## Velge basert på klasse
+
+```css
+.select-me {
+  color: red;
+}
+```
+
+```html
+<div>
+  <p class="select-me">Dette er det <strong>første</strong> elementet</p>
+  <p class="select-me">Dette er det <strong>andre</strong> elementet</p>
+  <p class="not-me">Dette er det <strong>tredje</strong> elementet</p>
+</div>
+```
+
+```{asis, eval=TRUE, echo=TRUE}
+<style>
+#ex-class-1 > .select-me {
+  color: red;
+}
+</style>
+```
+
+<div id="ex-class-1">
+  <p class="select-me">Dette er det <strong>første</strong> elementet</p>
+  <p class="select-me">Dette er det <strong>andre</strong> elementet</p>
+  <p class="not-me">Dette er det <strong>tredje</strong> elementet</p>
+</div>
 
 ## Kombinasjoner
 
@@ -271,7 +305,7 @@ A ~ B
   <p>Jeg er tredje avsnitt</p>
 </div>
 
-## Kombinasjoner
+## Velg alle etterkommere
 
 ```css
 div p {
@@ -279,15 +313,23 @@ div p {
 }
 ```
 
-<div class="small-code">
-  <p style="color: red;">Jeg er første avsnitt</p>
+```{asis, eval=TRUE, echo=TRUE}
+<style>
+#ex-text-match-1 > p {
+  color: red;
+}
+</style>
+```
+
+<div id="ex-text-match-1" class="small-code">
+  <p>Jeg er første avsnitt</p>
   <pre>Jeg er litt kode</pre>
-  <p style="color: red;">Jeg er andre avsnitt</p>
+  <p>Jeg er andre avsnitt</p>
   <pre>Jeg er mer kode</pre>
-  <p style="color: red;">Jeg er tredje avsnitt</p>
+  <p>Jeg er tredje avsnitt</p>
 </div>
 
-## Kombinasjoner
+## Velg umiddelbare søsken
 
 ```css
 pre + p {
@@ -295,15 +337,23 @@ pre + p {
 }
 ```
 
-<div class="small-code">
+```{asis, eval=TRUE, echo=TRUE}
+<style>
+#ex-text-match-2 > pre + p {
+  color: red;
+}
+</style>
+```
+
+<div id="ex-text-match-2" class="small-code">
   <p>Jeg er første avsnitt</p>
   <pre>Jeg er litt kode</pre>
-  <p style="color: red;">Jeg er andre avsnitt</p>
+  <p>Jeg er andre avsnitt</p>
   <pre>Jeg er mer kode</pre>
   <p>Jeg er tredje avsnitt</p>
 </div>
 
-## Kombinasjoner
+## Velg alle etterfølgende søsken
 
 ```css
 pre ~ p {
@@ -311,55 +361,247 @@ pre ~ p {
 }
 ```
 
-<div class="small-code">
-  <p>Jeg er første avsnitt</p>
-  <pre>Jeg er litt kode</pre>
-  <p style="color: red;">Jeg er andre avsnitt</p>
-  <pre>Jeg er mer kode</pre>
-  <p style="color: red;">Jeg er tredje avsnitt</p>
-</div>
-
-## Kombinasjoner
-
-```css
-ul > li {
+```{asis, eval=TRUE, echo=TRUE}
+<style>
+#ex-text-match-3 > pre ~ p {
   color: red;
 }
+</style>
 ```
 
-```htm
-<ul>
-  <li>One</li>
-  <li>Two!</li>
-  <li>Three</li>
-</ul>
-```
+<div id="ex-text-match-3" class="small-code">
+  <p>Jeg er første avsnitt</p>
+  <pre>Jeg er litt kode</pre>
+  <p>Jeg er andre avsnitt</p>
+  <pre>Jeg er mer kode</pre>
+  <p>Jeg er tredje avsnitt</p>
+</div>
 
-<ul>
-  <li>One</li>
-  <li style="color: red;">Two!</li>
-  <li>Three</li>
-</ul>
+## Velg elementer basert på attributter
+
+* Vi kan velge elementer basert på _attributtene_ til elementene
+* Vi kan velge elementer både basert på _eksistensen_ til en attributt eller _verdien_ til en attributt
+* For verdier kan vi velge basert både på _eksakt_ verdi eller treff på _deler av_ verdien
+
+CSS-velgere:
+```
+[attributt]
+[attributt=verdi]
+```
 
 ## Tekstmatching
 
 ```css
 /* Attributter som starter med en verdi */
-[attr^="value"]
+[attributt^="verdi"]
 
 /* Attributter som inneholder en verdi */
-[attr*="value"]
+[attributt*="verdi"]
 
 /* Attributter som slutter med en verdi */
-[attr$="value"]
+[attributt$="verdi"]
 ```
+
+## Velge basert på attributt
+
+```css
+[data-attr] {
+  color: red;
+}
+```
+
+```html
+<div>
+  <p data-attr="finn-meg">Første avsnitt</p>
+  <p data-attr="ikke-meg">Andre avsnitt</p>
+</div>
+```
+
+```{asis, eval=TRUE, echo=TRUE}
+<style>
+#ex-data-attr-1 > [data-attr] {
+  color: red;
+}
+</style>
+```
+
+<div id="ex-data-attr-1">
+  <p data-attr="finn-meg">Første avsnitt</p>
+  <p data-attr="ikke-meg">Andre avsnitt</p>
+</div>
+
+## Velge basert på attributtverdi
+
+```css
+[data-attr="finn-meg"] {
+  color: red;
+}
+```
+
+```html
+<div>
+  <p data-attr="finn-meg">Første avsnitt</p>
+  <p data-attr="ikke-meg">Andre avsnitt</p>
+</div>
+```
+
+```{asis, eval=TRUE, echo=TRUE}
+<style>
+#ex-data-attr-2 > [data-attr="finn-meg"] {
+  color: red;
+}
+</style>
+```
+
+<div id="ex-data-attr-2">
+  <p data-attr="finn-meg">Første avsnitt</p>
+  <p data-attr="ikke-meg">Andre avsnitt</p>
+</div>
+
+## Velge basert på attributtverdi
+
+```css
+[href$=".pdf"] {
+  color: red;
+}
+```
+
+```html
+<ul>
+  <li><a href="/rapport/fil.pdf">Kobling til fil</a></li>
+  <li><a href="https://riksrevisjonen.no/">Kobling til nettsted</a></li>
+  <li><a href="#intern">Intern kobling</a></li>
+</ul>
+```
+
+```{asis, eval=TRUE, echo=TRUE}
+<style>
+#ex-data-attr-3 [href$=".pdf"] {
+  color: red;
+}
+</style>
+```
+
+<ul id="ex-data-attr-3">
+  <li><a href="/rapport/fil.pdf">Kobling til fil</a></li>
+  <li><a href="https://riksrevisjonen.no/">Kobling til nettsted</a></li>
+  <li><a href="#intern">Intern kobling</a></li>
+</ul>
+
 
 ## Oppgaver
 
 * Skriv en CSS-velger som velger alle interne hyperkoblinger (interne hyperkoblinger starter alltid med `#` i attributtet `href`)
 * Skriv en CSS-velger som velger alle hyperkoblinger hvor attributtet `href` _slutter_ med `.pdf`
 
-## Pseudo-klasser
+## Pseudoklasser {.flexbox .vleft}
+
+* Pseudoklasser gjør det mulig å velge elementer basert på egenskaper ved disse
+* Vi kan være interesser i det _første_ eller _n-te_ elementet i en liste
+* Eller vi kan ønske å velge elementer som _ikke_ har en spesifikk klasse
+* Pseudoklasser gjør dette og mye mer mulig
+* Ikke alle pseudoklasser er støttet for webscraping med `rvest`
+
+## Utvalgte pseudoklasser
+
+| Pseudoklasse     | Beskrivelse                             |       
+| -----------------|:---------------------------------------:|
+| :first-child     | Første etterkommer                      |
+| :nth-child(n)    | N-te etterkommer                        |
+| :first-of-type   | Første element av en spesifikk av type  |
+| :nth-of-type(n)  | N-te element av en spesifikk type       |
+| :last-of-type    | Siste element av en spesifikk type      |
+| :not()           | Elementer som _ikke_ skal velges        |
+
+## Velge første element
+
+```css
+li:first-of-type {
+  color: red;
+}
+```
+
+```html
+<ul>
+  <li>Første element</li>
+  <li>Andre element</li>
+  <li>Tredje element</li>
+</ul>
+```
+
+```{asis, eval=TRUE, echo=TRUE}
+<style>
+#ex-pseudo-1 li:first-of-type {
+  color: red;
+}
+</style>
+```
+
+<ul id="ex-pseudo-1">
+  <li>Første element</li>
+  <li>Andre element</li>
+  <li>Tredje element</li>
+</ul>
+
+## Velge n-te element
+
+```css
+li:nth-of-type(2) {
+  color: red;
+}
+```
+
+```html
+<ul>
+  <li>Første element</li>
+  <li>Andre element</li>
+  <li>Tredje element</li>
+</ul>
+```
+
+```{asis, eval=TRUE, echo=TRUE}
+<style>
+#ex-pseudo-2 li:nth-of-type(2) {
+  color: red;
+}
+</style>
+```
+
+<ul id="ex-pseudo-2">
+  <li>Første element</li>
+  <li>Andre element</li>
+  <li>Tredje element</li>
+</ul>
+
+## Velge siste element
+
+```css
+li:last-of-type {
+  color: red;
+}
+```
+
+```html
+<ul>
+  <li>Første element</li>
+  <li>Andre element</li>
+  <li>Tredje element</li>
+</ul>
+```
+
+```{asis, eval=TRUE, echo=TRUE}
+<style>
+#ex-pseudo-3 li:last-of-type {
+  color: red;
+}
+</style>
+```
+
+<ul id="ex-pseudo-3">
+  <li>Første element</li>
+  <li>Andre element</li>
+  <li>Tredje element</li>
+</ul>
 
 
 # Jobbe med tekst i R
