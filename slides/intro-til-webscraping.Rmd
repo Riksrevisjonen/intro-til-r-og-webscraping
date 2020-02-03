@@ -511,9 +511,24 @@ df <- do.call('rbind', the_list)
 df
 ```
 
-
 >- Protip: Sjekk også ut `data.table::rbindlist()`
 
-# RSelenium / Ikke statisk HTML 
+# Avansert webskraping  
+
+##  Dynamiske nettsider {.flexbox .vleft .extraspace}
+
+- Biblioteker som `rvest` i R eller `scrapy` i Python får kun tak i HTML-koden på en nettside 
+- Moderne nettsider bruker imidlertid ofte `Javascript` for å gi en interaktiv brukeropplevelse 
+- Det er derfor *ikke*  sikkert at alt inneholdet på nettsiden er inkludert i HTML kildekoden `r emo::ji("sad")`
+
+
+## Nettsteder som krever at du er en nettleser {.flexbox .vleft .extraspace}
+
+- Et delvis relatert problem er at noen nettsteder vil behandle deg ulikt avhengig av hvordan du prøver å nå dem 
+- Særlig kan du oppdage at IP-adressen din vil bli blokkert dersom du ikke er en nettleser 
+
+>- Hvordan skal vi da få tak i inneholdet?  `r emo::ji('thinking')`
+
+## Selenium 
 
 FYLL INN HER FOR Å UNNGÅ MERGEKONFLIKT
