@@ -930,10 +930,12 @@ GET("http://httpbin.org/status/500")
 >- Hva betyr HTTP statuskoder i 400-serien? 
 >- Hva betyr HTTP statuskoder i 500-serien? 
 
-## Oppgaver {.flexbox .vleft .extraspace}
+## Oppgave {.flexbox .vleft .extraspace}
 
-1. Sjekk ut objektene `rr_resp_1` og `rr_resp_2` i ditt arbeidsmiljø. Hva er forskjellen på de to objektene? 
-2. Hvilken nettside / url stammer de fra?
+1. Sjekk ut objektene `rr_resp_1` og `rr_resp_2` i ditt arbeidsmiljø.
+2. Hva inneholder de to objektene? Sjekk eks. ut med `httr::content()`. 
+3. Hva er forskjellen på de to objektene? 
+4. Hvilken nettside / url stammer de fra?
 
 # Trekk ut innhold fra html
 
