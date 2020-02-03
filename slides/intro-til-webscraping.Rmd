@@ -615,7 +615,7 @@ regmatches(my_text, gregexpr('[0-9]{3}', my_text))[[1]]
 
 # Les inn webinnhold til R
 
-## `httr` pakke
+## `httr` pakken
 
 `httr` er en tilleggspakke til R som er mye brukt for å sende og og motta forespørsler over HTTP. 
 
@@ -754,14 +754,106 @@ df
 - Moderne nettsider bruker imidlertid ofte `Javascript` for å gi en interaktiv brukeropplevelse 
 - Det er derfor *ikke*  sikkert at alt inneholdet på nettsiden er inkludert i HTML kildekoden `r emo::ji("sad")`
 
+## Eksempel valg.no 
 
-## Nettsteder som krever at du er en nettleser {.flexbox .vleft .extraspace}
+```{r out.width='80%', fig.align='center'}
+knitr::include_graphics('../assets/valgresultat-no.png')
+```
 
-- Et delvis relatert problem er at noen nettsteder vil behandle deg ulikt avhengig av hvordan du prøver å nå dem 
-- Særlig kan du oppdage at IP-adressen din vil bli blokkert dersom du ikke er en nettleser 
+## Eksempel valg.no (med `rvest`)
+
+Med `rvest` vil *ikke* finne noe særlig på nettsiden valgresultat.no, siden nesten hele siden generes av at `Javacript`. 
+
+```{r echo=TRUE, cache=TRUE}
+h <- read_html(GET('https://valgresultat.no/?type=ko&year=2019'))
+h %>% html_nodes('[class="party-chart"]') # Finner ingenting her... 
+```
+
+## Andre utfordringer {.flexbox .vleft .extraspace}
+
+- I en del tilfeller kan det være nyttig å kunne navigere på nettsiden 
+- Noen nettsteder vil også kunne blokkere forespørselen din dersom du ikke er en nettleser 
 
 >- Hvordan skal vi da få tak i inneholdet?  `r emo::ji('thinking')`
 
 ## Selenium 
 
-FYLL INN HER FOR Å UNNGÅ MERGEKONFLIKT
+Selenium er i utgangspunktet et verktøy for automatisert testing av webapplikasjoner. 
+
+Ved bruk av Selenium kan vi åpne en nettleser (typisk Firefox eller Google Chrome) som kan gjøre oppaver for oss. 
+
+Løser utfodringen med lese inn Javascript, samt at det blant annet åpner muligheter for å klikke på elementer på en nettside.    
+
+Selenium kan integreres mot en rekke ulike programmeringsspråk. I R er det en pakke som heter `RSelenium`. 
+
+```{r echo = TRUE, eval = FALSE}
+install.packages('RSelenium')
+```
+```{r echo=TRUE}
+library(RSelenium)
+```
+
+## Selenium server 
+
+For å kunne bruke Selenium trenger vi imidlertid en server denne kan kjøre på. 
+
+Den anbefalte fremgangsmåten for dette er å bruke [Docker](https://www.docker.com/products/docker-desktop). 
+
+NB! Docker er ikke tilgjengelig på Riksrevisjonens standard PC-er. 
+<!-- Ta kontakt med SUV-DS dersom du har en case hvor du trenger å bruke Selenium til arbeidsformål.   -->
+
+```{bash echo=TRUE, eval=FALSE}
+# Start en Docker container med en Selenium Firefox nettleser 
+docker run -d -p 4445:4445 --shm-size 2g selenium/standalone-firefox
+```
+
+```{r echo=TRUE, eval=FALSE}
+# Opprett en tilkobling til Selenium-serveren  
+remDr <- remoteDriver(remoteServerAddr = 'localhost', port = 4445L)
+```
+
+## Eksempel valg.no (med `RSelenium`)
+
+Med `rvest` fikk vi ikke lest inn `Javascript` på nettsiden valgresultat.no. Det kan vi derimot gjøre med `RSelenium`. 
+
+```{r echo=TRUE , eval=FALSE}
+# Opprett en tilkobling til Selenium-serveren  
+remDr <- remoteDriver(remoteServerAddr = Sys.getenv('SEL_HOST'), port = 4445L)
+# Åpne en ny sesjon i nettleseren
+remDr$open(silent = TRUE) 
+# Naviger til siden 
+remDr$navigate('https://valgresultat.no/?type=ko&year=2019')
+
+```
+
+```{r echo = FALSE, eval = FALSE}
+h <- readRDS('assets/sel-example.RDS')
+```
+
+```{r echo = TRUE, eval = FALSE}
+# Les inn HTML 
+h <- read_html(remDr$getPageSource()[[1]])
+h %>% html_nodes('[class="party-chart"]')
+```
+
+## Eksempel valg.no (med `RSelenium`)
+
+```{r echo=TRUE, eval=FALSE}
+remDr$screenshot(display = TRUE)
+```
+```{r out.width='60%', fig.align='center'}
+knitr::include_graphics('../assets/sel-screenshot-valg-no-1.png')
+```
+
+## Eksempel valg.no (med `RSelenium`)
+
+```{r echo=TRUE, eval = FALSE}
+e <- remDr$findElement('css', '[class="icon-table2"]')
+e$clickElement()
+remDr$screenshot(display = TRUE)
+```
+```{r out.width='60%', fig.align='center'}
+knitr::include_graphics('../assets/sel-screenshot-valg-no-2.png')
+```
+
+## 
