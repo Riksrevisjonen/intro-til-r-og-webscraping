@@ -1,0 +1,541 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>Valgresultat.no</title>
+<base href="/">
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<style>
+		app-loader {
+			background-color: #fff;
+			position: absolute;
+			top: 0;
+			left: 0;
+			display: block;
+			opacity: 1;
+			z-index: 50000;
+			height: 100%;
+			width: 100%;
+			text-align: center;
+		}
+
+		app-loader p {
+			font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+			letter-spacing: 1px;
+		}
+
+		app-loader logo {
+			display: inline-block;
+			margin-top: 190px;
+			margin-top: calc(33vh);
+			width: 60%;
+		}
+
+		app-loader logo:after {
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+			display: block;
+			position: relative;
+			margin: 0 auto;
+			border-top: 4px solid #ff6e00;
+			border-bottom: 4px solid #ffebbf;
+			border-left: 4px solid #ff6e00;
+			border-right: 4px solid #ffebbf;
+			content: '';
+			opacity: .5;
+			animation: rotate 0.6s linear infinite;
+			-webkit-animation: rotate 0.6s linear infinite;
+			-moz-animation: rotate 0.6s linear infinite;
+			-ms-animation: rotate 0.6s linear infinite;
+			-o-animation: rotate 0.6s linear infinite;
+			-webkit-border-radius: 100%;
+			-moz-border-radius: 100%;
+			border-radius: 100%;
+			height: 75px;
+			width: 75px;
+		}
+
+		app-loader logo img {
+			width: 100%;
+			max-width: 500px;
+			margin-bottom: 1em;
+		}
+
+		@-webkit-keyframes rotate {
+			0% {
+				transform: rotateZ(-360deg);
+				-webkit-transform: rotateZ(-360deg);
+				-moz-transform: rotateZ(-360deg);
+				-ms-transform: rotateZ(-360deg);
+				-o-transform: rotateZ(-360deg); }
+			100% {
+				transform: rotateZ(0deg);
+				-webkit-transform: rotateZ(0deg);
+				-moz-transform: rotateZ(0deg);
+				-ms-transform: rotateZ(0deg);
+				-o-transform: rotateZ(0deg); } }
+
+		@-moz-keyframes rotate {
+			0% {
+				transform: rotateZ(-360deg);
+				-webkit-transform: rotateZ(-360deg);
+				-moz-transform: rotateZ(-360deg);
+				-ms-transform: rotateZ(-360deg);
+				-o-transform: rotateZ(-360deg); }
+			100% {
+				transform: rotateZ(0deg);
+				-webkit-transform: rotateZ(0deg);
+				-moz-transform: rotateZ(0deg);
+				-ms-transform: rotateZ(0deg);
+				-o-transform: rotateZ(0deg); } }
+
+		@-o-keyframes rotate {
+			0% {
+				transform: rotateZ(-360deg);
+				-webkit-transform: rotateZ(-360deg);
+				-moz-transform: rotateZ(-360deg);
+				-ms-transform: rotateZ(-360deg);
+				-o-transform: rotateZ(-360deg); }
+			100% {
+				transform: rotateZ(0deg);
+				-webkit-transform: rotateZ(0deg);
+				-moz-transform: rotateZ(0deg);
+				-ms-transform: rotateZ(0deg);
+				-o-transform: rotateZ(0deg); } }
+
+		@-ms-keyframes rotate {
+		app-loader logo:after 0% {
+			transform: rotateZ(-360deg);
+			-webkit-transform: rotateZ(-360deg);
+			-moz-transform: rotateZ(-360deg);
+			-ms-transform: rotateZ(-360deg);
+			-o-transform: rotateZ(-360deg);
+		}
+		app-loader logo:after 100% {
+			transform: rotateZ(0deg);
+			-webkit-transform: rotateZ(0deg);
+			-moz-transform: rotateZ(0deg);
+			-ms-transform: rotateZ(0deg);
+			-o-transform: rotateZ(0deg); } }
+
+		@keyframes rotate {
+			0% {
+				transform: rotateZ(-360deg);
+				-webkit-transform: rotateZ(-360deg);
+				-moz-transform: rotateZ(-360deg);
+				-ms-transform: rotateZ(-360deg);
+				-o-transform: rotateZ(-360deg); }
+			100% {
+				transform: rotateZ(0deg);
+				-webkit-transform: rotateZ(0deg);
+				-moz-transform: rotateZ(0deg);
+				-ms-transform: rotateZ(0deg);
+				-o-transform: rotateZ(0deg); } }
+
+		app-loader.fade-out {
+			animation: fade-out 350ms linear;
+			-webkit-animation: fade-out 350ms linear;
+			-moz-animation: fade-out 350ms linear;
+			-ms-animation: fade-out 350ms linear;
+			-o-animation: fade-out 350ms linear; }
+
+		@-webkit-keyframes fade-out {
+			0% {
+				opacity: 1; }
+			100% {
+				opacity: 0;
+				display: none; } }
+
+		@-moz-keyframes fade-out {
+			0% {
+				opacity: 1; }
+			100% {
+				opacity: 0;
+				display: none; } }
+
+		@-o-keyframes fade-out {
+			0% {
+				opacity: 1; }
+			100% {
+				opacity: 0;
+				display: none; }
+		}
+
+		@-ms-keyframes fade-out {
+		app-loader.fade-out 0% { opacity: 1; }
+		app-loader.fade-out 100% { opacity: 0; display: none; }
+		}
+
+		@keyframes fade-out {
+			0% {
+				opacity: 1; }
+			100% {
+				opacity: 0;
+				display: none;
+			}
+		}
+
+	</style>
+<script async="" src="https://www.google-analytics.com/analytics.js"></script><script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-104386347-1', 'auto');
+	</script><link rel="stylesheet" href="styles.7052093cdd9172947bc6.css">
+<style>html[_ngcontent-mpq-c0]{box-sizing:border-box}*[_ngcontent-mpq-c0], [_ngcontent-mpq-c0]::after, [_ngcontent-mpq-c0]::before{box-sizing:inherit}[_nghost-mpq-c0]{width:100%;display:block;background-color:#fffdfa}[_nghost-mpq-c0]   .container[_ngcontent-mpq-c0]{max-width:1396px;margin:1em auto}[_nghost-mpq-c0]   .container[_ngcontent-mpq-c0]::after{clear:both;content:"";display:block}[_nghost-mpq-c0]   .container__inner[_ngcontent-mpq-c0]{float:left;display:block;margin-right:2.35765202%;width:100%;padding:0 .25em}[_nghost-mpq-c0]   .container__inner[_ngcontent-mpq-c0]:last-child{margin-right:0}[_nghost-mpq-c0]     app-place-picker+router-outlet+app-about, [_nghost-mpq-c0]     app-place-picker+router-outlet+app-error, [_nghost-mpq-c0]     app-place-picker+router-outlet+app-viewport-container{display:none}[_nghost-mpq-c0]     .hidden{display:none!important}[_nghost-mpq-c0]   #banner[_ngcontent-mpq-c0]{background-color:#004eff;color:#fff;text-align:center}[_nghost-mpq-c0]   #banner[_ngcontent-mpq-c0]   p[_ngcontent-mpq-c0]{font-size:4em;font-style:normal;font-weight:400}</style>
+<style>[_nghost-mpq-c1]{position:absolute;top:0;height:.4em;width:1em;z-index:99997}[_nghost-mpq-c1]   .loading-bar[_ngcontent-mpq-c1]{position:fixed;margin:0;padding:0;top:0;left:0;right:0;z-index:99999}[_nghost-mpq-c1]   .loading-bar__progress[_ngcontent-mpq-c1]{margin:0;padding:0;z-index:99998;box-shadow:0 0 10px 0;height:2px;opacity:0}</style>
+<style>html[_ngcontent-mpq-c2]{box-sizing:border-box}*[_ngcontent-mpq-c2], [_ngcontent-mpq-c2]::after, [_ngcontent-mpq-c2]::before{box-sizing:inherit}[_nghost-mpq-c2]{position:absolute;top:5.3rem;left:0;z-index:10007;float:left;display:block;width:100%;margin-right:0}[_nghost-mpq-c2]:last-child{margin-right:0}@media screen and (min-width:40em){[_nghost-mpq-c2]{top:6.25rem}}[_nghost-mpq-c2]   .warning-wrapper[_ngcontent-mpq-c2]{max-width:1396px;margin-left:auto;margin-right:auto}[_nghost-mpq-c2]   .warning-wrapper[_ngcontent-mpq-c2]::after{clear:both;content:"";display:block}[_nghost-mpq-c2]   .inner[_ngcontent-mpq-c2]{margin:0 .25rem;display:flex;align-items:center;background-color:#f8d7da;border:1px solid #f5c6cb;border-radius:.25rem}[_nghost-mpq-c2]   .inner[_ngcontent-mpq-c2]   p[_ngcontent-mpq-c2]{margin-left:.5rem;flex:1 1 auto;color:#721c24}[_nghost-mpq-c2]   .inner[_ngcontent-mpq-c2]   span[_ngcontent-mpq-c2]{font-size:1em;padding:.75rem;flex:0 0 auto}</style>
+<style>html[_ngcontent-mpq-c3]{box-sizing:border-box}*[_ngcontent-mpq-c3], [_ngcontent-mpq-c3]::after, [_ngcontent-mpq-c3]::before{box-sizing:inherit}[_nghost-mpq-c3]{width:100%;display:block;background:#fff;border-bottom:3px solid #e9e6e2}[_nghost-mpq-c3]   .line[_ngcontent-mpq-c3]{width:100%;height:3px;background-color:#ff6e00}[_nghost-mpq-c3]   .container[_ngcontent-mpq-c3]{max-width:1396px;margin-left:auto;margin-right:auto}[_nghost-mpq-c3]   .container[_ngcontent-mpq-c3]::after{clear:both;content:"";display:block}[_nghost-mpq-c3]   .container__inner[_ngcontent-mpq-c3]{float:left;display:block;width:100%;margin-right:0;padding:0 .25em}[_nghost-mpq-c3]   .container__inner[_ngcontent-mpq-c3]:last-child{margin-right:0}[_nghost-mpq-c3]   .logo[_ngcontent-mpq-c3]{float:left;margin-right:2.35765202%;width:74.41058699%;display:block;margin-top:1em;margin-bottom:1em}[_nghost-mpq-c3]   .logo[_ngcontent-mpq-c3]:last-child{margin-right:0}[_nghost-mpq-c3]   .logo[_ngcontent-mpq-c3]   a[_ngcontent-mpq-c3]   img[_ngcontent-mpq-c3]{width:7rem;height:2.67rem}@media screen and (min-width:40em){[_nghost-mpq-c3]   .logo[_ngcontent-mpq-c3]{float:left;display:block;margin-right:2.35765202%;width:57.35097832%}[_nghost-mpq-c3]   .logo[_ngcontent-mpq-c3]:last-child{margin-right:0}[_nghost-mpq-c3]   .logo[_ngcontent-mpq-c3]   a[_ngcontent-mpq-c3]   img[_ngcontent-mpq-c3]{width:9rem;height:3.45rem}}[_nghost-mpq-c3]   .options_menu[_ngcontent-mpq-c3]{float:left;display:block;margin-right:2.35765202%;width:23.23176098%;margin-top:1.5em}[_nghost-mpq-c3]   .options_menu[_ngcontent-mpq-c3]:last-child{margin-right:0}@media screen and (min-width:40em){[_nghost-mpq-c3]   .options_menu[_ngcontent-mpq-c3]{float:left;display:block;margin-right:2.35765202%;width:40.29136965%;margin-top:2.2em}[_nghost-mpq-c3]   .options_menu[_ngcontent-mpq-c3]:last-child{margin-right:0}}[_nghost-mpq-c3]   .options_menu[_ngcontent-mpq-c3]::after{clear:both;content:"";display:block}[_nghost-mpq-c3]   .lang_menu__list[_ngcontent-mpq-c3]{float:right;display:none}@media screen and (min-width:40em){[_nghost-mpq-c3]   .lang_menu__list[_ngcontent-mpq-c3]{display:block}}[_nghost-mpq-c3]   .lang_menu__list__item[_ngcontent-mpq-c3]{font-weight:400;margin-right:2em}[_nghost-mpq-c3]   .search_menu[_ngcontent-mpq-c3]{float:right;cursor:pointer;line-height:2em;padding-top:.165em}[_nghost-mpq-c3]   .search_menu__title[_ngcontent-mpq-c3]{-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;display:none;font-size:1.13em;font-weight:500;margin-right:.33em}[_nghost-mpq-c3]   .search_menu__title[_ngcontent-mpq-c3]:hover{text-decoration:underline}[_nghost-mpq-c3]   .search_menu__icon[_ngcontent-mpq-c3]{font-family:icomoon;speak:none;font-style:normal;font-weight:300;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;padding:.5em .8em;font-size:1.5em}[_nghost-mpq-c3]   .search_menu__icon[_ngcontent-mpq-c3]::before{content:"\e9bd"}@media screen and (min-width:40em){[_nghost-mpq-c3]   .search_menu__title[_ngcontent-mpq-c3]{display:inline-block}[_nghost-mpq-c3]   .search_menu__icon[_ngcontent-mpq-c3]{padding:0;font-size:.9em}[_nghost-mpq-c3]   .search_menu__icon[_ngcontent-mpq-c3]::before{content:"\e986"}}</style>
+<style>html[_ngcontent-mpq-c4]{box-sizing:border-box}*[_ngcontent-mpq-c4], [_ngcontent-mpq-c4]::after, [_ngcontent-mpq-c4]::before{box-sizing:inherit}[_nghost-mpq-c4]{width:100%;display:block;background:#fff;margin-top:2em;border-top:3px solid #e9e6e2;font-size:1em;font-weight:400}[_nghost-mpq-c4]   .vdir-logo-text[_ngcontent-mpq-c4]{width:250px;height:50px}[_nghost-mpq-c4]   .container[_ngcontent-mpq-c4]{max-width:1396px;margin-left:auto;margin-right:auto}[_nghost-mpq-c4]   .container[_ngcontent-mpq-c4]::after{clear:both;content:"";display:block}[_nghost-mpq-c4]   .container__inner[_ngcontent-mpq-c4]{float:left;display:block;margin-right:2.35765202%;width:100%}[_nghost-mpq-c4]   .container__inner[_ngcontent-mpq-c4]:last-child{margin-right:0}[_nghost-mpq-c4]   section[_ngcontent-mpq-c4]:nth-child(1){float:left;display:block;margin-right:2.35765202%;width:100%;padding-top:1.5em;padding-bottom:1.5em;border-bottom:2px solid #eae7e3;margin-bottom:1.5em;text-align:center}[_nghost-mpq-c4]   section[_ngcontent-mpq-c4]:nth-child(1):last-child{margin-right:0}@media screen and (min-width:64em){[_nghost-mpq-c4]{padding-top:1.5em}[_nghost-mpq-c4]   section[_ngcontent-mpq-c4]:nth-child(1){float:left;display:block;margin-right:2.35765202%;width:40.29136965%;padding-top:0;padding-bottom:0;border-bottom:none;margin-bottom:0;text-align:start;padding-left:.5em}[_nghost-mpq-c4]   section[_ngcontent-mpq-c4]:nth-child(1):last-child{margin-right:0}}[_nghost-mpq-c4]   section[_ngcontent-mpq-c4]:nth-child(n+2){float:left;display:block;margin-right:2.35765202%;width:100%;margin-bottom:1.5em;text-align:center}[_nghost-mpq-c4]   section[_ngcontent-mpq-c4]:nth-child(n+2):last-child{margin-right:0}@media screen and (min-width:40em){[_nghost-mpq-c4]   section[_ngcontent-mpq-c4]:nth-child(n+2){float:left;display:block;margin-right:2.35765202%;width:31.76156532%;margin-bottom:0}[_nghost-mpq-c4]   section[_ngcontent-mpq-c4]:nth-child(n+2):last-child{margin-right:0}}@media screen and (min-width:64em){[_nghost-mpq-c4]   section[_ngcontent-mpq-c4]:nth-child(n+2){float:left;display:block;margin-right:2.35765202%;width:14.70195665%;margin-bottom:0;text-align:start}[_nghost-mpq-c4]   section[_ngcontent-mpq-c4]:nth-child(n+2):last-child{margin-right:0}[_nghost-mpq-c4]   section[_ngcontent-mpq-c4]:nth-child(n+2):nth-last-child(1){float:left;display:block;margin-right:2.35765202%;width:23.23176098%}[_nghost-mpq-c4]   section[_ngcontent-mpq-c4]:nth-child(n+2):nth-last-child(1):last-child{margin-right:0}}[_nghost-mpq-c4]   h2[_ngcontent-mpq-c4]{font-size:1.1em;margin-bottom:.75em;font-weight:500;color:#000;letter-spacing:1.6px;line-height:2em}[_nghost-mpq-c4]   ul[_ngcontent-mpq-c4]{color:#333;letter-spacing:.8px;font-weight:400}[_nghost-mpq-c4]   li[_ngcontent-mpq-c4]{line-height:1.75em}[_nghost-mpq-c4]   a[_ngcontent-mpq-c4]{color:#333;text-decoration:underline}[_nghost-mpq-c4]   .vtag[_ngcontent-mpq-c4]{font-weight:300;color:#333;margin:2em .5em 1em 0;float:right;font-size:.75em}</style>
+<style>html[_ngcontent-mpq-c5]{box-sizing:border-box}*[_ngcontent-mpq-c5], [_ngcontent-mpq-c5]::after, [_ngcontent-mpq-c5]::before{box-sizing:inherit}[_nghost-mpq-c5]{position:relative;float:left;font-size:.8em;padding-top:.1em;z-index:10003}[_nghost-mpq-c5]     .selected-item{line-height:2em!important}[_nghost-mpq-c5]     app-drop-down>div>ul{padding-top:2.9em!important}[_nghost-mpq-c5]     app-drop-down>div>ul>li>span{padding-right:2em!important}</style>
+<style>html[_ngcontent-mpq-c6]{box-sizing:border-box}*[_ngcontent-mpq-c6], [_ngcontent-mpq-c6]::after, [_ngcontent-mpq-c6]::before{box-sizing:inherit}[_nghost-mpq-c6]{overflow:visible;position:relative}[_nghost-mpq-c6]   .hidden[_ngcontent-mpq-c6]{display:none}[_nghost-mpq-c6] > div[_ngcontent-mpq-c6] > span[_ngcontent-mpq-c6]{-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;width:100%;line-height:1.4em;color:#000;font-weight:500;background:#fff;display:block;padding:0;position:relative;font-size:1.4em;cursor:pointer}[_nghost-mpq-c6] > div[_ngcontent-mpq-c6] > span[_ngcontent-mpq-c6]:after{font-family:icomoon;speak:none;font-style:normal;font-weight:300;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;content:"\E605";color:#000;text-align:center;font-size:1em}[_nghost-mpq-c6] > div[_ngcontent-mpq-c6] > span[_ngcontent-mpq-c6] > a[_ngcontent-mpq-c6]:hover{text-decoration:underline}[_nghost-mpq-c6]   .selected-item[_ngcontent-mpq-c6]{z-index:10001}[_nghost-mpq-c6]   ul[_ngcontent-mpq-c6]{padding-top:2.3em;margin:0;display:block;z-index:10002;position:absolute;top:0;left:-1em;list-style-type:none}[_nghost-mpq-c6]   ul[_ngcontent-mpq-c6]   li[_ngcontent-mpq-c6]{background-color:#fff;border-left:1px solid #ebebeb;border-right:1px solid #ebebeb}[_nghost-mpq-c6]   ul[_ngcontent-mpq-c6]   li[_ngcontent-mpq-c6]:first-child{border-top:1px solid #ebebeb}[_nghost-mpq-c6]   ul[_ngcontent-mpq-c6]   li[_ngcontent-mpq-c6]:last-child{border-bottom:none}[_nghost-mpq-c6]   ul[_ngcontent-mpq-c6]   li[_ngcontent-mpq-c6]   span[_ngcontent-mpq-c6]{display:block;padding-left:1em;padding-right:1em;white-space:nowrap;color:#000;background-color:#fff;line-height:2;cursor:pointer;font-size:1.2em;border-bottom:1px solid #ebebeb}[_nghost-mpq-c6]   ul[_ngcontent-mpq-c6]   li[_ngcontent-mpq-c6]   span[_ngcontent-mpq-c6]:hover{background-color:rgba(198,197,194,.16)}.drop-down--active[_nghost-mpq-c6] > div[_ngcontent-mpq-c6] > span[_ngcontent-mpq-c6]:after{transform:rotate(-180deg);-webkit-transform:rotate(-180deg);-moz-transform:rotate(-180deg);-ms-transform:rotate(-180deg);-o-transform:rotate(-180deg);content:"\E605";display:inline-block}</style>
+<style>html[_ngcontent-mpq-c7]{box-sizing:border-box}*[_ngcontent-mpq-c7], [_ngcontent-mpq-c7]::after, [_ngcontent-mpq-c7]::before{box-sizing:inherit}</style>
+<style>[_nghost-mpq-c7]{width:100%;display:block;min-height:480px;min-height:calc(100vh - 80px)}</style>
+<style>@charset "UTF-8";html[_ngcontent-mpq-c8]{box-sizing:border-box}*[_ngcontent-mpq-c8], [_ngcontent-mpq-c8]::after, [_ngcontent-mpq-c8]::before{box-sizing:inherit}[_nghost-mpq-c8]{width:100%;display:block;margin-bottom:.9em;max-width:1396px;margin-left:auto;margin-right:auto}[_nghost-mpq-c8]::after{clear:both;content:"";display:block}[_nghost-mpq-c8]   ul[_ngcontent-mpq-c8]{line-height:2em}[_nghost-mpq-c8]   li[_ngcontent-mpq-c8]{display:inline-block;padding:0 .2em;cursor:pointer}[_nghost-mpq-c8]   li[_ngcontent-mpq-c8]:after, [_nghost-mpq-c8]   li[_ngcontent-mpq-c8]:before{font-family:icomoon;speak:none;font-style:normal;font-weight:300;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}[_nghost-mpq-c8]   li[_ngcontent-mpq-c8]:first-child{padding-left:0}[_nghost-mpq-c8]   li[_ngcontent-mpq-c8]:nth-last-child(2){padding-right:0;pointer-events:none}[_nghost-mpq-c8]   li[_ngcontent-mpq-c8]:nth-child(n+1):nth-last-child(n+3):after{display:inline-block;position:relative;top:.0695em;transform:rotate(-90deg);-webkit-transform:rotate(-90deg);-moz-transform:rotate(-90deg);-ms-transform:rotate(-90deg);-o-transform:rotate(-90deg);font-size:1em;content:"\E605"}[_nghost-mpq-c8]   li[_ngcontent-mpq-c8]:last-child:before{font-size:1.2em!important;content:' | '!important}[_nghost-mpq-c8]   li[_ngcontent-mpq-c8]   a[_ngcontent-mpq-c8]{display:inline-block;font-size:1.1em;font-weight:500;color:#000;text-decoration:none}[_nghost-mpq-c8]   li[_ngcontent-mpq-c8]   a[_ngcontent-mpq-c8]:first-letter{text-transform:capitalize}[_nghost-mpq-c8]   li[_ngcontent-mpq-c8]   a[_ngcontent-mpq-c8]:hover{text-decoration:underline}</style>
+<style>html[_ngcontent-mpq-c9]{box-sizing:border-box}*[_ngcontent-mpq-c9], [_ngcontent-mpq-c9]::after, [_ngcontent-mpq-c9]::before{box-sizing:inherit}[_nghost-mpq-c9]{width:100%;display:block;position:relative}[_nghost-mpq-c9]   .loading-overlay[_ngcontent-mpq-c9]{display:none;position:absolute;z-index:11000;width:100%;height:100%;background-color:#fffdfa;opacity:.8}[_nghost-mpq-c9]   .throbber-parent[_ngcontent-mpq-c9]{display:none;position:absolute;top:10em;top:calc((100vh / 2) - 7.5em);margin:0;z-index:11001;width:100%}[_nghost-mpq-c9]   .throbber-parent[_ngcontent-mpq-c9]   .throbber-container[_ngcontent-mpq-c9]{height:75px;width:75px;margin:0 auto}[_nghost-mpq-c9]   .throbber-parent[_ngcontent-mpq-c9]   .throbber-container[_ngcontent-mpq-c9]   .throbber[_ngcontent-mpq-c9]:after{display:block;position:relative;margin:0 auto;border-top:4px solid #ff6e00;border-bottom:4px solid #ffebbf;border-left:4px solid #ff6e00;border-right:4px solid #ffebbf;content:'';opacity:.5;animation:.6s linear infinite rotate;-webkit-animation:.6s linear infinite rotate;-moz-animation:.6s linear infinite rotate;-ms-animation:rotate .6s linear infinite;-o-animation:.6s linear infinite rotate;border-radius:100%;height:75px;width:75px}@-webkit-keyframes rotate{0%{transform:rotateZ(-360deg);-webkit-transform:rotateZ(-360deg);-moz-transform:rotateZ(-360deg);-ms-transform:rotateZ(-360deg);-o-transform:rotateZ(-360deg)}100%{transform:rotateZ(0);-webkit-transform:rotateZ(0);-moz-transform:rotateZ(0);-ms-transform:rotateZ(0);-o-transform:rotateZ(0)}}@keyframes rotate{0%{transform:rotateZ(-360deg);-webkit-transform:rotateZ(-360deg);-moz-transform:rotateZ(-360deg);-ms-transform:rotateZ(-360deg);-o-transform:rotateZ(-360deg)}100%{transform:rotateZ(0);-webkit-transform:rotateZ(0);-moz-transform:rotateZ(0);-ms-transform:rotateZ(0);-o-transform:rotateZ(0)}}[_nghost-mpq-c9] > [_ngcontent-mpq-c9]:nth-child(2):last-child{top:0;margin:2em 0}.active[_nghost-mpq-c9]{cursor:default;pointer-events:none;touch-action:none}.active[_nghost-mpq-c9]   .loading-overlay[_ngcontent-mpq-c9], .active[_nghost-mpq-c9]   .throbber-parent[_ngcontent-mpq-c9]{display:block}</style>
+<style>html[_ngcontent-mpq-c10]{box-sizing:border-box}*[_ngcontent-mpq-c10], [_ngcontent-mpq-c10]::after, [_ngcontent-mpq-c10]::before{box-sizing:inherit}[_nghost-mpq-c10]{width:100%;display:block}[_nghost-mpq-c10]   .geo-inner[_ngcontent-mpq-c10]{max-width:1396px;margin-left:auto;margin-right:auto}[_nghost-mpq-c10]   .geo-inner[_ngcontent-mpq-c10]::after{clear:both;content:"";display:block}[_nghost-mpq-c10]   .geo-inner__charts[_ngcontent-mpq-c10]{margin-bottom:3em;overflow:hidden;float:left;display:block;width:100%;margin-right:0}[_nghost-mpq-c10]   .geo-inner__charts[_ngcontent-mpq-c10]:last-child{margin-right:0}@media screen and (min-width:64em){[_nghost-mpq-c10]   .geo-inner__charts[_ngcontent-mpq-c10]{float:left;display:block;margin-right:2.35765202%;width:57.35097832%}[_nghost-mpq-c10]   .geo-inner__charts[_ngcontent-mpq-c10]:last-child{margin-right:0}}[_nghost-mpq-c10]   .geo-inner__summary[_ngcontent-mpq-c10]{overflow:hidden;float:left;display:block;width:100%;margin-right:0}[_nghost-mpq-c10]   .geo-inner__summary[_ngcontent-mpq-c10]:last-child{margin-right:0}@media screen and (min-width:64em){[_nghost-mpq-c10]   .geo-inner__summary[_ngcontent-mpq-c10]{float:left;display:block;margin-right:2.35765202%;width:40.29136965%}[_nghost-mpq-c10]   .geo-inner__summary[_ngcontent-mpq-c10]:last-child{margin-right:0}}[_nghost-mpq-c10]   app-tabs[for=app-mandate][_ngcontent-mpq-c10]{margin-top:3em}[_nghost-mpq-c10]   app-overlay[_ngcontent-mpq-c10]     h1{font-size:1.3em;margin-bottom:.4em}</style>
+<style>html[_ngcontent-mpq-c11]{box-sizing:border-box}*[_ngcontent-mpq-c11], [_ngcontent-mpq-c11]::after, [_ngcontent-mpq-c11]::before{box-sizing:inherit}[_nghost-mpq-c11]{width:100%;display:block;overflow:visible;margin-bottom:.8em;max-width:1396px;margin-left:auto;margin-right:auto}[_nghost-mpq-c11]::after{clear:both;content:"";display:block}[_nghost-mpq-c11]   h1[_ngcontent-mpq-c11]{text-align:left;font-size:2em;margin:0 0 .1em}[_nghost-mpq-c11]   .context-selector-container[_ngcontent-mpq-c11]{float:left;display:block;margin-right:2.35765202%;width:100%}[_nghost-mpq-c11]   .context-selector-container[_ngcontent-mpq-c11]:last-child{margin-right:0}[_nghost-mpq-c11]   .context-selector-container[_ngcontent-mpq-c11]   .selectors[_ngcontent-mpq-c11]{float:left;display:block;margin-right:2.35765202%;width:100%}[_nghost-mpq-c11]   .context-selector-container[_ngcontent-mpq-c11]   .selectors[_ngcontent-mpq-c11]:last-child{margin-right:0}@media screen and (min-width:64em){[_nghost-mpq-c11]   .context-selector-container[_ngcontent-mpq-c11]   .selectors[_ngcontent-mpq-c11]{float:left;display:block;margin-right:2.35765202%;width:57.35097832%}[_nghost-mpq-c11]   .context-selector-container[_ngcontent-mpq-c11]   .selectors[_ngcontent-mpq-c11]:last-child{margin-right:0}}[_nghost-mpq-c11]   .context-selector-container[_ngcontent-mpq-c11]   .selectors[_ngcontent-mpq-c11]   *[_ngcontent-mpq-c11]{display:inline-block;margin-right:.35em}[_nghost-mpq-c11]   .context-selector-container[_ngcontent-mpq-c11]   .regional-warning[_ngcontent-mpq-c11]{float:left;display:block;width:100%;margin-right:0}[_nghost-mpq-c11]   .context-selector-container[_ngcontent-mpq-c11]   .regional-warning[_ngcontent-mpq-c11]:last-child{margin-right:0}@media screen and (min-width:64em){[_nghost-mpq-c11]   .context-selector-container[_ngcontent-mpq-c11]   .regional-warning[_ngcontent-mpq-c11]{float:left;display:block;margin-right:2.35765202%;width:40.29136965%}[_nghost-mpq-c11]   .context-selector-container[_ngcontent-mpq-c11]   .regional-warning[_ngcontent-mpq-c11]:last-child{margin-right:0}}[_nghost-mpq-c11]     .selected-item{background:0 0!important}</style>
+<style>html[_ngcontent-mpq-c13]{box-sizing:border-box}*[_ngcontent-mpq-c13], [_ngcontent-mpq-c13]::after, [_ngcontent-mpq-c13]::before{box-sizing:inherit}[_nghost-mpq-c13]{max-width:100%;margin-left:auto;margin-right:auto;padding-bottom:1.2em;display:block;float:left;width:100%}[_nghost-mpq-c13]::after{clear:both;content:"";display:block}[_nghost-mpq-c13]   .election-progression[_ngcontent-mpq-c13]{font-size:.9em;overflow:hidden;height:auto;transition:height .2s linear;-webkit-transition:height .2s linear;-moz-transition:height .2s linear;-ms-transition:height .2s linear;-o-transition:height .2s linear;float:left;display:block;margin-right:2.35765202%;width:100%}[_nghost-mpq-c13]   .election-progression[_ngcontent-mpq-c13]:last-child{margin-right:0}@media screen and (min-width:64em){[_nghost-mpq-c13]   .election-progression[_ngcontent-mpq-c13]{float:left;display:block;margin-right:2.35765202%;width:57.35097832%}[_nghost-mpq-c13]   .election-progression[_ngcontent-mpq-c13]:last-child{margin-right:0}}[_nghost-mpq-c13]   .election-progression[_ngcontent-mpq-c13]   .forhand[_ngcontent-mpq-c13]{float:left;display:block;margin-right:2.35765202%;width:48.82117399%}[_nghost-mpq-c13]   .election-progression[_ngcontent-mpq-c13]   .forhand[_ngcontent-mpq-c13]:last-child{margin-right:0}[_nghost-mpq-c13]   .election-progression[_ngcontent-mpq-c13]   .endelig[_ngcontent-mpq-c13]{float:left;display:block;width:48.82117399%;margin-right:0}[_nghost-mpq-c13]   .election-progression[_ngcontent-mpq-c13]   .endelig[_ngcontent-mpq-c13]:last-child{margin-right:0}[_nghost-mpq-c13]   .election-progression[_ngcontent-mpq-c13]   .oppgjor[_ngcontent-mpq-c13]{margin-top:1em;margin-bottom:1em;float:left;display:block;width:100%;margin-right:0}[_nghost-mpq-c13]   .election-progression[_ngcontent-mpq-c13]   .oppgjor[_ngcontent-mpq-c13]:last-child{margin-right:0}[_nghost-mpq-c13]   .toggle-progression-container[_ngcontent-mpq-c13]{float:left;display:block;width:100%;margin-right:0}[_nghost-mpq-c13]   .toggle-progression-container[_ngcontent-mpq-c13]:last-child{margin-right:0}[_nghost-mpq-c13]   .toggle-progression-container[_ngcontent-mpq-c13] > div[_ngcontent-mpq-c13]{float:left;font-size:.85rem;padding:.25rem .25rem .25rem 0;cursor:pointer}[_nghost-mpq-c13]   .toggle-progression-container[_ngcontent-mpq-c13] > div[_ngcontent-mpq-c13]   p[_ngcontent-mpq-c13]{display:inline;margin-right:.4rem;text-decoration:underline}@media screen and (min-width:64em){[_nghost-mpq-c13]   .toggle-progression-container[_ngcontent-mpq-c13]{display:none}}[_nghost-mpq-c13]   .prognosis-info[_ngcontent-mpq-c13]{display:flex;margin-bottom:.5em}[_nghost-mpq-c13]   .prognosis-info[_ngcontent-mpq-c13]   .last-changed[_ngcontent-mpq-c13]{flex:1 1 auto;align-self:center}[_nghost-mpq-c13]   .prognosis-info[_ngcontent-mpq-c13]   .explanation-btn-container[_ngcontent-mpq-c13]{display:block}[_nghost-mpq-c13]   .prognosis-info[_ngcontent-mpq-c13]   .explanation-btn[_ngcontent-mpq-c13]{flex:0 0 auto;padding:10px 12px 10px 10px;font-size:1rem}[_nghost-mpq-c13]   .prognosis-info[_ngcontent-mpq-c13]   .explanation-btn[_ngcontent-mpq-c13] + app-prognosis-explanation[_ngcontent-mpq-c13]{position:absolute;left:0;margin-top:20px;background-color:#fffdfa;border-bottom:1px solid #000;z-index:0;visibility:hidden;opacity:0;transition:visibility 0s linear .2s,opacity .2s;-webkit-transition:visibility linear .2s,opacity .2s;-moz-transition:visibility linear .2s,opacity .2s;-ms-transition:visibility 0s linear .2s,opacity .2s;-o-transition:visibility linear .2s,opacity .2s}[_nghost-mpq-c13]   .prognosis-info[_ngcontent-mpq-c13]   .explanation-btn.icon-close[_ngcontent-mpq-c13] + app-prognosis-explanation[_ngcontent-mpq-c13]{visibility:visible;opacity:1;transition:visibility 0s linear,opacity .2s;-webkit-transition:visibility linear,opacity .2s;-moz-transition:visibility linear,opacity .2s;-ms-transition:visibility 0s linear,opacity .2s;-o-transition:visibility linear,opacity .2s;z-index:10001}[_nghost-mpq-c13]   .explanation-ld[_ngcontent-mpq-c13]{display:none}@media screen and (min-width:64em){[_nghost-mpq-c13]   .prognosis-info[_ngcontent-mpq-c13]{margin-bottom:0}[_nghost-mpq-c13]   .prognosis-info[_ngcontent-mpq-c13]   .last-changed[_ngcontent-mpq-c13]{align-self:auto;margin-bottom:1em}[_nghost-mpq-c13]   .prognosis-info[_ngcontent-mpq-c13]   .explanation-btn-container[_ngcontent-mpq-c13]{display:none}[_nghost-mpq-c13]   .explanation-ld[_ngcontent-mpq-c13]{float:left;width:40.29136965%;margin-right:0;display:block}[_nghost-mpq-c13]   .explanation-ld[_ngcontent-mpq-c13]:last-child{margin-right:0}}</style>
+<style>html[_ngcontent-mpq-c15]{box-sizing:border-box}*[_ngcontent-mpq-c15], [_ngcontent-mpq-c15]::after, [_ngcontent-mpq-c15]::before{box-sizing:inherit}[_nghost-mpq-c15]{display:block;max-width:100%;margin-left:auto;margin-right:auto;min-width:320px;padding:0;position:relative;overflow:hidden}[_nghost-mpq-c15]::after{clear:both;content:"";display:block}[_nghost-mpq-c15]   .ripple-obj[_ngcontent-mpq-c15]{transform-origin:50% 50%;-webkit-transform-origin:50% 50%;-moz-transform-origin:50% 50%;-ms-transform-origin:50% 50%;-o-transform-origin:50% 50%}[_nghost-mpq-c15] > nav[_ngcontent-mpq-c15]{text-align:center;position:relative;top:auto;left:auto;right:auto;bottom:auto;max-width:100%;background-color:#fffdfa;z-index:99;width:100%}[_nghost-mpq-c15] > nav[_ngcontent-mpq-c15]   ul[_ngcontent-mpq-c15]{padding:0;margin:0;list-style:none}[_nghost-mpq-c15] > nav[_ngcontent-mpq-c15]   ul[_ngcontent-mpq-c15]   li[_ngcontent-mpq-c15]{font-size:.8em;border:1px solid #666;border-bottom:none;margin:0 .25em;display:block;float:left;position:relative;width:auto;background-color:#fffdfa;color:#666}[_nghost-mpq-c15] > nav[_ngcontent-mpq-c15]   ul[_ngcontent-mpq-c15]   li[_ngcontent-mpq-c15]   a[_ngcontent-mpq-c15]{color:#666;display:block;font-size:1.2em;line-height:2.5;padding:0 1.25em;white-space:nowrap;text-transform:capitalize}[_nghost-mpq-c15] > nav[_ngcontent-mpq-c15]   ul[_ngcontent-mpq-c15]   li[_ngcontent-mpq-c15]   a[_ngcontent-mpq-c15]:before{font-family:icomoon;speak:none;font-style:normal;text-transform:none;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;display:inline-block;vertical-align:middle;text-transform:none;font-weight:400;font-variant:normal;line-height:1;speak:none;-webkit-font-smoothing:antialiased;margin:-.25em .4em 0 0}[_nghost-mpq-c15] > nav[_ngcontent-mpq-c15]   ul[_ngcontent-mpq-c15]   li.tab-current[_ngcontent-mpq-c15]{border:1px solid #333;box-shadow:inset 0 2px #333;border-bottom:none;z-index:100;color:#000}[_nghost-mpq-c15] > nav[_ngcontent-mpq-c15]   ul[_ngcontent-mpq-c15]   li.tab-current[_ngcontent-mpq-c15]:after, [_nghost-mpq-c15] > nav[_ngcontent-mpq-c15]   ul[_ngcontent-mpq-c15]   li.tab-current[_ngcontent-mpq-c15]:before{content:'';position:absolute;height:1px;right:100%;bottom:0;width:1000px;background:#333}[_nghost-mpq-c15] > nav[_ngcontent-mpq-c15]   ul[_ngcontent-mpq-c15]   li.tab-current[_ngcontent-mpq-c15]:after{right:auto;left:100%;width:4000px}[_nghost-mpq-c15] > nav[_ngcontent-mpq-c15]   ul[_ngcontent-mpq-c15]   li.tab-current[_ngcontent-mpq-c15]   a[_ngcontent-mpq-c15]{color:#000;font-weight:500}[_nghost-mpq-c15] > nav[_ngcontent-mpq-c15]   ul[_ngcontent-mpq-c15]   li[_ngcontent-mpq-c15]:only-child{pointer-events:none}[_nghost-mpq-c15] > nav[_ngcontent-mpq-c15]   ul[_ngcontent-mpq-c15]   li[_ngcontent-mpq-c15]:only-child   a[_ngcontent-mpq-c15]{cursor:none;text-decoration:none}[_nghost-mpq-c15] > nav[_ngcontent-mpq-c15]   ul[_ngcontent-mpq-c15]   li.tab-settings[_ngcontent-mpq-c15]{border:0!important}[_nghost-mpq-c15] > nav[_ngcontent-mpq-c15]   ul[_ngcontent-mpq-c15]   li.tab-settings[_ngcontent-mpq-c15]   a[_ngcontent-mpq-c15]{padding:0 10px}[_nghost-mpq-c15] > nav[_ngcontent-mpq-c15]   ul[_ngcontent-mpq-c15]   li.tab-settings[_ngcontent-mpq-c15]   a[_ngcontent-mpq-c15]:before{margin:0}[_nghost-mpq-c15]   .tab-contents[_ngcontent-mpq-c15]   section[_ngcontent-mpq-c15]{padding:.5em 0;display:none;max-width:1230px;margin:0 auto}[_nghost-mpq-c15]   .tab-contents[_ngcontent-mpq-c15]   section.content-current[_ngcontent-mpq-c15]{display:block}[_nghost-mpq-c15]   .tab-contents[_ngcontent-mpq-c15]   section[_ngcontent-mpq-c15]:after, [_nghost-mpq-c15]   .tab-contents[_ngcontent-mpq-c15]   section[_ngcontent-mpq-c15]:before{content:'';display:table}[_nghost-mpq-c15]   .tab-contents[_ngcontent-mpq-c15]   section[_ngcontent-mpq-c15]:after{clear:both}@media screen and (max-width:32em){[_nghost-mpq-c15]   .tab-widget[_ngcontent-mpq-c15] > nav[_ngcontent-mpq-c15]   li[_ngcontent-mpq-c15] + li[_ngcontent-mpq-c15]   a[_ngcontent-mpq-c15]   span[_ngcontent-mpq-c15]{display:none}[_nghost-mpq-c15]   .tab-widget[_ngcontent-mpq-c15] > nav[_ngcontent-mpq-c15]   a[_ngcontent-mpq-c15]:before{margin-right:0}}</style>
+<style>[_nghost-mpq-c16]   .pane[_ngcontent-mpq-c16]{padding:.1em;float:left;width:100%}</style>
+<style>html[_ngcontent-mpq-c17]{box-sizing:border-box}*[_ngcontent-mpq-c17], [_ngcontent-mpq-c17]::after, [_ngcontent-mpq-c17]::before{box-sizing:inherit}[_nghost-mpq-c17]{display:inline-block;width:100%;font-size:.9em}[_nghost-mpq-c17]   .party-chart[_ngcontent-mpq-c17]{padding:0;list-style-type:none}[_nghost-mpq-c17]   .party-chart[_ngcontent-mpq-c17]   li[_ngcontent-mpq-c17]{border-bottom:1px dotted #000;padding-bottom:1em;float:left;width:100%}[_nghost-mpq-c17]   .party-item__change[_ngcontent-mpq-c17], [_nghost-mpq-c17]   .party-item__title[_ngcontent-mpq-c17]{font-weight:500;font-size:1em;text-align:left;color:#000;display:inline-block;float:left}[_nghost-mpq-c17]   .party-item__title[_ngcontent-mpq-c17]{padding:.5em 0;line-height:1}[_nghost-mpq-c17]   .party-item__value[_ngcontent-mpq-c17]{width:0;min-width:.3%;float:left;transition-property:width,transform;transition-duration:1ms;transition-timing-function:ease-in;height:2.5em}[_nghost-mpq-c17]   .party-item__title[_ngcontent-mpq-c17]{width:100%;font-size:1.1em;text-transform:capitalize}[_nghost-mpq-c17]   .party-item__change[_ngcontent-mpq-c17]{margin-left:.5em;float:left;line-height:2;height:2em;font-size:1.25em}[_nghost-mpq-c17]   .party-item__change[_ngcontent-mpq-c17]   .negative[_ngcontent-mpq-c17], [_nghost-mpq-c17]   .party-item__change[_ngcontent-mpq-c17]   .no-change[_ngcontent-mpq-c17], [_nghost-mpq-c17]   .party-item__change[_ngcontent-mpq-c17]   .positive[_ngcontent-mpq-c17]{font-family:icomoon;speak:none;font-style:normal;font-weight:300;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;color:transparent}[_nghost-mpq-c17]   .party-item__change[_ngcontent-mpq-c17]   .positive[_ngcontent-mpq-c17]:before{color:rgba(67,97,16,.98);content:"\ea33"}[_nghost-mpq-c17]   .party-item__change[_ngcontent-mpq-c17]   .negative[_ngcontent-mpq-c17]:before{color:rgba(168,51,0,.98);content:"\ea35"}[_nghost-mpq-c17]   .party-item__change[_ngcontent-mpq-c17]   .no-change[_ngcontent-mpq-c17]:before{color:#666;content:"\ea34"}[_nghost-mpq-c17]   .party-item__change[_ngcontent-mpq-c17]   .last[_ngcontent-mpq-c17]{font-size:.7em;line-height:3;margin-left:.3em}[_nghost-mpq-c17]   .party-item__change[_ngcontent-mpq-c17]   .last[_ngcontent-mpq-c17], [_nghost-mpq-c17]   .party-item__change[_ngcontent-mpq-c17]   .party-item__change__total[_ngcontent-mpq-c17]{float:left}[_nghost-mpq-c17]   .party-item__details[_ngcontent-mpq-c17]{width:100%;float:left;font-weight:400;font-size:.9em;margin-top:.5em}[_nghost-mpq-c17]   .party-item__details[_ngcontent-mpq-c17]   .party-item__details__entry[_ngcontent-mpq-c17]{max-width:100%;margin-left:auto;margin-right:0;line-height:1.428;margin-bottom:5px;padding-right:15px}[_nghost-mpq-c17]   .party-item__details[_ngcontent-mpq-c17]   .party-item__details__entry[_ngcontent-mpq-c17]::after{clear:both;content:"";display:block}[_nghost-mpq-c17]   .party-item__details[_ngcontent-mpq-c17]   .party-item__details__entry__title[_ngcontent-mpq-c17]{float:left;display:block;margin-right:2.35765202%;width:74.41058699%}[_nghost-mpq-c17]   .party-item__details[_ngcontent-mpq-c17]   .party-item__details__entry__title[_ngcontent-mpq-c17]:last-child{margin-right:0}[_nghost-mpq-c17]   .party-item__details[_ngcontent-mpq-c17]   .party-item__details__entry__value[_ngcontent-mpq-c17]{float:left;display:block;margin-right:2.35765202%;width:23.23176098%;text-align:right;font-weight:500}[_nghost-mpq-c17]   .party-item__details[_ngcontent-mpq-c17]   .party-item__details__entry__value[_ngcontent-mpq-c17]:last-child{margin-right:0}</style>
+<style>html[_ngcontent-mpq-c20]{box-sizing:border-box}*[_ngcontent-mpq-c20], [_ngcontent-mpq-c20]::after, [_ngcontent-mpq-c20]::before{box-sizing:inherit}[_nghost-mpq-c20]{max-width:1396px;margin-left:auto;margin-right:auto;font-size:.9em}[_nghost-mpq-c20]::after{clear:both;content:"";display:block}[_nghost-mpq-c20]   .summary-list[_ngcontent-mpq-c20]{width:100%;list-style-type:none;padding:0;margin:0}[_nghost-mpq-c20]   .summary-list__item[_ngcontent-mpq-c20]{display:block;margin-right:2.35765202%;width:100%;padding:1em 2.35765202% 2.35765202% 0;float:left}[_nghost-mpq-c20]   .summary-list__item[_ngcontent-mpq-c20]:last-child{margin-right:0}[_nghost-mpq-c20]   .summary-list__item--icon[_ngcontent-mpq-c20]{float:left;display:block;width:6.17215231%;padding:0 .7em 0 0;margin-right:.8em;font-size:2em}[_nghost-mpq-c20]   .summary-list__item--icon[_ngcontent-mpq-c20]:last-child{margin-right:0}[_nghost-mpq-c20]   .summary-list__item__meta[_ngcontent-mpq-c20]{float:left;display:block;margin-right:2.35765202%;width:82.94039133%}[_nghost-mpq-c20]   .summary-list__item__meta[_ngcontent-mpq-c20]:last-child{margin-right:0}[_nghost-mpq-c20]   .summary-list__item__meta__label[_ngcontent-mpq-c20], [_nghost-mpq-c20]   .summary-list__item__meta__value[_ngcontent-mpq-c20]{float:left;display:block;margin-right:2.35765202%;width:100%}[_nghost-mpq-c20]   .summary-list__item__meta__label[_ngcontent-mpq-c20]:last-child, [_nghost-mpq-c20]   .summary-list__item__meta__value[_ngcontent-mpq-c20]:last-child{margin-right:0}[_nghost-mpq-c20]   .summary-list__item__meta__value[_ngcontent-mpq-c20]{font-weight:400;padding-top:.2em}[_nghost-mpq-c20]   [class^=icon-][_ngcontent-mpq-c20]{padding-top:.4em;max-width:4em;min-width:3em}[_nghost-mpq-c20]   [class^=icon-][_ngcontent-mpq-c20]:before{font-size:2em}</style>
+<style>[_nghost-mpq-c22]   .icon-warning[_ngcontent-mpq-c22]{position:relative;top:1px;margin-right:.25em;color:#d58512}</style>
+<style>html[_ngcontent-mpq-c23]{box-sizing:border-box}*[_ngcontent-mpq-c23], [_ngcontent-mpq-c23]::after, [_ngcontent-mpq-c23]::before{box-sizing:inherit}[_nghost-mpq-c23]   .content[_ngcontent-mpq-c23]{font-size:.9em;margin:1em 0}[_nghost-mpq-c23]   .content[_ngcontent-mpq-c23]   p[_ngcontent-mpq-c23]{margin-bottom:1em}</style>
+<style>html[_ngcontent-mpq-c24]{box-sizing:border-box}*[_ngcontent-mpq-c24], [_ngcontent-mpq-c24]::after, [_ngcontent-mpq-c24]::before{box-sizing:inherit}[_nghost-mpq-c24]{display:block;width:100%}[_nghost-mpq-c24]   .progress-bar__title[_ngcontent-mpq-c24]{float:left;display:block;margin-right:2.35765202%;width:82.94039133%;font-weight:500}[_nghost-mpq-c24]   .progress-bar__title[_ngcontent-mpq-c24]:last-child{margin-right:0}[_nghost-mpq-c24]   .progress-bar__value-container[_ngcontent-mpq-c24]{float:left;margin-right:2.35765202%;width:100%;margin-top:.2em;border:1px solid #000;display:inline-block;padding-left:0;overflow:hidden}[_nghost-mpq-c24]   .progress-bar__value-container[_ngcontent-mpq-c24]:last-child{margin-right:0}[_nghost-mpq-c24]   .progress-bar__value[_ngcontent-mpq-c24]{height:1em;text-align:right;font-weight:500;overflow:visible;line-height:1;font-size:.9em;background-color:#e9e6e2}[_nghost-mpq-c24]   .progress-bar__value[_ngcontent-mpq-c24]:after{width:100%;height:1.4em;display:block;padding-top:.1em;content:attr(data-progress)}</style>
+<style>html[_ngcontent-mpq-c18]{box-sizing:border-box}*[_ngcontent-mpq-c18], [_ngcontent-mpq-c18]::after, [_ngcontent-mpq-c18]::before{box-sizing:inherit}[_nghost-mpq-c18]{font-weight:400;font-size:.875em;border-collapse:collapse}[_nghost-mpq-c18]   thead[_ngcontent-mpq-c18]   tr[_ngcontent-mpq-c18]   th[_ngcontent-mpq-c18]{font-weight:500;text-align:left;padding:6px;vertical-align:bottom;border-bottom:2px solid #ddd}[_nghost-mpq-c18]   thead[_ngcontent-mpq-c18]   tr[_ngcontent-mpq-c18]   th[_ngcontent-mpq-c18]:not(:first-of-type){text-align:right}[_nghost-mpq-c18]   tbody[_ngcontent-mpq-c18]   tr[_ngcontent-mpq-c18]:hover{background-color:#f5f5f5}[_nghost-mpq-c18]   tbody[_ngcontent-mpq-c18]   tr[_ngcontent-mpq-c18]   td[_ngcontent-mpq-c18]{padding:6px;vertical-align:top;border-top:1px solid #ddd}[_nghost-mpq-c18]   tbody[_ngcontent-mpq-c18]   tr[_ngcontent-mpq-c18]   td[_ngcontent-mpq-c18]:not(:first-of-type){text-align:right}</style>
+</head>
+<body>
+	<app-root _nghost-mpq-c0="" class="desktop" ng-version="7.2.14"><!----><app-loading-bar _ngcontent-mpq-c0="" _nghost-mpq-c1=""><div _ngcontent-mpq-c1="" class="loading-bar"><div _ngcontent-mpq-c1="" class="loading-bar__progress" style="width: 0%; background-color: rgb(64, 146, 241); color: rgb(64, 146, 241); height: 3px; opacity: 0; transition: all 0.5s ease-in-out 0s;"></div></div></app-loading-bar><app-warning _ngcontent-mpq-c0="" _nghost-mpq-c2="" class="ng-tns-c2-0"><!----></app-warning><app-header _ngcontent-mpq-c0="" role="banner" _nghost-mpq-c3=""><div _ngcontent-mpq-c3="" class="line"></div>
+<div _ngcontent-mpq-c3="" class="container"><div _ngcontent-mpq-c3="" class="container__inner">
+<div _ngcontent-mpq-c3="" class="logo"><a _ngcontent-mpq-c3="" aria-label="logo" href="/" role="link"><img _ngcontent-mpq-c3="" src="/assets/img/valg_nb_gold.svg"></a></div>
+<!----><div _ngcontent-mpq-c3="" class="options_menu ng-star-inserted">
+<div _ngcontent-mpq-c3="" class="search_menu">
+<span _ngcontent-mpq-c3="" class="search_menu__title" role="tooltip">SEARCH</span><span _ngcontent-mpq-c3="" aria-haspopup="true" class="search_menu__icon" role="button"></span>
+</div>
+<!----><ul _ngcontent-mpq-c3="" class="lang_menu__list ng-star-inserted"><li _ngcontent-mpq-c3="" class="lang_menu__list__item"><app-locale _ngcontent-mpq-c3="" _nghost-mpq-c5=""><app-drop-down _ngcontent-mpq-c5="" _nghost-mpq-c6=""><div _ngcontent-mpq-c6="" appclickoutside="">
+<span _ngcontent-mpq-c6="" class="selected-item"><a _ngcontent-mpq-c6=""><!----> LANGUAGE <!----></a></span><ul _ngcontent-mpq-c6="" class="hidden">
+<!----><li _ngcontent-mpq-c6="" data-id="no-nb" class="ng-star-inserted"><span _ngcontent-mpq-c6="">Norsk bokmål</span></li>
+<li _ngcontent-mpq-c6="" data-id="no-nn" class="ng-star-inserted"><span _ngcontent-mpq-c6="">Nynorsk</span></li>
+<li _ngcontent-mpq-c6="" data-id="no-sa" class="ng-star-inserted"><span _ngcontent-mpq-c6="">Sámegiella</span></li>
+<li _ngcontent-mpq-c6="" data-id="en-gb" class="ng-star-inserted"><span _ngcontent-mpq-c6="">English</span></li>
+</ul>
+</div></app-drop-down></app-locale></li></ul>
+</div>
+</div></div></app-header><div _ngcontent-mpq-c0="" class="container"><div _ngcontent-mpq-c0="" class="container__inner">
+<router-outlet _ngcontent-mpq-c0="" name="menu"></router-outlet><router-outlet _ngcontent-mpq-c0=""></router-outlet><app-viewport-container _nghost-mpq-c7="" class="ng-star-inserted"><!----><app-bread-crumbs _ngcontent-mpq-c7="" _nghost-mpq-c8="" class="ng-star-inserted"><!----><div _ngcontent-mpq-c8="" class="ng-star-inserted"><ul _ngcontent-mpq-c8="">
+<!----><li _ngcontent-mpq-c8="" class="ng-star-inserted"><a _ngcontent-mpq-c8="" queryparamshandling="preserve" role="link" aria-label="Norway" href="/?type=ko&amp;year=2019">Norway</a></li>
+<li _ngcontent-mpq-c8=""><a _ngcontent-mpq-c8="" attr.aria-haspopup="true" role="link">Change location</a></li>
+</ul></div></app-bread-crumbs><!----><app-content-loading _ngcontent-mpq-c7="" class="ng-star-inserted" _nghost-mpq-c9=""><div _ngcontent-mpq-c9="" class="loading-overlay"></div>
+<div _ngcontent-mpq-c9="" class="throbber-parent"><div _ngcontent-mpq-c9="" class="throbber-container"><div _ngcontent-mpq-c9="" class="throbber"></div></div></div>
+<app-geo-component _ngcontent-mpq-c7="" _nghost-mpq-c10=""><app-election-picker _ngcontent-mpq-c10="" _nghost-mpq-c11=""><div _ngcontent-mpq-c11="">
+<!----><h1 _ngcontent-mpq-c11="" role="heading" class="ng-star-inserted"><strong _ngcontent-mpq-c11="">Count for Norway</strong></h1>
+<!----><!----><!----><!---->
+</div>
+<div _ngcontent-mpq-c11="" class="context-selector-container">
+<div _ngcontent-mpq-c11="" class="selectors">
+<app-drop-down _ngcontent-mpq-c11="" _nghost-mpq-c6=""><div _ngcontent-mpq-c6="" appclickoutside="">
+<span _ngcontent-mpq-c6="" class="selected-item"><a _ngcontent-mpq-c6=""><!----><!----> Municipal council election </a></span><ul _ngcontent-mpq-c6="" class="hidden">
+<!----><li _ngcontent-mpq-c6="" data-id="st" class="ng-star-inserted"><span _ngcontent-mpq-c6="">Parliamentary election</span></li>
+<li _ngcontent-mpq-c6="" data-id="fy" class="ng-star-inserted"><span _ngcontent-mpq-c6="">County authority election</span></li>
+<li _ngcontent-mpq-c6="" data-id="ko" class="ng-star-inserted"><span _ngcontent-mpq-c6="">Municipal council election</span></li>
+<li _ngcontent-mpq-c6="" data-id="sa" class="ng-star-inserted"><span _ngcontent-mpq-c6="">Sami parliament election</span></li>
+</ul>
+</div></app-drop-down><app-drop-down _ngcontent-mpq-c11="" _nghost-mpq-c6=""><div _ngcontent-mpq-c6="" appclickoutside="">
+<span _ngcontent-mpq-c6="" class="selected-item"><a _ngcontent-mpq-c6=""><!----><!----> 2019 </a></span><ul _ngcontent-mpq-c6="" class="hidden">
+<!----><li _ngcontent-mpq-c6="" data-id="2019" class="ng-star-inserted"><span _ngcontent-mpq-c6="">2019</span></li>
+<li _ngcontent-mpq-c6="" data-id="2017" class="ng-star-inserted"><span _ngcontent-mpq-c6="">2017</span></li>
+<li _ngcontent-mpq-c6="" data-id="2015" class="ng-star-inserted"><span _ngcontent-mpq-c6="">2015</span></li>
+<li _ngcontent-mpq-c6="" data-id="2011" class="ng-star-inserted"><span _ngcontent-mpq-c6="">2011</span></li>
+</ul>
+</div></app-drop-down>
+</div>
+<app-regional-warning _ngcontent-mpq-c11="" class="regional-warning" _nghost-mpq-c22=""><!----></app-regional-warning>
+</div></app-election-picker><div _ngcontent-mpq-c10="" class="geo-inner">
+<!----><app-status _ngcontent-mpq-c10="" _nghost-mpq-c13=""><div _ngcontent-mpq-c13="" class="election-progression">
+<div _ngcontent-mpq-c13="" class="prognosis-info">
+<div _ngcontent-mpq-c13="" class="last-changed"><span _ngcontent-mpq-c13="" class="last-changed__title">Results last changed 17 oktober 2019 kl. 15:27</span></div>
+<div _ngcontent-mpq-c13="" appclickoutside="" class="explanation-btn-container">
+<span _ngcontent-mpq-c13="" class="explanation-btn icon-question"></span><app-prognosis-explanation _ngcontent-mpq-c13="" _nghost-mpq-c23=""><app-tabs _ngcontent-mpq-c23="" _nghost-mpq-c15=""><nav _ngcontent-mpq-c15=""><ul _ngcontent-mpq-c15="" class="tab-panes">
+<!----><li _ngcontent-mpq-c15="" class="tab-current ng-star-inserted"><a _ngcontent-mpq-c15="" href="#" class="icon-question">Explanation</a></li>
+</ul></nav><app-tab _ngcontent-mpq-c23="" _nghost-mpq-c16=""><div _ngcontent-mpq-c16="" class="pane"><div _ngcontent-mpq-c23="" class="content">
+<p _ngcontent-mpq-c23="">From the moment you place the ballot paper in the ballot box and until it becomes part of the election result, it will go through several checks to ensure that the election is properly conducted and that the election result is correct.</p>
+<a _ngcontent-mpq-c23="" rel="external" target="_blank" href="https://valg.no/en/electiondata/election-results/how-your-vote-becomes-a-part-of-the-election-result/">Read more about the election process here</a>
+</div></div></app-tab></app-tabs></app-prognosis-explanation>
+</div>
+</div>
+<app-progress-bar _ngcontent-mpq-c13="" class="forhand" _nghost-mpq-c24=""><div _ngcontent-mpq-c24="" class="progress-bar">
+<span _ngcontent-mpq-c24="" class="progress-bar__title">Preliminary counting</span><div _ngcontent-mpq-c24="" class="progress-bar__value-container"><div _ngcontent-mpq-c24="" appcounter="" class="progress-bar__value" data-progress="100,0%" style="width: 100%;"></div></div>
+</div></app-progress-bar><app-progress-bar _ngcontent-mpq-c13="" class="endelig" _nghost-mpq-c24=""><div _ngcontent-mpq-c24="" class="progress-bar">
+<span _ngcontent-mpq-c24="" class="progress-bar__title">Final counting</span><div _ngcontent-mpq-c24="" class="progress-bar__value-container"><div _ngcontent-mpq-c24="" appcounter="" class="progress-bar__value" data-progress="100,0%" style="width: 100%;"></div></div>
+</div></app-progress-bar><app-progress-bar _ngcontent-mpq-c13="" class="oppgjor" _nghost-mpq-c24=""><div _ngcontent-mpq-c24="" class="progress-bar">
+<span _ngcontent-mpq-c24="" class="progress-bar__title">Final election result</span><div _ngcontent-mpq-c24="" class="progress-bar__value-container"><div _ngcontent-mpq-c24="" appcounter="" class="progress-bar__value" data-progress="100,0%" style="width: 100%;"></div></div>
+</div></app-progress-bar>
+</div>
+<div _ngcontent-mpq-c13="" class="toggle-progression-container"><div _ngcontent-mpq-c13="">
+<p _ngcontent-mpq-c13="">Hide progression</p>
+<span _ngcontent-mpq-c13="" class="icon-shrink"></span>
+</div></div>
+<div _ngcontent-mpq-c13="" class="explanation-ld"><app-prognosis-explanation _ngcontent-mpq-c13="" _nghost-mpq-c23=""><app-tabs _ngcontent-mpq-c23="" _nghost-mpq-c15=""><nav _ngcontent-mpq-c15=""><ul _ngcontent-mpq-c15="" class="tab-panes">
+<!----><li _ngcontent-mpq-c15="" class="tab-current ng-star-inserted"><a _ngcontent-mpq-c15="" href="#" class="icon-question">Explanation</a></li>
+</ul></nav><app-tab _ngcontent-mpq-c23="" _nghost-mpq-c16=""><div _ngcontent-mpq-c16="" class="pane"><div _ngcontent-mpq-c23="" class="content">
+<p _ngcontent-mpq-c23="">From the moment you place the ballot paper in the ballot box and until it becomes part of the election result, it will go through several checks to ensure that the election is properly conducted and that the election result is correct.</p>
+<a _ngcontent-mpq-c23="" rel="external" target="_blank" href="https://valg.no/en/electiondata/election-results/how-your-vote-becomes-a-part-of-the-election-result/">Read more about the election process here</a>
+</div></div></app-tab></app-tabs></app-prognosis-explanation></div></app-status><div _ngcontent-mpq-c10="" class="geo-inner__charts">
+<!----><app-tabs _ngcontent-mpq-c10="" for="app-party|app-details" _nghost-mpq-c15=""><nav _ngcontent-mpq-c15=""><ul _ngcontent-mpq-c15="" class="tab-panes">
+<!----><li _ngcontent-mpq-c15="" class="tab-current ng-star-inserted"><a _ngcontent-mpq-c15="" href="#" class="icon-stats-bars">Party distribution</a></li>
+<li _ngcontent-mpq-c15="" class="ng-star-inserted"><a _ngcontent-mpq-c15="" href="#" class="icon-table2">Details</a></li>
+</ul></nav><app-tab _ngcontent-mpq-c10="" _nghost-mpq-c16=""><div _ngcontent-mpq-c16="" class="pane"><app-party _ngcontent-mpq-c10="" _nghost-mpq-c17=""><ol _ngcontent-mpq-c17="" class="party-chart">
+<!----><li _ngcontent-mpq-c17="" class="party-item ng-star-inserted" data-index="0">
+<div _ngcontent-mpq-c17="" class="party-item__title"><span _ngcontent-mpq-c17=""> Arbeiderpartiet </span></div>
+<div _ngcontent-mpq-c17="" appcounter="" class="party-item__value" style="background-color: rgb(255, 110, 0); width: 24.8%;"></div>
+<div _ngcontent-mpq-c17="" class="party-item__change">
+<span _ngcontent-mpq-c17="" appcounter="" class="party-item__change__total">24,8% </span><span _ngcontent-mpq-c17="" title="-8,23628 pp" class="last negative"></span>
+</div>
+<div _ngcontent-mpq-c17="" class="party-item__details">
+<!----><!----><!---->
+</div>
+</li>
+<li _ngcontent-mpq-c17="" class="party-item ng-star-inserted" data-index="1">
+<div _ngcontent-mpq-c17="" class="party-item__title"><span _ngcontent-mpq-c17=""> Høyre </span></div>
+<div _ngcontent-mpq-c17="" appcounter="" class="party-item__value" style="background-color: rgb(255, 135, 25); width: 20.1%;"></div>
+<div _ngcontent-mpq-c17="" class="party-item__change">
+<span _ngcontent-mpq-c17="" appcounter="" class="party-item__change__total">20,1% </span><span _ngcontent-mpq-c17="" title="-3,09043 pp" class="last negative"></span>
+</div>
+<div _ngcontent-mpq-c17="" class="party-item__details">
+<!----><!----><!---->
+</div>
+</li>
+<li _ngcontent-mpq-c17="" class="party-item ng-star-inserted" data-index="2">
+<div _ngcontent-mpq-c17="" class="party-item__title"><span _ngcontent-mpq-c17=""> Senterpartiet </span></div>
+<div _ngcontent-mpq-c17="" appcounter="" class="party-item__value" style="background-color: rgb(255, 160, 50); width: 14.4%;"></div>
+<div _ngcontent-mpq-c17="" class="party-item__change">
+<span _ngcontent-mpq-c17="" appcounter="" class="party-item__change__total">14,4% </span><span _ngcontent-mpq-c17="" title="5,90684 pp" class="last positive"></span>
+</div>
+<div _ngcontent-mpq-c17="" class="party-item__details">
+<!----><!----><!---->
+</div>
+</li>
+<li _ngcontent-mpq-c17="" class="party-item ng-star-inserted" data-index="3">
+<div _ngcontent-mpq-c17="" class="party-item__title"><span _ngcontent-mpq-c17=""> Fremskrittspartiet </span></div>
+<div _ngcontent-mpq-c17="" appcounter="" class="party-item__value" style="background-color: rgb(255, 185, 75); width: 8.2%;"></div>
+<div _ngcontent-mpq-c17="" class="party-item__change">
+<span _ngcontent-mpq-c17="" appcounter="" class="party-item__change__total">8,2% </span><span _ngcontent-mpq-c17="" title="-1,24864 pp" class="last negative"></span>
+</div>
+<div _ngcontent-mpq-c17="" class="party-item__details">
+<!----><!----><!---->
+</div>
+</li>
+<li _ngcontent-mpq-c17="" class="party-item ng-star-inserted" data-index="4">
+<div _ngcontent-mpq-c17="" class="party-item__title"><span _ngcontent-mpq-c17=""> Miljøpartiet De Grønne </span></div>
+<div _ngcontent-mpq-c17="" appcounter="" class="party-item__value" style="background-color: rgb(255, 210, 100); width: 6.8%;"></div>
+<div _ngcontent-mpq-c17="" class="party-item__change">
+<span _ngcontent-mpq-c17="" appcounter="" class="party-item__change__total">6,8% </span><span _ngcontent-mpq-c17="" title="2,55356 pp" class="last positive"></span>
+</div>
+<div _ngcontent-mpq-c17="" class="party-item__details">
+<!----><!----><!---->
+</div>
+</li>
+<li _ngcontent-mpq-c17="" class="party-item ng-star-inserted" data-index="5">
+<div _ngcontent-mpq-c17="" class="party-item__title"><span _ngcontent-mpq-c17=""> Sosialistisk Venstreparti </span></div>
+<div _ngcontent-mpq-c17="" appcounter="" class="party-item__value" style="background-color: rgb(255, 235, 125); width: 6.1%;"></div>
+<div _ngcontent-mpq-c17="" class="party-item__change">
+<span _ngcontent-mpq-c17="" appcounter="" class="party-item__change__total">6,1% </span><span _ngcontent-mpq-c17="" title="1,96398 pp" class="last positive"></span>
+</div>
+<div _ngcontent-mpq-c17="" class="party-item__details">
+<!----><!----><!---->
+</div>
+</li>
+<li _ngcontent-mpq-c17="" class="party-item ng-star-inserted" data-index="6">
+<div _ngcontent-mpq-c17="" class="party-item__title"><span _ngcontent-mpq-c17=""> Kristelig Folkeparti </span></div>
+<div _ngcontent-mpq-c17="" appcounter="" class="party-item__value" style="background-color: rgb(255, 255, 150); width: 4%;"></div>
+<div _ngcontent-mpq-c17="" class="party-item__change">
+<span _ngcontent-mpq-c17="" appcounter="" class="party-item__change__total">4,0% </span><span _ngcontent-mpq-c17="" title="-1,44215 pp" class="last negative"></span>
+</div>
+<div _ngcontent-mpq-c17="" class="party-item__details">
+<!----><!----><!---->
+</div>
+</li>
+<li _ngcontent-mpq-c17="" class="party-item ng-star-inserted" data-index="7">
+<div _ngcontent-mpq-c17="" class="party-item__title"><span _ngcontent-mpq-c17=""> Venstre </span></div>
+<div _ngcontent-mpq-c17="" appcounter="" class="party-item__value" style="background-color: rgb(255, 255, 175); width: 3.9%;"></div>
+<div _ngcontent-mpq-c17="" class="party-item__change">
+<span _ngcontent-mpq-c17="" appcounter="" class="party-item__change__total">3,9% </span><span _ngcontent-mpq-c17="" title="-1,61932 pp" class="last negative"></span>
+</div>
+<div _ngcontent-mpq-c17="" class="party-item__details">
+<!----><!----><!---->
+</div>
+</li>
+<li _ngcontent-mpq-c17="" class="party-item ng-star-inserted" data-index="8">
+<div _ngcontent-mpq-c17="" class="party-item__title"><span _ngcontent-mpq-c17=""> Rødt </span></div>
+<div _ngcontent-mpq-c17="" appcounter="" class="party-item__value" style="background-color: rgb(255, 255, 200); width: 3.8%;"></div>
+<div _ngcontent-mpq-c17="" class="party-item__change">
+<span _ngcontent-mpq-c17="" appcounter="" class="party-item__change__total">3,8% </span><span _ngcontent-mpq-c17="" title="1,79875 pp" class="last positive"></span>
+</div>
+<div _ngcontent-mpq-c17="" class="party-item__details">
+<!----><!----><!---->
+</div>
+</li>
+<li _ngcontent-mpq-c17="" class="party-item ng-star-inserted" data-index="9">
+<div _ngcontent-mpq-c17="" class="party-item__title"><span _ngcontent-mpq-c17=""> Others </span></div>
+<div _ngcontent-mpq-c17="" appcounter="" class="party-item__value" style="background-color: rgb(255, 255, 200); width: 7.9%;"></div>
+<div _ngcontent-mpq-c17="" class="party-item__change">
+<span _ngcontent-mpq-c17="" appcounter="" class="party-item__change__total">7,9% </span><span _ngcontent-mpq-c17="" title="4,73866 pp" class="last positive"></span>
+</div>
+<div _ngcontent-mpq-c17="" class="party-item__details">
+<!----><!----><!---->
+</div>
+</li>
+</ol></app-party></div></app-tab><!----><app-tab _ngcontent-mpq-c10="" _nghost-mpq-c16="" class="ng-star-inserted"><div _ngcontent-mpq-c16="" class="pane" hidden=""><app-details _ngcontent-mpq-c10="" _nghost-mpq-c18=""><table _ngcontent-mpq-c18="">
+<thead _ngcontent-mpq-c18=""><tr _ngcontent-mpq-c18="">
+<th _ngcontent-mpq-c18="">Party name</th>
+<th _ngcontent-mpq-c18="">Number of ballots</th>
+<th _ngcontent-mpq-c18="">Support (%)</th>
+<!----><th _ngcontent-mpq-c18="" class="ng-star-inserted">Change since last municipal council election</th>
+<!----><th _ngcontent-mpq-c18="" class="ng-star-inserted">Change since last parliamentary election</th>
+</tr></thead>
+<tbody _ngcontent-mpq-c18="">
+<!----><tr _ngcontent-mpq-c18="" class="ng-star-inserted">
+<td _ngcontent-mpq-c18="">Arbeiderpartiet</td>
+<td _ngcontent-mpq-c18="" appcounter="">664 695 </td>
+<td _ngcontent-mpq-c18="" appcounter="">24,8% </td>
+<!----><td _ngcontent-mpq-c18="" appcounter="" class="ng-star-inserted">-8,2 pp</td>
+<!----><td _ngcontent-mpq-c18="" appcounter="" class="ng-star-inserted">-2,6 pp</td>
+</tr>
+<tr _ngcontent-mpq-c18="" class="ng-star-inserted">
+<td _ngcontent-mpq-c18="">Høyre</td>
+<td _ngcontent-mpq-c18="" appcounter="">538 765 </td>
+<td _ngcontent-mpq-c18="" appcounter="">20,1% </td>
+<!----><td _ngcontent-mpq-c18="" appcounter="" class="ng-star-inserted">-3,1 pp</td>
+<!----><td _ngcontent-mpq-c18="" appcounter="" class="ng-star-inserted">-5,0 pp</td>
+</tr>
+<tr _ngcontent-mpq-c18="" class="ng-star-inserted">
+<td _ngcontent-mpq-c18="">Senterpartiet</td>
+<td _ngcontent-mpq-c18="" appcounter="">386 350 </td>
+<td _ngcontent-mpq-c18="" appcounter="">14,4% </td>
+<!----><td _ngcontent-mpq-c18="" appcounter="" class="ng-star-inserted">5,9 pp</td>
+<!----><td _ngcontent-mpq-c18="" appcounter="" class="ng-star-inserted">4,1 pp</td>
+</tr>
+<tr _ngcontent-mpq-c18="" class="ng-star-inserted">
+<td _ngcontent-mpq-c18="">Fremskrittspartiet</td>
+<td _ngcontent-mpq-c18="" appcounter="">220 713 </td>
+<td _ngcontent-mpq-c18="" appcounter="">8,2% </td>
+<!----><td _ngcontent-mpq-c18="" appcounter="" class="ng-star-inserted">-1,2 pp</td>
+<!----><td _ngcontent-mpq-c18="" appcounter="" class="ng-star-inserted">-7,0 pp</td>
+</tr>
+<tr _ngcontent-mpq-c18="" class="ng-star-inserted">
+<td _ngcontent-mpq-c18="">Miljøpartiet De Grønne</td>
+<td _ngcontent-mpq-c18="" appcounter="">182 548 </td>
+<td _ngcontent-mpq-c18="" appcounter="">6,8% </td>
+<!----><td _ngcontent-mpq-c18="" appcounter="" class="ng-star-inserted">2,6 pp</td>
+<!----><td _ngcontent-mpq-c18="" appcounter="" class="ng-star-inserted">3,6 pp</td>
+</tr>
+<tr _ngcontent-mpq-c18="" class="ng-star-inserted">
+<td _ngcontent-mpq-c18="">Sosialistisk Venstreparti</td>
+<td _ngcontent-mpq-c18="" appcounter="">163 652 </td>
+<td _ngcontent-mpq-c18="" appcounter="">6,1% </td>
+<!----><td _ngcontent-mpq-c18="" appcounter="" class="ng-star-inserted">2,0 pp</td>
+<!----><td _ngcontent-mpq-c18="" appcounter="" class="ng-star-inserted">0,1 pp</td>
+</tr>
+<tr _ngcontent-mpq-c18="" class="ng-star-inserted">
+<td _ngcontent-mpq-c18="">Kristelig Folkeparti</td>
+<td _ngcontent-mpq-c18="" appcounter="">107 185 </td>
+<td _ngcontent-mpq-c18="" appcounter="">4,0% </td>
+<!----><td _ngcontent-mpq-c18="" appcounter="" class="ng-star-inserted">-1,4 pp</td>
+<!----><td _ngcontent-mpq-c18="" appcounter="" class="ng-star-inserted">-0,2 pp</td>
+</tr>
+<tr _ngcontent-mpq-c18="" class="ng-star-inserted">
+<td _ngcontent-mpq-c18="">Venstre</td>
+<td _ngcontent-mpq-c18="" appcounter="">104 316 </td>
+<td _ngcontent-mpq-c18="" appcounter="">3,9% </td>
+<!----><td _ngcontent-mpq-c18="" appcounter="" class="ng-star-inserted">-1,6 pp</td>
+<!----><td _ngcontent-mpq-c18="" appcounter="" class="ng-star-inserted">-0,5 pp</td>
+</tr>
+<tr _ngcontent-mpq-c18="" class="ng-star-inserted">
+<td _ngcontent-mpq-c18="">Rødt</td>
+<td _ngcontent-mpq-c18="" appcounter="">101 316 </td>
+<td _ngcontent-mpq-c18="" appcounter="">3,8% </td>
+<!----><td _ngcontent-mpq-c18="" appcounter="" class="ng-star-inserted">1,8 pp</td>
+<!----><td _ngcontent-mpq-c18="" appcounter="" class="ng-star-inserted">1,4 pp</td>
+</tr>
+<tr _ngcontent-mpq-c18="" class="ng-star-inserted">
+<td _ngcontent-mpq-c18="">Others</td>
+<td _ngcontent-mpq-c18="" appcounter="">213 065 </td>
+<td _ngcontent-mpq-c18="" appcounter="">7,9% </td>
+<!----><td _ngcontent-mpq-c18="" appcounter="" class="ng-star-inserted">4,7 pp</td>
+<!----><td _ngcontent-mpq-c18="" appcounter="" class="ng-star-inserted">6,2 pp</td>
+</tr>
+</tbody>
+</table></app-details></div></app-tab><!----></app-tabs>
+</div>
+<div _ngcontent-mpq-c10="" class="geo-inner__summary">
+<app-tabs _ngcontent-mpq-c10="" for="app-summary" _nghost-mpq-c15=""><nav _ngcontent-mpq-c15=""><ul _ngcontent-mpq-c15="" class="tab-panes">
+<!----><li _ngcontent-mpq-c15="" class="tab-current ng-star-inserted"><a _ngcontent-mpq-c15="" href="#" class="icon-file-text">Summary</a></li>
+</ul></nav><app-tab _ngcontent-mpq-c10="" _nghost-mpq-c16=""><div _ngcontent-mpq-c16="" class="pane"><app-summary _ngcontent-mpq-c10="" _nghost-mpq-c20=""><!----><ul _ngcontent-mpq-c20="" class="summary-list ng-star-inserted" role="list">
+<li _ngcontent-mpq-c20="" aria-atomic="true" class="summary-list__item" role="listitem">
+<div _ngcontent-mpq-c20="" aria-hidden="true" class="summary-list__item--icon icon-users" role="presentation"></div>
+<div _ngcontent-mpq-c20="" class="summary-list__item__meta">
+<span _ngcontent-mpq-c20="" class="summary-list__item__meta__label" title="Entitled to vote">Entitled to vote</span><span _ngcontent-mpq-c20="" class="summary-list__item__meta__value" title="">4 199 382</span>
+</div>
+</li>
+<li _ngcontent-mpq-c20="" aria-atomic="true" class="summary-list__item" role="listitem">
+<div _ngcontent-mpq-c20="" aria-hidden="true" class="summary-list__item--icon icon-file-text" role="presentation"></div>
+<div _ngcontent-mpq-c20="" class="summary-list__item__meta">
+<span _ngcontent-mpq-c20="" class="summary-list__item__meta__label" title="Ballots counted so far">Ballots counted so far</span><span _ngcontent-mpq-c20="" appcounter="" class="summary-list__item__meta__value" title="The number is based on approved ballots">2 706 050 </span>
+</div>
+</li>
+<li _ngcontent-mpq-c20="" aria-atomic="true" class="summary-list__item" role="listitem">
+<div _ngcontent-mpq-c20="" aria-hidden="true" class="summary-list__item--icon icon-stats-pie" role="presentation"></div>
+<div _ngcontent-mpq-c20="" class="summary-list__item__meta">
+<span _ngcontent-mpq-c20="" class="summary-list__item__meta__label" title="Of which are advance ballots">Of which are advance ballots</span><span _ngcontent-mpq-c20="" appcounter="" class="summary-list__item__meta__value" title="The number is based on approved ballots">912 126 </span>
+</div>
+</li>
+<!----><li _ngcontent-mpq-c20="" aria-atomic="true" class="summary-list__item ng-star-inserted" role="listitem">
+<div _ngcontent-mpq-c20="" aria-hidden="true" class="summary-list__item--icon icon-stats-dots" role="presentation"></div>
+<div _ngcontent-mpq-c20="" class="summary-list__item__meta">
+<span _ngcontent-mpq-c20="" class="summary-list__item__meta__label" title="Turnout percentage">Turnout percentage</span><span _ngcontent-mpq-c20="" appcounter="" class="summary-list__item__meta__value" title="Turnout percentage is based on the number of approved votings">64,7% </span>
+</div>
+</li>
+<li _ngcontent-mpq-c20="" aria-atomic="true" class="summary-list__item" role="listitem">
+<div _ngcontent-mpq-c20="" aria-hidden="true" class="summary-list__item--icon icon-blank" role="presentation"></div>
+<div _ngcontent-mpq-c20="" class="summary-list__item__meta">
+<span _ngcontent-mpq-c20="" class="summary-list__item__meta__label" title="Blank ballot papers">Blank ballot papers</span><span _ngcontent-mpq-c20="" appcounter="" class="summary-list__item__meta__value">23 445 </span>
+</div>
+</li>
+<li _ngcontent-mpq-c20="" aria-atomic="true" class="summary-list__item" role="listitem">
+<div _ngcontent-mpq-c20="" aria-hidden="true" class="summary-list__item--icon icon-bin" role="presentation"></div>
+<div _ngcontent-mpq-c20="" class="summary-list__item__meta">
+<span _ngcontent-mpq-c20="" class="summary-list__item__meta__label" title="Rejected ballot papers">Rejected ballot papers</span><span _ngcontent-mpq-c20="" appcounter="" class="summary-list__item__meta__value">4 871 </span>
+</div>
+</li>
+<li _ngcontent-mpq-c20="" class="summary-list__item"><a _ngcontent-mpq-c20="" rel="external" target="_blank" href="https://valg.no/en/electiondata/election-results/the-summary-explained/">Read more about the numbers behind the summary</a></li>
+</ul></app-summary></div></app-tab></app-tabs><!---->
+</div>
+</div></app-geo-component></app-content-loading></app-viewport-container>
+</div></div>
+<app-footer _ngcontent-mpq-c0="" _nghost-mpq-c4=""><div _ngcontent-mpq-c4="" class="container">
+<div _ngcontent-mpq-c4="" class="container__inner">
+<section _ngcontent-mpq-c4=""><img _ngcontent-mpq-c4="" class="vdir-logo-text" src="/assets/img/vdir_nb_gold.svg"></section><section _ngcontent-mpq-c4=""><h2 _ngcontent-mpq-c4="">Address</h2>
+<ul _ngcontent-mpq-c4="">
+<li _ngcontent-mpq-c4=""><a _ngcontent-mpq-c4="" href="https://www.google.no/maps/place/Valgdirektoratet/@59.2638642,10.4022938,17z/data=!4m8!1m2!2m1!1sRambergveien+9!3m4!1s0x0:0xd9d4f4122dc0a666!8m2!3d59.264078!4d10.4041822" rel="external" target="_blank">Rambergveien 9</a></li>
+<li _ngcontent-mpq-c4="">Postboks 2080</li>
+<li _ngcontent-mpq-c4="">3115 Tønsberg</li>
+</ul></section><section _ngcontent-mpq-c4=""><h2 _ngcontent-mpq-c4="">Contact</h2>
+<ul _ngcontent-mpq-c4="">
+<li _ngcontent-mpq-c4=""><a _ngcontent-mpq-c4="" href="mailto:post@valg.no" rel="external">post@valg.no</a></li>
+<li _ngcontent-mpq-c4=""><a _ngcontent-mpq-c4="" href="https://www.facebook.com/valginorge" rel="external" target="_blank">Valg on Facebook</a></li>
+<li _ngcontent-mpq-c4=""><a _ngcontent-mpq-c4="" href="https://twitter.com/valginorge" rel="external" target="_blank">Valg on Twitter</a></li>
+</ul></section><!----><section _ngcontent-mpq-c4="" class="ng-star-inserted"><h2 _ngcontent-mpq-c4="">Links</h2>
+<ul _ngcontent-mpq-c4="">
+<li _ngcontent-mpq-c4=""><a _ngcontent-mpq-c4="" queryparamshandling="preserve" role="link">About valgresultat.no</a></li>
+<li _ngcontent-mpq-c4=""><a _ngcontent-mpq-c4="" queryparamshandling="preserve" role="link">Export of results</a></li>
+</ul></section>
+</div>
+<span _ngcontent-mpq-c4="" class="vtag">v3.0.43</span>
+</div></app-footer></app-root><script type="text/javascript" src="runtime.26209474bfa8dc87a77c.js"></script><script type="text/javascript" src="main.da66189b2b756bc46d19.js"></script>
+</body>
+</html>
