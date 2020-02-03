@@ -719,7 +719,7 @@ strsplit("a.b.c", ".")[[1]]
 strsplit("a.b.c", "[.]")[[1]]
 ```
 
-## Oppgaver / Quiz {.flexbox .vleft .extraspace}
+## Oppgaverx {.flexbox .vleft .extraspace}
 
 1. Opprett en vektor `x <- c(" Same procedure as last year, miss Sophie? ", "Same procedure as every year, James.\n")` 
 2. Hva er lengden til `x` ? Hvor mange tegn er det i elementene i `x`? 
@@ -786,7 +786,7 @@ alstå `\\d` og `\\s`
 | Søk og erstatt mønster i en teksstreng            | `sub`, `gsub`        |
 | Søk etter mønster i en teksstreng                 | `grep`, `grepl`      |
 | Finn plasseringen til mønster i en tekststreng    | `regexpr`, `gregexpr`|
-| Hent ut inneholdet fra en match basert på plassering     | `regmatches`         |
+| Hent ut innholdet fra en match basert på plassering     | `regmatches`         |
 
 
 ## Søk og erstatt med `sub` og `gsub`
@@ -869,7 +869,7 @@ gregexpr('[0-9]', my_text)
 ```
 
 
-## Hent ut inneholdet med `regmatches` 
+## Hent ut innholdet med `regmatches` 
 
 ```{r echo=TRUE}
 regmatches(my_text, regexpr('[0-9]', my_text))
@@ -891,7 +891,7 @@ regmatches(my_text, gregexpr('[0-9]{3}', my_text))[[1]]
 
 # Les inn webinnhold til R
 
-## `httr` pakke
+## `httr` pakken
 
 `httr` er en tilleggspakke til R som er mye brukt for å sende og og motta forespørsler over HTTP. 
 
@@ -944,7 +944,6 @@ GET("http://httpbin.org/status/500")
 ```
 
 
-
 ## HTTP statuskoder 
 
 | Beskrivelse           | Statuskode |
@@ -964,6 +963,13 @@ GET("http://httpbin.org/status/500")
 >- Hva gjør kommandoen `httr::content()`? 
 >- Hva betyr HTTP statuskoder i 400-serien? 
 >- Hva betyr HTTP statuskoder i 500-serien? 
+
+## Oppgave {.flexbox .vleft .extraspace}
+
+1. Sjekk ut objektene `rr_resp_1` og `rr_resp_2` i ditt arbeidsmiljø.
+2. Hva inneholder de to objektene? Sjekk eks. ut med `httr::content()`. 
+3. Hva er forskjellen på de to objektene? 
+4. Hvilken nettside / url stammer de fra?
 
 # Trekk ut innhold fra html
 
@@ -1070,7 +1076,7 @@ Oppgaven er å hente ut listen over alle departementene som revideres, og knytte
 
 Oppgaven kan deles inn i følgende deloppgaver:
 
-* Finn hvilke elementer som inneholder de data vi er interessert i
+* Finn hvilke elementer som innholder de data vi er interessert i
 * Finn beste måte å uttrykke dette på med CSS-notasjon
 * Loop gjennom alle avdelingene for å trekke ut data
 * Vask data i R
@@ -1127,7 +1133,7 @@ x <- c()
 
 ## Bind sammen med `do.call(x, 'rbind')`
 
-En svært nyttig fremgangsmåte for å binde sammen en liste som inneholder en rekke `data.frames` er å kombinere basisfunksjonene `rbind` og `do.call`. 
+En svært nyttig fremgangsmåte for å binde sammen en liste som innholder en rekke `data.frames` er å kombinere basisfunksjonene `rbind` og `do.call`. 
 
 ```{r echo=TRUE}
 the_list <- list(data.frame(v1 = 1, v2 = 1:3, v3 = LETTERS[1:3]),
@@ -1142,6 +1148,139 @@ df
 
 
 
-# RSelenium / Ikke statisk HTML 
+# Avansert webskraping  
 
-FYLL INN HER FOR Å UNNGÅ MERGEKONFLIKT
+##  Dynamiske nettsider {.flexbox .vleft .extraspace}
+
+- Biblioteker som `rvest` i R eller `scrapy` i Python får kun tak i HTML-koden på en nettside 
+- Moderne nettsider bruker imidlertid ofte `Javascript` for å gi en interaktiv brukeropplevelse 
+- Det er derfor *ikke*  sikkert at alt innholdet på nettsiden er inkludert i HTML kildekoden `r emo::ji("sad")`
+
+## Eksempel valg.no 
+
+```{r out.width='80%', fig.align='center'}
+knitr::include_graphics('../assets/valgresultat-no.png')
+```
+
+## Eksempel valg.no (med `rvest`)
+
+Med `rvest` vil vi *ikke* finne noe særlig på nettsiden til valgresultat.no, siden nesten hele siden generes av at `Javacript`. 
+
+```{r echo=TRUE, cache=TRUE}
+h <- read_html(GET('https://valgresultat.no/?type=ko&year=2019'))
+h %>% html_nodes('[class="party-chart"]') # Finner ingenting her... 
+```
+
+## Andre utfordringer {.flexbox .vleft .extraspace}
+
+- I en del tilfeller kan det være nyttig å kunne **navigere** på nettsiden.  
+- Det kan være nødvendig å **klikke på elementer** for å hente ut ytterligere innhold. 
+- Nettsteder vil kunne gi deg **ulikt innhold** avhengig av om du er en nettleser eller ikke. 
+- Noen nettsteder vil også **blokkere forespørselen** din dersom du ikke er en nettleser.  
+
+>- Hvordan skal vi da få tak i innholdet? `r emo::ji('thinking')`
+
+## Selenium {.flexbox .vleft .extraspace}
+
+- Selenium er i utgangspunktet et verktøy for automatisert testing av webapplikasjoner. 
+
+- Ved bruk av Selenium kan vi åpne en nettleser (typisk Firefox eller Google Chrome) som kan gjøre oppaver for oss. 
+
+- Dette løser utfodringen med å lese inn Javascript, samt at det blant annet åpner muligheter for å klikke på elementer på en nettside.
+
+- Selenium kan integreres mot en rekke ulike programmeringsspråk. I R er det en pakke som heter `RSelenium`. 
+
+## `RSelenium`
+
+```{r echo = TRUE, eval = FALSE}
+# Installer pakken fra CRAN 
+install.packages('RSelenium')
+```
+```{r echo = TRUE, eval = FALSE}
+# eller fra Github...
+devtools::install_github("ropensci/RSelenium")
+``` 
+
+```{r echo = TRUE, eval = FALSE}
+# Last inn pakken
+library(RSelenium)
+```
+
+
+## Selenium server {.flexbox .vleft .extraspace}
+
+- For å kunne bruke Selenium trenger vi en driver denne kan kjøre på. 
+
+- Den anbefalte fremgangsmåten for dette er å bruke [Docker](https://www.docker.com/products/docker-desktop). 
+
+- NB! Docker er ikke tilgjengelig på Riksrevisjonens standard PC-er. 
+
+- Ta kontakt med SUV-DS dersom du har en case hvor du trenger å bruke Selenium til arbeidsformål.
+
+
+## `RSelenium` og Docker 
+
+**Tips:** Sjekk ut [RSelenium på Github](https://github.com/ropensci/RSelenium) og [Docker imaget for Selenium ](https://github.com/SeleniumHQ/docker-selenium). 
+  
+```{r, echo=TRUE, eval=FALSE}
+# Start en Docker container med en Selenium Firefox nettleser 
+system("docker run -d -p 4445:4445 --shm-size 2g selenium/standalone-firefox") 
+```
+
+```{r echo=TRUE, eval=FALSE}
+# Opprett en tilkobling til Selenium-serveren  
+remDr <- remoteDriver(remoteServerAddr = 'localhost', port = 4445L)
+```
+
+## Eksempel valg.no (med `RSelenium`)
+
+Med `rvest` fikk vi ikke lest inn `Javascript` på nettsiden valgresultat.no. Det kan vi derimot gjøre med `RSelenium`. 
+
+```{r echo=TRUE , eval=FALSE}
+# Åpne en ny sesjon i nettleseren
+remDr$open(silent = TRUE) 
+# Naviger til siden 
+remDr$navigate('https://valgresultat.no/?type=ko&year=2019')
+# Les inn HTML 
+h <- read_html(remDr$getPageSource()[[1]])
+```
+```{r echo = FALSE, eval = TRUE}
+h <- read_html('../assets/sel-example.html')
+```
+
+```{r echo = TRUE}
+h %>% html_nodes('[class="party-chart"]')
+```
+
+## Eksempel valg.no (med `RSelenium`)
+
+```{r echo=TRUE, eval=FALSE}
+remDr$screenshot(display = TRUE)
+```
+```{r out.width='60%', fig.align='center'}
+knitr::include_graphics('../assets/sel-screenshot-valg-no-1.png')
+```
+
+## Eksempel valg.no (med `RSelenium`)
+
+```{r echo=TRUE, eval = FALSE}
+e <- remDr$findElement('css', '[class="icon-table2"]')
+e$clickElement()
+remDr$screenshot(display = TRUE)
+```
+```{r out.width='60%', fig.align='center'}
+knitr::include_graphics('../assets/sel-screenshot-valg-no-2.png')
+```
+
+## Nyttige `RSelenium` funksjoner 
+
+| Beskrivelse        | Funksjon                |
+|--------------------|:-----------------------:|
+| Åpne en ny sesjon  | `open()`                | 
+| Lukk åpne sesjoner | `close()`, `closeall()` |
+| Naviger til en side| `navigate()`            | 
+| Gjeldende side     |  `getCurrentUrl()`      |
+| Kildekoden på gjeldende side     |  `getPageSource()`      |
+| Finn elementer     | `findElements`          |
+| Klikk på elementer | `clickElements`         |
+| Ta skjermbilde     | `screenshot`            |
