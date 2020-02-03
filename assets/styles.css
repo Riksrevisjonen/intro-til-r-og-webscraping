@@ -17,7 +17,7 @@ blockquote .quoteby {
   font-size: .8em;
 }
 
-.small-code pre {
+.small-code pre, .small-code p {
   font-size: .6em;
   line-height: 1.2em;
 }

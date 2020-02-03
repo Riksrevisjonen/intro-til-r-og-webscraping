@@ -693,11 +693,39 @@ GET("http://httpbin.org/status/500")
 
 ## Pakken `rvest`
 
+```{r, echo=TRUE}
+rr_wiki <- read_html('https://no.wikipedia.org/wiki/Riksrevisjonen')
+```
+
+
+```{r, echo=TRUE}
+# Hent all tekst i avsnitt som kommer etter TOC
+x <- rr_wiki %>% html_nodes('#toc ~ p') %>% html_text()
+# Hent elementnavnet på alle elementer som har tittel som inkluderer "Kosmo"
+x <- rr_wiki %>% html_nodes('[title*="Kosmo"]') %>% html_name()
+# Hent koblingen for alle hyperkoblinger som starter med "http"
+x <- rr_wiki %>% html_nodes('[href^="http"]') %>% html_attr('href')
+# Hent alle hyperkoblinger som inkluderer "riksrevisjonen.no"
+x <- rr_wiki %>% html_nodes('[href*="riksrevisjonen.no"]') %>% html_attr('href')
+```
+
+
 ## Et enkelt eksempel
 
 ```{r out.width='80%', fig.align='center'}
 knitr::include_graphics('../assets/rr-organisasjon.png')
 ```
+
+## Et enkelt eksempel
+
+Oppgaven er å hente ut listen over alle departementene som revideres, og knytte disse til en avdeling i Riksrevisjonen.
+
+Oppgaven kan deles inn i følgende deloppgaver:
+
+* Finn hvilke elementer som inneholder de data vi er interessert i
+* Finn beste måte å uttrykke dette på med CSS-notasjon
+* Loop gjennom alle avdelingene for å trekke ut data
+* Vask data i R
 
 ## Oppgave
 
