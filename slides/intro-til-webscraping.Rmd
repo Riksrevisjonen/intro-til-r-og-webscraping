@@ -11,13 +11,24 @@ output:
     logo: ../assets/rr-logo.svg
 ---
 
+```{r setup, include=FALSE}
+if (!require(tufte)) install.packages('tufte')
+if (!require(rvest)) install.packages('rvest')
+knitr::opts_chunk$set(echo = FALSE)
+set.seed(42)
+library(rvest)
+```
+
 # Hva er webscraping?
 
 ## Webscraping
 
-## Bruk av webscraping i Riksrevisjonen
+## Bruk av webscraping i Riksrevisjonen {.flexbox .vleft}
 
 * Automatisk innhenting av styredokumenter fra helseforetakene
+* Innhenting av data fra NSDs database for høyere utdanning
+* Sakspapirer fra norske kommunestyrer
+* Data om hjelpemidler tilgjengelig fra hjelpemiddelsentralen
 
 # Strukturen til en nettside
 
@@ -28,22 +39,18 @@ output:
 * HTML-syntaks består av _elementer_ slik som `<body>`, `<p>` og `<img>`
 * Elementer i HTML har en nøstet struktur
 
-## Elementer i HTML {.flexbox .vleft}
+## Anatomien til et element {.flexbox .vleft}
 
 Et element i HTML består av følgende deler:
 
 * En åpningskode (tag)
-* En avslutningskode (tag)
+* En avslutningskode (tag) *
+* Navngitte attributter (med eller uten verdier)
 * Innholdet i elementet
 
-## Typer av elementer i HTML
+* Ikke alle elementer har en avslutningskode
 
-Det er to hovedtyper av elementer i HTML:
-
-* **Blokkelementer**: større, strukturelle elementer som synlig deler inn innholdet på en nettside, slik som `<p>` (avsnitt)
-* **Inline elementer**: elementer som er inne i blokkelementer og som omslutter en liten del av innholdet, slik som `<em>` (kursiv) og `<strong>` (uthevet)
-
-## HTML
+## Dokumentstruktur
 
 ```html
 <!DOCTYPE html>
@@ -73,9 +80,9 @@ Det er to hovedtyper av elementer i HTML:
 
 | Element   | Beskrivelse          |       
 | ----------|:--------------------:|
-| em     | Overskrift nivå 1-6  |  
-| strong         | Avsnitt              |
-|         | Ordnet liste         |
+| em        | Kursiv (emphasis)    |  
+| strong    | Uthevet (strong)     |
+| ol        | Ordnet liste         |
 | ul        | Uordnet liste        |
 | li        | Listeelement         |
 
@@ -108,6 +115,7 @@ Det er to hovedtyper av elementer i HTML:
       <li>Alna</li>
       <li>Bjerke</li>
       <li>Frogner</li>
+      <li>Gamle Oslo</li>
     </ul>
   </li>
 </ul>
@@ -118,6 +126,7 @@ Det er to hovedtyper av elementer i HTML:
 * Elementer kan ha _attributter_
 * Attributter har normalt _verdier_, men kan også være _boolske_
 * Attributter angis innenfor åpningskoden til elementet
+* Noen elementer har alltid attributter, slik som hyperkoblinger `<a>`
 
 ```html
 <h1 id="title">Overskrift</h1>
@@ -127,34 +136,230 @@ Det er to hovedtyper av elementer i HTML:
 
 ```html
 <a href="https://riksrevisjonen.no/" target="_blank">Lenke til Riksrevisjonen</a>
+<a href="/rapporter/">Lenke til rapporter</a>
 ```
 
-* Hyperlenker lages med elementet `<a>`
-* Lenken definerer med attributtet `href`
-* Hvor lenken skal åpnes defineres med attributtet `target`
+* Hyperkoblinger lages med elementet `<a>`
+* Koblinger defineres med attributtet `href`
+* Hvor koblingen skal åpnes defineres med attributtet `target`
+* Koblinger til samme server trenger ikke `http(s)` eller `server.com`
 
-## Hyperlenker
+## Document Object Model (DOM)
+
+<pre><div style="padding: .2em; margin: .2em 0; background-color: #ededfd;">Window<div style="padding: .2em; margin: .2em 0; background-color: #f6c2c2;">Document<div style="padding: .2em; margin: .2em 0; background-color: #ffffc8;"><span>Element</span><div style="padding: .2em; margin: .2em 0; background-color: #d9ffc8;"><span>Element</span></div><div style="padding: .2em; margin: .2em 0; background-color: #d9ffc8;"><span>Element</span></div></div><div style="padding: .2em; margin: .2em 0; background-color: #ffffc8;"><span>Element</span><div style="padding: .2em; margin: .2em 0; background-color: #d9ffc8;"><span>Element</span></div><div style="padding: .2em; margin: .2em 0; background-color: #d9ffc8;"><span>Element</span></div></div></div></div></pre>
+
+## Document Object Model (DOM)
 
 ```html
-<a href="en-annen-fil-i-samme-filbane.html">Klikk her</a>
+<div>             <!-- Forelder -->
+  <p>Første</p>   <!-- Etterkommer -->
+  <p>Andre</p>    <!-- Søsken -->
+  <div>           <!-- Etterkommer/forelder -->
+    <p>Neste</p>  <!-- Etterkommer -->
+  </div>
+</div>
 ```
+
+## Oppgave
+
+Åpne fila `webscrape.html` fra ditt hjemmeområde.
+
+* Lag et avsnittselement med klassen
+
+## Sideinspektøren
+
+```{r out.width='80%', fig.align='center'}
+knitr::include_graphics('../assets/page-inspector.png')
+```
+
+## Oppgave
+
+Gå til `https://no.wikipedia.org/wiki/Riksrevisjonen`
+Åpne sideinspektøren med F12
+
+# Velge HTML-elementer med CSS
+
+## Hvordan velge riktig HTML-element
+
+To typer syntaks for å velge HTML-elementer
+
+* Xpath
+* CSS (Cascading Style Sheets)
+
+Av disse har CSS den enkleste syntaksen. Begge variantene støttes av `rvest`-pakken
+
+## Velge HTML-elementer
+
+Det er flere måter å velge HTML-elementer på
+
+* Basert på type (element)
+* Basert på id
+* Basert på klasse
+* Basert på attributter
+
+## Velge basert på id
+
+```{r, include=FALSE}
+x <- read_html(
+  '
+  <body>
+    <p id="first">Dette er det <strong>første</strong> elementet</p>
+    <p id="second">Dette er det <strong>andre</strong> elementet</p>
+    <p id="third">Dette er det <strong>tredje</strong> elementet</p>
+  </body>
+  ')
+```
+
 
 ```html
-<a href="/en-annen-fil-på-samme-server.html">Klikk her</a>
+<body>
+  <p id="first">Dette er det <strong>første</strong> elementet</p>
+  <p id="second">Dette er det <strong>andre</strong> elementet</p>
+  <p id="third">Dette er det <strong>tredje</strong> elementet</p>
+</body>
 ```
 
-## URL
-
-```{r, echo=TRUE}
-URLencode("https://server.com/pass på tegnsetting")
+```{r, echo=TRUE, eval=TRUE}
+html_node(x, '#first')
+html_node(x, '#second')
+html_node(x, '#third')
 ```
 
+## Kombinasjoner
 
-## CSS
+Velg alle elementer `B` som er _direkte_ etterkommere av `A`
 
-* bruk av attributter
-* søk i struktur
-* pseudo-klasser
+```
+A > B
+```
+
+Velg alle elementer `B` som er etterkommere av `A` (uansett slektsledd)
+
+```
+A B
+```
+
+Velg element `B` som er et _umiddelbart_ søsken til `A`
+
+```
+A + B
+```
+
+Velg alle elementer `B` som er _etterfølgende_ søsken til `A`
+
+```
+A ~ B
+```
+
+## Kombinasjoner
+
+```html
+<div>
+  <p>Jeg er første avsnitt</p>
+  <pre>Jeg er litt kode</pre>
+  <p>Jeg er andre avsnitt</p>
+  <pre>Jeg er mer kode</pre>
+  <p>Jeg er tredje avsnitt</p>
+</div>
+```
+
+<div class="small-code">
+  <p>Jeg er første avsnitt</p>
+  <pre>Jeg er litt kode</pre>
+  <p>Jeg er andre avsnitt</p>
+  <pre>Jeg er mer kode</pre>
+  <p>Jeg er tredje avsnitt</p>
+</div>
+
+## Kombinasjoner
+
+```css
+div p {
+  color: red;
+}
+```
+
+<div class="small-code">
+  <p style="color: red;">Jeg er første avsnitt</p>
+  <pre>Jeg er litt kode</pre>
+  <p style="color: red;">Jeg er andre avsnitt</p>
+  <pre>Jeg er mer kode</pre>
+  <p style="color: red;">Jeg er tredje avsnitt</p>
+</div>
+
+## Kombinasjoner
+
+```css
+pre + p {
+  color: red;
+}
+```
+
+<div class="small-code">
+  <p>Jeg er første avsnitt</p>
+  <pre>Jeg er litt kode</pre>
+  <p style="color: red;">Jeg er andre avsnitt</p>
+  <pre>Jeg er mer kode</pre>
+  <p>Jeg er tredje avsnitt</p>
+</div>
+
+## Kombinasjoner
+
+```css
+pre ~ p {
+  color: red;
+}
+```
+
+<div class="small-code">
+  <p>Jeg er første avsnitt</p>
+  <pre>Jeg er litt kode</pre>
+  <p style="color: red;">Jeg er andre avsnitt</p>
+  <pre>Jeg er mer kode</pre>
+  <p style="color: red;">Jeg er tredje avsnitt</p>
+</div>
+
+## Kombinasjoner
+
+```css
+ul > li {
+  color: red;
+}
+```
+
+```htm
+<ul>
+  <li>One</li>
+  <li>Two!</li>
+  <li>Three</li>
+</ul>
+```
+
+<ul>
+  <li>One</li>
+  <li style="color: red;">Two!</li>
+  <li>Three</li>
+</ul>
+
+## Tekstmatching
+
+```css
+/* Attributter som starter med en verdi */
+[attr^="value"]
+
+/* Attributter som inneholder en verdi */
+[attr*="value"]
+
+/* Attributter som slutter med en verdi */
+[attr$="value"]
+```
+
+## Oppgaver
+
+* Skriv en CSS-velger som velger alle interne hyperkoblinger (interne hyperkoblinger starter alltid med `#` i attributtet `href`)
+* Skriv en CSS-velger som velger alle hyperkoblinger hvor attributtet `href` _slutter_ med `.pdf`
+
+## Pseudo-klasser
 
 
 # Jobbe med tekst i R
@@ -488,11 +693,39 @@ GET("http://httpbin.org/status/500")
 
 ## Pakken `rvest`
 
+```{r, echo=TRUE}
+rr_wiki <- read_html('https://no.wikipedia.org/wiki/Riksrevisjonen')
+```
+
+
+```{r, echo=TRUE}
+# Hent all tekst i avsnitt som kommer etter TOC
+x <- rr_wiki %>% html_nodes('#toc ~ p') %>% html_text()
+# Hent elementnavnet på alle elementer som har tittel som inkluderer "Kosmo"
+x <- rr_wiki %>% html_nodes('[title*="Kosmo"]') %>% html_name()
+# Hent koblingen for alle hyperkoblinger som starter med "http"
+x <- rr_wiki %>% html_nodes('[href^="http"]') %>% html_attr('href')
+# Hent alle hyperkoblinger som inkluderer "riksrevisjonen.no"
+x <- rr_wiki %>% html_nodes('[href*="riksrevisjonen.no"]') %>% html_attr('href')
+```
+
+
 ## Et enkelt eksempel
 
 ```{r out.width='80%', fig.align='center'}
 knitr::include_graphics('../assets/rr-organisasjon.png')
 ```
+
+## Et enkelt eksempel
+
+Oppgaven er å hente ut listen over alle departementene som revideres, og knytte disse til en avdeling i Riksrevisjonen.
+
+Oppgaven kan deles inn i følgende deloppgaver:
+
+* Finn hvilke elementer som inneholder de data vi er interessert i
+* Finn beste måte å uttrykke dette på med CSS-notasjon
+* Loop gjennom alle avdelingene for å trekke ut data
+* Vask data i R
 
 ## Oppgave
 
