@@ -1264,7 +1264,7 @@ knitr::include_graphics('../assets/valgresultat-no.png')
 
 ## Eksempel valg.no (med `rvest`)
 
-Med `rvest` vil vi *ikke* finne noe særlig på nettsiden til valgresultat.no, siden nesten hele siden generes av at `Javacript`. 
+Med `rvest` vil vi *ikke* finne noe særlig på nettsiden til valgresultat.no, siden nesten hele siden generes av et `Javacript`. 
 
 ```{r echo=TRUE, cache=TRUE}
 h <- read_html(GET('https://valgresultat.no/?type=ko&year=2019'))
