@@ -1204,6 +1204,23 @@ mapply(multiply, x = 1:3, y = 4:6)
 * Funksjonene bør heller løse små, mer _generelle_ oppgaver, enn å være store og komplekse
 * Feilhåndtering er viktig!
 
+## Når ting går galt
+
+Det går ikke alltid som forventet når vi bruker funksjoner. `try` og `tryCatch` kan hjelpe oss når det oppstår problemer:
+
+```{r, echo=TRUE, error=TRUE}
+x <- log("a")
+```
+
+```{r, echo=TRUE}
+tryCatch(
+  { log("a") },
+  warning = function(m) { "Vi har fått en advarsel" },
+  error = function(m) { "Det har skjedd en feil" }
+)
+```
+
+
 ## Bruk av `Sys.sleep` {.flexbox .vleft .extraspace}
 
 * Når vi henter inn mange HTML-sider i et skript, bør vi passe på å redusere hastigheten på skriptet
