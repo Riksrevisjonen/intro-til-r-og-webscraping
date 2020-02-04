@@ -240,7 +240,7 @@ Det er flere måter å velge HTML-elementer på
 * Basert på pseudoelementer
 * En kombinasjon av disse
 
-# Egenskaper ved HTML-elementer {.flexbox .vleft}
+## Egenskaper ved HTML-elementer {.flexbox .vleft}
 
 * `id` er unik på tvers av et HTML-dokument
 * `class` brukes av CSS og kan ha flere verdier
