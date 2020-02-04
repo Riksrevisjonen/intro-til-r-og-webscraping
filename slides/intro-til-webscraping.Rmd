@@ -21,23 +21,33 @@ library(rvest)
 
 # Hva er webscraping?
 
-## Webscraping
+## Webscraping {.flexbox .vleft}
 
-## Bruk av webscraping i Riksrevisjonen {.flexbox .vleft}
+Webscraping handler om å trekke ut data fra nettsider (kan også brukes for å finne og laste ned _filer_ som er tilgjengelig fra en webserver).
+
+Webscraping i R kan deles inn i tre hovedaktiviteter:
+
+1. Lese inn HTML-sider som et objekt i R
+2. Identifisere hvilke elementer i HTML-dokumentet som inneholder de data vi vil ha
+3. Trekke ut informasjonen og strukturere den slik at den er klar for analyse
+
+## Bruk av webscraping i Riksrevisjonen {.flexbox .vleft .extraspace}
 
 * Automatisk innhenting av styredokumenter fra helseforetakene
 * Innhenting av data fra NSDs database for høyere utdanning
 * Sakspapirer fra norske kommunestyrer
 * Data om hjelpemidler tilgjengelig fra hjelpemiddelsentralen
+* Innhente nøkkeltall for fylkesmennene
 
 # Strukturen til en nettside
 
-## HTML {.flexbox .vleft}
+## HTML {.flexbox .vleft .extraspace}
 
 * Alle nettsider er bygget opp med HTML (Hyper Text Markup Language)
 * HTML bruker en spesiell syntaks for å fortelle nettleseren hvordan en side skal vises
 * HTML-syntaks består av _elementer_ slik som `<body>`, `<p>` og `<img>`
 * Elementer i HTML har en nøstet struktur
+* I tillegg til HTML, benyttes CSS og JavaScript for å utforme nettsider og gi interaktiv funksjonalitet
 
 ## Anatomien til et element {.flexbox .vleft}
 
@@ -48,7 +58,11 @@ Et element i HTML består av følgende deler:
 * Navngitte attributter (med eller uten verdier)
 * Innholdet i elementet
 
-* Ikke alle elementer har en avslutningskode
+```html
+<h1 id="title">Overskrift</h1>
+```
+
+\* Ikke alle elementer har en avslutningskode
 
 ## Dokumentstruktur
 
@@ -68,23 +82,42 @@ Et element i HTML består av følgende deler:
 
 ## Vanlige elementer i HTML
 
-| Element   | Beskrivelse          |       
-| ----------|:--------------------:|
-| h1-h6     | Overskrift nivå 1-6  |  
-| p         | Avsnitt              |
-| ol        | Ordnet liste         |
-| ul        | Uordnet liste        |
-| li        | Listeelement         |
+| Element   | Beskrivelse           |       
+| ----------|:---------------------:|
+| h1-h6     | Overskrift nivå 1-6   |
+| div       | Generelt blokkelement |
+| p         | Avsnitt               |
+| ol        | Ordnet liste          |
+| ul        | Uordnet liste         |
+| li        | Listeelement          |
 
 ## Vanlige elementer i HTML
 
-| Element   | Beskrivelse          |       
-| ----------|:--------------------:|
-| em        | Kursiv (emphasis)    |  
-| strong    | Uthevet (strong)     |
-| ol        | Ordnet liste         |
-| ul        | Uordnet liste        |
-| li        | Listeelement         |
+| Element   | Beskrivelse             |       
+| ----------|:-----------------------:|
+| em        | Kursiv (emphasis)       |  
+| strong    | Uthevet (strong)        |
+| span      | Generelt inline element |
+| img       | Bilde                   |
+
+## Blokk og inline elementer
+
+```html
+<div>
+  <h2>Dette er en tittel på nivå 2</h2>
+  <p>Dette er et avsnitt som har <strong>uthevet tekst</strong></p>
+  <p>Dette er et avsnitt som har <em>kursiv tekst</em></p>
+  <p>Dette er et avsnitt som har <span style="color: red;">rød tekst i et inline
+     element</span>.</p>
+</div>
+```
+
+<div>
+  <h2>Dette er en tittel på nivå 2</h2>
+  <p>Dette er et avsnitt som har <strong>uthevet tekst</strong>.</p>
+  <p>Dette er et avsnitt som har <em>kursiv tekst</em>.</p>
+  <p>Dette er et avsnitt som har <span style="color: red;">rød tekst i et inline element</span>.</p>
+</div>
 
 ## Lister i HTML
 
@@ -111,12 +144,12 @@ Et element i HTML består av følgende deler:
 ```html
 <ul>
   <li>Oslo
-    <ul>
+    <ol>
       <li>Alna</li>
       <li>Bjerke</li>
       <li>Frogner</li>
       <li>Gamle Oslo</li>
-    </ul>
+    </ol>
   </li>
 </ul>
 ```
@@ -129,10 +162,10 @@ Et element i HTML består av følgende deler:
 * Noen elementer har alltid attributter, slik som hyperkoblinger `<a>`
 
 ```html
-<h1 id="title">Overskrift</h1>
+<h1 class="title uppercase" id="title">Overskrift</h1>
 ```
 
-## Attributter {.flexbox .vleft .build}
+## Attributter {.flexbox .vleft}
 
 ```html
 <a href="https://riksrevisjonen.no/" target="_blank">Lenke til Riksrevisjonen</a>
@@ -151,11 +184,11 @@ Et element i HTML består av følgende deler:
 ## Document Object Model (DOM)
 
 ```html
-<div>             <!-- Forelder -->
-  <p>Første</p>   <!-- Etterkommer -->
-  <p>Andre</p>    <!-- Søsken -->
-  <div>           <!-- Etterkommer/forelder -->
-    <p>Neste</p>  <!-- Etterkommer -->
+<div>               <!-- Forelder/besteforelder -->
+  <p>Første</p>     <!-- Etterkommer -->
+  <p>Andre</p>      <!-- Søsken -->
+  <div>             <!-- Etterkommer/forelder -->
+    <p>Neste</p>    <!-- Etterkommer -->
   </div>
 </div>
 ```
@@ -164,7 +197,11 @@ Et element i HTML består av følgende deler:
 
 Åpne fila `webscrape.html` fra ditt hjemmeområde.
 
-* Lag et avsnittselement med klassen
+1. Lag et element av typen `p` med klassen `mitt-element` og skriv tekst inn i denne
+2. Lag et nytt element av typen `ul` med klassen `min-liste`
+3. Lag minst tre listeelementer inne i elementet du opprettet i forrige steg. Skriv tekst inn i hvert listeelement
+4. Legg til attributtet `data-tabell` med verdien `areal` til det første `<table>`-elementet
+5. Legg til attributtet `data-tabell` med verdien `folketall` til det andre `<table>`-elementet
 
 ## Sideinspektøren
 
@@ -172,14 +209,18 @@ Et element i HTML består av følgende deler:
 knitr::include_graphics('../assets/page-inspector.png')
 ```
 
-## Oppgave
+## Oppgave {.flexbox .vleft}
 
-Gå til `https://no.wikipedia.org/wiki/Riksrevisjonen`
-Åpne sideinspektøren med F12
+1. Gå til `https://no.wikipedia.org/wiki/Riksrevisjonen`
+2. Åpne sideinspektøren med F12
+3. Velg bildet av Per-Kristian Foss. Hva slags element er dette?
+4. Hvilke attributter har dette elementet?
+5. Hvilken elementtype er forelderelementet til bildet?
+6. Hvilken klasse har dette elementet?
 
-# Velge HTML-elementer med CSS
+# CSS-velgere
 
-## Hvordan velge riktig HTML-element
+## Hvordan velge riktig HTML-element {.flexbox .vleft .extraspace}
 
 To typer syntaks for å velge HTML-elementer
 
@@ -198,6 +239,13 @@ Det er flere måter å velge HTML-elementer på
 * Basert på attributter
 * Basert på pseudoelementer
 * En kombinasjon av disse
+
+# Egenskaper ved HTML-elementer {.flexbox .vleft}
+
+* `id` er unik på tvers av et HTML-dokument
+* `class` brukes av CSS og kan ha flere verdier
+* `href` brukes av `<a>`-elementet for å angi koblinger
+* `src` brukes for å angi kildedokument (for eksempel av `<img>`)
 
 ## Velge basert på id
 
@@ -489,10 +537,12 @@ CSS-velgere:
 </ul>
 
 
-## Oppgaver
+## Oppgaver {.flexbox .vleft .extraspace}
 
-* Skriv en CSS-velger som velger alle interne hyperkoblinger (interne hyperkoblinger starter alltid med `#` i attributtet `href`)
-* Skriv en CSS-velger som velger alle hyperkoblinger hvor attributtet `href` _slutter_ med `.pdf`
+1. Skriv en CSS-velger som velger alle interne hyperkoblinger (interne hyperkoblinger starter alltid med `#` i attributtet `href`)
+2. Skriv en CSS-velger som velger alle hyperkoblinger hvor attributtet `href` _slutter_ med `.pdf`
+3. Skriv en CSS-velger som velger alle elementer `<p>` som er _direkte etterkommere_ av elementer med klassen `.data`
+4. Skriv en CSS-valger som velger alle elementer av typen `<table>` som har klassen `.info`
 
 ## Pseudoklasser {.flexbox .vleft}
 
@@ -603,6 +653,50 @@ li:last-of-type {
   <li>Tredje element</li>
 </ul>
 
+## Velg siste etterkommer
+
+```css
+ul:last-child {
+  color: red;
+}
+```
+
+```html
+<ul>
+  <li>Første element</li>
+  <li>Andre element</li>
+  <li>Tredje element</li>
+</ul>
+```
+
+```{asis, eval=TRUE, echo=TRUE}
+<style>
+#ex-pseudo-3 ul:last-child {
+  color: red;
+}
+</style>
+```
+
+<ul id="ex-pseudo-3">
+  <li>Første element</li>
+  <li>Andre element</li>
+  <li>Tredje element</li>
+</ul>
+
+## Quiz
+
+1. Gjenfinner du pseudoklasser i HTML-koden?
+2. Hvilket element blir valgt av CSS-velgeren `p:last-of-type`?
+3. Hvilket element blir valgt av CSS-velgeren `ul:first-child`?
+4. Inspiser koden under. Vil `p:nth-of-type(2)` og `div:nth-child(2)` velge samme element?
+
+```html
+<div>
+  <span>Jeg er nummer en!</span>
+  <p>Jeg er nummer to</p>
+  <p>Jeg er nummer tre</p>
+</div>
+```
 
 # Jobbe med tekst i R
 
@@ -939,24 +1033,120 @@ GET("http://httpbin.org/status/500")
 
 # Trekk ut innhold fra html
 
-## Pakken `rvest`
+## Pakken `rvest` {.flexbox .vleft .extraspace}
 
-```{r, echo=TRUE}
-rr_wiki <- read_html('https://no.wikipedia.org/wiki/Riksrevisjonen')
+* Pakken `rvest` kan benyttes for å lese innholdet i en nettside
+* `rvest` bruker pakken `xml2` for å lese inn HTML-innhold
+* Inneholder flere funksjoner for å velge elementer (noder) og trekke ut innhold
+* Støtter både Xpath og CSS-syntaks
+* Egen funksjon for å innhente tabulære data fra HTML-tabeller
+
+## Funksjoner i `rvest`
+
+| Funksjon      | Beskrivelse |
+|:--------------|:----------:|
+| `html_node`   | Finn første elementer/noder        |
+| `html_nodes`  | Finn alle elementer/noder        |
+| `html_text`   | Trekk ut tekst fra         |
+| `html_attr`   | Trekk ut innholdet fra en attributt        |   
+| `html_attrs`  | Trekk ut innholdet fra alle attributter        |
+| `html_table`  | Trekk ut HTML-tabeller og gjør om til data.frame  |
+| `html_name`   | Trekk ut navnet på valgt element |
+
+## Piping {.flexbox .vleft .extraspace}
+
+* `rvest` bruker en spesiell syntaks kalt piping
+* Kommer opprinnelig fra pakken `magrittr` (kan lastes inn separat for å bruke til andre formål)
+* Piping gjør det lettere å kjede sammen flere kommandoer som brukes på _samme_ objekt
+* Lettere å lese enn nøstede kommandoer i R
+* Bruker `%>%` for å kjede sammen kommandoer
+
+## Piping vs. standard R
+
+```{r, include=FALSE}
+set.seed(42)
 ```
 
+```{r, echo=TRUE,}
+# Standard R syntax, evalueres fra innerste funksjon
+floor(mean(runif(10, 0, 10)))
+```
+
+```{r, include=FALSE}
+set.seed(42)
+```
+
+```{r, echo=TRUE}
+library(magrittr)
+# magrittr skrives i motsatt rekkefølge
+runif(10, 0, 10) %>%
+  mean() %>%
+  floor()
+```
+
+## Les inn HTML-sider med `rvest` og `httr`
+
+Vi kan bruke `read_html` (fra pakken `xml2` som `rvest` bruker) for å lese inn HTML-sider. Merk klassen til objektet som returneres.
+
+```{r, echo=TRUE}
+library(rvest)
+rr_wiki <- read_html('https://no.wikipedia.org/wiki/Riksrevisjonen')
+class(rr_wiki)
+```
+
+```{r}
+library(httr)
+resp <- GET('https://no.wikipedia.org/wiki/Riksrevisjonen')
+rr_wiki <- content(resp)
+class(rr_wiki)
+```
+
+## Hent elementer med `html_nodes`
+
+Vi bruker `html_nodes` for å hente alle elementer som matcher vår CSS-velger. Funksjonen `html_node` vil kun returnere det første elementet.
 
 ```{r, echo=TRUE}
 # Hent all tekst i avsnitt som kommer etter TOC
-x <- rr_wiki %>% html_nodes('#toc ~ p') %>% html_text()
-# Hent elementnavnet på alle elementer som har tittel som inkluderer "Kosmo"
-x <- rr_wiki %>% html_nodes('[title*="Kosmo"]') %>% html_name()
-# Hent koblingen for alle hyperkoblinger som starter med "http"
-x <- rr_wiki %>% html_nodes('[href^="http"]') %>% html_attr('href')
-# Hent alle hyperkoblinger som inkluderer "riksrevisjonen.no"
-x <- rr_wiki %>% html_nodes('[href*="riksrevisjonen.no"]') %>% html_attr('href')
+x <- html_nodes(rr_wiki, '#toc ~ p')
+class(x)
+length(x)
 ```
 
+## Trekk ut tekst fra noder med `html_text`
+
+For å få ut det faktiske innholdet fra nodene, kan vi bruker funksjonen `html_text`
+
+```{r, echo=TRUE}
+html_text(x[[1]])
+```
+
+## Sett det hele sammen med piping
+
+```{r, echo=TRUE}
+rr_wiki %>%                   # Velg objektet rr_wiki
+  html_nodes('.toc ~ p') %>%  # Hent elementer
+  .[[1]] %>%                  # Velg det første elementet
+  html_text()                 # Trekk ut teksten
+```
+
+## Hent data fra attributter
+
+```{r, echo=TRUE}
+# Hent koblingen for alle hyperkoblinger som starter med "http"
+x <- rr_wiki %>% html_nodes('[href^="http"]') %>% html_attr('href')
+head(x)
+```
+
+
+## Oppgave
+
+1. Last inn `rvest` med `library()`
+2. Les inn HTML-dokumentet `webscrape.html` som `webpage` med `read_html`
+3. Hent inn teksten til alle `<p>`-elementene på siden. Hvor mange elementer er det?
+4. Hva er forskjellen på å velge elementer med `div > p` og `div p`?
+5. Velg det _andre_ listeelementet fra listen `min-liste`
+6. Hent inn de to tabellene og tilordne dem til hvert sitt objekt, `areal` og `folketall`
+7. Hva er befolkningstettheten for fylket med _lavest_ befolkningstetthet?
 
 ## Et enkelt eksempel
 
@@ -977,9 +1167,67 @@ Oppgaven kan deles inn i følgende deloppgaver:
 
 ## Oppgave
 
+Du finner objektet `streps` i ditt globale miljø
+
+1. Hva slags objekt er `streps`? Sørg for å få det lest inn som et HTML-dokument
+2. Hvor mange elementer av typen `<table>` finnes det på denne siden?
+3. Hent data fra den _andre_ tabellen i `streps` og tilordne denne til `rep_tbl` (tips: se argumentet `fill` or `html_table`)
+4. Trekk ut alle koblinger fra den _andre_ tabellen i `streps` og tilordne disse til `rep_links`
+5. Hvor mange koblinger er det i `rep_links`?
+
 # Funksjoner for å scrape flere nettsider
 
-FYLL INN HER FOR Å UNNGÅ MERGEKONFLIKT
+## Hvorfor webscraping {.flexbox .vleft}
+
+* Det kan være tidkrevende å utvikle et skript for webscraping
+* Fordelen med webscraping, er at vi kan innhente samme informasjon fra flere nettsider, eller fra samme nettside over tid
+* Har vi skrevet skriptet én gang kan vi gjenbruke det mange ganger
+
+## Skrive funksjoner i R
+
+* En av de store styrkene med R, er at vi kan skrive våre egne funksjoner
+* Sikrer gjenbruk av kode
+* Følger prinsippet om at vi ikke skal gjenta oss selv
+* Kan benyttes sammen med `apply`-funksjonene for å iterere over en liste med URLer
+
+```{r, eval=TRUE, echo=TRUE}
+multiply <- function(x, y) {
+  x * y
+}
+mapply(multiply, x = 1:3, y = 4:6)
+```
+
+## Forutsetninger for bruk av funksjoner {.flexbox .vleft .extraspace}
+
+* Sidene du skal hente data fra må ha relativt lik struktur
+* Objektet du skal returnere må ha lik struktur
+* Funksjonene bør heller løse små, mer _generelle_ oppgaver, enn å være store og komplekse
+* Feilhåndtering er viktig!
+
+## Bruk av `Sys.sleep` {.flexbox .vleft .extraspace}
+
+* Når vi henter inn mange HTML-sider i et skript, bør vi passe på å redusere hastigheten på skriptet
+* Ved å sende mange forespørsler til en server, kan vi overvelde serveren (definisjonen på Denial of Service angrep)
+* Mange servere vil blokkere hyppig trafikk fra én IP-adresse
+* I R kan vi bruke funksjonen `Sys.sleep` for å pause skriptet
+* Verdier mellom `.5` og `1` sekund vil ofte være nok*
+
+\* Pro-tips: bruk `runif(1, 1, 2)` sammen med `Sys.sleep`
+
+## Funksjonen `do.call`
+
+* `do.call` lar deg kalle en R-funksjon og angi en liste med argumenter
+* Kan være et veldig kraftfult verktøy i R-skript
+* Gjør det mulig å standardisere argumenter til funksjoner i stedet for å skrive dem hver gang
+
+```{r, echo=TRUE}
+x1 <- c(1, 2, 5)
+x2 <- c(1, 3, 6)
+x3 <- c(1, 4, 7)
+x4 <- c(1, 5, 8)
+do.call(sum, list(x1, x2, x3, x4))
+```
+
 
 ## Bind sammen med `do.call(x, 'rbind')`
 
@@ -993,6 +1241,12 @@ df
 ```
 
 >- Protip: Sjekk også ut `data.table::rbindlist()`
+
+## Hente data fra Wikipedia
+
+```{r out.width='80%', fig.align='center'}
+knitr::include_graphics('../assets/wikipedia.png')
+```
 
 # Avansert webskraping  
 
@@ -1130,4 +1384,3 @@ knitr::include_graphics('../assets/sel-screenshot-valg-no-2.png')
 | Finn elementer     | `findElements`          |
 | Klikk på elementer | `clickElements`         |
 | Ta skjermbilde     | `screenshot`            |
-
