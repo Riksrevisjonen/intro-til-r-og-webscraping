@@ -1284,9 +1284,9 @@ h %>% html_nodes('[class="party-chart"]') # Finner ingenting her...
 
 - Selenium er i utgangspunktet et verktøy for automatisert testing av webapplikasjoner. 
 
-- Ved bruk av Selenium kan vi åpne en nettleser (typisk Firefox eller Google Chrome) som kan gjøre oppaver for oss. 
+- Ved bruk av Selenium kan vi åpne en nettleser (typisk Firefox eller Google Chrome) som kan gjøre oppgaver for oss. 
 
-- Dette løser utfodringen med å lese inn Javascript, samt at det blant annet åpner muligheter for å klikke på elementer på en nettside.
+- Dette løser utfordringen med å lese inn Javascript, samt at det blant annet åpner muligheten for å klikke på elementer på en nettside.
 
 - Selenium kan integreres mot en rekke ulike programmeringsspråk. I R er det en pakke som heter `RSelenium`. 
 
