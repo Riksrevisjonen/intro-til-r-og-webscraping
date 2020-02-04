@@ -703,7 +703,7 @@ ul:last-child {
 ## Tekstmanipulasjon i R {.flexbox .vleft .extraspace}
 
 * R har en rekke innebygde funksjoner for å behandle og bearbeide tekst 
-* Dere må ikke kunne alle disse til fingerspissene, men de er til stor nytte når man skal behandle resultaterfra webskraping (HTML, XML, JSON etc.)
+* Dere må ikke kunne alle disse til fingerspissene, men de er til stor nytte når man skal behandle resultater fra webskraping (HTML, XML, JSON etc.)
 * De vil også være til stor nytte i generell behandling av tekstvektorer, tekstdokumenter (eks. PDF) og forberedelser til _text mining_ og *NLP*   
 
 ## Funksjoner for å jobbe med tekst i R {.flexbox .vleft}
@@ -779,7 +779,7 @@ strsplit("a.b.c", ".")[[1]]
 strsplit("a.b.c", "[.]")[[1]]
 ```
 
-## Oppgaverx {.flexbox .vleft .extraspace}
+## Oppgaver {.flexbox .vleft .extraspace}
 
 1. Opprett en vektor `x <- c(" Same procedure as last year, miss Sophie? ", "Same procedure as every year, James.\n")` 
 2. Hva er lengden til `x` ? Hvor mange tegn er det i elementene i `x`? 
