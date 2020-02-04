@@ -1265,6 +1265,21 @@ df
 knitr::include_graphics('../assets/wikipedia.png')
 ```
 
+## Hente data fra NSD
+
+```{r out.width='80%', fig.align='center'}
+knitr::include_graphics('../assets/polsys.png')
+```
+
+## Oppgave {.flexbox .vleft}
+
+Du har objektet `polsys` tilgjengelig i det globale miljøet.
+
+1. Hent ut tabellen over regjeringer og deres ansiennitet
+2. Konverter tabellen til en `data.frame`
+3. Hent ut URLene i tabellen
+4. Hvordan vil du gå frem for å scrape innholdet på alle koblingene fra tabellen?
+
 # Avansert webskraping  
 
 ##  Dynamiske nettsider {.flexbox .vleft .extraspace}
