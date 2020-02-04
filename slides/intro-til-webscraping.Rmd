@@ -703,7 +703,7 @@ ul:last-child {
 ## Tekstmanipulasjon i R {.flexbox .vleft .extraspace}
 
 * R har en rekke innebygde funksjoner for å behandle og bearbeide tekst 
-* Dere må ikke kunne alle disse til fingerspissene, men de er til stor nytte når man skal behandle resultatet fra webskraping (HTML, CSS, JS, XML, JSON)
+* Dere må ikke kunne alle disse til fingerspissene, men de er til stor nytte når man skal behandle resultaterfra webskraping (HTML, XML, JSON etc.)
 * De vil også være til stor nytte i generell behandling av tekstvektorer, tekstdokumenter (eks. PDF) og forberedelser til _text mining_ og *NLP*   
 
 ## Funksjoner for å jobbe med tekst i R {.flexbox .vleft}
@@ -791,7 +791,7 @@ strsplit("a.b.c", "[.]")[[1]]
 
 ## Regulære uttrykk {.flexbox .vleft .extrapace}
 
-* **Regulære uttrykk** er en svært nyttig metode for å finne og behandle ulike *mønster* i tekststrenger 
+* **Regulære uttrykk** er en svært nyttig metode for å finne og behandle ulike *mønstre* i tekststrenger 
 
 * Kan brukes på tvers av en rekke ulike programmeringsspråk; R, Python, PHP, JavaScript etc.
 (om enn med noen mulige variasjoner) 
@@ -1027,7 +1027,7 @@ GET("http://httpbin.org/status/500")
 ## Oppgave {.flexbox .vleft .extraspace}
 
 1. Sjekk ut objektene `rr_resp_1` og `rr_resp_2` i ditt arbeidsmiljø.
-2. Hva inneholder de to objektene? Sjekk eks. ut med `httr::content()`. 
+2. Hva inneholder de to objektene? Sjekk eks. ut med `httr::content()`, `class()`, `names()` og `str()`.   
 3. Hva er forskjellen på de to objektene? 
 4. Hvilken nettside / url stammer de fra?
 
@@ -1281,7 +1281,7 @@ knitr::include_graphics('../assets/valgresultat-no.png')
 
 ## Eksempel valg.no (med `rvest`)
 
-Med `rvest` vil vi *ikke* finne noe særlig på nettsiden til valgresultat.no, siden nesten hele siden generes av at `Javacript`. 
+Med `rvest` vil vi *ikke* finne noe særlig på nettsiden til valgresultat.no, siden nesten hele siden generes av et `Javacript`. 
 
 ```{r echo=TRUE, cache=TRUE}
 h <- read_html(GET('https://valgresultat.no/?type=ko&year=2019'))
@@ -1301,9 +1301,9 @@ h %>% html_nodes('[class="party-chart"]') # Finner ingenting her...
 
 - Selenium er i utgangspunktet et verktøy for automatisert testing av webapplikasjoner. 
 
-- Ved bruk av Selenium kan vi åpne en nettleser (typisk Firefox eller Google Chrome) som kan gjøre oppaver for oss. 
+- Ved bruk av Selenium kan vi åpne en nettleser (typisk Firefox eller Google Chrome) som kan gjøre oppgaver for oss. 
 
-- Dette løser utfodringen med å lese inn Javascript, samt at det blant annet åpner muligheter for å klikke på elementer på en nettside.
+- Dette løser utfordringen med å lese inn Javascript, samt at det blant annet åpner muligheten for å klikke på elementer på en nettside.
 
 - Selenium kan integreres mot en rekke ulike programmeringsspråk. I R er det en pakke som heter `RSelenium`. 
 
@@ -1326,7 +1326,7 @@ library(RSelenium)
 
 ## Selenium server {.flexbox .vleft .extraspace}
 
-- For å kunne bruke Selenium trenger vi en driver denne kan kjøre på. 
+- For å kunne bruke Selenium trenger vi en server / driver denne kan kjøre på. 
 
 - Den anbefalte fremgangsmåten for dette er å bruke [Docker](https://www.docker.com/products/docker-desktop). 
 
