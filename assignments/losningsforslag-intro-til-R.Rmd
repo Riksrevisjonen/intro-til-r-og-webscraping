@@ -1,14 +1,14 @@
 ---
-title: "Introduksjon til R - løsningsforslag"
+title: "Introduksjon til R: løsningsforslag"
 output: pdf_document
-date: "29 januar 2020"
+date: "`r format(Sys.Date(), '%e. %B %Y')`"
 ---
 
 ```{r setup, include=FALSE, error = TRUE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-### Oppgave 1 - R som kalkulator
+### Oppgave 1: R som kalkulator
 
 ```{r}
 3.75 * 4
@@ -19,7 +19,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 For å gange med tallet pi, kan du enten gange ved å skrive ut tallet selv, eller gange med `pi`, som er en innebygget konstant i R, se `?Constants`.
 
-### Oppgave 2 - Innebygde funksjoner
+### Oppgave 2: Innebygde funksjoner
 
 2. Lag en vektor `x <- c(1:10, NA)`
 3. Hva er summen av `x`?
@@ -34,16 +34,15 @@ mean(x, na.rm = TRUE)
 sd(x, na.rm = TRUE)
 ```
 
-### Oppgave 3 - Tilordning
+### Oppgave 3: Tilordning
 
 1. Tilordne verdiene `4` til `x` og `3` til `y`
-2. Hva blir summen av x * y?
-3. Hva blir summen av x ^ y?
-4. Tilordne summen av x + x ^ y til z. Hva er verdien av z?
-5. Tilordne verdiene "14" til x og 22 til y
-6. Hva blir summen av x + y? Kan du gjøre noe med x for at uttrykket skal evalueres til en numerisk verdi?
-7. Slett objektene x, y og z fra ditt arbeidsmiljø
-
+2. Hva blir summen av `x * y`?
+3. Hva blir summen av `x ^ y`?
+4. Tilordne summen av `x + x ^ y` til `z`. Hva er verdien av `z`?
+5. Tilordne verdiene `"14"` til `x` og `22` til `y`
+6. Hva blir summen av `x + y`? Kan du gjøre noe med `x` for at uttrykket skal evalueres til en numerisk verdi?
+7. Slett objektene `x`, `y` og `z` fra ditt arbeidsmiljø
 
 ```{r}
 x <- 4
@@ -62,7 +61,6 @@ z <- x + x ^ y
 z
 ```
 
-
 ```{r, error = TRUE}
 x <- "14"
 y <- 22
@@ -70,7 +68,7 @@ y <- 22
 x + y 
 ```
 
-Dette skjer fordi `x` er character. Vi må derfor konvertere `x` til numerisk:
+Dette skjer fordi `x` er av typen `character`. Vi må derfor konvertere `x` til numerisk:
 
 ```{r}
 x <- as.numeric(x)
@@ -81,13 +79,13 @@ x + y
 rm(x, y, z)
 ```
 
-### Oppgave 4  - Vektor
+### Oppgave 4: Vektor
 
-1. Lag en vektor x med verdier fra 10 til 19
-2. Hvor mange elementer er det i x?
-3. Hva er den tredje verdien i x?
-4. Hva inneholder elementene 5 til 8?
-5. Hva inneholder elementene 2, 3 og 7?
+1. Lag en vektor `x` med verdier fra 10 til 19.
+2. Hvor mange elementer er det i `x`?
+3. Hva er den tredje verdien i `x`?
+4. Hva inneholder elementene 5 til 8?.
+5. Hva inneholder elementene 2, 3, og 7?
 
 ```{r} 
 x <- 10:19
@@ -112,12 +110,12 @@ x[c(2:3,7)]
 
 Bruk funksjonen `c()` for å angi spesifikke rekker av verdier eller enkeltverdier du ønsker å se på.
 
-### Oppgave 5 - Se på datasettet USAarrests
+### Oppgave 5: Se på datasettet USAarrests
 
-1. Last inn datasettet USArrests med **data(USArrests)**
-2. Ta en titt på de fem øverste radene.
-3. Ta en titt på de 10 øverste radene. 
-4. Hvilke kolonnenavn har datasettet? 
+1. Last inn datasettet `USArrests` med `data(USArrests)`.
+2. Ta en titt på de fem øverste radene.  
+3. Ta en titt på de ti øverste radene.
+4. Hvilke kolonnenavn har datasettet?
 5. Hvilke radnavn har datasettet?
 
 ```{r, include = TRUE}
@@ -128,7 +126,7 @@ colnames(USArrests)
 rownames(USArrests)
 ```
 
-### Oppgave 6  - Subset 
+### Oppgave 6: Subset 
 
 1. Kjør `?USArrests` eller `help(USArrests)` [kjøres ikke i løsningsforslag]
 2. Hva er verdien i rad 1, kolonne 2?
@@ -147,24 +145,34 @@ USArrests[USArrests$UrbanPop == 66,]
 Delstaten i rad 3 er Arizona. Fra output kan vi også se at mordraten er 8,1. Vi kan også kjøre ut kun denne verdien ved å spesifisere radnummer og kolonnenavn, som vist på to måter her.
 Delstatene hvor 66 prosent av populasjonen bor i urbane områder er Kansas, Lousiana, Minnesota, Wisconsin.
 
-### Oppgave 7  - Lister
+### Oppgave 7: Lister
+
+1. Lage et listeobjekt `my_list` med elementene `x = 1`, `y = c("R", "er gøy")` og `z = 1:20` (i denne rekkefølgen)
+2. Hva inneholder `my_list[2]`? Hva inneholder `my_list[[2]]`? Hva inneholder `my_list[[2]][2]`?
+3. Hvorfor gir `my_list[[1]][2]` en feilmelding?
+4. Hva er den fjerde verdien i det tredje listeelementet?
 
 ```{r}
 my_list <- list(x = 1, y = c("R", "er gøy"), z = 1:20)
 my_list[2]
 my_list[[2]]
 my_list[[2]][2]
-my_list[[1]][2] # Resultatet blir NA fordi det bare er ett element i listens første element (x)
+my_list[[1]][2]
+```
+
+Resultatet blir `NA` fordi det bare er ett element i listens første element, mens vi forsøker å hente ut det andre elementet (som ikke finnes og derfor er missing).
+
+```{r}
 my_list[[3]][4]
 ```
 
-### Oppgave 8  - Innebygde funksjoner
+### Oppgave 8: Innebygde funksjoner
 
-1. Sjekk ut hjelpesiden til funksjonen sum. Hvilke argumenter tar funksjonen? (`?sum`) [kjøres ikke i løsningsforslag]
-2. Lag en vektor x <- c(1:10, NA).
-3. Hva er summen av x ?
-4. Hva er gjennomsnittet av x ?
-5. Hva er standardavviket til x ?
+1. Sjekk ut hjelpesiden til funksjonen `sum`. Hvilke argumenter tar funksjonen? (`?sum`) [kjøres ikke i løsningsforslag]
+2. Lag en vektor `x <- c(1:10, NA)`.
+3. Hva er summen av `x` ?
+4. Hva er gjennomsnittet av `x` ?
+5. Hva er standardavviket til `x` ?
 
 ```{r}
 x <- c(1:10, NA)
@@ -174,7 +182,12 @@ mean(x, na.rm = TRUE)
 sd(x, na.rm = TRUE)
 ```
 
-### Oppgave 9  - Sample-funksjonen
+### Oppgave 9: Sample-funksjonen
+
+1. Sjekk ut hjelpesiden til funksjonen `sample`. Hvilke argumenter tar funksjonen?
+2. Lag en vektor `my_vec` med 5 tilfeldig heltall trukket fra en vektor med alle tallene fra `10` til `20`.
+3. Hva skjer hvis du setter `replace` til `TRUE`?
+4. Hva skjer hvis du setter et seed, `set.seed(42)`, før hver gang du kjører funksjonen?
 
 ```{r}
 my_vec <- sample(10:20, 5)
@@ -184,9 +197,14 @@ set.seed(42)
 (my_vec <- sample(10:20, 5, replace = TRUE))
 ```
 
-Ser at den sampler de samme verdiene hver gang du kjører funksjonen. Kan brukes for å reprodusere resultatene, og du må kjøre argumentet `set.seed()` før `sample()` for å få det samme resultatet.
+Ved å bruke `set.seed` får vi de samme verdiene hver gang vi kjører funksjonen. `set.seed` kan brukes til å reprodusere resultatene i et skript. Du må kjøre argumentet `set.seed()` rett før `sample()` for å få det samme resultatet.
 
-### Oppgave 10  - Vektoriserte funksjoner
+### Oppgave 10: Vektoriserte funksjoner
+
+1. Lag en vektor `my_numbers` med 10 tilfeldig heltall fra 0 til 20. Bruk for eksempel `round(runif(n, min, max))`. Set seed 42 før du kjører kommandoen.
+2. Hva er resultatet av `log(my_numbers)`?
+3. Hva er resultatet av `sum(my_numbers)`?
+4. Hva er forskjellen på kommandoene `sum` og `log`?
 
 ```{r}
 set.seed(42)
@@ -194,7 +212,7 @@ my_numbers <- round(runif(10,min = 10, max = 20))
 my_numbers
 ```
 
-round() runder av tallene til heltall
+`round` runder av tallene til heltall
 
 ```{r}
 log(my_numbers)
@@ -203,7 +221,7 @@ sum(my_numbers)
 
 Forskjellen mellom `log()` og `sum()` er at `log()` tar logaritmen til hvert tall, mens `sum()` summerer alle elementene i vektoren. Hvorvidt en funksjon er vektorisert eller ikke, har noe å si for hvordan du kan bruke funksjonen. 
 
-### Oppgave 11 - Innlesing av csv-filer
+### Oppgave 11: Innlesing av csv-filer
 
 1. Les inn `carseats.csv` som varseats med `read.csv()`
 2. Bruk `head(carseats)` for å se de første observasjonene
@@ -224,14 +242,12 @@ str(carseats_chr)
 
 Legg merke til at variablene **ShelveLoc**, **Urban** og **US** nå er importert som **character** i stedet for **Factor**.
 
-### Oppgave 12 - Innlesing av excelfiler 
+### Oppgave 12: Innlesing av excelfiler 
 
-1. Last inn pakken **readxl** med **library(readxl)**
-2. Les inn fila **carseats.xlsx** som **carseats_excel** med **read_xlsx** fra pakken **readxl**
-3. Bruk summary på **carseats_excel**. Hva er median for variabelen **Price**?
-4. Er **carseats** og **carseats_excel** like? Hvorfor ikke?
-
-Hint: likhet kan vurderes med **identical**. Husk også funksjonene **class** og **str**.
+1. Last inn pakken `readxl` med `library(readxl)`
+2. Les inn fila `carseats.xlsx` som `carseats_excel` med `read_xlsx` fra pakken `readxl`
+3. Bruk `summary` på `carseats_excel`. Hva er median for variabelen `Price`?
+4. Er `carseats` og `carseats_excel` like? Hvorfor ikke?
 
 ```{r}
 library(readxl)
@@ -242,14 +258,14 @@ class(carseats)
 class(carseats_excel)
 ```
 
-**carseats** er en **data.frame**, mens **carseats_excel** har klassene **data.frame**, **tbl** og **tbl_df** ("tibble" dataframe, som som standard importerer tekst som character og ikke som factor).
+`carseats` er et objekt av typen `data.frame`, mens `carseats_excel` har klassene `tbl`, `tbl_df` og `data.frame`. Objekttypen kommer fra pakken `tibble` som brukes av `readxl`. `tbl` har lik struktur som en `data.frame`, men som standard blir ikke tekst importert som faktor, men som character.
 
-### Oppgave 13 - Likhet
+### Oppgave 13: Likhet
 
-1. Er uttrykket nchar('riksrevisjonen') lik 13?
-2. Er uttrykket **-6 * 4 + 5** større enn **-3 * 8 - 4**?
-3. Er summen av c(TRUE, FALSE, TRUE) større enn 2
-4. Er uttrykket ceiling(2.2 * 4.7) større eller lik uttrykket floor(2.2 * 5.2)
+1. Er uttrykket `nchar('riksrevisjonen')` **lik** 13?
+2. Er uttrykket `-6 * 4 + 5` **større enn** `-3 * 8 - 4`?
+3. Er summen av `c(TRUE, FALSE, TRUE)` **større enn** `2`
+4. Er uttrykket `ceiling(2.2 * 4.7)` **større eller lik** uttrykket `floor(2.2 * 5.2)`
 
 ```{r}
 nchar('riksrevisjonen') == 13
@@ -258,38 +274,36 @@ sum(c(TRUE, FALSE, TRUE)) > 2
 ceiling(2.2*4.7) >= floor(2.2 * 5.2)
 ```
 
-Summen av (TRUE, FALSE, TRUE) er det samme som 1+0+1. Resultatet i tredje deloppgave blir derfor FALSE.
+Summen av `c(TRUE, FALSE, TRUE)` er det samme som `1 + 0 + 1`. Resultatet i tredje deloppgave blir derfor `FALSE`.
 
-`ceiling` runder opp til nærmeste heltall, mens `floor`runder opp til nærmeste heltall. Resultatet blir derfor TRUE.
+`ceiling` runder _opp_ til nærmeste heltall, mens `floor` runder _ned_ til nærmeste heltall. Resultatet blir derfor `TRUE`.
 
-```{r}
-x <- 10:30
-which(x > 20)
-which(!(x > 20))
-```
+### Oppgave 14: Logiske operatorer og betingelser
 
-### Oppgave 14 - Logiske operatorer og betingelser
-
-Bruk et R-skript for å skrive koden for disse oppgavene
-
-1. Hva er resultatet av if (nchar('riksrevisjonen') > 5) TRUE else FALSE?
-2. Skriv kode som returerer Sant hvis uttrykket abs(-20) er større enn 0
-3. Skriv kode som tilordner x verdien "Mindre enn 5" hvis uttrykket runif(1, 1,10) er mindre enn 5 og verdien "Større enn 5" hvis ikke. Kjør koden; hva er verdien av x?
+1. Hva er resultatet av `if (nchar('riksrevisjonen') > 5) TRUE else FALSE`?
+2. Skriv kode som returerer `Sant` hvis uttrykket `abs(-20)` er **større enn** `0`
+3. Skriv kode som tilordner `x` verdien `"Mindre enn 5"` hvis uttrykket `runif(1, 1, 10)` er **mindre enn** `5` og verdien `"Større enn 5"` hvis ikke. Kjør koden; hva er verdien av `x`?
 4. Kjør koden på nytt. Er verdien den samme?
 
 ```{r}
 if (nchar('riksrevisjonen') > 5) TRUE else FALSE
 if (abs(-20) > 0) TRUE
 
-x <- if(runif(1,1,10) < 5) 'Mindre enn 5' else 'Større enn 5'
+set.seed(1984)
+(x <- if (runif(1, 1, 10) < 5) 'Mindre enn 5' else 'Større enn 5')
+(x <- if (runif(1, 1, 10) < 5) 'Mindre enn 5' else 'Større enn 5')
 ```
 
-### Oppgave 15 - If/else
+Resultatet blir ikke _nødvendigvis_ det samme fordi vi bruker en tilfeldig funksjon, `runif` som trekker et tilfeldig tall fra en uniform distribusjon. Merk at vi i løsningsforslaget har brukt `set.seed` for å sikre oss at vi i dette tilfellet får to forskjellige resultat når vi kjører koden to ganger.
 
-1. Lag en ny vektor x med verdiene 17, 33, 3, 32, 29, 8, 12, 22, 29, 41.
-2. Lag en vektor a med verdiene 3, 2, 1 og en vektor b med verdiene 1, 2, 3 (kan forkortes til 3:1 og 1:3).
-3. Skriv kode som returnerer 0 hvis verdien av hver enkel verdi av x er mindre enn 20 og 1 hvis verdien er større eller lik 20·
-4. Skriv kode som returnerer Lik hvis uttrykket a == b er sant og Ulik hvis ikke. Forklar resultatet av denne koden
+### Oppgave 15: If/else
+
+Lag en ny vektor `x` med verdiene `17, 33, 3, 32, 29, 8, 12, 22, 29, 41`.
+
+1. Skriv kode som returnerer `0` hvis verdien av hver enkel verdi av `x` er **mindre enn** 20 og `1` hvis verdien er **større eller lik** 20
+2. Lag en vektor `a` med verdiene `3, 2, 1` og en vektor `b` med verdiene `1, 2, 3` (kan forkortes til `3:1` og `1:3`).
+3. Skriv kode som returnerer `Lik` hvis uttrykket `a == b` er **sant** og `Ulik` hvis ikke
+4. Forklar resultatet av denne koden
 
 ```{r}
 x <- c(17,33,3,32,29,8,12,22,29,41)
@@ -301,9 +315,9 @@ ifelse(x < 20, 0, 1)
 ifelse(a==b, 'Sant', 'Usant')
 ```
 
-Forklaring til siste deloppgave: vektorene sammenlignes elementvis, det vil si at 3,2,1 sammenlignes med 1,2,3. R sammenligner først 3 == 1 (Usant), så 2 == 2 (Sant), og så 1 == 3 (Usant).
+Forklaring til siste deloppgave: vektorene sammenlignes elementvis, det vil si at 3, 2, 1 sammenlignes med 1, 2, 3. R sammenligner først uttrykket `3 == 1` (som gir `FALSE`), så `2 == 2` (som gir `TRUE`), og så `1 == 3` (som gir `FALSE`).
 
-### Oppgave 16 - (S)apply
+### Oppgave 16: (S)apply
 
 ```{r, include = FALSE}
 load("data.RData")
@@ -324,10 +338,9 @@ sapply(nokeur, min)
 max(sapply(nokeur, max))
 ```
 
-### Oppgave 17  Lag funksjonen double
+### Oppgave 17: Lag funksjonen double
 
-1. Lag en funksjon double som tar et argument x og returnerer resultatet av x
-multiplisert med 2.
+1. Lag en funksjon `double` som tar et argument `x` og returnerer resultatet av `x` multiplisert med 2.  
 2. Bruk funksjonen på tallene 3, 4, 12 og 54.
 
 ```{r}
@@ -338,7 +351,7 @@ double(2)
 double(c(3,4,12,54))
 ```
 
-### Oppgave 18  Lag funksjonen multiply
+### Oppgave 18: Lag funksjonen multiply
 
 1. Lag en funksjon `multiply` som tar argumentene x og y og returnerer
 resultatet av `x` multiplisert med `y`.
@@ -359,63 +372,51 @@ multiply(x = 3, y = 6)
 multiply <- function(x, y = 7){
   x * y
 } 
-# Denne mangler x-argumentet, derfor error
+# Denne mangler x-argumentet, og gir derfor feilmelding
 multiply(y = 6)
 
 multiply(c(3,2,6))
 
+# Her bruker vi objekter av typen character, og får derfor en feilmelding
 multiply("2", "3")
 
 ```
 
-```{r, echo=FALSE}
-n <- 17
-n <- n + 1
-```
+### Oppgave 19: Skriv om multiplyfunksjonen
 
-### Oppgave 19 - Skriv om multiplyfunksjonen
-
-1. Skriv om multiply funksjonen slik at den håndterer tekststrenger som
-inputverdier for både x og y.
-2. Test funksjonen med multiply(2, 3) og multiply("2","3").
-3. Test funksjonen med verdiene x = list("10") og y = data.frame(x = 10).
-4. Klarer du skrive om funksjonen til å håndtere ikke numeriske verdier
-generelt?
+1. Skriv om `multiply` funksjonen slik at den håndterer tekstrenger som inputverdier for både `x` og `y`.
+2. Test funksjonen med `multiply(2, 3)` og `multiply("2", "3")`.
+3. Test funksjonen med verdiene `x = list("10")` og ` y = data.frame(x = 10)`.
+4. Klarer du skrive om funksjonen til å håndtere ikke numeriske verdier generelt?
 
 ```{r, error = TRUE}
-multiply <- function(x,y){
-if(is.character(x)){
-  x <- as.numeric(x)
-}
-if(is.character(y)){
-  y <- as.numeric(y)
-}
+multiply <- function(x, y) {
+  # Vi trenger ikke bruke klammer hvis if-uttrykket er på én linje
+  if (is.character(x)) x <- as.numeric(x)
+  if (is.character(y)) y <- as.numeric(y)
   x * y
 }  
 
+# Nå går dette helt fint
 multiply("2","3")
 
+# Men det går ikke like bra hvis vi bruker andre datastrukturer enn vektorer
 x <- list("10")
 y <- data.frame(x = 10)
 
-multiply(x,y)
-
+multiply(x, y)
 ```
 
-Skriver om funksjonen sånn at den håndterer ikke-numeriske verdier generelt
+Skriver om funksjonen sånn at den håndterer ikke-numeriske verdier generelt. Funksjonen `is.numeric` sjekker om et objekt er en numerisk verdi, mens funksjonen `as.numeric` forsøker å tvinge et objekt til å bli numerisk. Vi kan bruke `if` til å endre `x` og `y` hvis disse _ikke_ er numeriske. Vi bruker da `!is.numeric` som "snur" resultatet av `is.numeric`.
 
 ```{r}
-multiply <- function(x,y){
-if(!(is.numeric(x))){
-  x <- as.numeric(x)
-}
-if(!(is.numeric(y))){
-  y <- as.numeric(y)
-}
-x * y
+multiply <- function(x, y) {
+  # is.numeric returnerer en boolsk verdi
+  # Ved å sette ! foran is.numeric snur vi uttrykket
+  if (!is.numeric(x)) x <- as.numeric(x)
+  if (!is.numeric(y)) y <- as.numeric(y)
+  x * y
 } 
 
 multiply(x,y)
-
 ```
-
