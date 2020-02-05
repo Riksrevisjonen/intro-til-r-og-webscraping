@@ -5,3 +5,9 @@
 
 # Ignore macOS-specific files
 .DS_Store
+
+# We do not want to commit PDFs
+*.pdf
+
+# Ignore anything in dev
+dev/*
