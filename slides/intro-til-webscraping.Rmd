@@ -1286,7 +1286,7 @@ Du har objektet `polsys` tilgjengelig i det globale miljøet.
 
 - Biblioteker som `rvest` i R eller `scrapy` i Python får kun tak i HTML-koden på en nettside 
 - Moderne nettsider bruker imidlertid ofte `Javascript` for å gi en interaktiv brukeropplevelse 
-- Det er derfor *ikke*  sikkert at alt innholdet på nettsiden er inkludert i HTML kildekoden `r emo::ji("sad")`
+- Det er derfor *ikke*  sikkert at alt innholdet på nettsiden er inkludert i HTML kildekoden `r set.seed(2); emo::ji("sad")`
 
 ## Eksempel valg.no 
 
