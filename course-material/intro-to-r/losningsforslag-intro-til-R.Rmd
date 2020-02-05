@@ -320,7 +320,7 @@ Forklaring til siste deloppgave: vektorene sammenlignes elementvis, det vil si a
 ### Oppgave 16: (S)apply
 
 ```{r, include = FALSE}
-load("data.RData")
+load("intro-til-r.RData")
 ```
 
 Objektet nokeur skal være tilgjengelig i ditt arbeidmiljø. Objektet inneholder en
