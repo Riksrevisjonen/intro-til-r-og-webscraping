@@ -16,11 +16,11 @@ library(httr); library(rvest)
 
 Åpne fila webscrape.html fra ditt hjemmeområde.
 
-1. Lag et element av typen p med klassen mitt-element og skriv tekst inn idenne
-2. Lag et nytt element av typen ul med klassen min-liste
-3. Lag minst tre listeelementer inne i elementet du opprettet i forrige steg. Skrivtekst inn i hvert listeelement
-4. Legg til attributtet data-tabell med verdien areal til det første table-elementet
-5. Legg til attributtet data-tabell med verdien folketall til det andre table-elementet
+1. Lag et element av typen `p` med klassen `mitt-element` og skriv tekst inn i denne
+2. Lag et nytt element av typen `ul` med klassen `min-liste`
+3. Lag minst tre listeelementer inne i elementet du opprettet i forrige steg. Skriv tekst inn i hvert listeelement
+4. Legg til attributtet `data-tabell` med verdien `areal` til det første `<table>`-elementet
+5. Legg til attributtet `data-tabell` med verdien `folketall` til det andre `<table>`-elementet
 
 ```html
 <p> Mitt første p-element! </p>
@@ -32,9 +32,13 @@ library(httr); library(rvest)
 </ul>
 ```
 
+For tabellene legger vi til `data-tabell="areal"` og `data-tabell="folketall"` i _åpningskoden_ for elementet:
+
 ```html
 <table border="1" data-tabell="areal">
 ```
+
+Og:
 
 ```html
 <table border="1" data-tabell="folketall">
@@ -255,7 +259,7 @@ the_urls <- paste0('https://nsd.no/polsys/', the_urls)
 
 For å hente ut innholdet til alle nettsidene som er koblet fra tabellen vi hentet i oppgave 3, kan vi bruke `lapply` for å iterere gjennom vår liste av URLer. `lapply` vil returnere en liste som er like lang om listen om URLer vi sender til den. I `lapply` definerer vi vår egen funksjon (dette kalles en anonym funksjon siden vi ikke har definert den først) som bruker pakken `httr` for å sende en GET-forespørsel og hente innholdet fra hver enkelt nettside. Merk at vi her har lagt til to funksjoner: `Sys.sleep` som pauser skriptet for hver iterasjon slik at vi ikke sender for mange forespørsler til serveren på en gang, og `message` som skriver en melding til konsollen; i dette tilfellet hvilken URL vi jobber med.
 
-I et større skript som skal gjenbrukes på et stort antall sider, vil vi også ønske å bygge inn litt enkel feilhåndtering, for eksmpel med å sjekke statuskoden vi får i responsobjektet fra `httr` eller teste om selve forespørselen feiler med `try` eller `tryCatch`.
+I et større skript som skal gjenbrukes på et stort antall sider, vil vi også ønske å bygge inn litt enkel feilhåndtering, for eksempel med å sjekke statuskoden vi får i responsobjektet fra `httr` eller teste om selve forespørselen feiler med `try` eller `tryCatch`.
 
 ```{r  eval=FALSE, echo=TRUE}
 # Henter nettsiden for hver av de nye url-ene
