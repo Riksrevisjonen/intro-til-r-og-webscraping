@@ -1,0 +1,268 @@
+---
+title: "Løsningsforslag deloppgaver"
+author: "Eivor Hovde Hoff"
+date: "`r format(Sys.Date(), '%e. %B %Y')`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list = ls())
+load('intro-til-ws.RData')
+library(httr); library(rvest)
+```
+
+### Redigere html-filen
+
+Åpne fila webscrape.html fra ditt hjemmeområde.
+
+1. Lag et element av typen p med klassen mitt-element og skriv tekst inn idenne
+2. Lag et nytt element av typen ul med klassen min-liste
+3. Lag minst tre listeelementer inne i elementet du opprettet i forrige steg. Skrivtekst inn i hvert listeelement
+4. Legg til attributtet data-tabell med verdien areal til det første table-elementet
+5. Legg til attributtet data-tabell med verdien folketall til det andre table-elementet
+
+```html
+<p> Mitt første p-element! </p>
+
+<ul>
+  <li>Lista min</li>
+  <li>Er den </li>
+  <li>Beste lista </li>
+</ul>
+```
+
+```html
+<table border="1" data-tabell="areal">
+```
+
+```html
+<table border="1" data-tabell="folketall">
+```
+
+### Finn html-egenskaper ved bruk av sideinspektøren
+
+1. Gå til https://no.wikipedia.org/wiki/Riksrevisjonen
+2. Åpne sideinspektøren med F12
+3. Velg bildet av Per-Kristian Foss. Hva slags element er dette?
+4. Hvilke attributter har dette elementet?
+5. Hvilken elementtype er forelderelementet til bildet?
+6. Hvilken klasse har dette elementet?
+
+Bildet er et `<img>`-element og har flere attributter, inkludert: `alt`, `src`, `decoding`, `width`, `height`, `srcset` mm.
+
+Foreldreelementet til bildet er et `<a>`-element med attributtet `href` og klasse `image`.
+
+### CSS-velgere
+
+1. Skriv en CSS-velger som velger alle interne hyperkoblinger (interne hyperkoblinger starter alltid med `#` i attributtet `href`)
+2. Skriv en CSS-velger som velger alle hyperkoblinger hvor attributtet `href` _slutter_ med `.pdf`
+3. Skriv en CSS-velger som velger alle elementer `<p>` som er _direkte etterkommere_ av elementer med klassen `.data`
+4. Skriv en CSS-valger som velger alle elementer av typen `<table>` som har klassen `.info`
+
+```css
+[href^ = "#"]
+[href$ = ".pdf"]
+.data ~ p
+table.info
+```
+
+## Quiz
+
+1. Gjenfinner du pseudoklasser i HTML-koden?
+
+   **Nei.**
+
+2. Hvilket element blir valgt av CSS-velgeren `p:last-of-type`?
+
+   **Elementet `<p>Jeg er nummer tre</p>`**
+
+3. Hvilket element blir valgt av CSS-velgeren `ul:first-child`?
+
+   **Elementet `<span>Jeg er nummer en!</span>`**
+
+4. Inspiser koden under. Vil `p:nth-of-type(2)` og `div:nth-child(2)` velge samme element?
+
+   **Nei. Den første velgeren vil velge det andre `<p>`-elementet under `<div>`-elementet, som er den tredje etterkommeren til `<div>`. Den andre velgeren vil velge den andre etterkommeren til `<div>` som er elementet `<p>Jeg er nummer to</p>`.**
+
+```html
+<div>
+  <span>Jeg er nummer en!</span>
+  <p>Jeg er nummer to</p>
+  <p>Jeg er nummer tre</p>
+</div>
+```
+
+### Tekststrenger
+
+1. Opprett en vektor `x <- c(" Same procedure as last year, miss Sophie? ", "Same procedure as every year, James.\n")` 
+2. Hva er lengden til `x` ? Hvor mange tegn er det i elementene i `x`? 
+3. Del opp `x` i ulike deler med komma som split tegn. Del deretter opp `x` med mellomrom som split tegn. Hva blir resultatet? 
+4. Opprett en ny vektor `y` hvor du fjerner ekstra mellomrom og tilsvarende tegn fra starten og slutten av elementene i `x`. 
+5. Kombiner elementene i `y` til én enkelt tekststreng.
+
+```{r}
+x <- c(" Same procedure as last year, miss Sophie? ","Same procedure as every year, James.\n")
+length(x)
+nchar(x)
+strsplit(x, split = ",")
+strsplit(x, split = " ")
+y <- trimws(x)
+paste(y, collapse = " ")
+```
+
+### Webscraping med httr-pakken
+
+1. Sjekk ut objektene `rr_resp_1` og `rr_resp_2` i ditt arbeidsmiljø.
+2. Hva inneholder de to objektene? Sjekk eks. ut med `httr::content()`, `class()`, `names()` og `str()`.   
+3. Hva er forskjellen på de to objektene? 
+4. Hvilken nettside/URL stammer de fra?
+
+```{r}
+library(httr)
+resp <- list(rr_resp_1, rr_resp_2)
+lapply(resp, class)
+lapply(resp, content)
+lapply(resp, names)
+```
+
+Det kan være lurt å sjekke statuskoden for å se om forespørselen til nettsiden har gått gjennom uten feil.
+
+```{r}
+rr_resp_1$status_code
+rr_resp_2$status_code
+
+rr_resp_1$url
+rr_resp_2$url
+```
+
+Vi ser at vi har fått en 404-feil i `rr_resp_2`. Når vi ser på url-ene, er vi at det mangler en **e** i url-en til `rr_resp_2`.
+
+### Webscraping med rvest
+
+1. Last inn `rvest` med `library()`
+2. Les inn HTML-dokumentet `webscrape.html` som `webpage` med `read_html`
+3. Hent inn teksten til alle `<p>`-elementene på siden. Hvor mange elementer er det?
+4. Hva er forskjellen på å velge elementer med `div > p` og `div p`?
+5. Velg det _andre_ listeelementet fra listen `min-liste`
+6. Hent inn de to tabellene og tilordne dem til hvert sitt objekt, `areal` og `folketall`
+7. Hva er befolkningstettheten for fylket med _lavest_ befolkningstetthet?
+
+```{r}
+library(rvest)
+# Vi har lagret den redigerte html-fila som webscrape-edited.html
+webpage <- read_html('webscrape-edited.html')
+
+html_text(html_nodes(webpage, 'p'))
+html_text(html_node(webpage, 'p'))
+
+html_text(html_nodes(webpage, 'div p'))
+html_text(html_nodes(webpage, 'div > p'))
+```
+
+Merk forskjellen på `html_node()` og `html_nodes()`.
+
+Se på HTML-filen. Det første avsnittet er ikke en direkte etterkommer av `<div>` (den er inne i en `<span>`), men en direkte etterkommer av `<span>`. Derfor vil siste linje i koden kun finne det andre avsnittet.
+
+
+```{r}
+webpage %>%
+  html_nodes('.min-liste li:nth-child(2)') %>%
+  html_text()
+
+areal <- webpage %>%
+  html_node('[data-tabell="areal"]') %>%
+  html_table()
+folketall <- webpage %>%
+  html_node('[data-tabell="folketall"]') %>%
+  html_table()
+
+min(areal$Areal / folketall$Folketall)
+
+# Men det blir penere med befolkningstetthet per 1000 innbygger
+min(areal$Areal / (folketall$Folketall / 1000))
+```
+
+### Stortingsrepresentanter
+
+Du finner objektet `streps` i ditt globale miljø
+
+1. Hva slags objekt er `streps`? Sørg for å få det lest inn som et HTML-dokument
+2. Hvor mange elementer av typen `<table>` finnes det på denne siden?
+3. Hent data fra den _andre_ tabellen i `streps` og tilordne denne til `rep_tbl` (tips: se argumentet `fill` or `html_table`)
+4. Trekk ut alle koblinger fra den _andre_ tabellen i `streps` og tilordne disse til `rep_links`
+5. Hvor mange koblinger er det i `rep_links`?
+
+```{r}
+library(httr); library(rvest)
+# Leser inn HTML og finner antallet table-elementer
+class(streps)             # Først må vi se hva slags objekt vi har
+html <- content(streps)   # Leser inn HTML fra responseobjektet
+length(html_nodes(html, 'table'))
+
+# Henter data fra en andre tabellen
+rep_tbl <- html %>%
+  html_node('table:nth-of-type(2)') %>%  
+  html_table(fill = T)                        
+
+# Henter ut koblinger fra den andre tabellen
+rep_links <- html %>%
+  html_node('table:nth-of-type(2)') %>%
+  html_nodes('a') %>%
+  html_attr('href')
+
+# Vi ser antall koblinger med length
+length(rep_links) # 530
+```
+
+
+### Regjeringsansiennitet
+
+Du har objektet `polsys` tilgjengelig i det globale miljøet.
+
+1. Hent ut tabellen over regjeringer og deres ansiennitet
+2. Konverter tabellen til en `data.frame`
+3. Hent ut URLene i tabellen
+4. Hvordan vil du gå frem for å scrape innholdet på alle koblingene fra tabellen?
+
+
+```{r}
+# Leser inn HTML fra responseobjektet
+the_html <- content(polsys)
+
+# Henter ut den første tabellen over regjeringer og deres ansiennitet
+pol_tbl <- the_html %>%   
+  html_nodes('table') %>% # Finner alle HTML-tabeller
+  .[[1]] %>%              # Velger den første tabellen 
+  html_table(fill = T)    # KOnverterer til en data frame
+
+class(pol_tbl) # En data frame
+
+# Henter ut URLene i tabellen 
+the_urls <- the_html %>%
+  html_nodes('table') %>%   # Finner alle tabeller
+  .[[1]] %>%                # Velger den første tabellen
+  html_nodes('a') %>%       # Velger alle 'a'-elementer
+  html_attr('href')         # Velger ut 'href' attribute
+
+
+# Skraper innholdet på alle koblingene i tabellen
+head(the_urls) # URL-ene mangler basisurl / nettsted
+
+# Slår sammen URL-ene med basisurl
+the_urls <- paste0('https://nsd.no/polsys/', the_urls) 
+```
+
+For å hente ut innholdet til alle nettsidene som er koblet fra tabellen vi hentet i oppgave 3, kan vi bruke `lapply` for å iterere gjennom vår liste av URLer. `lapply` vil returnere en liste som er like lang om listen om URLer vi sender til den. I `lapply` definerer vi vår egen funksjon (dette kalles en anonym funksjon siden vi ikke har definert den først) som bruker pakken `httr` for å sende en GET-forespørsel og hente innholdet fra hver enkelt nettside. Merk at vi her har lagt til to funksjoner: `Sys.sleep` som pauser skriptet for hver iterasjon slik at vi ikke sender for mange forespørsler til serveren på en gang, og `message` som skriver en melding til konsollen; i dette tilfellet hvilken URL vi jobber med.
+
+I et større skript som skal gjenbrukes på et stort antall sider, vil vi også ønske å bygge inn litt enkel feilhåndtering, for eksmpel med å sjekke statuskoden vi får i responsobjektet fra `httr` eller teste om selve forespørselen feiler med `try` eller `tryCatch`.
+
+```{r  eval=FALSE, echo=TRUE}
+# Henter nettsiden for hver av de nye url-ene
+the_list <- lapply(the_urls, function(u) {
+  Sys.sleep(1)
+  message(u)
+  r <- content(GET((u)))
+  r
+})
+```
