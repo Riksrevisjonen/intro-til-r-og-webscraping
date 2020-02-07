@@ -1,0 +1,475 @@
+---
+title: "Løsningsforslag for hjemmeoppgave i webscraping"
+author: "Aleksander Eilertsen"
+date: "4 februar 2020"
+output:
+  pdf_document: default
+---
+
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, comment = "#>")
+```
+
+# Oppgavetekst 
+
+I denne oppgaven skal du finne frem til hvilken stortingsrepresentant som har hatt flest sidevisninger på Wikipedia i løpet av den        inneværende stortingsperioden (altså siden 2. oktober 2017).          
+
+Først må du hente inn oversiktsiden over stortingsrepresentantene. Deretter må du finne frem til navnene på representantene som finnes i tabellen.                                                             
+
+Du kan bruke pakken `pageviews` til å hente inn antall sidevisninger en Wikipedia-side har hatt siden en gitt dato.                   **Hint**: sjekk ut funksjonen `article_pageviews`.                        
+
+Lag en liste med resultatet fra denne funksjonen for hver representant. **Hint**: sjekk ut `lapply`.
+
+Bind sammen listen til en `data.frame` og finn frem til hvilken representant som har fleste sidevisninger.   
+
+Det var i oppgaven gitt et utkast til kode som så slik ut: 
+
+```{r eval=FALSE}
+# Fjern alt i workspace
+...
+
+# Last inn oversiktssiden over norske stortingsrepresentanter på nytt 
+# Hint: Sjekk ut funksjonen read_html i rvest-pakken eller funksjonene
+# GET og content i httr-pakken. URL-en du skal bruke er:
+# https://no.wikipedia.org/wiki/Liste_over_stortingsrepresentanter_2017%E2%80%932021
+my_html <- ...
+
+# Hent ut tekst og lenker fra representanttabellen 
+# Hint: Sjekk ut funksjonene html_nodes, html_attr og html_text i 
+# rvest-pakken 
+the_links <- ...
+the_texts <- ...
+
+# Filtrer bort fylker
+fylker <- c('Østfold','Akershus', 'Oslo', 'Hedmark', 'Buskerud',
+            'Telemark','Vestfold', 'Vest-Agder', 'Aust-Agder', 
+            'Oppland', 'Hordaland', 'Rogaland', 'Sogn og Fjordane',
+            'Sør-Trøndelag', 'Nord-Trøndelag', 'Møre og Romsdal', 
+            'Nordland', 'Troms', 'Finnmark')
+the_MPs <- the_texts[... %in% ...]
+
+# Filtrer bort partier 
+# Hint: Hvor mange tegn er det i de ulike tekststrengene? 
+the_MPs <- the_MPs[...(the_MPs) > 3]
+
+# Er det mer som bør filtreres bort ? 
+# Hint: Print ut the_MPs objektet til konsollen. 
+# Er det bare lenker til personer som gjenstår? 
+...
+
+# Last inn pakken og sjekke ut funksjonen 
+# Tips: Du må installere pakken dersom du ikke
+# har den fra før. 
+library(...)
+?... 
+
+# Gjenta funksjonen 'article_pageviews' over en vektor med 
+# navnet på alle representantene  Lagre listen i et objekt 
+# med navn 'dl_pageviews'. 
+# 
+# Merk: Du vil kunne få feilmeldinger for enkelte lenker. 
+# Det anbefales derfor å legge funksjonen article_pageviews
+# inn i en try-funksjon. 
+dl_pageviews <- 
+  ...(..., function(x) try(
+    ...
+  )
+))
+
+# Her bruker vi en egen funksjon, is_error, til få finne ut 
+# hvilke forespørsler som ikke ga en 'try-error. 
+# Du må fullføre koden for å filtrere ut disse. 
+is_error <- function(x) inherits(x, 'try-error')
+succeeded <- !vapply(x, is_error, logical(1))
+dl_pageviews_succeeded <- dl_pageviews[...]
+
+# Bind sammen til en data frame
+df <- ...
+
+# Spørsmål 1: Hvilken representant har flest sidevisninger?
+...
+
+# Spørsmål 2: Hvor mange representanter har kun én sidevisning? 
+...
+```
+
+
+# Løsningsforslag 
+
+For å fjerne alle objektene i arbeidsområdet vårt kan vi bruke kommandoen `rm(list = ls())`. Denne kommandoen kombinerer de to innebygde funksjonene `rm` og `ls`. `rm` brukes til å fjerne objekter fra arbeidsområdet, mens `ls()` lister opp alle objektene som er i det nåværende arbeidsområdet. 
+
+```{r}
+# Fjern alt i workspace
+rm(list = ls())
+```
+
+Før vi går videre til å lese inn HTML-siden med stortingsrepresentanter kan det være lurt å laste inn pakkene vi trenger for det videre arbeidet. Her laster vi inn pakkene `httr` og `rvest`. Dersom du ikke har disse pakkene fra tidligere kan du installere dem med `install.packages()`.
+
+```{r eval =FALSE}
+# Installer pakker
+install.packages(c("rvest", "httr"))
+```
+
+
+```{r, warning=FALSE}
+# Last inn pakker 
+library(httr);library(rvest)
+```
+
+## Innhenting av Wikipedia-siden 
+
+Vi kan hente ut HTML-innholdet på en nettside ved å kombinere funksjonene `GET` og `content` fra `httr` pakken. Alternativt kan vi bruke funksjonen `read_html` fra `rvest` pakken. En fordel ved å bruke `httr` er imidlertid at vi da kan sjekke statuskoden til forespørselen.  
+
+```{r}
+# Send en GET-forespørsel til URLen 
+the_url <- 
+  'https://no.wikipedia.org/wiki/Liste_over_stortingsrepresentanter_2017%E2%80%932021'
+resp <- GET(the_url)
+```
+
+Her ser vi at vi har fått statuskoden 200 som innebærer at forespørselen var vellykket. 
+
+```{r}
+# Sjekk statuskoden til objektet vi fikk tilbake 
+resp$status_code
+```
+```{r}
+# Hent ut innholdet fra objektet 
+my_html <- content(resp)
+```
+```{r}
+# Inspiser innholdet 
+my_html
+```
+
+## Finn frem til representanttabellen
+
+For å lage en vektorer med alle hyperlenkene i representanttabellen kan vi kombinere funksjonene `html_node(s)` og `html_attr(s)` i rvest biblioteket. `html_node` og `html_nodes` velger ut **noder** i et HTML-dokument (basert på CSS eller XPath), mens `html_attr` og `html_attrs` henter ut **attributter** fra en HTML-struktur (enten fra et helt dokument eller fra spesifikke noder i et dokument). 
+
+Vi må først finne frem til selve tabellen. Dette kan vi for eksempel gjøre ved å lete etter elementer av typen `table`. 
+
+```{r}
+my_html %>% html_nodes('table')
+```
+
+Her ser vi at representanttabellen ligger i det andre nodesettet. På sammme måte som med lister kan vi hente ut deler av et nodesett med `[[` parenteser. Her bruker vi `[[2]]` for å få tak i det andre elementet. Punktumet foran `[[` viser at vi referer til det foregående elementet, og er vanlig syntaks når man bruker klammeparenteser i piping `%>%`.  
+
+```{r}
+my_html %>% html_nodes('table') %>% .[[2]]
+```
+
+For å være enda mer sikker på at vi henter ut riktig objekt kan vi henvise til CSS-klassen som tabellen har. Ved å inspisere nettsiden i en nettleser som Google Chrome, Mozilla Firefox eller Microsoft Edge kan vi finne frem til at tabellen har klassen `wikitable sortable`. Tabellens klasse fremgår forsåvidt også av resultatene over.  Vi kan referere til dennne klassen med CSS-velgeren `.wikitable.sortable`. 
+
+```{r}
+my_html %>% html_nodes('.wikitable.sortable')
+```
+
+## Finn frem til nodene med hyperlenker 
+
+Videre kan vi finne frem til alle nodene i tabellen som inneholder hyperlenker ved å lete etter elementet **a** med `html_nodes`, og deretter
+hente ut **href** attributtene i disse nodene med `html_attr`. 
+
+```{r R.options=list(max.print=10)}
+my_html %>% 
+  html_nodes('.wikitable.sortable') %>%          # representanttabellen
+  html_nodes('a') %>%                            # 'a' noder i tabellen
+  html_attr('href')                              # innholdet i 'href' attributtene
+```
+
+Tilsvarende kan vi hente ut teksten til nodene med hyperlenker med funksjonen `html_text`. 
+
+```{r R.options=list(max.print=10)}
+my_html %>% 
+  html_nodes('.wikitable.sortable') %>%         # representanttabellen
+  html_nodes('a') %>%                            # 'a' noder i tabellen
+  html_text()                                    # teksten til disse nodene 
+```
+
+Vi kan da lagre disse resultatene til objektene `the_links` og `the_texts` som angitt i oppgaven. 
+
+```{r}
+the_links <- my_html %>% 
+  html_nodes('.wikitable.sortable') %>%          # representanttabellen
+  html_nodes('a') %>%                            # 'a' noder i tabellen
+  html_attr('href')                              # innholdet i 'href' attributtene
+the_texts <- my_html %>% 
+  html_nodes('.wikitable.sortable') %>%          # representanttabellen
+  html_nodes('a') %>%                            # 'a' noder i tabellen
+  html_text()                                    # teksten til disse nodene 
+```
+
+## Filtrering av elementer 
+
+Videre ser vi av funnene over at tabellen ikke bare inneholder lenker til stortingsrepresentanter, men også til fylker og partier. Disse bør fjernes før vi går videre med innhentingen av sidevisninger.
+
+Det er allerede lagt inn kode for å opprette et objekt `fylker` med alle (de tidligere) fylkesnavnene. Vi kan bruke operatoren `!` (ikke) for å hente ut de elementene i vektoren `the_texts` som **ikke** finnes i vektoren `fylker`. Vi lagrer dette til en ny vektor `the_MPs`. 
+
+```{r}
+# Filtrer bort fylker
+fylker <- c('Østfold','Akershus', 'Oslo', 'Hedmark', 'Buskerud',
+            'Telemark','Vestfold', 'Vest-Agder', 'Aust-Agder', 
+            'Oppland', 'Hordaland', 'Rogaland', 'Sogn og Fjordane',
+            'Sør-Trøndelag', 'Nord-Trøndelag', 'Møre og Romsdal', 
+            'Nordland', 'Troms', 'Finnmark')
+the_MPs <- the_texts[!the_texts %in% fylker]
+```
+
+Videre er alle partiforkortelsene på tre tegn eller mindre. Vi kan da bruke funksjonen `nchar` og den logiske operatoren `>` (større enn) for å avgrense vektoren til de elementene som har flere enn tre tegn. Vi overskriver det tidligere objektet vårt og lagrer en ny vektor `the_MPs` hvor partiene er fjernet. 
+
+```{r}
+# Filtrer bort partier 
+the_MPs <- the_MPs[nchar(the_MPs) > 3]
+```
+
+Det kan være noe vanskelig å se om det er noe ytterligere som bør fjernes fra vektoren, men vi kan for eksempel inspisere den med funksjonen `head`. 
+
+```{r}
+head(the_MPs, 20)
+```
+
+Her ser vi at element 17 inneholder strengen "Stortingspresident", og ikke navnet på en person. Vi ønsker kun representanter, og fjerner dette elementet.  
+
+```{r}
+# Er det mer som bør filtreres bort ? 
+the_MPs <- the_MPs[!grepl("Stortingspresident", the_MPs)]
+```
+
+## Innhenting av sidevisninger 
+
+Det er oppgitt at vi skal bruke funksjonen `article_pageviews` i pakken `pageviews` til å hente inn sidevisningene til hver representant. 
+Dersom du ikke har installert pakken tidligere kan du installere den med kommandoen `install.packages()`. 
+
+```{r, eval=FALSE}
+install.packages("pageviews")
+```
+```{r echo = FALSE, eval=TRUE, warning=FALSE}
+library(pageviews)
+dl_pageviews <- readRDS('assets/dl_pageviews.RDS')
+```
+
+Vi kan laste inn pakken med funksjonen `library`, og få opp hjelpesiden til funksjonen med kommandoen `?`. 
+
+```{r eval=FALSE}
+# Last inn pakken og sjekk ut funksjonen 
+library(pageviews)
+?article_pageviews
+```
+
+### Argumenter i funksjonen 
+
+Her det litt viktig å lese dokumentasjonen grundig. `article_pageviews` tar flere argumenter som vil være interessante for oss å endre. Merk at de fleste argumentene har standardverdier. Et kall til funksjonen med disse standardverdiene henter inn antall sidevisninger som artikkelen "R Programming Language" hadde den 1. oktober 2015. 
+
+```{r}
+article_pageviews()
+```
+
+De to første argumentene vi bør legge merke til i funksjonen er argumentene `project` og `article`. Merk at standardverdien for `project` er 
+`en.wikipedia`. Vi er imidlertid ute etter sider som ligger under det norske Wikipedia-prosjektet. I tillegg må vi endre `article` til en norsk Wikipedia-side. Dersom vi for eksempel ønsker å sjekke antall sidevisninger på Abid Rajas Wikipedia-side kan vi skrive.  
+
+```{r}
+article_pageviews(project = "no.wikipedia", article = "Abid Raja")
+```
+
+Videre bør vi legge merke til argumentene `start` og `end`. Standardverdien for `start` er "2015100100" (altså 1. oktober 2015), mens standardverdien for `end` er `NULL`. Fra dokumentasjonen fremgår det at `NULL` innebærer at det kun innhentes data for én dag. Dersom vi ønsker data for flere dager, må vi altså presisere det. Her henter vi antall sidevisninger for Abid Raja fra 1. - 5. oktober 2015. 
+
+```{r}
+article_pageviews(project = "no.wikipedia", article = "Abid Raja",
+                  start = "2015100100", end = "2015100500")
+```
+
+Oppgaven spør etter antall sidevisninger i inneværende stortingsperiode. Vi ønsker altså sidevisninger fra 2. oktober 2017 og frem  til i dag. Her henter antall daglig sidevisninger for Abid Raja i denne perioden. Vi får da ut en datatabell med én rad per dag. 
+
+```{r}
+raja <- article_pageviews(project = "no.wikipedia", article = "Abid Raja", 
+                          start = "2017100200", end = "2020020400")
+nrow(raja)
+```
+
+### Håndtering av feilmeldinger 
+
+En effektiv måte å hente inn en tilsvarende tabell for **alle** representantene er å bruke funksjonen `lapply`. I utgangspunktet vil kodesnutten som er gitt under fungere bra.
+
+```{r eval=FALSE}
+## Not run 
+lapply(the_MPs, function(x){
+  article_pageviews(
+    project = 'no.wikipedia',
+    article = x
+  )
+})
+```
+
+
+Det er imidlertid ikke alle navnene som har en korresponderende Wikipedia-side. Eksempelvis funker det ikke for siden til Jorunn Elisabet Lossius (som for tiden møter som vara for Kjell Ingolf Ropstad). I dette tilfellet er grunnen at representanten har flere etternavn enn det som står i tabellen vi har innhentet tidligere. Det kan likevel være vanskelig å vite på forhånd hvor slike feil oppstår og hva de skyldes.
+
+```{r, eval=FALSE}
+article_pageviews(project ='no.wikipedia', article = "Jorunn Elisabet Lossius")
+#> Error in FUN(X[[i]], ...) : 
+#>   The date(s) you used are valid, but we either do not have data for those date(s), 
+#>   or the project you asked for is not loaded yet. Please check
+#>   https://wikimedia.org/api/rest_v1/?doc for more information.
+```
+
+Problemet med feilmeldinger (*errors*) er videre at det vil få koden til å stoppe opp. Hvis vi for eksempel prøver å hente inn sidevisningene til både Lossius og Ropstad, ser vi at koden stopper opp ved det første elementet uten å gå videre. 
+
+```{r eval=FALSE}
+lapply(c("Jorunn Elisabet Lossius", "Kjell Ingolf Ropstad"), 
+       function(x) article_pageviews(
+         project = 'no.wikipedia', 
+         article = x
+         )
+)
+#> Error in FUN(X[[i]], ...) : 
+#>   The date(s) you used are valid, but we either do not have data for those date(s), 
+#>   or the project you asked for is not loaded yet. Please check
+#>   https://wikimedia.org/api/rest_v1/?doc for more information.
+```
+
+Heldigvis finnes det måter å håndtere slike feilmeldinger på. Ved å legge funksjonen vår inn i en `try` kommando kan vi få kodesnutten til å fortsette og kjøre. Her ser vi at vi får innhentet opplysninger for Ropstad, selve om forespørselen feiler for Lossius. Det er også verdt å legge merke til at den første forepørselen får klassen `try-error`. Dette kan vi utnytte senere. 
+
+```{r eval=FALSE}
+lapply(c("Jorunn Elisabet Lossius", "Kjell Ingolf Ropstad"), 
+       function(x) 
+         try(
+           article_pageviews(
+             project = 'no.wikipedia', 
+             article = x
+             )
+           )
+)
+#> [[1]]
+#> [1] Error in FUN(X[[i]], ...) : 
+#> The date(s) you used are valid, but we either do not have data for those date(s), 
+#> or the project you asked for is not loaded yet. Please check
+#> https://wikimedia.org/api/rest_v1/?doc for more information.
+#> [1] "try-error"
+#> attr(,"condition")
+#> <simpleError in FUN(X[[i]], ...): The date(s) you used are valid, but we either do 
+#> not have data for those date(s), or the project you asked for is not loaded yet.  
+#> Please check https://wikimedia.org/api/rest_v1/?doc for more information.>
+
+#> [[2]]
+#>     project language              article     access      agent granularity       date 
+#> 1 wikipedia       no Kjell_Ingolf_Ropstad all-access all-agents       daily 2015-10-01 
+#>  views
+#>     15
+```
+
+Et endelig forslag til kodesnutt for å innhente sidevisninger for alle representantene er da som følger. Her tar vi både høyde for norsk Wikipedia, start- og sluttdato og håndtering av feilmeldinger underveis.  
+
+```{r eval=FALSE} 
+dl_pageviews <- 
+  lapply(the_MPs, function(x) try(
+    article_pageviews(
+      project = 'no.wikipedia',
+      article = x,
+      start = '2017100200', # 2. oktober 2017 kl. 00:00:00
+      end =   '2020020415'  # 4. februar 2020 kl. 15:00:00
+    )
+  ))
+#> Error in FUN(X[[i]], ...) : 
+#>   The date(s) you used are valid, but we either do not have data for those date(s), 
+#>   or the project you asked for is not loaded yet. Please check
+#>   https://wikimedia.org/api/rest_v1/?doc for more information.
+#> Error in FUN(X[[i]], ...) : 
+#>   The date(s) you used are valid, but we either do not have data for those date(s), 
+#>   or the project you asked for is not loaded yet. Please check
+#>   https://wikimedia.org/api/rest_v1/?doc for more information.
+#> Error in FUN(X[[i]], ...) : 
+#>   The date(s) you used are valid, but we either do not have data for those date(s), 
+#>   or the project you asked for is not loaded yet. Please check
+#>   https://wikimedia.org/api/rest_v1/?doc for more information.
+```
+
+### Filtrering av forepørsler som feilet 
+
+Det er i oppgaven angitt en funksjon `is_error` som kan brukes til å filtrere bort de forespørslene som feilet. Denne funksjonen sjekker hvorvidt elementene den brukes på har klassen `try-error` eller ikke. 
+
+```{r}
+is_error <- function(x) inherits(x, 'try-error')
+```
+
+**Merk** at det er en beklagelig skrivefeil i den neste kommandoen. I oppgaven er det angitt: 
+
+```{r, eval=FALSE}
+succeeded <- !vapply(x, is_error, logical(1))
+```
+
+`x` burde imildlertid vært byttet ut med `...` slik at det hadde vært tydeligere at dette er noe som skal fylles ut.
+
+```{r, eval=FALSE}
+succeeded <- !vapply(..., is_error, logical(1))
+```
+
+Hensikten er da altså å benytte funksjonen `is_error` på listeobjektet vårt `dl_pageviews`. `vapply` har ikke vært dekket i kursmaterialet, men fungerer analogt med `sapply` og `lapply`. 
+
+```{r}
+succeeded <- !vapply(dl_pageviews, is_error, logical(1))
+```
+
+Resultatet av kommandoen over blir en vektor `succeeded` som inneholder verdien `TRUE` dersom forespørselen lykkes (altså at klassen **ikke** er en `try-error`) og verdien `FALSE` dersom forspørselen mislykkes (altså at klassen er en `try-error`). Totalt er det 186 forespørsler som lykkes og 3 forepørsler som feilet. 
+
+```{r}
+head(succeeded)
+sum(succeeded)
+sum(!succeeded)
+```
+
+Vi kan avslutningsvis bruke vektoren `succeeded` til å velge ut de forespørslene som lykkes. 
+
+```{r}
+dl_pageviews_succeeded <- dl_pageviews[succeeded]
+length(dl_pageviews_succeeded)
+```
+
+## Bind sammen resultatet til en data frame 
+
+Vi har tidligere vært innom at funksjonen `article_pageviews` returnerer en `data.frame`. Det innebærer at objektet `dl_pageviews_succeeded` er en liste med en rekke data frames. En enkel måte å binde sammen en slik liste på er å kombinere basisfunksjonene `do.call` og `rbind`.  
+
+```{r}
+# Bind sammen til en data frame
+df <- do.call('rbind', dl_pageviews_succeeded)
+```
+
+## Antall sidevisninger per representant 
+
+Vi vil raskt se at vi ikke er helt i mål med denne tabellen. Som vi har vært innom returnerer `article_pageview` en data frame med én rad per dag. Objektet `df` inneholder derfor én rad per dag for hver av de 186 representantene. Totalt `r nrow(df)` rader. 
+
+```{r}
+nrow(df)
+```
+
+For å finne det det totale antall sidevisninger i perioden må vi alstå aggregere antall sidevisninger (`views`) per representant (`article`). Dette kan vi for eksempel gjøre med den innebygde basisfunksjonen `aggregate`.  
+
+```{r}
+# Aggreger visninger per representant 
+df_aggregated <- aggregate(df$views, by = list(df$article), sum) 
+```
+
+Vi får da en tabell med én rad per representant.  
+
+```{r}
+nrow(df_aggregated)
+```
+
+Hvilken representant som har flest sidevisninger kan vi da for eksempel sjekke med funksjonene `which` og `which.max`. Merk at svaret er det samme for begge disse funksjonen, og at det kun er én representant som har flest sidevisninger. Riktig svar er da altså Erna Solberg som hadde totalt 20 6995 fra 2. oktober 2017 frem til 4. februar 2020. Dette tallet vil selvsagt være noe avhengig av nøyaktig hvilken *til* dato som er brukt. 
+
+```{r}
+head(df_aggregated )
+df_aggregated[which.max(df_aggregated$x),] # Svar: Erna Solberg
+df_aggregated[which(df_aggregated$x == max(df_aggregated $x)),] # Svar: Erna Solberg
+
+```
+
+Spørsmål 2 er et kontrollspørsmål. Dersom man har ikke har innhentet opplysninger for hele perioden vil man kunne finne representanter med kun én sidevisning. Dersom det er gjort riktig skal imidlertid svaret være ingen. 
+
+```{r}
+# Spørsmål 2: Hvor mange representanter har kun én sidevisning? 
+nrow(df_aggregated[df_aggregated$x == 1,]) # Svar: 0
+```
+
+
+
+
+ 
