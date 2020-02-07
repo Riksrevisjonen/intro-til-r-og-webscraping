@@ -245,7 +245,7 @@ install.packages("pageviews")
 ```
 ```{r echo = FALSE, eval=TRUE, warning=FALSE}
 library(pageviews)
-dl_pageviews <- readRDS('assets/dl_pageviews.RDS')
+dl_pageviews <- readRDS('../assets/dl_pageviews.RDS')
 ```
 
 Vi kan laste inn pakken med funksjonen `library`, og få opp hjelpesiden til funksjonen med kommandoen `?`. 
