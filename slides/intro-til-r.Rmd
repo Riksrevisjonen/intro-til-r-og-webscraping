@@ -244,9 +244,10 @@ v[4:6] # Og elementene 4 til 6
 ## Vektorer
 
 ```{r, echo=TRUE}
-v[c(1,4,6)]  # Elementene 1, 4 og 6
-length(v)    # Bruk `length()` for å tak lengden på en vektor
-v[length(v)] # Det siste elementet
+eksp <- c('Tor', 'Stig', 'Annette', 'Åse Kristin', 'Tora', 'Sverre', 'Aleksander')
+eksp[c(1,4,6)]  # Elementene 1, 4 og 6
+length(eksp)    # Bruk `length()` for å tak lengden på en vektor
+eksp[length(eksp)] # Det siste elementet
 ```
 
 ## Oppgaver {.flexbox .vleft .extraspace}
@@ -254,7 +255,7 @@ v[length(v)] # Det siste elementet
 1. Lag en vektor `x` med verdier fra 10 til 19.
 2. Hvor mange elementer er det i `x`?
 3. Hva er den tredje verdien i `x`?
-4. Hva inneholder elementene 5 til 8?.
+4. Hva inneholder elementene 5 til 8?
 5. Hva inneholder elementene 2, 3, og 7?
 
 ## Matriser
@@ -287,11 +288,12 @@ m[3:5, 2] # Hent verdiene i rad 3 til 5 som er i kolonne 2
 Data frames -- datatabeller -- ligner matriser, men vi kan ha ulike datatyper i hver kolonne.
 ```{r, echo=TRUE}
 df <- data.frame(tall = 1:4, bokstaver = letters[1:4])
+df <- data.frame(tall = 1:4, bokstaver = c('a', 'b', 'c', 'd'))
 df
 ```
 
 ## Inspiser data
-
+Datasett: mtcars - 32 biler og 10 ulike egenskaper ved de
 ```{r, echo=TRUE}
 head(mtcars)
 ```
@@ -306,6 +308,12 @@ head(mtcars, n = 10)
 
 ```{r, echo=TRUE}
 str(mtcars)
+```
+
+## Inspiser data
+
+```{r, echo=TRUE}
+summary(mtcars)
 ```
 
 ## Kolonnenavn
@@ -323,6 +331,8 @@ rownames(mtcars) # Radnavn
 
 ## Oppgaver {.flexbox .vleft .extraspace}
 
+USArrests: Statistikk om antall arrestasjoner for overfall, drap og voldtekt per 100 000 innbyggere i 50 stater i USA i 1973. I tillegg andelen av befolkningen som bor i urbane områder.
+
 1. Last inn datasettet `USArrests` med `data(USArrests)`.
 2. Ta en titt på de fem øverste radene.  
 3. Ta en titt på de ti øverste radene.
@@ -333,8 +343,8 @@ rownames(mtcars) # Radnavn
 
 ```{r, echo=TRUE}
 mtcars$mpg       # Velg en kolonne basert på navn
-mtcars[2, ]       # Velg en rad basert på indeks
-mtcars$mpg[4]    # Velg en konkret verdi i en kolonne
+mtcars[2, ]      # Velg en rad basert på indeks
+mtcars$mpg[4]    # Se verdien for indeksnr 4 i kolonne mpg
 ```
 
 ## Velg deler av data
@@ -348,6 +358,8 @@ mtcars[mtcars$gear == 5,] # Avgrens datasettet til rader hvor gear er lik 5
 ```{r, echo=TRUE}
 mtcars[mtcars$gear == 5, 'mpg'] # Velg kun mpg for rader hvor gear er lik 5
 mtcars[mtcars$gear == 5,]$mpg   # Velg kun mpg for rader hvor gear er lik 5
+
+mtcars[mtcars$gear == 5, c('mpg', 'cyl')] # Velg mpg og cyl for rader hvor gear er lik 5
 ```
 
 ## Oppgaver {.flexbox .vleft .extraspace}
@@ -361,8 +373,8 @@ mtcars[mtcars$gear == 5,]$mpg   # Velg kun mpg for rader hvor gear er lik 5
 ## Lister
 
 ```{r, echo=TRUE}
-l <- list(tall = 1:5, bokstaver = letters[1:5])  # Liste
-l
+lista_mi <- list(tall = 1:5, bokstaver = letters[1:5])  # Liste
+lista_mi
 ```
 
 ## Lister
@@ -370,8 +382,8 @@ l
 Lister kan inneholde ulike typer objekter  
 
 ```{r echo=TRUE}
-class(l$tall)
-class(l$bokstaver)
+class(lista_mi$tall)
+class(lista_mi$bokstaver)
 ```
 
 
@@ -380,8 +392,8 @@ class(l$bokstaver)
 Det er mulig å inspisere lister på samme måte som andre objekter
 
 ```{r echo=TRUE}
-head(l)
-str(l)
+head(lista_mi)
+str(lista_mi)
 ```
 
 ## Lister
@@ -389,8 +401,8 @@ str(l)
 Men det er viktig å merke seg at lister har en litt annen struktur når man skal jobbe med dem
 
 ```{r,echo=TRUE, error=TRUE}
-l[1]
-l[1,1]
+lista_mi[1]
+lista_mi[1,1]
 ```
 
 ## Lister
@@ -398,9 +410,9 @@ l[1,1]
 Bli venn med dobbeltklammen `[[]]`
 
 ```{r, echo=TRUE}
-l[[1]]    # Det første listeelementet
-l[[1]][1] # Den første verdien i det første listeelementet
-l[[2]][2] # Den andre verdien i det andre listeelementet
+lista_mi[[1]]    # Det første listeelementet
+lista_mi[[1]][1] # Den første verdien i det første listeelementet
+lista_mi[[2]][2] # Den andre verdien i det andre listeelementet
 ```
 
 ## Lister
@@ -408,9 +420,9 @@ l[[2]][2] # Den andre verdien i det andre listeelementet
 Det er flere ulike måter å få tak i verdiene i en liste på
 
 ```{r, echo=TRUE}
-l$tall
-l[["tall"]]
-l[[1]]
+lista_mi$tall
+lista_mi[["tall"]]
+lista_mi[[1]]
 ```
 
 
@@ -419,8 +431,8 @@ l[[1]]
 Elementene i en liste trenger dog ikke å ha navn
 
 ```{r, echo=TRUE}
-l <- list(1:5, letters[1:5])
-l
+lista_mi <- list(1:5, letters[1:5])
+lista_mi
 ```
 
 ## Oppgaver {.flexbox .vleft .extraspace}
@@ -602,26 +614,19 @@ TRUE != 0
 ## Bruk av `%in%`
 
 ```{r, echo=TRUE, eval=FALSE}
-test_vec <- c(10, 20, 30)
-x <- seq(5, 30, 5)
-x %in% test_vec
+tall <- c(10, 20, 30, 40)
+tallrekke <- seq(5, 30, 5)
 ```
 
 ## Bruk av `%in%`
 
 ```{r, echo=TRUE, eval=TRUE}
-test_vec <- c(10, 20, 30)
-x <- seq(5, 30, 5)
-x %in% test_vec
-```
+tall <- c(10, 20, 30, 40)
+tallrekke <- seq(5, 30, 5)
+tallrekke
 
-## Bruk av `%in%`
-
-```{r, echo=TRUE, eval=TRUE}
-test_vec <- c(10, 20, 30)
-x <- seq(5, 30, 5)
-x %in% test_vec
-x %in% test_vec
+tall %in% tallrekke
+!(tall %in% tallrekke)
 ```
 
 ## Større og mindre enn
@@ -717,13 +722,13 @@ if (betingelse) {
 ## Hvis ... eller
 
 ```{r, echo=TRUE}
-x <- 9
-if (x %% 2) {
-  'Delelig med 2'
-} else if (x %% 3) {
-  'Delelig med 3'
+alder <- 18
+if (alder >= 20) {
+  'Kan kjøpe både øl og sprit.'
+} else if (alder %in% c(18, 19)) {
+  'Kan kjøpe øl, men ikke sprit.'
 } else {
-  'Ikke delelig med 2 eller 3'
+  'Kan verken kjøpe øl eller sprit.'
 }
 ```
 
@@ -733,11 +738,12 @@ if (x %% 2) {
 Pass på hvordan du skriver `if ... else` kode:
 
 ```{r, echo=TRUE, error=TRUE}
-if (FALSE) {
-  print('Sant')
-}
+alder <- 25
+if (alder >= 30) {
+  print('30 år eller eldre')
+} 
 else {
-  print('Ikke sant')
+  print('Yngre enn 30 år')
 }
 ```
 
@@ -757,6 +763,20 @@ x2
 ## Vektorisering av hvis/eller
 
 * `if ... else` virker kun på én logisk verdi (den er ikke _vektorisert_)
+
+```{r, echo=TRUE}
+x <- c(14, 6, 2, 4, 5, 10)
+
+if(x >= 10){
+  print('X er større enn eller lik 10')
+} else {
+  print('X er ikke større enn eller lik 10')
+}
+
+```
+
+## Vektorisering av hvis/eller
+
 * For å sammenligne en _vektor_ av verdier, kan du bruke `ifelse`
 * `ifelse` tar _tre_ argumenter: en vektor, verdien som skal returneres hvis **sann** og verdien som skal returneres hvis **ikke sann**
 
@@ -772,7 +792,7 @@ Bruk et R-skript for å skrive koden for disse oppgavene
 
 * Hva er resultatet av `if (nchar('riksrevisjonen') > 5) TRUE else FALSE`?
 * Skriv kode som returerer `Sant` hvis uttrykket `abs(-20)` er **større enn** `0`
-* Skriv kode som tilordner `x` verdien `"Mindre enn 5"` hvis uttrykket `runif(1, 1, 10)` er **mindre enn** `5` og verdien `"Større enn 5"` hvis ikke. Kjør koden; hva er verdien av `x`?
+* Skriv kode som tilordner `x` verdien `"Mindre enn 5"` hvis uttrykket `runif(1, 1, 10)` er **mindre enn** `5` og verdien `"Større enn 5"` hvis ikke. Kjør koden. Hva er verdien av `x`?
 * Kjør koden på nytt. Er verdien den samme?
 
 ## Oppgaver (2)
