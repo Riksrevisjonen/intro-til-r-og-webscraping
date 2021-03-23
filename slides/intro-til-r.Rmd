@@ -207,47 +207,58 @@ z
 
 **Endimensjonale:**
 
-- Vektor: endimensjonal vektor med `n` elementer. Må være av samme type
-- Liste: en liste med `n` elementer. Kan være av ulik type, inkludert andre lister
+- Vektor: `n` elementer av **samme datatype**
+- Liste: `n` elementer som kan være av ulike typer, inkludert andre lister.
 
 **Todimensjonale:**
 
-- Matrise: en todimensjonal struktur med ` r  *  k` elementer. Må være av samme type
-- Data frame: en todimensjonal datatabell med ` r * k` elementer. Kolonner kan være av forskjellig type
+- Matrise: ` r  *  k` elementer av **samme datatype**
+- Data frame: ` r * k` elementer, kolonner kan være av forskjellig type.
 
 ## Vektorer
 
+Lage vektorer
 ```{r, echo=TRUE}
-# Dette er kortversjonen for tall 1 til 5
-# Vi kan også bruke c(1,2,3,4,5)
-v <- c(1:5)
-v
+# Vi lager en vektor min_vektor med tallene 1 til 5.
+min_vektor  <- c(1,2,3,4,5)
+# Kortversjon
+min_vektor <- c(1:5)
+min_vektor
 ```
 
 ```{r, echo=TRUE}
-# NB! Vektorer må være av samme type!
-v <- c(1, 'RR', FALSE)
-v
-```
-
-## Vektorer
-
-Vi avgrenser elementer i en vektor med å bruke `[i]`
-
-```{r, echo=TRUE}
-v <- c(1:10)
-v[1]   # Få tak i første element i en vektor
-v[8]   # Og det åttende elementet
-v[4:6] # Og elementene 4 til 6
+# NB! Vektorer må være av samme type
+min_vektor <- c(1, 'RR', FALSE)
+min_vektor
 ```
 
 ## Vektorer
 
+Lage vektorer
 ```{r, echo=TRUE}
-eksp <- c('Tor', 'Stig', 'Annette', 'Åse Kristin', 'Tora', 'Sverre', 'Aleksander')
-eksp[c(1,4,6)]  # Elementene 1, 4 og 6
-length(eksp)    # Bruk `length()` for å tak lengden på en vektor
-eksp[length(eksp)] # Det siste elementet
+# Vi lager en sjefsvektor
+sjefer <- c('Tor', 'Stig', 'Annette', 'Åse Kristin', 'Tora', 'Sverre', 'Aleksander')
+sjefer
+```
+## Vektorer
+
+Avgrense vektorer: se på spesifikke elementer ved å bruke `[i]`
+
+```{r, echo=TRUE}
+sjefer <- c('Tor', 'Stig', 'Annette', 'Åse Kristin', 'Tora', 'Sverre', 'Aleksander')
+sjefer[1]   # Få tak i første element i en vektor
+sjefer[5]   # Det femte elementet
+sjefer[4:6] # Elementene 4 til og med 6
+```
+
+## Vektorer
+
+Avgrense vektorer
+```{r, echo=TRUE}
+sjefer <- c('Tor', 'Stig', 'Annette', 'Åse Kristin', 'Tora', 'Sverre', 'Aleksander')
+sjefer[c(1,4,6)]  # Elementene 1, 4 og 6
+length(sjefer)    # Bruk `length()` for å tak lengden på en vektor
+sjefer[length(sjefer)] # Det siste elementet
 ```
 
 ## Oppgaver {.flexbox .vleft .extraspace}
@@ -260,40 +271,50 @@ eksp[length(eksp)] # Det siste elementet
 
 ## Matriser
 
+Lage matriser
 ```{r, echo=TRUE}
 # Vi må angi hvor mange rader eller kolonner matrisen skal ha
-m <- matrix(1:10, ncol = 2)
+m <- matrix(data = 1:10, ncol = 2)
 m
 ```
 
 ## Matriser
 
-Vi avgrenser elementer i en matrise med å bruke `[r, k]`
-
+Avgrense matriser: se på spesifikke elementer ved å bruke `[r, k]`
 ```{r, echo=TRUE}
-m <- matrix(1:10, ncol = 2)
+m <- matrix(data = 1:10, ncol = 2)
 m[2, 2] # Hent verdien i rad 2, kolonne 2
-m[, 2]  # Hent verdiene i kolonne 4
+m[, 2]  # Hent verdiene i kolonne 2
 ```
 
 ## Matriser
 
+Avgrenselista matriser
 ```{r, echo=TRUE}
 m[1:3, ]  # Hent verdiene i rad 1 til 3
-m[3:5, 2] # Hent verdiene i rad 3 til 5 som er i kolonne 2
+m[1:3, 2] # Hent verdiene i rad 3 til 5 som er i kolonne 2
 ```
 
 ## Data frame
 
-Data frames -- datatabeller -- ligner matriser, men vi kan ha ulike datatyper i hver kolonne.
+Lage data frames (datatabeller) - kan ha ulike datatyper i hver kolonne
 ```{r, echo=TRUE}
 df <- data.frame(tall = 1:4, bokstaver = letters[1:4])
 df <- data.frame(tall = 1:4, bokstaver = c('a', 'b', 'c', 'd'))
 df
 ```
 
+## Inspisere data
+- Vi kan inspisere data frames på samme måte som  med matriser - `[r, k]`
+- I tillegg er det vanlig å bruke følgende funksjoner:
+  + `head()`
+  + `tail()`
+  + `str()`
+  + `summary()`
+  + `colnames()` og `rownames()`
+
 ## Inspiser data
-Datasett: mtcars - 32 biler og 10 ulike egenskaper ved de
+**mtcars**: 32 biler og 11 ulike egenskaper ved de
 ```{r, echo=TRUE}
 head(mtcars)
 ```
@@ -302,6 +323,12 @@ head(mtcars)
 
 ```{r, echo=TRUE}
 head(mtcars, n = 10)
+```
+
+## Inspiser data
+
+```{r, echo=TRUE}
+tail(mtcars, n = 10)
 ```
 
 ## Inspiser data
@@ -358,7 +385,11 @@ mtcars[mtcars$gear == 5,] # Avgrens datasettet til rader hvor gear er lik 5
 ```{r, echo=TRUE}
 mtcars[mtcars$gear == 5, 'mpg'] # Velg kun mpg for rader hvor gear er lik 5
 mtcars[mtcars$gear == 5,]$mpg   # Velg kun mpg for rader hvor gear er lik 5
+```
 
+## Velg deler av data
+
+```{r, echo=TRUE}
 mtcars[mtcars$gear == 5, c('mpg', 'cyl')] # Velg mpg og cyl for rader hvor gear er lik 5
 ```
 
@@ -585,6 +616,12 @@ sqrt(my_num)
 
 # Kontrollflyt
 
+## Vi skal se på {.flexbox .vleft .extraspace}
+* Likhet og ulikhet
+* Større enn / mindre enn
+* Logiske operatorer
+* Hvis ... eller
+
 ## Likhet {.flexbox .vleft .extraspace}
 
 * Vi kan sjekke for **likhet** med `==` (merk bruk av to likhetstegn!)
@@ -603,6 +640,15 @@ FALSE != FALSE  # Test for ulikhet
 ## Likhet
 
 ```{r, echo=TRUE}
+1 == 0    # Test for likhet
+1 == 1    # Test for likhet
+0 != 1    # Test for ulikhet
+0 != 0    # Test for ulikhet
+```
+
+## Likhet
+
+```{r, echo=TRUE}
 # Vi kan teste om tekst er lik
 'Riksrevisjonen' == 'riksrevisjonen'
 # Eller om numeriske verdier er like
@@ -616,6 +662,14 @@ TRUE != 0
 ```{r, echo=TRUE, eval=FALSE}
 tall <- c(10, 20, 30, 40)
 tallrekke <- seq(5, 30, 5)
+```
+
+## Bruk av `%in%`
+
+```{r, echo=TRUE, eval=TRUE}
+tall <- c(10, 20, 30, 40)
+tallrekke <- seq(5, 30, 5)
+tallrekke
 ```
 
 ## Bruk av `%in%`
@@ -656,7 +710,6 @@ which(x > 20)
 Hva blir resultatet av følgende?
 
 ```{r, echo=TRUE, eval=FALSE}
-1:7 > 7:1
 1:7 == 7:1
 ```
 
@@ -665,8 +718,17 @@ Hva blir resultatet av følgende?
 Hva blir resultatet av følgende?
 
 ```{r, echo=TRUE, eval=TRUE}
-1:7 > 7:1
 1:7 == 7:1
+```
+
+## Kontrollflyt og vektorer
+
+Hva blir resultatet av følgende?
+
+```{r, echo=TRUE, eval=TRUE}
+1:7 == 7:1
+1:7
+7:1
 ```
 
 ## Oppgaver {.flexbox .vleft}
@@ -688,6 +750,7 @@ I R bruker vi følgende logiske operatorer
 
 ```{r, echo=TRUE}
 TRUE & TRUE
+TRUE & FALSE
 TRUE | FALSE
 !FALSE
 ```
@@ -721,6 +784,19 @@ if (betingelse) {
 
 ## Hvis ... eller
 
+```{r, echo=TRUE, eval=FALSE}
+alder <- 18
+if (alder >= 20) {
+  'Kan kjøpe både øl og sprit.'
+} else if (alder %in% c(18, 19)) {
+  'Kan kjøpe øl, men ikke sprit.'
+} else {
+  'Kan verken kjøpe øl eller sprit.'
+}
+```
+
+## Hvis ... eller
+
 ```{r, echo=TRUE}
 alder <- 18
 if (alder >= 20) {
@@ -732,6 +808,31 @@ if (alder >= 20) {
 }
 ```
 
+## Hvis ... eller
+
+```{r, echo=TRUE}
+alder <- 11
+if (alder >= 20) {
+  'Kan kjøpe både øl og sprit.'
+} else if (alder %in% c(18, 19)) {
+  'Kan kjøpe øl, men ikke sprit.'
+} else {
+  'Kan verken kjøpe øl eller sprit.'
+}
+```
+
+## Hvis ... eller
+
+```{r, echo=TRUE}
+alder <- 20
+if (alder >= 20) {
+  'Kan kjøpe både øl og sprit.'
+} else if (alder %in% c(18, 19)) {
+  'Kan kjøpe øl, men ikke sprit.'
+} else {
+  'Kan verken kjøpe øl eller sprit.'
+}
+```
 
 ## Hvis ... eller
 
@@ -759,18 +860,36 @@ x1
 x2
 ```
 
+## Hvis ... eller
+
+Hvis-uttrykk returnerer en verdi, og kan derfor tilordnes et objekt:
+
+```{r, echo=TRUE}
+y <- 100
+x <- if (y > 80) 1 else 2
+x
+
+y <- 70
+x <- if (y > 80) 1 else 2
+x
+```
+
+
+## Vektorisering av hvis/eller
+
+* `if ... else` virker kun på én logisk verdi (den er ikke _vektorisert_)
 
 ## Vektorisering av hvis/eller
 
 * `if ... else` virker kun på én logisk verdi (den er ikke _vektorisert_)
 
 ```{r, echo=TRUE}
-x <- c(14, 6, 2, 4, 5, 10)
+x <- c(14, 6, 2, 13, 5, 11)
 
 if(x >= 10){
-  print('X er større enn eller lik 10')
+  print('Over')
 } else {
-  print('X er ikke større enn eller lik 10')
+  print('Under')
 }
 
 ```
@@ -781,7 +900,7 @@ if(x >= 10){
 * `ifelse` tar _tre_ argumenter: en vektor, verdien som skal returneres hvis **sann** og verdien som skal returneres hvis **ikke sann**
 
 ```{r, echo=TRUE}
-x <- c(14, 6, 2, 4, 5, 10)
+x <- c(14, 6, 2, 13, 5, 11)
 ifelse(x >= 10, 'Over', 'Under')
 ```
 
