@@ -19,22 +19,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 For å gange med tallet pi, kan du enten gange ved å skrive ut tallet selv, eller gange med `pi`, som er en innebygget konstant i R, se `?Constants`.
 
-### Oppgave 2: Innebygde funksjoner
-
-2. Lag en vektor `x <- c(1:10, NA)`
-3. Hva er summen av `x`?
-4. Hva er gjennomsnittet av `x`?
-5. Hva er standardavviket til `x`?
-
-```{r}
-x <- c(1:10, NA)
-sum(x)
-sum(x, na.rm = TRUE)
-mean(x, na.rm = TRUE)
-sd(x, na.rm = TRUE)
-```
-
-### Oppgave 3: Tilordning
+### Oppgave 2: Tilordning
 
 1. Tilordne verdiene `4` til `x` og `3` til `y`
 2. Hva blir summen av `x * y`?
@@ -79,7 +64,7 @@ x + y
 rm(x, y, z)
 ```
 
-### Oppgave 4: Vektor
+### Oppgave 3: Vektor
 
 1. Lag en vektor `x` med verdier fra 10 til 19.
 2. Hvor mange elementer er det i `x`?
@@ -110,7 +95,7 @@ x[c(2:3,7)]
 
 Bruk funksjonen `c()` for å angi spesifikke rekker av verdier eller enkeltverdier du ønsker å se på.
 
-### Oppgave 5: Se på datasettet USAarrests
+### Oppgave 4: Se på datasettet USAarrests
 
 1. Last inn datasettet `USArrests` med `data(USArrests)`.
 2. Ta en titt på de fem øverste radene.  
@@ -126,7 +111,7 @@ colnames(USArrests)
 rownames(USArrests)
 ```
 
-### Oppgave 6: Subset 
+### Oppgave 5: Subset 
 
 1. Kjør `?USArrests` eller `help(USArrests)` [kjøres ikke i løsningsforslag]
 2. Hva er verdien i rad 1, kolonne 2?
@@ -145,7 +130,7 @@ USArrests[USArrests$UrbanPop == 66,]
 Delstaten i rad 3 er Arizona. Fra output kan vi også se at mordraten er 8,1. Vi kan også kjøre ut kun denne verdien ved å spesifisere radnummer og kolonnenavn, som vist på to måter her.
 Delstatene hvor 66 prosent av populasjonen bor i urbane områder er Kansas, Lousiana, Minnesota, Wisconsin.
 
-### Oppgave 7: Lister
+### Oppgave 6: Lister
 
 1. Lage et listeobjekt `my_list` med elementene `x = 1`, `y = c("R", "er gøy")` og `z = 1:20` (i denne rekkefølgen)
 2. Hva inneholder `my_list[2]`? Hva inneholder `my_list[[2]]`? Hva inneholder `my_list[[2]][2]`?
@@ -166,7 +151,7 @@ Resultatet blir `NA` fordi det bare er ett element i listens første element, me
 my_list[[3]][4]
 ```
 
-### Oppgave 8: Innebygde funksjoner
+### Oppgave 7: Innebygde funksjoner
 
 1. Sjekk ut hjelpesiden til funksjonen `sum`. Hvilke argumenter tar funksjonen? (`?sum`) [kjøres ikke i løsningsforslag]
 2. Lag en vektor `x <- c(1:10, NA)`.
@@ -182,7 +167,7 @@ mean(x, na.rm = TRUE)
 sd(x, na.rm = TRUE)
 ```
 
-### Oppgave 9: Sample-funksjonen
+### Oppgave 8: Sample-funksjonen
 
 1. Sjekk ut hjelpesiden til funksjonen `sample`. Hvilke argumenter tar funksjonen?
 2. Lag en vektor `my_vec` med 5 tilfeldig heltall trukket fra en vektor med alle tallene fra `10` til `20`.
@@ -199,7 +184,7 @@ set.seed(42)
 
 Ved å bruke `set.seed` får vi de samme verdiene hver gang vi kjører funksjonen. `set.seed` kan brukes til å reprodusere resultatene i et skript. Du må kjøre argumentet `set.seed()` rett før `sample()` for å få det samme resultatet.
 
-### Oppgave 10: Vektoriserte funksjoner
+### Oppgave 9: Vektoriserte funksjoner
 
 1. Lag en vektor `my_numbers` med 10 tilfeldig heltall fra 0 til 20. Bruk for eksempel `round(runif(n, min, max))`. Set seed 42 før du kjører kommandoen.
 2. Hva er resultatet av `log(my_numbers)`?
@@ -221,46 +206,7 @@ sum(my_numbers)
 
 Forskjellen mellom `log()` og `sum()` er at `log()` tar logaritmen til hvert tall, mens `sum()` summerer alle elementene i vektoren. Hvorvidt en funksjon er vektorisert eller ikke, har noe å si for hvordan du kan bruke funksjonen. 
 
-### Oppgave 11: Innlesing av csv-filer
-
-1. Les inn `carseats.csv` som varseats med `read.csv()`
-2. Bruk `head(carseats)` for å se de første observasjonene
-3. Bruk `sum()` og `mean()` for å finne sum og gjennomsnitt på variablene `Sales` og `Price`
-4. Les inn fila på nytt som `carseats_chr` men uten konvertering av tekst til faktorer. Sjekk resultatet med `class(carseats_chr$Urban)`
-
-```{r}
-carseats <- read.csv("carseats.csv")
-str(carseats)
-head(carseats)
-sum(carseats$Sales)
-sum(carseats[['Sales']])
-sum(carseats[,1])
-
-carseats_chr <- read.csv("carseats.csv", stringsAsFactors = FALSE)
-str(carseats_chr)
-```
-
-Legg merke til at variablene **ShelveLoc**, **Urban** og **US** nå er importert som **character** i stedet for **Factor**.
-
-### Oppgave 12: Innlesing av excelfiler 
-
-1. Last inn pakken `readxl` med `library(readxl)`
-2. Les inn fila `carseats.xlsx` som `carseats_excel` med `read_xlsx` fra pakken `readxl`
-3. Bruk `summary` på `carseats_excel`. Hva er median for variabelen `Price`?
-4. Er `carseats` og `carseats_excel` like? Hvorfor ikke?
-
-```{r}
-library(readxl)
-carseats_excel <- read_xlsx("carseats.xlsx")
-summary(carseats_excel$Price)
-identical(carseats, carseats_excel)
-class(carseats)
-class(carseats_excel)
-```
-
-`carseats` er et objekt av typen `data.frame`, mens `carseats_excel` har klassene `tbl`, `tbl_df` og `data.frame`. Objekttypen kommer fra pakken `tibble` som brukes av `readxl`. `tbl` har lik struktur som en `data.frame`, men som standard blir ikke tekst importert som faktor, men som character.
-
-### Oppgave 13: Likhet
+### Oppgave 10: Likhet
 
 1. Er uttrykket `nchar('riksrevisjonen')` **lik** 13?
 2. Er uttrykket `-6 * 4 + 5` **større enn** `-3 * 8 - 4`?
@@ -278,7 +224,7 @@ Summen av `c(TRUE, FALSE, TRUE)` er det samme som `1 + 0 + 1`. Resultatet i tred
 
 `ceiling` runder _opp_ til nærmeste heltall, mens `floor` runder _ned_ til nærmeste heltall. Resultatet blir derfor `TRUE`.
 
-### Oppgave 14: Logiske operatorer og betingelser
+### Oppgave 11: Logiske operatorer og betingelser
 
 1. Hva er resultatet av `if (nchar('riksrevisjonen') > 5) TRUE else FALSE`?
 2. Skriv kode som returerer `Sant` hvis uttrykket `abs(-20)` er **større enn** `0`
@@ -296,7 +242,7 @@ set.seed(1984)
 
 Resultatet blir ikke _nødvendigvis_ det samme fordi vi bruker en tilfeldig funksjon, `runif` som trekker et tilfeldig tall fra en uniform distribusjon. Merk at vi i løsningsforslaget har brukt `set.seed` for å sikre oss at vi i dette tilfellet får to forskjellige resultat når vi kjører koden to ganger.
 
-### Oppgave 15: If/else
+### Oppgave 12: If/else
 
 Lag en ny vektor `x` med verdiene `17, 33, 3, 32, 29, 8, 12, 22, 29, 41`.
 
@@ -317,7 +263,7 @@ ifelse(a==b, 'Sant', 'Usant')
 
 Forklaring til siste deloppgave: vektorene sammenlignes elementvis, det vil si at 3, 2, 1 sammenlignes med 1, 2, 3. R sammenligner først uttrykket `3 == 1` (som gir `FALSE`), så `2 == 2` (som gir `TRUE`), og så `1 == 3` (som gir `FALSE`).
 
-### Oppgave 16: (S)apply
+### Oppgave 13: (S)apply
 
 ```{r, include = FALSE}
 load("intro-til-r.RData")
@@ -338,85 +284,3 @@ sapply(nokeur, min)
 max(sapply(nokeur, max))
 ```
 
-### Oppgave 17: Lag funksjonen double
-
-1. Lag en funksjon `double` som tar et argument `x` og returnerer resultatet av `x` multiplisert med 2.  
-2. Bruk funksjonen på tallene 3, 4, 12 og 54.
-
-```{r}
-double <- function(x){
-  x * 2
-}
-double(2)
-double(c(3,4,12,54))
-```
-
-### Oppgave 18: Lag funksjonen multiply
-
-1. Lag en funksjon `multiply` som tar argumentene x og y og returnerer
-resultatet av `x` multiplisert med `y`.
-2. Test funksjonen med `multiply(2, 3)`, `multiply(4, 3)` og `multiply(x = 3, y = 6)`.
-3. Legg til 7 som standardargument for y. Hva er resultatet av `multiply(6)`?.
-4. Hvorfor får du feilmelding hvis du skriver `multiply(y = 6)`?
-5. Hva er resultatet av `multiply("2","3")`?
-
-```{r, error = TRUE}
-multiply <- function(x, y){
-  x * y
-} 
-
-multiply(2,3)
-multiply(4,3)
-multiply(x = 3, y = 6)
-
-multiply <- function(x, y = 7){
-  x * y
-} 
-# Denne mangler x-argumentet, og gir derfor feilmelding
-multiply(y = 6)
-
-multiply(c(3,2,6))
-
-# Her bruker vi objekter av typen character, og får derfor en feilmelding
-multiply("2", "3")
-
-```
-
-### Oppgave 19: Skriv om multiplyfunksjonen
-
-1. Skriv om `multiply` funksjonen slik at den håndterer tekstrenger som inputverdier for både `x` og `y`.
-2. Test funksjonen med `multiply(2, 3)` og `multiply("2", "3")`.
-3. Test funksjonen med verdiene `x = list("10")` og ` y = data.frame(x = 10)`.
-4. Klarer du skrive om funksjonen til å håndtere ikke numeriske verdier generelt?
-
-```{r, error = TRUE}
-multiply <- function(x, y) {
-  # Vi trenger ikke bruke klammer hvis if-uttrykket er på én linje
-  if (is.character(x)) x <- as.numeric(x)
-  if (is.character(y)) y <- as.numeric(y)
-  x * y
-}  
-
-# Nå går dette helt fint
-multiply("2","3")
-
-# Men det går ikke like bra hvis vi bruker andre datastrukturer enn vektorer
-x <- list("10")
-y <- data.frame(x = 10)
-
-multiply(x, y)
-```
-
-Skriver om funksjonen sånn at den håndterer ikke-numeriske verdier generelt. Funksjonen `is.numeric` sjekker om et objekt er en numerisk verdi, mens funksjonen `as.numeric` forsøker å tvinge et objekt til å bli numerisk. Vi kan bruke `if` til å endre `x` og `y` hvis disse _ikke_ er numeriske. Vi bruker da `!is.numeric` som "snur" resultatet av `is.numeric`.
-
-```{r}
-multiply <- function(x, y) {
-  # is.numeric returnerer en boolsk verdi
-  # Ved å sette ! foran is.numeric snur vi uttrykket
-  if (!is.numeric(x)) x <- as.numeric(x)
-  if (!is.numeric(y)) y <- as.numeric(y)
-  x * y
-} 
-
-multiply(x,y)
-```
