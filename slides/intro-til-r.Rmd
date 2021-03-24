@@ -17,14 +17,17 @@ knitr::opts_chunk$set(echo = FALSE)
 set.seed(42)
 ```
 
+## Program for dagen {.flexbox .vleft}
+
+* Hva er R
+* Grunnleggende bruk av R
+* Datatyper
+* Datastrukturer
+* Bruk av funksjoner
+* Kontrollflyt
+* Looper og apply-familien
 
 # Hva er R?
-
-## Hva er R? {.flexbox .vleft}
-
-- R er et høynivå **programmeringsspråk** beregnet (primært) for **statistikk**, men med svært mange bruksområder
-- R brukes innen en rekke sektorer og fagområder (inkludert Riksrevisjonen `r emo::ji('smiley')`) og er et av de viktigste verktøyene innen **data science**
-- I utgangspunktet skjer alt arbeid i R via et terminalvindu ved å skrive inn kommandoer, men verktøy som *RStudio* og *R Commander* gjør det lettere å jobbe med R
 
 ## Hva kan R brukes til? {.flexbox .vleft}
 
@@ -42,19 +45,21 @@ Kortversjonen: **det meste**
 
 ## Hva bruker vi R til i Riksrevisjonen? {.flexbox .vleft}
 
-- Innhenting av data fra nett (webscraping) og via APIer
-- Statistiske analyer og utprøving av maskinlæring
-- Bearbeiding av data, blant annet fra datafangst
+- Data mining, inkludert webscraping og data fra APIer
+- Utvikling av interaktive webapplikasjoner
 - Analyse og visualisering av geodata
-- Utvikling av mindre webapplikasjoner (slik som Løvehulen, Rapportsøk, og Kommunekart)
+- Text mining og Natural Language Processing (NLP)
+- Implementering av maskinlæring og statistiske modeller
+- Data Envelopment Analysis (DEA)
 - Og mye, mye, mer
 
-## Dataanalyse i R {.flexbox .vleft .extraspace}
+## Hvorfor lære R?{.flexbox .vleft}
 
-- Enorme muligheter for dataanalyse i R
-- R håndterer både _strukturerte_ og _ustrukturerte_ data
-- En rekke innebygde funksjoner for statistisk analyse, og kan utvides til de fleste analyseformål
+- Allsidig høynivå programmeringsspråk med gode funksjoner for å håndtere _tabulære data_ i tillegg til en fleksibel objektmodell
 - God støtte for datavisualiseringer, både innebygget og via utvidelser (pakker)
+- Enkelt å dokumentere analyser og gjøre dem reproduserbare (blant annet med Rmarkdown-formatet)
+- Stort og aktivt utviklingsmiljø
+- Lettere å lære og mestre enn Python (men er også fornuftig å lære begge)
 
 ## Koding i R {.flexbox .vleft}
 
@@ -66,11 +71,9 @@ Kortversjonen: **det meste**
 ## Pakker i R {.flexbox .vleft .extraspace}
 
 * R kan utvides med _pakker_ som gir R ny funksjonalitet
-* Per i dag er det flere enn 16.000 pakker tilgjengelig via CRAN
+* Per i dag er det flere enn 17.000 pakker tilgjengelig via CRAN
 * SUV DS har utviklet egne pakker for bruk i Riksrevisjonen!
-* Få pakker i dette kurset, men vi vil bruke flere pakker i kurset om **webscraping**
-
-# Demo av RStudio
+* Få pakker i dette kurset, men vi vil bruke flere pakker i neste del av kurset
 
 ## RStudio
 
