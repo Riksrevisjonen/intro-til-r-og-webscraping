@@ -1,0 +1,246 @@
+---
+title: "Statistikk med R"
+author: "Ove Haugland Jakobsen og Eivor Hovde Hoff"
+date: "7. april 2021"
+always_allow_html: yes
+output:
+  ioslides_presentation:
+    fig_retina: 2
+    widescreen: yes
+    css: ../assets/styles.min.css
+    logo: ../assets/rr-logo.svg
+---
+
+```{r setup, include=FALSE}
+if (!require(tufte)) install.packages('tufte')
+knitr::opts_chunk$set(echo = FALSE)
+set.seed(42)
+library(haven); library(tibble)
+```
+
+# Oversikt over kurset
+
+## Oversikt over kurset
+
+* Importere data til R
+  - Import av data
+  - Eksport av data
+* Deskriptiv statistikk med R eksplorativ analyse
+  - Eksplorerende analyse
+  - Håndtering av missing
+  - Mild introduksjon til å vaske data
+* Modellbygging i R
+
+## Rask repetisjon
+
+
+
+# Importere data
+
+## Kilder til data {.flexbox .vleft .extraspace}
+
+* Flatfiler (semikomma- eller kommaseparerte filer)
+* Excel-filer
+* Filer fra statistikkpakker (Stata, SAS, SPSS)
+* Databaser (SQL)
+* APIer over internett (Stortingets API, SSB)
+* Skytjenester (AWS, Hadoop)
+* Webscraping! `r emo::ji('wink')`
+
+## Flatfiler {.flexbox .vleft}
+
+* R har innebygde funksjoner for å lese inn flatfiler
+* Flatfiler kommer i flere typer
+  - *kommaseparerte filer*: har som regel filendelse `.csv` eller `.txt`
+  - *semikolonseparerte filer*: vanlig i _Europa_ og som regel med filendelse `.csv` eller `.txt`
+  - *tabulatorseparerte filer*: har som regel filendelse `.txt` eller `.tsv`
+  
+## Kommaseparerte filer
+
+Du kan undersøke filstrukturen med funksjonen `readLines()`:
+
+```{r, eval=FALSE, echo=TRUE}
+# Leser de tre første linjene av fila
+readLines('carseats.csv', n = 3)
+```
+
+
+```{r, eval=TRUE, echo=FALSE, warning=FALSE}
+setwd(sprintf('%s/course-material/intro-to-r/', here::here()))
+readLines('carseats.csv', n = 3)
+```
+
+Legg merke til at første rad i fila inneholder _kolonnenavn_, fila er _kommaseparert_, bruker `"` for å markere tekst, og har `.` som desimaltegn.
+
+## Kommaseparerte filer (2)
+
+Vi kan lese inn _kommaseparerte_ filer med `read.csv()` og _semikolonseparerte filer med `read.csv2()`.
+
+```{r, eval=FALSE, echo=TRUE}
+df <- read.csv('carseats.csv')
+print(df[1:5, 1:8])
+```
+
+
+```{r, eval=TRUE, echo=FALSE, warning=FALSE}
+setwd(sprintf('%s/course-material/intro-to-r/', here::here()))
+df <- read.csv('carseats.csv')
+print(df[1:5, 1:8])
+```
+
+## Kommaseparerte filer (3)
+
+Sjekk data med `str()`
+og `head()`
+
+## Kommaseparerte filer (4)
+
+`read.csv()` har flere argumenter vi kan bruke for å styre hvordan fila blir lest inn:
+
+```{r, eval=FALSE, echo=TRUE}
+df <- read.csv(
+  'carseats.csv',
+  header = TRUE,  # Kolonnenavn i første rad?
+  sep = ',',      # Skilletegn for celleverdier
+  dec = '.',      # Desimaltegn
+  quote = '"',    # Tekstkvalifikator (kan være FALSE)
+  skip = 10       # Hopp over n rader fra toppen av fila
+)
+```
+
+Se flere muligheter med `?read.csv`
+
+## Tabulatorseparerte filer
+
+Her er samme fil, men denne har en annen struktur:
+
+```{r, eval=FALSE, echo=TRUE}
+# Leser de tre første linjene av fila
+readLines('carseats.tsv', n = 3)
+```
+
+
+```{r, eval=TRUE, echo=FALSE, warning=FALSE}
+setwd(sprintf('%s/course-material/intro-to-r/', here::here()))
+readLines('carseats.tsv', n = 3)
+```
+
+Legg merke til at første rad i fila inneholder _kolonnenavn_, men denne fila er _tabulatorseparert_ (`\t` er tegn for tabulator), det er ingen tekstkvalifikator, og `,` er brukt som desimaltegn.
+
+## Tabulatorseparerte filer (2)
+
+## Les inn data med basefunksjoner {.flexbox .vleft}
+
+* R har innebygde funksjoner (fra `utils`) for å lese inn tekstbaserte filer
+* Vanligste dataformat for tabulære data er CSV
+* Vi kan lese inn tabulære data fra tekstfiler med `read.table`
+* Funksjonen `read.delim` er en variant av `read.table` som leser inn _tabulatorseparerte_ filer
+* Funksjonen `read.csv` er en variant av `read.table` som leser inn _kommaseparerte_ filer
+* Funksjonen `read.csv2` er en variant av `read.table` som leser inn _semikolonseparerte_ filer
+
+## Vanlige problemer {.flexbox .vleft}
+
+To vanlige problemer med å lese inn data:
+
+1. R forsøker å konvertere tekstvariabler til faktorer
+2. Norske tegn (alle ikke-ASCII-tegn) leses inn feil på grunn av problemer med tekstkoding (encoding)
+
+Løsninger:
+
+* Les inn data med argumentet `stringsAsFactors` satt til `FALSE`
+* Tekstkodingen kan angis med `encoding`: `CP1252` er vanlig på Windows, mens `UTF-8` er vanlig på macOS og web (for det meste)
+* **Hvis du kan velge tekstkoding på rådata, velg alltid UTF-8**
+
+## Oppgaver {.flexbox .vleft}
+
+**Husk at du kan bruke `?read.csv` for å få informasjon om funksjonen!**
+
+1. Les inn fila `carseats.csv` som `carseats` med `read.csv()`
+2. Bruk `head(carseats)` for å se de første observasjonene
+3. Bruk `sum()` og `mean()` for å finne sum og gjennomsnitt på variablene `Sales` og `Price`
+4. Les inn fila på nytt som `carseats_chr` men uten konvertering av tekst til faktorer. Sjekk resultatet med `class(carseats_chr$Urban)`
+
+## readxl {.flexbox .vleft}
+
+To viktige funksjoner:
+
+* `excel_sheets` og
+* `read_excel`
+
+`read_excel()` støtter både `xlsx` og `xls`-filer, og vil gjette type basert på filnavn. Hvis du vet hvilket format du skal lese, kan du bruke `read_xls()` eller `read_xlsx()`
+
+## Oppgaver {.flexbox .vleft .extraspace}
+
+1. Last inn pakken `readxl` med `library(readxl)`
+2. Les inn fila `carseats.xlsx` som `carseats_excel` med `read_xlsx` fra pakken `readxl`
+3. Bruk `summary` på `carseats_excel`. Hva er median for variabelen `Price`?
+4. Er `carseats` og `carseats_excel` like? Hvorfor ikke?*
+
+* Hint: likhet kan vurderes med `identical`. Husk også funksjonene `class` og `str`.
+
+## Les inn data fra Stata
+
+Vi kan lese inn data fra Stata med pakken `heaven`.
+
+```{r, eval=FALSE, echo=TRUE}
+library(haven)
+df <- read_dta('kompensasjonsordning.dta')
+```
+
+```{r, eval=TRUE, echo=FALSE, warning=FALSE}
+setwd(sprintf('%s/course-material/intro-to-r/', here::here()))
+library(haven)
+komp_ordning <- read_dta('kompensasjonsordning.dta')
+head(komp_ordning)
+```
+
+# Deskriptiv statistikk
+
+_beskrive_ data
+_visualisere_ data
+
+* intro til dplyr?
+
+Sjekk fila
+dim()
+str()
+nrow()
+ncol()
+
+Sentraltendens?
+gjennomsnitt
+median
+modus
+
+Funksjoner
+quantile()
+summary()
+min()
+max()
+mean()
+
+Visualisering
+hist()
+boxplot()
+
+hist(data) + rug(data) rett etterpå!
+
+boxplot(pm25 ~ region, data = pollution, col = 'red')
+
+
+# Regresjonsbaserte modeller
+
+## Lineære modeller
+
+lm()
+
+## Logistiske modeller
+
+glm()
+
+# Predict-funksjonen
+
+## Nyttige pakker
+
+* caret
+* mlbench
