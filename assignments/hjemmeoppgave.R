@@ -8,7 +8,7 @@
 
 nokeur_df <- read.csv2(paste0(
   'https://data.norges-bank.no/api/data/EXR/M.EUR.NOK.SP?format=csv&apisrc=nbi',
-  '&startPeriod=2011-01-01&endPeriod=2020-01-01&locale=no'))
+  '&startPeriod=2011-01-01&endPeriod=2020-12-01&locale=no'))
 nokeur_df <- nokeur_df[, c('TIME_PERIOD', 'OBS_VALUE')]
 colnames(nokeur_df) <- c('Tid', 'Verdi')
 
@@ -26,18 +26,19 @@ colnames(nokeur_df) <- c('Tid', 'Verdi')
 #' 7. Hvor mange ganger går verdien **opp**?
 #' 8. Hvor mange ganger går verdien **ned**?
 #'
-#' Lag en funksjon `over_10` som tar ett argument `x` og returnerer `TRUE` hvis verdien er **større enn** 10 og `FALSE` hvis ikke
-#'
-#' 9. Bruk `sapply` på `nokeur_df$Verdi` med `over_10` som funksjon. Tilordne resultatet til objektet `hoy_kurs`
-#' 10. Hvor mange ganger er kursen over 10 kroner?
-#' 11. Klarer du å skrive samme kode som én linje uten bruk av `sapply`?
-#' 12. Generaliser funksjonen du laget over til en ny funksjon `over` som tar to argumenter; en vektor som tidligere og en verdi det skal sjekkes mot.
-#' 13. Hvor mange ganger er kursen over 9 kroner?
-#' 14. Har du flere forslag til hvordan funksjonen `over` kan generaliseres ytterligere?
-#'
-#' Bruk `plot` til å lage et linjediagram med kursen over tid. Du får linjediagram med å sette argumentet `type` til `l`
-#'
-#' 15. Hvordan har kursen utviklet seg over tid?
+#' Bruk `plot` til å lage et linjediagram med kursen over tid. Husk at du kan få opp informasjon om `plot` med `?plot` og du kan få listet argumentene til `plot` med `args(plot)`. Du får linjediagram med å sette argumentet `type` til `l`.
+#' 
+#' Denne oppgaven kan være litt vanskelig, for datasettet er ikke umiddelbart godt tilrettelagt for å analysere data over _tid_. I kurset har vi sett at du kan endre datatyper i R med flere funksjoner som starter med `as.*`, for eksempel ved å endre `character` til `numeric` med `as.numeric("10")`. R har en funksjon for å endre datatype til _dato_ som heter `as.Date()`. Denne forventer en vektor av type `character` som input, og forstår som standard datoformatet `YYYY-MM-DD`. Funksjonen `paste()` slår sammen tekst i R.
+
+x <- 'hello'
+y <- 'world'
+print(paste(x, y))
+
+#' Vi kan styre hvilket tegn som skiller tekststrengene vi slår sammen med argumentet `sep` (standardverdi er mellomrom):
+
+print(paste(x, y, sep = '-'))
+
+#' 9. Hvordan har kursen utviklet seg over tid?
 #' 
 #' ## Løsningsforslag
 #' 
@@ -72,56 +73,12 @@ sum(kurs_endring == "Opp")
 
 sum(kurs_endring == "Ned")
 
-#' 9. I denne oppgaven skal vi lage en funksjon `over_10` som tar ett argument `x` og returnerer `TRUE` hvis `x` er større enn 10, og `FALSE` hvis ikke. Nye funksjoner med å tilordne `function` til et objekt.
+#' 9. I den siste oppgaven skal vi bruke `plot` for å lage et linjediagram med kurs over tid. Hvis vi se på hjelpesiden til `plot` med `?plot`, ser vi at funksjonen tar et argument `type` for linjediagram. For at plottet skal bli finere, bruker vi her også `ylab` for å angi etiketten på y-aksen, og `xlab` for å angi etiketter på x-aksen.
 
-over_10 <- function(x) if (x > 10) TRUE else FALSE
-
-#' Neste steg er å bruke `sapply` med vår nylig definerte funksjon:
-
-hoy_kurs <- sapply(nokeur_df$Verdi, over_10)
-
-#' 10. `over_10` returnerer en boolsk vektor. Som i oppgave 7 og 8 kan vi derfor bruke `sum` for å finne hvor mange ganger kursen er _over_ 10.
-
-sum(hoy_kurs)
-
-#' 11. I oppgave 9 og 10 definerte vi først en funksjon, for så å bruke denne med `sapply`. Vi kunne imidlertid ha fått det samme uttrykket direkte med å bruke `sum` sammen med et boolsk uttrykk hvor vi sjekker om `nokeur_df$Verdi` er _større enn_ 10:
-
-sum(nokeur_df$Verdi > 10)
-
-#' 12. Vi generaliserer funksjonen `over_10` til funksjonen `over` som tar to argumenter (`x` og `y`):
-
-over <- function(x, y) if (x > y) TRUE else FALSE
-
-#' 13. Igjen bruker vi `sapply` sammen med `sum` for å finne hvor mange ganger kursen er _større enn_ 9:
-
-hoy_kurs <- sapply(nokeur_df$Verdi, over, y = 9)
-sum(hoy_kurs)
-
-#' 14. Det er mange måter å ytterligere generalisere funksjonen på. Her har vi valgt å generalisere funksjonen med å ta inn et nytt argument `compare` hvor vi angir _sammenligningsfunksjonen_. Som standard setter vi verdien av `compare` til _større enn_ som vi angir med `gt`. Vi gjør også funksjonen mer fleksibel ved at vi bruker den vektoriserte funksjonen `ifelse` fremfor `if ... else`. Merk her bruken av `switch`. `switch` gir oss et alternativ til å skrive en kompleks `if ... else`-struktur basert på verdien av `compare`. `switch` tar `compare` som første argument og returnerer resultatet av uttrykket som matcher verdien av `compare`. Ved å teste `compare` med `match.arg` i begynnelsen av funksjonen, vil funksjonen gi en feilmelding hvis brukeren forsøker å sette `compare` til en verdi funksjonen ikke støtter.
-
-over <- function(x, y, compare = 'gt') {
-  compare <- match.arg(compare, c('gt', 'ge', 'lt', 'le', 'eq'))
-  r <- switch(
-    compare,
-    'gt' = ifelse(x > y, TRUE, FALSE),
-    'ge' = ifelse(x >= y, TRUE, FALSE),
-    'lt' = ifelse(x < y, TRUE, FALSE),
-    'le' = ifelse(x <= y, TRUE, FALSE),
-    'eq' = ifelse(x == y, TRUE, FALSE)
-  )
-  r
-}
-
-#' Nå trenger vi ikke bruke `sapply` for å returnere en boolsk vektor:
-
-x <- over(nokeur_df$Verdi, y = 9)
-sum(x)
-
-#' 15. I den siste oppgaven skal vi bruke `plot` for å lage et linjediagram med kurs over tid. Hvis vi se på hjelpesiden til `plot` med `?plot`, ser vi at funksjonen tar et argument `type` for linjediagram. For at plottet skal bli finere, bruker vi her også `ylab` for å angi etiketten på y-aksen, og `xlab` for å angi etiketter på x-aksen.
-
+#+ error=TRUE, fig.keep='none'
 plot(nokeur_df$Tid, nokeur_df$Verdi, type = 'l', ylab = 'Kurs', xlab = 'Tid')
 
-#' Vi legger merke til at diagrammet ikke gir oss et linjediagram slik som forventet. Dette skjer fordi kolonnen `Tid` ikke er en numerisk variabel. Dette kan vi sjekke med `class`:
+#' Hvis vi kjører denne funksjonen direkte, får vi kun feilmeldinger (i tidligere versjoner av R enn versjon 4, ville vi fått et diagram, men med et ganske uventet resultat). Dette skjer fordi kolonnen `Tid` ikke er en numerisk variabel, og R får en feilmelding når R forsøker å konvertere denne kolonnen til numeriske verdier. Dette kan vi sjekke med `class`:
 
 class(nokeur_df$Tid)
 
