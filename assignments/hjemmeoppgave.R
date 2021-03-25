@@ -40,6 +40,10 @@ print(paste(x, y, sep = '-'))
 
 #' 9. Hvordan har kursen utviklet seg over tid?
 #' 
+#' Det finnes mange argumenter som kan brukes sammen med `plot`. En oversikt finnes blant annet ved å slå opp hjelpefilen til `par` med `?par`. Her er det en ganske ekstensiv liste, og ikke alle argumenter er heller relevante for linjediagram.
+#' 
+#' Noen vanlige argumenter som brukes for linjediagram er `col` for å angi farge, `lwd` for å angi tykkelsen på linjen og `lty` for å angi typen linje (heltrukket linje, stripete linje osv.). Det er også vanlig å legge til forklaringer til diagrammet og aksene med `main`, `xlab` og `ylab`. Utforsk ulike måter å generere linjediagrammet på, for eksempel med argumentene `col = 'blue', lwd = 2, lty = 5`.
+
 #' ## Løsningsforslag
 #' 
 #' 1. Vi finner klassen til et element med funksjonen `class`.
