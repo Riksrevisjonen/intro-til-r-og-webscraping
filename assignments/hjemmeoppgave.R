@@ -1,7 +1,7 @@
 #' ---
 #' title: "Hjemmeoppgave"
 #' author: "Ove Haugland Jakobsen"
-#' date: "`r format(Sys.Date(), '%d. %B %Y')`"
+#' date: "`r format(Sys.Date(), '%e. %B %Y')`"
 #' ---
 #' 
 #' Vi har allerede hentet inn objektet `nokeur_df` og gjort det tilgjengelig via `hjemmeoppgave.RData`. Hvis du vil hente det inn på egenhånd, kan du kjøre koden under:
