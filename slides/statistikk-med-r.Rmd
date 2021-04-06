@@ -894,6 +894,12 @@ $$\bar{Y}$$
 
 ## Formelobjektet
 
+## Kategoriske variabler (factor)
+
+* R håndterer kategoriske variabler med datatypen `factor`
+* Frem til versjon 4, ble alle tekstkolonner automatisk importer om `factor` og ikke `character`
+* Faktorvariabler kan brukes direkte i regresjonsmodeller _uten_ omkoding (det opprettes automatisk k-1 dummyvariabler)
+
 ## Enkel regresjonsmodell
 
 * Vi kan bruke den innebygde funksjonen `lm()` for å lage en regresjonsmodell
@@ -919,6 +925,11 @@ lm.mod <- lm(medv ~ crim, data = Boston)
 summary(lm.mod)
 ```
 
+coef()
+confint()
+
+predict(mod, data, interval='confidence')
+
 
 ## Multippel regresjonsmodell
 
@@ -927,12 +938,24 @@ $$Y=\alpha+\beta_1x_1+\beta_2x_2...\beta_nx_n+\epsilon$$
 * Vi kan gå fra en enkel regresjonsmodell til en multippel regresjonsmodell ved å utvide formelobjektet
 * For en vanlig additiv modell, bruker vi `+` for å legge til uavhengige variabler i modellen
 
+Eksempel
+
+```{r}
+lm(medv ~ lstat * age, data = Boston)
+```
+
+
 ## Oppdatere modeller
 
 ## Vurdere modeller
 
 
 ## Samspill
+
+```{r}
+#samspill.mod <- lm()
+```
+
 
 ## Transformasjoner
 
