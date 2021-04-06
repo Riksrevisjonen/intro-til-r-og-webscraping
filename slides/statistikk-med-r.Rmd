@@ -66,7 +66,7 @@ readLines('carseats.csv', n = 3)
 
 
 ```{r, eval=TRUE, echo=FALSE, warning=FALSE}
-setwd(sprintf('%s/course-material/intro-to-r/', here::here()))
+setwd(sprintf('%s/course-material/statistikk-med-r/', here::here()))
 readLines('carseats.csv', n = 3)
 ```
 
@@ -83,7 +83,7 @@ print(df[1:5, 1:8])
 
 
 ```{r, eval=TRUE, echo=FALSE, warning=FALSE}
-setwd(sprintf('%s/course-material/intro-to-r/', here::here()))
+setwd(sprintf('%s/course-material/statistikk-med-r/', here::here()))
 df <- read.csv('carseats.csv')
 print(df[1:5, 1:8])
 ```
@@ -121,7 +121,7 @@ readLines('carseats.tsv', n = 3)
 
 
 ```{r, eval=TRUE, echo=FALSE, warning=FALSE}
-setwd(sprintf('%s/course-material/intro-to-r/', here::here()))
+setwd(sprintf('%s/course-material/statistikk-med-r/', here::here()))
 readLines('carseats.tsv', n = 3)
 ```
 
@@ -188,7 +188,7 @@ df <- read_dta('kompensasjonsordning.dta')
 ```
 
 ```{r, eval=TRUE, echo=FALSE, warning=FALSE}
-setwd(sprintf('%s/course-material/intro-to-r/', here::here()))
+setwd(sprintf('%s/course-material/statistikk-med-r/', here::here()))
 library(haven)
 komp_ordning <- read_dta('kompensasjonsordning.dta')
 head(komp_ordning)
@@ -232,13 +232,109 @@ boxplot(pm25 ~ region, data = pollution, col = 'red')
 
 ## Lineære modeller
 
-lm()
+$$Y=\alpha+\beta_1x_1+\beta_2x_2+\epsilon$$
+
+$$\bar{Y}$$
+
+## Formelobjektet
+
+## Enkel regresjonsmodell
+
+* Vi kan bruke den innebygde funksjonen `lm()` for å lage en regresjonsmodell
+* Vi bruker formelobjektet for å spesifisere modellen
+* Hvis vi kjører funksjonen direkte, får vi ut koeffisientene til modellen
+* Vi kan også lagre modellen til et eget objekt som vi kan jobbe videre med
+
+## Enkel regresjonsmodell (2)
+
+Eksempel:
+
+```{r, eval=FALSE, echo=TRUE}
+library(MASS)
+lm.mod <- lm(medv ~ crim, data = Boston)
+summary(lm.mod)
+```
+
+## Enkel regresjonsmodell (3)
+
+```{r, eval=TRUE, echo=FALSE}
+library(MASS)
+lm.mod <- lm(medv ~ crim, data = Boston)
+summary(lm.mod)
+```
+
+
+## Multippel regresjonsmodell
+
+$$Y=\alpha+\beta_1x_1+\beta_2x_2...\beta_nx_n+\epsilon$$
+
+* Vi kan gå fra en enkel regresjonsmodell til en multippel regresjonsmodell ved å utvide formelobjektet
+* For en vanlig additiv modell, bruker vi `+` for å legge til uavhengige variabler i modellen
+
+## Oppdatere modeller
+
+## Vurdere modeller
+
+
+## Samspill
+
+## Transformasjoner
+
+## Skalerte variabler
+
 
 ## Logistiske modeller
 
 glm()
 
 # Predict-funksjonen
+
+## Predict
+
+```{r, eval=FALSE}
+# Lage modell
+mod <- lm()
+# Bruke modell
+preds <- predict(mod, data)
+
+```
+
+## Prediksjon på nye data
+
+```{r, eval=TRUE, echo=FALSE}
+default <- ISLR::Default
+```
+
+
+```{r}
+set.seed(42)
+x <- runif(nrow(default), 0, 1)
+x <- ifelse(x < .7, TRUE, FALSE)
+table(x)
+```
+
+## Prediksjon på nye data
+
+```{r}
+default.trening <- default[x,]
+default.test <- default[!x,]
+```
+
+```{r}
+mod <- glm(default ~ balance, data = default.trening, family = 'binomial')
+preds <- predict(mod, default.test, type = 'response')
+preds <- factor(ifelse(preds > .5, 'Yes', 'No'))
+```
+
+```{r}
+table(preds, default.test$default)
+```
+
+```{r}
+caret::confusionMatrix(table(preds, default.test$default))
+```
+
+
 
 ## Nyttige pakker
 
