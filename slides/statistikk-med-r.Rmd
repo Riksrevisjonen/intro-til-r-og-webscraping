@@ -293,24 +293,23 @@ aggregate(x,           # Data frame
 ## Enveis og toveis tabeller - aggregate()
 
 ```{r, echo=TRUE, eval=TRUE}
-# Vi aggregerer gjennomsnittlig salg fordelt på Urban og ShelveLoc (kvalitet på hylleplassering)
+# Vi aggregerer gjennomsnittlig salg fordelt på Urban 
+#  og ShelveLoc (kvalitet på hylleplassering)
 aggregate(carseats$Sales, 
-          by = list(UrbanPop = carseats$Urban, Hylleplassering = carseats$ShelveLoc), 
-          FUN = mean)
+          by = list(UrbanLoc = carseats$Urban, Hylleplassering = carseats$ShelveLoc), 
+          FUN = mean, na.rm=TRUE)
 ```
 
 ## Enveis og toveis tabeller - aggregate()
 
 ```{r, echo=TRUE, eval=TRUE}
 # Vi kan også lage en ny aggregert data frame
-
 agg_salg <- aggregate(carseats$Sales, 
-                      list(UrbanPop = carseats$Urban, 
+                      list(UrbanLoc = carseats$Urban, 
                            Hylleplassering = carseats$ShelveLoc), 
                       mean, na.rm = TRUE)
 
 colnames(agg_salg)[colnames(agg_salg) == 'x'] <- 'Snitt_Salg'
-
 head(agg_salg)
 ```
 
@@ -318,7 +317,7 @@ head(agg_salg)
 
 ```{r, echo=TRUE, eval=TRUE, warning=FALSE}
 # Også mulig å aggregere på hele datasettet
-aggregate(carseats, list(Hylleplassering = carseats$ShelveLoc), mean, na.rm=TRUE)
+aggregate(carseats, list(UrbanLoc = carseats$Urban), mean, na.rm=TRUE)
 ```
 
 ## Sentraltendens og spredning {.flexbox .vleft}
@@ -348,8 +347,8 @@ Vennlig påminnelse om målenivå
 # Data frame summary, her utvalgte kolonner
 summary(carseats[, 1:4])
 
-# En vektor i en dataframe
-summary(carseats$Sales)
+# En kolonne i en dataframe
+summary(carseats$Price)
 
 ```
 
@@ -357,8 +356,8 @@ summary(carseats$Sales)
 
 ```{r, echo=TRUE, eval=TRUE}
 # En vektor
-konk_pris <- carseats$CompPrice
-summary(konk_pris)
+pris <- carseats$Price
+summary(pris)
 ```
 
 ## Sentraltendens
@@ -366,10 +365,10 @@ summary(konk_pris)
 ```{r, echo=TRUE, eval=TRUE}
 
 # Median
-median(carseats$CompPrice)
+median(carseats$Price)
 
 # Gjennomsnitt
-mean(carseats$CompPrice)
+mean(carseats$Price)
 
 ```
 
@@ -391,26 +390,28 @@ mean(x, na.rm = TRUE)
 ## Spredning
 
 ```{r, echo=TRUE, eval=TRUE}
-# Funksjonen diff kombinert med range() gir min og maks-verdi
+# range() printer min- og maksverdier
+range(carseats$Price)
+
+# Funksjonen diff kombinert med range() gir variasjonsbredden
 diff(range(carseats$Price))
 
-# Kvartiler/persentiler
-quantile(carseats$Price)
-
-quantile(carseats$Price, probs = 0.50)
-
-quantile(carseats$Price, probs = c(0.25, 0.50, 0.75))
+# Dette er det samme som 
+max(carseats$Price)-min(carseats$Price)
 
 ```
 
 ## Spredning
 
 ```{r, echo=TRUE, eval=TRUE}
-# IQR (Avstand mellom Q1 Q3)
+# Finne kvartiler/persentiler
+quantile(carseats$Price, probs = c(0.25, 0.50, 0.75))
+
+# Finn kvartilbredde med IQR (Avstand mellom Q1 Q3)
 IQR(carseats$Price)
 
 # Standardavvik
-sd(carseats$Sales)
+sd(carseats$Price)
 
 ```
 
@@ -426,25 +427,25 @@ sd(carseats$Sales)
 +-------------------------+-------------------------------------+
 | mean(x), median(x)      | Gjennomsnitt og median              |
 +-------------------------+-------------------------------------+
-| range(x)                | Min- og maksverdier                 |
+| diff(range(x))          | Variasjonsbredde                    |
 +-------------------------+-------------------------------------+
-| IQR(x)                  | Avstanden mellom Q1 og Q3           |
+| IQR(x)                  | Kvartilbredde (avstand Q1 og Q3)    |          |
 +-------------------------+-------------------------------------+
-| quantile(x)             | Kvartiler                           |
+| quantile(x)             | Kvartiler/persentiler               |
 +-------------------------+-------------------------------------+
 | sd(x)                   | Standardavvik                       |                 
 +-------------------------+-------------------------------------+
 
-## Oppgaver - Deskriptiv statistikk {.flexbox .vleft. .extraspace}
+## Oppgaver - Deskriptiv statistikk {.flexbox .vleft .extraspace}
 
-Les inn datasettet `komp_oppg.RDS` med `komp_oppgave <- readRDS('komp_oppg.RDS')`
+Les inn datasettet `komp_oppg.RDS` med `readRDS('komp_oppg.RDS')`
 
 1. Lag en frekvenstabell basert på `sektorkode`.
 2. Bruk `aggregate()` og `sum()` til å summere `belop` fordelt på `sektorkode`.
 3. Finn median og gjennomsnitt til variabelen `belop`. Tolk.
-4. Bruk `quantile()`-funksjonen til å printe ut 25te og 75te persentil. Tolk.
+4. Bruk `quantile()`-funksjonen til å printe ut 25te, 75te og 90nde persentil. Sammenlign med `min()` og `max()`.
 5. Finn IQR uten å bruke funksjonen IQR basert på tallene over.
-6. Får du det samme tallet med funksjonen `IQR()`?
+   + Får du det samme tallet med funksjonen `IQR()`?
 
 ## Visualisere - base R {.flexbox .vleft}
 
@@ -498,22 +499,22 @@ rug(carseats$Sales, main = "Antall solgte bilseter (1000)")
 ## Data skew(ed) - what to do?
 
 ```{r, echo=FALSE, eval=TRUE}
-komp_oppg <- readRDS('C:/Users/eho/Documents/git/intro-til-r-og-webscraping/course-material/statistikk-med-r/komp_oppg.RDS')
-Sales <- komp_oppg$fastekostnader/1000
+komp_oppg <- readRDS(sprintf('%s/course-material/statistikk-med-r/komp_oppg.RDS', here::here()))
+fb_venner <- komp_oppg$fastekostnader/1000
 ```
 
 ```{r, echo=TRUE, eval=TRUE, warning = FALSE, message = FALSE}
-# Hva hvis fordelingen i Sales var veldig skjev?
-hist(Sales, breaks = 15)
-rug(Sales, breaks = 15)
+# Hva hvis fordelingen var veldig skjev?
+hist(fb_venner, breaks = 15)
+rug(fb_venner, breaks = 15)
 ```
 
 ## Data skew(ed) - what to do?
 
 ```{r, echo=TRUE, eval=TRUE, warning = FALSE, message = FALSE}
 # En løsning er å logtransformere data
-hist(log10(Sales), breaks = 15)
-rug(log10(Sales), breaks = 15)
+hist(log10(fb_venner), breaks = 15)
+rug(log10(fb_venner), breaks = 15)
 ```
 
 ## Data skew(ed) - what to do?
@@ -524,10 +525,9 @@ round(10^(c(1.5, 2.5, 3.0, 3.5)))
 
 ```{r, echo=FALSE, eval=TRUE, warning = FALSE, message = FALSE}
 # En løsning er å logtransformere data
-hist(log10(Sales), breaks = 15)
-rug(log10(Sales), breaks = 15)
+hist(log10(fb_venner), breaks = 15)
+rug(log10(fb_venner), breaks = 15)
 ```
-
 
 ## Boxplot
 
@@ -966,12 +966,11 @@ for en oversikt over regulære uttrykk i R
 
 ## Oppgaver
 
-Les inn datasettet `komp_oppgave.RDS` med `komp_oppgave <- readRDS('komp_oppgave.RDS')`
+Les inn datasettet `komp_oppgave.RDS` med `readRDS('komp_oppgave.RDS')`
 
 1. Hvilke kolonner i `komp_oppgave` har missingverdier?
-2. Hvor mange missing er det i datasettet?
-3. Hvilken datatype har `variabel` og `variabel`?
-
+2. Hvor mange missingverdier er det i datasettet totalt?
+3. Hvilken datatype har `variabel` og `tildelingsdato`?
 
 
 # Regresjonsbaserte modeller
