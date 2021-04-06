@@ -15,7 +15,7 @@ output:
 if (!require(tufte)) install.packages('tufte')
 knitr::opts_chunk$set(echo = FALSE)
 set.seed(42)
-library(haven); library(tibble)
+library(haven); library(tibble); library(ggplot2)
 ```
 
 # Oversikt over kurset
@@ -66,7 +66,7 @@ readLines('carseats.csv', n = 3)
 
 
 ```{r, eval=TRUE, echo=FALSE, warning=FALSE}
-setwd(sprintf('%s/course-material/intro-to-r/', here::here()))
+setwd(sprintf('%s/course-material/statistikk-med-r/', here::here()))
 readLines('carseats.csv', n = 3)
 ```
 
@@ -83,7 +83,7 @@ print(df[1:5, 1:8])
 
 
 ```{r, eval=TRUE, echo=FALSE, warning=FALSE}
-setwd(sprintf('%s/course-material/intro-to-r/', here::here()))
+setwd(sprintf('%s/course-material/statistikk-med-r/', here::here()))
 df <- read.csv('carseats.csv')
 print(df[1:5, 1:8])
 ```
@@ -121,7 +121,7 @@ readLines('carseats.tsv', n = 3)
 
 
 ```{r, eval=TRUE, echo=FALSE, warning=FALSE}
-setwd(sprintf('%s/course-material/intro-to-r/', here::here()))
+setwd(sprintf('%s/course-material/statistikk-med-r/', here::here()))
 readLines('carseats.tsv', n = 3)
 ```
 
@@ -188,7 +188,7 @@ df <- read_dta('kompensasjonsordning.dta')
 ```
 
 ```{r, eval=TRUE, echo=FALSE, warning=FALSE}
-setwd(sprintf('%s/course-material/intro-to-r/', here::here()))
+setwd(sprintf('%s/course-material/statistikk-med-r/', here::here()))
 library(haven)
 komp_ordning <- read_dta('kompensasjonsordning.dta')
 head(komp_ordning)
@@ -196,36 +196,692 @@ head(komp_ordning)
 
 # Deskriptiv statistikk
 
-_beskrive_ data
-_visualisere_ data
+## Deskriptiv statistikk {.flexbox .vleft .extraspace}
 
-* intro til dplyr?
+1. **Beskrive data** 
+    + basefunksjoner i R
+2. **Visualisere data**
+    + basefunksjoner i R og pakken `ggplot2`
+3. **(Mild introduksjon til) datavasking**
 
-Sjekk fila
-dim()
-str()
-nrow()
-ncol()
 
-Sentraltendens?
-gjennomsnitt
-median
-modus
+**To andre mye brukte pakker i R**
 
-Funksjoner
-quantile()
-summary()
-min()
-max()
-mean()
+* `dplyr` og `tidyverse`
 
-Visualisering
-hist()
-boxplot()
+# Beskrive data
 
-hist(data) + rug(data) rett etterpå!
+## Repetisjon av noen funksjoner {.flexbox .vleft}
 
-boxplot(pm25 ~ region, data = pollution, col = 'red')
+* `dim()` : dimensjoner i datasettet
+* `nrow()` og `ncol()` : antall rader og kolonner
+* `str()` : struktur
+* `head()`: øverste del av datasett
+* `tail()`: nederste del av datasett
+
+## Enveis og toveis tabeller  {.flexbox .vleft}
+
+* `table(x, ...)` 
+* `aggregate(x, by, FUN)`
+
+```{r, echo=FALSE, eval=FALSE}
+
+table(x, ...,          # Data
+      useNA = 'ifany'  # Inkludering av missing  
+      )
+
+aggregate(x,           # Data
+          by,          # Liste over grupperingsvariabler
+          FUN          # Funksjon som skal brukes
+          )
+```
+
+
+## Enveis og toveis tabeller - table()
+
+```{r, echo=FALSE, eval=FALSE}
+
+table(x, ...,          # Data
+      useNA = 'ifany'  # Inkludering av missing  
+      )
+```
+
+```{r, echo=FALSE}
+carseats <- ISLR::Carseats
+carseats$Urban[35:44] <- NA
+```
+
+```{r, echo=TRUE, eval=TRUE}
+# Frekvenstabell over antall Urbane lokasjoner
+table(carseats$Urban)
+```
+
+```{r, echo=TRUE, eval=TRUE}
+# Inkluder missing
+table(carseats$Urban, useNA = 'ifany')
+```
+
+## Enveis og toveis tabeller - table()
+
+```{r, echo=TRUE, eval=TRUE}
+# Lage et tabellobjekt 
+tbl <- table(carseats$Urban, carseats$ShelveLoc)
+
+# Bruker proportions() med margin = 1 for andeler fordelt på radene
+proportions(tbl, margin = 1)
+```
+
+```{r, echo=FALSE}
+carseats <- ISLR::Carseats
+```
+
+
+## Enveis og toveis tabeller - aggregate()
+
+```{r, echo=TRUE, eval=FALSE}
+
+aggregate(x,           # Data frame
+          by,          # Liste over grupperingsvariabler
+          FUN          # Funksjon som skal brukes
+          )
+```
+
+* Aggregere verdier i en data frame
+* Output er en data frame
+
+## Enveis og toveis tabeller - aggregate()
+```{r, echo=TRUE, eval=TRUE}
+# Vi aggregerer gjennomsnittlig salg fordelt på Urban og ShelveLoc (kvalitet på hylleplassering)
+aggregate(carseats$Sales, 
+          by = list(UrbanPop = carseats$Urban, Hylleplassering = carseats$ShelveLoc), 
+          FUN = mean)
+```
+## Enveis og toveis tabeller - aggregate()
+```{r, echo=TRUE, eval=TRUE}
+# Vi kan også lage en ny aggregert data frame
+
+agg_salg <- aggregate(carseats$Sales, 
+                      list(UrbanPop = carseats$Urban, 
+                           Hylleplassering = carseats$ShelveLoc), 
+                      mean, na.rm = TRUE)
+
+colnames(agg_salg)[colnames(agg_salg) == 'x'] <- 'Snitt_Salg'
+
+head(agg_salg)
+```
+
+## Enveis og toveis tabeller - aggregate()
+
+```{r, echo=TRUE, eval=TRUE, warning=FALSE}
+# Også mulig å aggregere på hele datasettet
+aggregate(carseats, list(Hylleplassering = carseats$ShelveLoc), mean, na.rm=TRUE)
+```
+
+## Sentraltendens og spredning {.flexbox .vleft}
+
+Vennlig påminnelse om målenivå
+
++---------------+---------------+----------------+-----------+
+| Type data     | Målenivå      | Sentraltendens | Spredning |
++===============+===============+================+===========+
+| Kategoriske   | Nominal       | Modus          | Ingen     |
+|               |               |                |           |
+|               | Ordinal       | Modus, median  | IQR       |
+|               |               |                |           |   
++---------------+---------------+----------------+-----------+
+| Kontinuerlige | Intervall/    | Modus          | Range     |
+|               |               |                |           |
+|               | Forholdstall  | Median         | Varians   |
+|               |               |                |           |
+|               |               | Gjennomsnitt   | Std.dev   |
+|               |               |                |           |
+|               |               |                | IQR       |
++---------------+---------------+----------------+-----------+
+
+## `summary()`
+
+```{r, echo=TRUE, eval=TRUE}
+# Data frame summary, her utvalgte kolonner
+summary(carseats[, 1:4])
+
+# En vektor i en dataframe
+summary(carseats$Sales)
+
+```
+
+## `summary()`
+
+```{r, echo=TRUE, eval=TRUE}
+# En vektor
+konk_pris <- carseats$CompPrice
+summary(konk_pris)
+```
+
+## Sentraltendens
+
+```{r, echo=TRUE, eval=TRUE}
+
+# Median
+median(carseats$Sales)
+
+# Gjennomsnitt
+mean(carseats$Sales)
+
+```
+
+## Sentraltendens
+
+Husk argumentet `na.rm`!
+```{r, echo=TRUE, eval=TRUE}
+# En vektor hvor minst én verdi er missing
+x <- c(1:15, NA, 17:20)
+```
+
+```{r, echo=TRUE, eval=TRUE}
+mean(x)
+
+mean(x, na.rm = TRUE)
+
+```
+
+## Spredning OPPDATER
+
+```{r, echo=TRUE, eval=TRUE}
+#range(carseats$Sales) # plus max-min for ekte range
+
+#quantile(carseats$Sales)
+
+#IQR(carseats$Sales)
+
+#sd(carseats$Sales)
+
+```
+
+
+## Oversikt over noen funksjoner
+
++-------------------------+-------------------------------------+
+| Funksjon                | Beskrivelse                         |
++=========================+=====================================+
+| summary(x)              | Oppsummerende deskriptiv statistikk |
++-------------------------+-------------------------------------+
+| min(x), max(x)          | Min- og maksverdier                 |                   |
++-------------------------+-------------------------------------+
+| mean(x), median(x)      | Gjennomsnitt og median              |
++-------------------------+-------------------------------------+
+| range(x)                | Min- og maksverdier                 |
++-------------------------+-------------------------------------+
+| IQR(x)                  | Avstanden mellom Q1 og Q3           |
++-------------------------+-------------------------------------+
+| quantile(x)             | Kvartiler   |
++-------------------------+-------------------------------------+
+| sd(x)                   | Standardavvik                       |                 
++-------------------------+-------------------------------------+
+
+
+## Visualisere - base R {.flexbox .vleft}
+
+* `hist(x, ...)`
+* `boxplot(x, ...)`
+* `plot(x, y, ...)`
+
+```{r, echo=FALSE, eval=FALSE}
+
+# Histogram
+hist(x, 
+     breaks = n,
+     freq = TRUE,
+     main = "Tittel", 
+     ...)
+
+# Boxplot
+boxplot(x, ...)
+
+boxplot(x1~x2,
+        data = df, 
+        ...)
+
+```
+
+## Histogram {.flexbox .vleft}
+
+```{r, echo=TRUE, eval=TRUE}
+hist(carseats$Sales)
+```
+
+## Histogram
+
+```{r, echo=TRUE, eval=TRUE}
+# Endre antallet intervaller (bins/breaks)
+hist(carseats$Sales, breaks = 15)
+```
+
+## Histogram
+```{r, echo=TRUE, eval=TRUE}
+# Endre fra frekvenser til 'density'
+hist(carseats$Sales, freq = FALSE)
+```
+
+## Histogram
+```{r, echo=TRUE, eval=TRUE}
+hist(carseats$Sales, main = "Antall solgte bilseter (1000)")
+rug(carseats$Sales, main = "Antall solgte bilseter (1000)")
+```
+
+## Boxplot
+
+```{r, echo=TRUE, eval=TRUE}
+boxplot(carseats$Sales)
+```
+
+## Boxplot
+
+```{r, echo=TRUE, eval=TRUE}
+boxplot(Sales~ShelveLoc, data = carseats)
+```
+
+## Boxplot
+
+```{r, echo=TRUE, eval=TRUE}
+boxplot(Sales~ShelveLoc, data = carseats, col = "steelblue")
+```
+
+## Boxplot
+
+```{r, echo=TRUE, eval=TRUE}
+boxplot(Sales~ShelveLoc, data = carseats, col = "steelblue", 
+        main = "Salg fordelt på hylleplassering")
+```
+
+## Oppgaver
+
+Bruk datasettet om kompensasjonsordningen
+
+1. Oppgave 1
+2. Oppgave 2
+3. Oppgave 3
+4. Oppgave 4
+5. Oppgave 5
+
+## Visualisering - `ggplot2` {.flexbox .vleft .extraspace}
+
+* Uendelige muligheter for enkle og kompliserte visualiseringer som ser bra ut
+* Se gjerne [ggplot2 cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
+
+```{r, echo=TRUE, eval=FALSE}
+ggplot(data,    # data
+       aes(  
+         x,     # x-aksen
+         y,     # y-aksen
+         ...    # (mange) andre argumenter
+       )) +
+  geom_*() +   # hvordan datapunktene skal vises og hvilke egenskaper de skal ha
+  stat_*() +   # visualisering av transformasjoner
+  scale_*() +  # hvordan plottet visualiserer verdiene
+  theme_*()    # tema
+```
+
+## En meget mangelfull oversikt OPPDATER/KUTT {.flexbox .vleft .extraspace}
+
+ggplot(data, aes(x, y, **color**, **alpha**, **size**,  **shape**, ...))
+
++ geom_: _point()_, _line()_, _bar()_, _boxplot()_, _area()_ ...
+
+* Geometries kan også gis ulike egenskaper
+   - geom_point(**alpha**, **size**, **color**, ...)
+
+
+## ggplot2 - Stegvis eksempel
+
+```{r, echo=TRUE, eval=TRUE, fig.align='right'}
+ggplot(carseats, aes(x = Sales, y = Price))
+
+```
+
+## ggplot2 - Stegvis eksempel
+
+```{r, echo=TRUE, eval=TRUE, fig.align='right'}
+ggplot(carseats, aes(x = Sales, y = Price)) + geom_point()
+
+```
+
+## ggplot2 - Stegvis eksempel
+
+```{r, echo=TRUE, eval=TRUE, fig.align='right'}
+ggplot(carseats, aes(x = Sales, y = Price, color = Urban)) + geom_point()
+```
+
+## ggplot2 - Stegvis eksempel
+
+```{r, echo=TRUE, eval=FALSE}
+ggplot(carseats, aes(x = Sales, y = Price, col = Urban)) + geom_point() +
+  stat_smooth()
+```
+
+## ggplot2 - Stegvis eksempel
+
+```{r, echo=FALSE, eval=TRUE, fig.align='right'}
+ggplot(carseats, aes(x = Sales, y = Price, col = Urban)) + geom_point() +
+  stat_smooth()
+```
+
+## ggplot2 - Stegvis eksempel
+
+```{r, echo=TRUE, eval=FALSE}
+ggplot(carseats, aes(x = Sales, y = Price, col = Urban)) + 
+  geom_point(alpha = 0.3) + 
+  stat_smooth()
+```
+
+## ggplot2 - Stegvis eksempel
+
+```{r, echo=FALSE, eval=TRUE, fig.align='right'}
+ggplot(carseats, aes(x = Sales, y = Price, col = Urban)) + 
+  geom_point(alpha = 0.3) + 
+  stat_smooth()
+```
+
+## ggplot2 - Stegvis eksempel
+
+```{r, echo=TRUE, eval=FALSE}
+ggplot(carseats, aes(x = Sales, y = Price, col = Urban)) + 
+  geom_point(alpha = 0.3) + 
+  stat_smooth() +
+  theme_minimal()
+```
+
+## ggplot2 - Stegvis eksempel
+
+```{r, echo=FALSE, eval=TRUE, fig.align='right'}
+ggplot(carseats, aes(x = Sales, y = Price, col = Urban)) + 
+  geom_point(alpha = 0.3) + 
+  stat_smooth() +
+  theme_minimal()
+```
+
+## ggplot2 - Stegvis eksempel
+
+```{r, echo=TRUE, eval=FALSE}
+ggplot(carseats, aes(x = Sales, y = Price, col = Urban)) + 
+  geom_smooth(alpha = 0.3) + 
+  theme_minimal()
+```
+
+## ggplot2 - Stegvis eksempel
+
+```{r, echo=FALSE, eval=TRUE}
+ggplot(carseats, aes(x = Sales, y = Price, col = Urban)) + 
+  geom_smooth(alpha = 0.3) + 
+  theme_minimal()
+```
+
+## Legg til et kult eksempel bare for å vise
+
+## Et til kult eksempel bare for å vise
+
+## Oppgaver
+Bruk data om kompensasjonsordningen
+
+1. x
+2. y
+3.
+4.
+5.
+
+
+# (Mild introduksjon til) datavasking
+## Data er ofte _dirty_ {.flexbox .vleft}
+
+Menneskelige og tekniske feil fører til _dirty data_
+
+* Datavasking er noe av det viktigste vi gjør
+* Bli godt kjent med egne data
+* Planlegg god tid til datavasking
+
+## Dirty data - vanlige sjekker {.flexbox .vleft}
+
+* Missing data 
+* Datatype
+* Range
+* Duplikater
+* Samsvar på tvers
+* Tekstvariabler
+
+
+## Missing data - et uunngåelig problem {.flexbox .vleft .extraspace}
+
++-------------------------------+----------------------------------------+-------------------------+
+| Type missing data             | Beskrivelse                            | Eksempel                |
++===============================+========================================+=========================+
+| Helt tilfeldig                | Ingen sammenheng med andre observerte/ | Feil på blodtrykksmåler |
+|                               |  uobserverte verdier                   | i blodtrykksstudie      |
+| _Missing completely at random_|                                        |                         |
++-------------------------------+----------------------------------------+-------------------------+
+| Betinget tilfeldig            | Sammenheng med andre _observerte_      | Yngre møter opp         |
+|                               | verdier                                | sjeldnere enn eldre     |  
+| _Missing at random_           |                                        |                         |
++-------------------------------+----------------------------------------+-------------------------+
+| Ikke-tilfeldig                | Sammenheng med andre _uobserverte_     | Eldre med høyt blodtrykk|
+|                               | verdier                                | møter sjeldnere enn     |  
+| _Missing not at random_       |                                        | andre eldre             |
++-------------------------------+----------------------------------------+-------------------------+
+
+## Håndtering av missing data {.flexbox .vleft .extraspace}
+
+*  Droppe observasjoner
+*  Imputere (fylle inn verdier) basert på
+    - statistiske mål (gjennomsnitt, median)
+    - kjennskap til dataene
+    - algoritmer/maskinlæring
+
+* Ikke én løsning, avhenger av
+    - hvor godt du kjenner data
+    - type missing du antar at du har
+
+## Missing data - funksjoner i R MÅ OPPDATERES
+
+* Missing data i R: `NA`, `NaN` 
+* Kan også være 99 og 0
+* `visdat` - en pakke for visualisering av missing data
+* `naniar`
+
+* `is.na()`
+* `anyNA()`
+* `sapply(df, anyNA)`
+* NA + anything gir NA (hovedregel)
+
+```{r, eval=TRUE, echo=TRUE}
+# Finne ut 
+```
+
+## Et eksempeldatasett
+
+```{r, eval=TRUE, echo=FALSE}
+dato <- c('01/03/2020', '01/04/2020', '01/05/2020', '01/06/2020', '01/07/2020', '01/08/2020', '01/09/2020', '01/10/2020','01/11/2020','01/12/2020')
+hk <- data.frame(
+  navn = c(rep('Ove', 10), rep('Eivor', 10), rep('Lars', 10)),
+  alder = c(rep(36, 10) , rep(33, 8), 104,NA, rep(29, 8), NA, 58),
+  dato = rep(dato, 3),
+  stemning = c('OK', 'Glad', 'Superglad', 'Glad', 'Langt nede','Nede', 'Superglad', 'Langt nede','OK', 'Glad', 'Nede','Nede', 'Superglad', 'Langt nede','Glad', 'Langt nede', 'Glad', 'Langt nede','Nede', 'Superglad', 'Langt nede', 'OK', 'Superglad', 'Glad', 'nede','nede', 'Glad', 'OK', 'Ok', 'langt nede')
+)
+
+hk <- rbind(hk, hk[rep(1,5),])
+hk$dato[13] <- '01/05/2023'
+```
+
+Humøret til Ove, Eivor og Lars i perioden 01.03.2020-01.12.2020
+
+```{r, eval=TRUE, echo=TRUE}
+str(hk)
+```
+
+## Datatype
+```{r, eval=TRUE, echo=TRUE}
+# Sjekker datatypen til dato
+class(hk$dato)
+
+# Ser på noen av verdiene
+hk$dato[1:5]
+
+```
+
+## En kort tur innom håndtering av datoer {.flexbox .vleft}
+
+Vi må fortelle R hvilket format datostrengene har
+
+* `?strptime` for oversikt over formatangivelser
+* `as.Date(x, format)` for å konvertere til dato
+* `as.POSIXct(x, format)` for å konvertere til datetime
+
+## En kort tur innom håndtering av datoer {.flexbox .vleft}
+
+| Tekstdato                 | Format               |       
+| --------------------------|:--------------------:|
+| "01/03/2020"              | `%d/%m/%Y`           |
+| "20200301"                | `%Y%m%d`             |
+| "1. mar 2020"             | `%d. %b %Y`          |
+| "1. mars 2020 15:17:23"   | `%d. %B %Y %H:%M:%S` |
+| "01-03-20 14:14"          | `%d-%m-%y %H:%M`     | 
+
+## En kort tur innom håndtering av datoer
+
+```{r, eval=TRUE, echo=TRUE}
+# Konvertere til dato med as.Date() 
+dato <- as.Date('01.03.2020', format = "%d.%m.%Y")
+dato
+
+# Konverterer til datetime med as.POSIXct()
+datetime <- as.POSIXct('01.03.2020 13:09', format = "%d.%m.%Y %H:%M")
+datetime
+
+```
+
+## Datatype
+```{r, eval=TRUE, echo=TRUE}
+# hk$dato[1:3]
+hk$dato2 <- as.Date(hk$dato, format = '%d/%m/%Y')
+hk$dato2 [1:5]
+
+# Sjekker datatype
+class(hk$dato2)
+```
+
+## Range-problematikk
+```{r, eval=TRUE, echo=TRUE}
+# Faller alle verdiene innenfor riktig intervall?
+range(hk$dato2)
+
+# Finner observasjonen(e) med dato lengre fram i tid enn 01.12.2020
+which(hk$dato2 > as.Date('2020-12-01'))
+```
+
+## Range-problematikk
+```{r, eval=TRUE, echo=TRUE}
+# Ser på denne observasjonen
+hk[13,]
+
+```
+
+```{r, eval=TRUE, echo=TRUE}
+# I dette tilfellet endre til det som sannsynligvis er den riktige datoen
+hk$dato2[13] <- as.Date('2020-05-01')
+```
+
+## Duplikater {.flexbox .vleft .extraspace}
+
+Kjenn observasjonsenheten
+ 
+Nyttige funksjoner
+
+* `unique()`
+* `length()`
+* `duplicated()`
+* `table()`
+
+## Duplikater
+
+```{r, eval=TRUE, echo=TRUE}
+# Printer ut unike verdier i en vektor
+unique(hk$navn)
+
+# Antall unike verdier i en vektor
+length(unique(hk$navn))
+```
+
+## Duplikater
+
+```{r, eval=TRUE, echo=TRUE}
+# Sjekker om navnekolonnen har duplikater
+duplicated(hk$navn)
+
+# Antall duplikater for navn
+table(duplicated(hk$navn))
+```
+
+## Duplikater
+
+```{r, eval=TRUE, echo=TRUE}
+# Vi kan sjekke for fulle duplikater
+table(duplicated(hk))
+
+# Ser på de duplikate radene
+hk[duplicated(hk), ]
+
+```
+
+## Duplikater
+
+```{r, eval=TRUE, echo=TRUE}
+# Lager et nytt datasett uten duplikater
+hk_vasket <- hk[!duplicated(hk),]
+
+# Sjekker at det ikke er noen duplikater
+table(duplicated(hk_vasket))
+```
+
+## Tekstvariabler
+
+| Beskrivelse                                       | Funksjon(er)         |       
+| --------------------------------------------------|:--------------------:|
+| Slå sammen tekststrenger                          | `paste`, `paste0`    |
+| Fjern mellomrom fra starten/slutten av en streng  | `trimws`             |
+| Finn antall tegn i en tekststreng                 | `nchar`              |
+| Split elementer i en tekststreng                  | `strsplit`           |
+| Konverter en streng til store/små bokstaver       | `toupper`, `tolower` | 
+| Hent ut eller erstatt deler av en tekststreng     | `substr`, `substring`|
+
+## Tekstvariabler
+
+```{r, eval=TRUE, echo=TRUE}
+# Unike verdier av stemning-variabelen
+unique(hk_vasket$stemning)
+
+# Konverterer til små bokstaver
+hk_vasket$stemning <- tolower(hk_vasket$stemning)
+unique(hk_vasket$stemning)
+```
+
+## Regulære uttrykk {.flexbox .vleft .extrapace}
+
+* **Regulære uttrykk** er en nyttig metode for å finne og behandle ulike *mønstre* i tekststrenger 
+
+* Kan brukes på tvers av en rekke ulike programmeringsspråk 
+
+* For en interaktiv innføring gå til [regex101.com](https://regex101.com/)
+
+* Se [Regular Expressions as used in R](https://stat.ethz.ch/R-manual/R-devel/library/base/html/regex.html) 
+for en oversikt over regulære uttrykk i R
+
+* Vi legger ved fjorårets slides om regulære uttrykk
+
+
+## Oppgave
+1. Les inn datasettet carseats_dirty.R med `readRDS(carseats_dirty.R)`
+2. Oppgave 2
+3. Oppgave 3
+4. Oppgave 4
+5. Oppgave 5
+
 
 
 # Regresjonsbaserte modeller
