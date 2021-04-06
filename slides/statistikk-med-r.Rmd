@@ -33,6 +33,29 @@ library(haven); library(tibble); library(ggplot2)
 
 ## Rask repetisjon
 
+Datatyper | Datastrukturer
+=|=
+Heltall (integers) | Vektor
+Numerisk (float og double) | Lister
+Tekst (character) | Matrise
+Logisk (logical) | Data frame
+
+## Rask repetisjon - subsetting
+
+**For vektorer bruker vi indeks**:
+
+```{r, echo=TRUE}
+min.vektor <- rep(1,100,2)
+min.vektor[4:6]
+```
+
+
+**For matriser og data frame bruker vi rad og kolonne-indeks**:
+
+```{r, echo=TRUE}
+min.matrise <- matrix(1:100, ncol = 5)
+min.matrise[2:4, 1:3]
+```
 
 
 # Importere data
