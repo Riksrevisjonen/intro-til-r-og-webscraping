@@ -526,8 +526,22 @@ boxplot(Sales~ShelveLoc, data = carseats, col = "steelblue",
 ## Plot
 
 ```{r, echo=TRUE, eval=TRUE}
-plot(Sales~ShelveLoc, data = carseats, col = "steelblue", 
-        main = "Salg fordelt på hylleplassering")
+plot(carseats$Sales, carseats$Price)
+```
+
+## Plot
+
+```{r, echo=TRUE, eval=TRUE}
+plot(carseats$Sales, carseats$Price, 
+     panel.first = lines(stats::lowess(carseats$Sales, carseats$Price)))
+```
+
+## Plot
+
+```{r, echo=TRUE, eval=TRUE}
+plot(carseats$Sales, carseats$Price, 
+     panel.first = lines(stats::lowess(carseats$Sales, carseats$Price)),
+     xlab = "Sales", ylab = "Price")
 ```
 
 ## Visualisering - `ggplot2` {.flexbox .vleft .extraspace}
