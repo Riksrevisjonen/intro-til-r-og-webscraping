@@ -1107,9 +1107,86 @@ carseats <- read.csv(
 1. Oppgave 1
 2. Oppgave 2
 
-## Logistiske modeller
+# Logistisk regresjon
 
-glm()
+## Motivasjon for logistiske modeller
+
+```{r, eval=TRUE, echo=FALSE}
+Default <- ISLR::Default
+```
+
+```{r, eval=TRUE, echo=FALSE}
+layout(mat = matrix(1:3, nrow = 1), heights = rep(1, 3), widths = c(2, 1, 1))
+par(bg = 'transparent')
+plot(
+  income~balance,
+  col = ifelse(default == 'Yes', 'chocolate', 'lightskyblue'),
+  pch = ifelse(default == 'Yes', 3, 1),
+  cex = .7,
+  data = Default,
+  xlab = 'Balance',
+  ylab = 'Income')
+boxplot(
+  balance~default,
+  data = Default,
+  col = c('lightskyblue', 'chocolate'),
+  xlab = 'Default',
+  ylab = 'Balance')
+boxplot(
+  income~default,
+  data = Default,
+  col = c('lightskyblue', 'chocolate'),
+  xlab = 'Default',
+  ylab = 'Income')
+```
+
+## Lineær vs. logistisk regresjon
+
+```{r, eval=TRUE, echo=FALSE}
+default.num <- ifelse(Default$default == 'Yes', 1, 0)
+
+lm.mod <- lm(default.num ~ balance, data = Default)
+logit.mod <- glm(default ~ balance, data = Default, family = binomial)
+lm.preds <- predict(lm.mod, Default)
+logit.preds <- predict(logit.mod, Default, type = 'response')
+
+par(mfrow = c(1, 2), bg = 'transparent')
+
+plot(
+  Default$balance, default.num, col = 'gold', pch = 3,
+  xlab = 'Balance', ylab = 'Sannsynlighet for default',
+  main = 'Lineær modell', cex = .8
+)
+abline(h = 1, lty = 2)
+abline(h = 2, lty = 2)
+abline(coefficients(lm.mod), col = 'steelblue', lwd = 2)
+
+plot(
+  Default$balance, default.num, col = 'gold', pch = 3,
+  xlab = 'Balance', ylab = 'Sannsynlighet for default',
+  main = 'Logistisk model', cex = .8
+)
+abline(h = 1, lty = 2)
+abline(h = 2, lty = 2)
+lines(
+  Default$balance[order(logit.preds)],
+  logit.preds[order(logit.preds)],
+  lwd = 2, col = 'steelblue'
+)
+```
+
+
+## {.small-code}
+
+```{r}
+logit.mod <- glm(default ~ balance, data = Default, family = binomial)
+summary(logit.mod)
+```
+
+## Tolkning av koeffisientene
+
+
+
 
 # Predict-funksjonen
 
