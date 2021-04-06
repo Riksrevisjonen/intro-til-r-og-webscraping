@@ -205,7 +205,7 @@ head(komp_ordning)
 3. **(Mild introduksjon til) datavasking**
 
 
-**Noen nevnbare pakker**
+**Noen nevnbare pakker som ikke dekkes**
 
 * `dplyr` og `tidyverse`
 * `data.table`
@@ -523,121 +523,89 @@ boxplot(Sales~ShelveLoc, data = carseats, col = "steelblue",
         main = "Salg fordelt på hylleplassering")
 ```
 
+## Plot
+
+```{r, echo=TRUE, eval=TRUE}
+plot(Sales~ShelveLoc, data = carseats, col = "steelblue", 
+        main = "Salg fordelt på hylleplassering")
+```
 
 ## Visualisering - `ggplot2` {.flexbox .vleft .extraspace}
 
 * Uendelige muligheter for enkle og kompliserte visualiseringer som ser bra ut
-* Se gjerne [ggplot2 cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
+* Krever at man lærer seg syntaksen
+* Eget kurs i ggplot2 på [Datacamp](https://www.datacamp.com)
+* [ggplot2 cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
+* [R Graph Gallery](https://www.r-graph-gallery.com/ggplot2-package.html)
+
+## ggplot2 - Histogram
+
+```{r, echo=FALSE, eval=TRUE, warning=FALSE, message=FALSE}
+library(hrbrthemes)
+ggplot(carseats, aes(Sales)) + 
+  geom_histogram(binwidth = 2, fill="#69b3a2", color="#e9ecef", alpha=0.8) + 
+  ggtitle("Histogram - Salg av bilseter (1000)") + 
+  theme_ipsum() +
+  theme(plot.title = element_text(size = 12))
+```
+
+## ggplot2 - Histogram kode
 
 ```{r, echo=TRUE, eval=FALSE}
-ggplot(data,    # data
-       aes(  
-         x,     # x-aksen
-         y,     # y-aksen
-         ...    # (mange) andre argumenter
-       )) +
-  geom_*() +   # hvordan datapunktene skal vises og hvilke egenskaper de skal ha
-  stat_*() +   # visualisering av transformasjoner
-  scale_*() +  # hvordan plottet visualiserer verdiene
-  theme_*()    # tema
+library(hrbrthemes)
+ggplot(carseats, aes(Sales)) + 
+  geom_histogram(binwidth = 2, fill="#69b3a2", color="#e9ecef", alpha=0.8) + 
+  ggtitle("Histogram - Salg av bilseter (1000)") + 
+  theme_ipsum() +
+  theme(plot.title = element_text(size = 12))
 ```
 
-## En meget mangelfull oversikt OPPDATER/KUTT {.flexbox .vleft .extraspace}
+## ggplot2 - Boxplot
 
-ggplot(data, aes(x, y, **color**, **alpha**, **size**,  **shape**, ...))
-
-+ geom_: _point()_, _line()_, _bar()_, _boxplot()_, _area()_ ...
-
-* Geometries kan også gis ulike egenskaper
-   - geom_point(**alpha**, **size**, **color**, ...)
-
-
-## ggplot2 - Stegvis eksempel
-
-```{r, echo=TRUE, eval=TRUE, fig.align='right'}
-ggplot(carseats, aes(x = Sales, y = Price))
-
+```{r, echo=FALSE, eval=TRUE, warning=FALSE, message=FALSE}
+library(hrbrthemes)
+ggplot(carseats, aes(ShelveLoc, Sales)) + 
+  geom_boxplot(fill="#69b3a2", alpha=0.9) + 
+  ggtitle("Boxplot - Salg av bilseter (1000) fordelt på hylleplassering") + 
+  theme_ipsum() +
+  theme(plot.title = element_text(size = 10))
 ```
 
-## ggplot2 - Stegvis eksempel
-
-```{r, echo=TRUE, eval=TRUE, fig.align='right'}
-ggplot(carseats, aes(x = Sales, y = Price)) + geom_point()
-
-```
-
-## ggplot2 - Stegvis eksempel
-
-```{r, echo=TRUE, eval=TRUE, fig.align='right'}
-ggplot(carseats, aes(x = Sales, y = Price, color = Urban)) + geom_point()
-```
-
-## ggplot2 - Stegvis eksempel
+## ggplot2 - Boxplot kode
 
 ```{r, echo=TRUE, eval=FALSE}
-ggplot(carseats, aes(x = Sales, y = Price, col = Urban)) + geom_point() +
-  stat_smooth()
+library(hrbrthemes)
+ggplot(carseats, aes(ShelveLoc, Sales)) + 
+  geom_boxplot(fill="#69b3a2", alpha=0.9) + 
+  ggtitle("Boxplot - Salg av bilseter (1000) fordelt på hylleplassering") + 
+  theme_ipsum() +
+  theme(plot.title = element_text(size = 10))
 ```
 
-## ggplot2 - Stegvis eksempel
 
-```{r, echo=FALSE, eval=TRUE, fig.align='right'}
-ggplot(carseats, aes(x = Sales, y = Price, col = Urban)) + geom_point() +
-  stat_smooth()
-```
+## ggplot2 - Scatterplot
 
-## ggplot2 - Stegvis eksempel
-
-```{r, echo=TRUE, eval=FALSE}
-ggplot(carseats, aes(x = Sales, y = Price, col = Urban)) + 
+```{r, echo=FALSE, eval=TRUE, warning=FALSE, message=FALSE}
+library(hrbrthemes)
+ggplot(carseats, aes(x = Sales, y = Price, color = Urban)) + 
   geom_point(alpha = 0.3) + 
-  stat_smooth()
-```
-
-## ggplot2 - Stegvis eksempel
-
-```{r, echo=FALSE, eval=TRUE, fig.align='right'}
-ggplot(carseats, aes(x = Sales, y = Price, col = Urban)) + 
-  geom_point(alpha = 0.3) + 
-  stat_smooth()
-```
-
-## ggplot2 - Stegvis eksempel
-
-```{r, echo=TRUE, eval=FALSE}
-ggplot(carseats, aes(x = Sales, y = Price, col = Urban)) + 
-  geom_point(alpha = 0.3) + 
+  ggtitle("Sales vs. Price med LOESS-kurve") +
   stat_smooth() +
-  theme_minimal()
+  theme_ipsum() +
+  theme(plot.title = element_text(size = 10))
 ```
 
-## ggplot2 - Stegvis eksempel
+## ggplot2 - Scatterplot kode
 
-```{r, echo=FALSE, eval=TRUE, fig.align='right'}
-ggplot(carseats, aes(x = Sales, y = Price, col = Urban)) + 
+```{r, echo=TRUE, eval=FALSE, warning=FALSE}
+library(hrbrthemes)
+ggplot(carseats, aes(x = Sales, y = Price, color = Urban)) + 
   geom_point(alpha = 0.3) + 
+  ggtitle("Sales vs. Price med LOESS-kurve") +
   stat_smooth() +
-  theme_minimal()
+  theme_ipsum() +
+  theme(plot.title = element_text(size = 10))
 ```
-
-## ggplot2 - Stegvis eksempel
-
-```{r, echo=TRUE, eval=FALSE}
-ggplot(carseats, aes(x = Sales, y = Price, col = Urban)) + 
-  geom_smooth(alpha = 0.3) + 
-  theme_minimal()
-```
-
-## ggplot2 - Stegvis eksempel
-
-```{r, echo=FALSE, eval=TRUE}
-ggplot(carseats, aes(x = Sales, y = Price, col = Urban)) + 
-  geom_smooth(alpha = 0.3) + 
-  theme_minimal()
-```
-
-## Legg til et kult eksempel bare for å vise
-https://www.r-graph-gallery.com/ggplot2-package.html
 
 ## Oppgaver
 
@@ -929,7 +897,7 @@ table(duplicated(hk_vasket))
 unique(hk_vasket$stemning)
 
 # Konverterer til små bokstaver
-hk_vasket$stemning <- tolower(hk_vasket$stemning)
+hk_vasket$stemning <- tolower(hk_vasket$stemning) %>% trimws()
 unique(hk_vasket$stemning)
 ```
 
@@ -947,12 +915,13 @@ for en oversikt over regulære uttrykk i R
 * Vi legger ved fjorårets slides om regulære uttrykk
 
 
-## Oppgave
-1. Les inn datasettet carseats_dirty med `readRDS(carseats_dirty.RDS)`
-2. Oppgave 2
-3. Oppgave 3
-4. Oppgave 4
-5. Oppgave 5
+## Oppgaver
+
+Les inn datasettet `komp_oppgave.RDS` med `komp_oppgave <- readRDS('komp_oppgave.RDS')`
+
+1. Hvilke kolonner i `komp_oppgave` har missingverdier?
+2. Hvor mange missing er det i datasettet?
+3. Hvilken datatype har `variabel` og `variabel`?
 
 
 
