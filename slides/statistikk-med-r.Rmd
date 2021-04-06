@@ -971,6 +971,7 @@ $$\bar{Y}$$
 * R håndterer kategoriske variabler med datatypen `factor`
 * Frem til versjon 4, ble alle tekstkolonner automatisk importer om `factor` og ikke `character`
 * Faktorvariabler kan brukes direkte i regresjonsmodeller _uten_ omkoding (det opprettes automatisk k-1 dummyvariabler)
+* Vi kan se dummyvariablene R oppretter med funksjonen `contrasts()`
 
 ## Enkel regresjonsmodell
 
@@ -1025,14 +1026,69 @@ lm(medv ~ lstat * age, data = Boston)
 ## Samspill
 
 ```{r}
-#samspill.mod <- lm()
+samspill.mod <- lm(medv ~ lstat * age, data = Boston)
+summary(samspill.mod)
 ```
 
 
 ## Transformasjoner
 
-## Skalerte variabler
+```{r}
+trans.mod <- lm(medv ~ lstat + I(lstat^2), data = Boston)
+summary(trans.mod)
+```
 
+## Transformasjoner
+
+```{r}
+trans.mod2 <- lm(medv ~ poly(lstat, 4), data = Boston)
+summary(trans.mod2)
+```
+
+## Transformasjoner
+
+```{r}
+trans.mod3 <- lm(medv ~ log(rm), data = Boston)
+summary(trans.mod3)
+```
+
+
+## Standardisering
+
+Håndtere at ulike variabler har ulik måleenhet
+I regresjonsanalyser kan vi se på de standardiserte beta-koeffisientene, men enkelte algoritmer er sensitive for målenivå (forskjellig resultat om en variabel er målt i kroner eller dollar)
+Gjennomsnitt på 0 og standardavvik på 1
+God praksis å skalere variabler
+I R kan vi gjøre dette med funksjonen `scale()`
+
+## Standardisering
+
+```{r, echo=TRUE}
+lstat <- Boston$lstat
+mean(lstat); sd(lstat)
+```
+
+```{r, echo=TRUE}
+lstat.scaled <- as.vector(scale(lstat))
+mean(lstat.scaled); sd(lstat.scaled)
+```
+
+
+## Oppgaver
+
+```{r, eval=FALSE, echo=TRUE}
+carseats <- read.csv('carseats.csv', stringsAsFactors = TRUE)
+```
+
+
+```{r, eval=TRUE, echo=FALSE}
+carseats <- read.csv(
+  sprintf('%s/course-material/statistikk-med-r/carseats.csv', here::here()),
+  stringsAsFactors = TRUE)
+```
+
+1. Oppgave 1
+2. Oppgave 2
 
 ## Logistiske modeller
 
