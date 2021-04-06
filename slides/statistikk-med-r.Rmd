@@ -540,7 +540,7 @@ plot(Sales~ShelveLoc, data = carseats, col = "steelblue",
 
 ## ggplot2 - Histogram
 
-```{r, echo=FALSE, eval=TRUE}
+```{r, echo=FALSE, eval=TRUE, warning=FALSE, message=FALSE}
 library(hrbrthemes)
 ggplot(carseats, aes(Sales)) + 
   geom_histogram(binwidth = 2, fill="#69b3a2", color="#e9ecef", alpha=0.8) + 
@@ -548,7 +548,6 @@ ggplot(carseats, aes(Sales)) +
   theme_ipsum() +
   theme(plot.title = element_text(size = 12))
 ```
-
 
 ## ggplot2 - Histogram kode
 
@@ -563,7 +562,7 @@ ggplot(carseats, aes(Sales)) +
 
 ## ggplot2 - Boxplot
 
-```{r, echo=FALSE, eval=TRUE}
+```{r, echo=FALSE, eval=TRUE, warning=FALSE, message=FALSE}
 library(hrbrthemes)
 ggplot(carseats, aes(ShelveLoc, Sales)) + 
   geom_boxplot(fill="#69b3a2", alpha=0.9) + 
@@ -572,7 +571,7 @@ ggplot(carseats, aes(ShelveLoc, Sales)) +
   theme(plot.title = element_text(size = 10))
 ```
 
-# ggplot2 - Boxplot kode
+## ggplot2 - Boxplot kode
 
 ```{r, echo=TRUE, eval=FALSE}
 library(hrbrthemes)
@@ -586,7 +585,7 @@ ggplot(carseats, aes(ShelveLoc, Sales)) +
 
 ## ggplot2 - Scatterplot
 
-```{r, echo=FALSE, eval=TRUE, warning=FALSE}
+```{r, echo=FALSE, eval=TRUE, warning=FALSE, message=FALSE}
 library(hrbrthemes)
 ggplot(carseats, aes(x = Sales, y = Price, color = Urban)) + 
   geom_point(alpha = 0.3) + 
@@ -595,6 +594,7 @@ ggplot(carseats, aes(x = Sales, y = Price, color = Urban)) +
   theme_ipsum() +
   theme(plot.title = element_text(size = 10))
 ```
+
 ## ggplot2 - Scatterplot kode
 
 ```{r, echo=TRUE, eval=FALSE, warning=FALSE}
