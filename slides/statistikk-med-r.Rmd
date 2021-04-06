@@ -929,13 +929,132 @@ Les inn datasettet `komp_oppgave.RDS` med `komp_oppgave <- readRDS('komp_oppgave
 
 ## Lineære modeller
 
-lm()
+$$Y=\alpha+\beta_1x_1+\beta_2x_2+\epsilon$$
+
+$$\bar{Y}$$
+
+## Formelobjektet
+
+## Kategoriske variabler (factor)
+
+* R håndterer kategoriske variabler med datatypen `factor`
+* Frem til versjon 4, ble alle tekstkolonner automatisk importer om `factor` og ikke `character`
+* Faktorvariabler kan brukes direkte i regresjonsmodeller _uten_ omkoding (det opprettes automatisk k-1 dummyvariabler)
+
+## Enkel regresjonsmodell
+
+* Vi kan bruke den innebygde funksjonen `lm()` for å lage en regresjonsmodell
+* Vi bruker formelobjektet for å spesifisere modellen
+* Hvis vi kjører funksjonen direkte, får vi ut koeffisientene til modellen
+* Vi kan også lagre modellen til et eget objekt som vi kan jobbe videre med
+
+## Enkel regresjonsmodell (2)
+
+Eksempel:
+
+```{r, eval=FALSE, echo=TRUE}
+library(MASS)
+lm.mod <- lm(medv ~ crim, data = Boston)
+summary(lm.mod)
+```
+
+## Enkel regresjonsmodell (3)
+
+```{r, eval=TRUE, echo=FALSE}
+library(MASS)
+lm.mod <- lm(medv ~ crim, data = Boston)
+summary(lm.mod)
+```
+
+coef()
+confint()
+
+predict(mod, data, interval='confidence')
+
+
+## Multippel regresjonsmodell
+
+$$Y=\alpha+\beta_1x_1+\beta_2x_2...\beta_nx_n+\epsilon$$
+
+* Vi kan gå fra en enkel regresjonsmodell til en multippel regresjonsmodell ved å utvide formelobjektet
+* For en vanlig additiv modell, bruker vi `+` for å legge til uavhengige variabler i modellen
+
+Eksempel
+
+```{r}
+lm(medv ~ lstat * age, data = Boston)
+```
+
+
+## Oppdatere modeller
+
+## Vurdere modeller
+
+
+## Samspill
+
+```{r}
+#samspill.mod <- lm()
+```
+
+
+## Transformasjoner
+
+## Skalerte variabler
+
 
 ## Logistiske modeller
 
 glm()
 
 # Predict-funksjonen
+
+## Predict
+
+```{r, eval=FALSE}
+# Lage modell
+mod <- lm()
+# Bruke modell
+preds <- predict(mod, data)
+
+```
+
+## Prediksjon på nye data
+
+```{r, eval=TRUE, echo=FALSE}
+default <- ISLR::Default
+```
+
+
+```{r}
+set.seed(42)
+x <- runif(nrow(default), 0, 1)
+x <- ifelse(x < .7, TRUE, FALSE)
+table(x)
+```
+
+## Prediksjon på nye data
+
+```{r}
+default.trening <- default[x,]
+default.test <- default[!x,]
+```
+
+```{r}
+mod <- glm(default ~ balance, data = default.trening, family = 'binomial')
+preds <- predict(mod, default.test, type = 'response')
+preds <- factor(ifelse(preds > .5, 'Yes', 'No'))
+```
+
+```{r}
+table(preds, default.test$default)
+```
+
+```{r}
+caret::confusionMatrix(table(preds, default.test$default))
+```
+
+
 
 ## Nyttige pakker
 
