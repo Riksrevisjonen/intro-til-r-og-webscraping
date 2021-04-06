@@ -64,6 +64,7 @@ Du kan undersøke filstrukturen med funksjonen `readLines()`:
 readLines('carseats.csv', n = 3)
 ```
 
+
 ```{r, eval=TRUE, echo=FALSE, warning=FALSE}
 setwd(sprintf('%s/course-material/statistikk-med-r/', here::here()))
 readLines('carseats.csv', n = 3)
@@ -79,6 +80,7 @@ Vi kan lese inn _kommaseparerte_ filer med `read.csv()` og _semikolonseparerte f
 df <- read.csv('carseats.csv')
 print(df[1:5, 1:8])
 ```
+
 
 ```{r, eval=TRUE, echo=FALSE, warning=FALSE}
 setwd(sprintf('%s/course-material/statistikk-med-r/', here::here()))
@@ -389,11 +391,8 @@ mean(x, na.rm = TRUE)
 ## Spredning
 
 ```{r, echo=TRUE, eval=TRUE}
-# Funksjonen range() gir min og maks-verdi
-range(carseats$Price)
-
-# Range: avstanden mellom min og maks
-max(carseats$Price)-min(carseats$Price) 
+# Funksjonen diff kombinert med range() gir min og maks-verdi
+diff(range(carseats$Price))
 
 # Kvartiler/persentiler
 quantile(carseats$Price)
@@ -436,9 +435,9 @@ sd(carseats$Sales)
 | sd(x)                   | Standardavvik                       |                 
 +-------------------------+-------------------------------------+
 
-## Oppgaver {.flexbox .vleft}
+## Oppgaver - Deskriptiv statistikk {.flexbox .vleft. .extraspace}
 
-Les inn datasettet `komp_oppgave.RDS` med `komp_oppgave <- readRDS('komp_oppgave.RDS')`
+Les inn datasettet `komp_oppg.RDS` med `komp_oppgave <- readRDS('komp_oppg.RDS')`
 
 1. Lag en frekvenstabell basert på `sektorkode`.
 2. Bruk `aggregate()` og `sum()` til å summere `belop` fordelt på `sektorkode`.
@@ -495,6 +494,40 @@ hist(carseats$Sales, freq = FALSE)
 hist(carseats$Sales, main = "Antall solgte bilseter (1000)")
 rug(carseats$Sales, main = "Antall solgte bilseter (1000)")
 ```
+
+## Data skew(ed) - what to do?
+
+```{r, echo=FALSE, eval=TRUE}
+komp_oppg <- readRDS('C:/Users/eho/Documents/git/intro-til-r-og-webscraping/course-material/statistikk-med-r/komp_oppg.RDS')
+Sales <- komp_oppg$fastekostnader/1000
+```
+
+```{r, echo=TRUE, eval=TRUE, warning = FALSE, message = FALSE}
+# Hva hvis fordelingen i Sales var veldig skjev?
+hist(Sales, breaks = 15)
+rug(Sales, breaks = 15)
+```
+
+## Data skew(ed) - what to do?
+
+```{r, echo=TRUE, eval=TRUE, warning = FALSE, message = FALSE}
+# En løsning er å logtransformere data
+hist(log10(Sales), breaks = 15)
+rug(log10(Sales), breaks = 15)
+```
+
+## Data skew(ed) - what to do?
+
+```{r, echo=TRUE, eval=TRUE, warning = FALSE, message = FALSE}
+round(10^(c(1.5, 2.5, 3.0, 3.5)))
+```
+
+```{r, echo=FALSE, eval=TRUE, warning = FALSE, message = FALSE}
+# En løsning er å logtransformere data
+hist(log10(Sales), breaks = 15)
+rug(log10(Sales), breaks = 15)
+```
+
 
 ## Boxplot
 
@@ -619,15 +652,19 @@ ggplot(carseats, aes(x = Sales, y = Price, color = Urban)) +
   theme(plot.title = element_text(size = 10))
 ```
 
-## Oppgaver
+## Oppgaver - Visualisering {.flexbox .vleft .extraspace}
 
-Les inn datasettet `komp_oppgave.RDS` med `komp_oppgave <- readRDS('komp_oppgave.RDS')`
+Les inn datasettet `komp_oppgave.RDS` med `readRDS('komp_oppg.RDS')`.
 
-1. Lag et boxplot med `boxplot()`
-2. Lag et boxplot med `ggplot()`
-3. Oppgave 3
-4. Oppgave 4
-5. Oppgave 5
+1. Lag en variabel `belop_1000` som viser beløp i 1000 kroner
+2. Lag et histogram av `belop_1000` og bruk funksjonen `rug()` rett etterpå 
+    + Hvordan vil du beskrive fordelingen?
+    + Hva kan du gjøre med variabelen for å visualisere data bedre?
+    + Lag histogrammet på nytt
+3. Lag et boxplot med `belop_1000` fordelt på `sektorkode`
+    + Hvordan kan du forbedre boxplottet?
+    + Lag boxplottet på nytt
+4. Hva er `ggplot2`?
 
 
 # (Mild introduksjon til) datavasking
