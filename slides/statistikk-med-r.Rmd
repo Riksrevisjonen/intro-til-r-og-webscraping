@@ -18,37 +18,36 @@ set.seed(42)
 library(haven); library(tibble); library(ggplot2)
 ```
 
-# Oversikt over kurset
-
 ## Oversikt over kurset
 
 * Importere data til R
   - Import av data
   - Eksport av data
-* Deskriptiv statistikk med R eksplorativ analyse
+* Deskriptiv statistikk med R
   - Eksplorerende analyse
   - Håndtering av missing
   - Mild introduksjon til å vaske data
 * Modellbygging i R
+  - Lineær regresjon
+  - Logistisk regresjon
 
-## Rask repetisjon
+## Rask repetisjon: _datatyper og strukturer_
 
-Datatyper | Datastrukturer
-=|=
-Heltall (integers) | Vektor
-Numerisk (float og double) | Lister
-Tekst (character) | Matrise
-Logisk (logical) | Data frame
+| Datatyper | Datastrukturer |
+|:---------:|:--------------:|
+| Heltall (integers) | **Vektor** |
+| Numerisk (float og double) | **Lister** |
+| Tekst (character) | **Matrise** |
+| Logisk (logical) | **Data frame** |
 
-## Rask repetisjon - subsetting
+## Rask repetisjon: _subsetting_
 
 **For vektorer bruker vi indeks**:
 
 ```{r, echo=TRUE}
-min.vektor <- rep(1,100,2)
+min.vektor <- seq(1, 100, 2)
 min.vektor[4:6]
 ```
-
 
 **For matriser og data frame bruker vi rad og kolonne-indeks**:
 
@@ -57,6 +56,21 @@ min.matrise <- matrix(1:100, ncol = 5)
 min.matrise[2:4, 1:3]
 ```
 
+## Rask repetisjon: _funksjoner_
+
+* Funksjoner kan ha ett eller flere _argumenter_
+* Argumenter kan være _posisjonsbaserte_ eller _navngitte_
+* Få informasjon om argumenter med `args()` og hjelp til bruk av funksjonen med `?`
+* Noen funksjoner er _vektoriserte_
+
+## Rask repetisjon: _kontrollflyt_
+
+* Test for likhet med `==` og ulikhet med `!=`
+* Bruk `%in%` for å sjekke om `x` er inkludert i `y` (`x %in% y`), og finn det motsatte med `!(x %in y)`
+* Sjekk for større enn `>`, større eller lik `>=`, mindre enn `<` og mindre eller lik `<=`
+* R har de logiske operatorene `&` for **og**, `|` for **eller** og `!` for **ikke**
+* Vi kan skrive betinget kode med `if (betingelse) { kode hvis sann } else { kode hvis ikke sann }`
+* Funksjonen `ifelse()` er en vektorisert funksjon som tester for én betingelse
 
 # Importere data
 
@@ -86,7 +100,6 @@ Du kan undersøke filstrukturen med funksjonen `readLines()`:
 # Leser de tre første linjene av fila
 readLines('carseats.csv', n = 3)
 ```
-
 
 ```{r, eval=TRUE, echo=FALSE, warning=FALSE}
 setwd(sprintf('%s/course-material/statistikk-med-r/', here::here()))
@@ -1020,7 +1033,7 @@ $$\bar{Y}$$
 * Hvis vi kjører funksjonen direkte, får vi ut koeffisientene til modellen
 * Vi kan også lagre modellen til et eget objekt som vi kan jobbe videre med
 
-## Enkel regresjonsmodell (2)
+## Enkel regresjonsmodell (2) {.small-code}
 
 Eksempel:
 
@@ -1030,7 +1043,7 @@ lm.mod <- lm(medv ~ crim, data = Boston)
 summary(lm.mod)
 ```
 
-## Enkel regresjonsmodell (3)
+## Enkel regresjonsmodell (3) {.small-code}
 
 ```{r, eval=TRUE, echo=FALSE}
 library(MASS)
@@ -1038,12 +1051,48 @@ lm.mod <- lm(medv ~ crim, data = Boston)
 summary(lm.mod)
 ```
 
-coef()
-confint()
+## 
 
-predict(mod, data, interval='confidence')
+```{r}
+coef(lm.mod)
+confint(lm.mod)
+```
 
 
+##
+
+```{r}
+mod.preds <- predict(lm.mod, Boston, interval='confidence')
+head(mod.preds)
+```
+
+## RMSE, R<sup>2</sup> og F-statistikken
+
+```{r}
+anova(lm.mod)
+```
+
+
+## Standardisering
+
+* Det er ofte god praksis å standardisere variabler i en analyse for å håndtere ulike måleenheter
+* Med standardisering, skaleres variablene slik at de har et gjennomsnitt på 0 og et standardavvik på 1
+* Standardiserte variabler gjør det lettere å tolke koeffisientene i regresjonsanalysene (R rapporterer ikke betakoeffisienter som standard), og andre modeller er sensitive for ulike måleenheter
+* I R kan vi standardisere variabler med funksjonen `scale()`
+
+## Standardisering
+
+```{r, echo=TRUE}
+lstat <- Boston$lstat
+paste('Snitt:', round(mean(lstat), 3))
+paste('Std.avvik:', round(sd(lstat), 3))
+```
+
+```{r, echo=TRUE}
+lstat.scaled <- as.vector(scale(lstat))
+paste('Snitt:', round(mean(lstat.scaled), 3))
+paste('Std.avvik:', round(sd(lstat.scaled), 3))
+```
 ## Multippel regresjonsmodell
 
 $$Y=\alpha+\beta_1x_1+\beta_2x_2...\beta_nx_n+\epsilon$$
@@ -1057,62 +1106,76 @@ Eksempel
 lm(medv ~ lstat * age, data = Boston)
 ```
 
+## Eksempel {.small-code}
+
+```{r, echo=TRUE}
+mult.mod <- lm(medv ~ ., data = Boston)
+summary(mult.mod)
+```
 
 ## Oppdatere modeller
 
-## Vurdere modeller
+```{r}
+# Fjerne age fra modellen
+mult.mod <- update(mult.mod, ~ . -age)
+mult.mod <- update(mult.mod, ~ . -indus)
+```
 
-
-## Samspill
+## Samspill {.small-code}
 
 ```{r}
 samspill.mod <- lm(medv ~ lstat * age, data = Boston)
 summary(samspill.mod)
 ```
 
-
-## Transformasjoner
+## Transformasjoner {.small-code}
 
 ```{r}
 trans.mod <- lm(medv ~ lstat + I(lstat^2), data = Boston)
 summary(trans.mod)
 ```
 
-## Transformasjoner
+## Transformasjoner {.small-code}
 
 ```{r}
 trans.mod2 <- lm(medv ~ poly(lstat, 4), data = Boston)
 summary(trans.mod2)
 ```
 
-## Transformasjoner
+## Transformasjoner {.small-code}
 
 ```{r}
 trans.mod3 <- lm(medv ~ log(rm), data = Boston)
 summary(trans.mod3)
 ```
 
+## Vurdere modeller
 
-## Standardisering
+* Lineære parametre
+* Tilfeldig utvalg
+* Ikke perfekt kolinearitet
+* Feilleddet har forventing lik 0
+* Feilleddet har konstant varianse gitt de øvrige uavhengige variablene (homoskedastitet)
 
-Håndtere at ulike variabler har ulik måleenhet
-I regresjonsanalyser kan vi se på de standardiserte beta-koeffisientene, men enkelte algoritmer er sensitive for målenivå (forskjellig resultat om en variabel er målt i kroner eller dollar)
-Gjennomsnitt på 0 og standardavvik på 1
-God praksis å skalere variabler
-I R kan vi gjøre dette med funksjonen `scale()`
+## Multikolinearitet
 
-## Standardisering
+* Kolinearitet i modellen reduserer nøyaktighetene i regresjonskoeffisisentene
+Vi kan undersøke multikolinearitet med _variance inflation factor_ eller VIF
+* I R kan vi bruke funksjonen `vif()` fra pakken `car`
+* Minste verdi for VIF er 1, verdier over 10 (noen mener 5) er en indikasjon på problematisk kolinearitet i data
 
-```{r, echo=TRUE}
-lstat <- Boston$lstat
-mean(lstat); sd(lstat)
+## Multikolinearitet
+
+```{r}
+#vif()
 ```
 
-```{r, echo=TRUE}
-lstat.scaled <- as.vector(scale(lstat))
-mean(lstat.scaled); sd(lstat.scaled)
-```
+## Diagnostiske plot
 
+```{r, eval=TRUE, echo=FALSE}
+par(mfrow=c(2,2), bg='transparent')
+plot(lm.mod)
+```
 
 ## Oppgaver
 
@@ -1198,32 +1261,57 @@ lines(
 )
 ```
 
+## Logistisk regresjon i R
+
+* I R bruker vi funksjonen `glm()` (generalized linear models) for å bygge en logistisk regresjonsmodell
+* `glm()` støtter en rekke modeller, inkludert logistisk gjennom argumentet `familiy`
+* `glm()` kan også brukes til vanlige lineære modeller slik som med `lm()`
 
 ## {.small-code}
 
-```{r}
+```{r, eval=TRUE, echo=TRUE}
 logit.mod <- glm(default ~ balance, data = Default, family = binomial)
 summary(logit.mod)
 ```
 
 ## Tolkning av koeffisientene
 
+$$\hat{p}(X)=\frac{e^{\hat{\beta_0}}+\hat{\beta_1}X_1}{1+e^{\hat{\beta_0}}+\hat{\beta_1}X_1}=\frac{e^{-10.6513+0.0055\times1000}}{1+e^{-10.6513+0.0055\times1000}}=0.00576$$
 
-
-
-# Predict-funksjonen
-
-## Predict
-
-```{r, eval=FALSE}
-# Lage modell
-mod <- lm()
-# Bruke modell
-preds <- predict(mod, data)
-
+```{r, echo=TRUE}
+predict(logit.mod, data.frame(balance = 1000), type = 'response')[[1]]
 ```
 
+
+$$\hat{p}(X)=\frac{e^{\hat{\beta_0}}+\hat{\beta_1}X_1}{1+e^{\hat{\beta_0}}+\hat{\beta_1}X_1}=\frac{e^{-10.6513+0.0055\times2000}}{1+e^{-10.6513+0.0055\times2000}}=0.586$$
+
+```{r, echo=TRUE}
+predict(logit.mod, data.frame(balance = 2000), type = 'response')[[1]]
+```
+
+## Oppgaver
+
+# Estimere _nye_ data
+
+## Estimering av nye data
+
+* Vi har allerede sett hvordan vi kan finne estimert verdi med `predict()`-funksjonen
+* Denne funksjonen kan også benyttes til å estimere _nye_ data
+* Dette er den grunnleggende funksjonen for maskinlæring i R!
+* Vi skal her se på noen veldig forenklede eksempler på bruk av `predict()` for å estimere nye data
+
+## Fremgangsmåte
+
+1. Splitte datasettet tilfeldig i et _treningsdatasett_ og et _testdatasett_
+2. Bygge en modell på _treningsdatasettet_
+3. Estimere verdier på _testdatasettet_
+4. Evaluere modellens presisjon på _testdatasettet_
+
 ## Prediksjon på nye data
+
+Vi starter med å lage en vektor med tilfeldige tall fra en _uniform_ distribusjon.
+
+Denne kan vi bruke for å splitte datasettet. Vi gir alle verdier som er mindre enn `0.7` verdien `TRUE` og alle andre verdien `FALSE`. Dette bør gi oss (omtrent) en 70/30 splitt av data.
 
 ```{r, eval=TRUE, echo=FALSE}
 default <- ISLR::Default
@@ -1234,7 +1322,7 @@ default <- ISLR::Default
 set.seed(42)
 x <- runif(nrow(default), 0, 1)
 x <- ifelse(x < .7, TRUE, FALSE)
-table(x)
+addmargins(table(x))
 ```
 
 ## Prediksjon på nye data
@@ -1245,7 +1333,7 @@ default.test <- default[!x,]
 ```
 
 ```{r}
-mod <- glm(default ~ balance, data = default.trening, family = 'binomial')
+mod <- glm(default ~ ., data = default.trening, family = 'binomial')
 preds <- predict(mod, default.test, type = 'response')
 preds <- factor(ifelse(preds > .5, 'Yes', 'No'))
 ```
@@ -1258,9 +1346,6 @@ table(preds, default.test$default)
 caret::confusionMatrix(table(preds, default.test$default))
 ```
 
+## Oppgaver
 
 
-## Nyttige pakker
-
-* caret
-* mlbench
