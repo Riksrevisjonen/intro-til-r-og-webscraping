@@ -205,9 +205,10 @@ head(komp_ordning)
 3. **(Mild introduksjon til) datavasking**
 
 
-**To andre mye brukte pakker i R**
+**Noen nevnbare pakker**
 
 * `dplyr` og `tidyverse`
+* `data.table`
 
 # Beskrive data
 
@@ -290,13 +291,16 @@ aggregate(x,           # Data frame
 * Output er en data frame
 
 ## Enveis og toveis tabeller - aggregate()
+
 ```{r, echo=TRUE, eval=TRUE}
 # Vi aggregerer gjennomsnittlig salg fordelt på Urban og ShelveLoc (kvalitet på hylleplassering)
 aggregate(carseats$Sales, 
           by = list(UrbanPop = carseats$Urban, Hylleplassering = carseats$ShelveLoc), 
           FUN = mean)
 ```
+
 ## Enveis og toveis tabeller - aggregate()
+
 ```{r, echo=TRUE, eval=TRUE}
 # Vi kan også lage en ny aggregert data frame
 
@@ -362,10 +366,10 @@ summary(konk_pris)
 ```{r, echo=TRUE, eval=TRUE}
 
 # Median
-median(carseats$Sales)
+median(carseats$CompPrice)
 
 # Gjennomsnitt
-mean(carseats$Sales)
+mean(carseats$CompPrice)
 
 ```
 
@@ -384,16 +388,32 @@ mean(x, na.rm = TRUE)
 
 ```
 
-## Spredning OPPDATER
+## Spredning
 
 ```{r, echo=TRUE, eval=TRUE}
-#range(carseats$Sales) # plus max-min for ekte range
+# Funksjonen range() gir min og maks-verdi
+range(carseats$Price)
 
-#quantile(carseats$Sales)
+# Range: avstanden mellom min og maks
+max(carseats$Price)-min(carseats$Price) 
 
-#IQR(carseats$Sales)
+# Kvartiler/persentiler
+quantile(carseats$Price)
 
-#sd(carseats$Sales)
+quantile(carseats$Price, probs = 0.50)
+
+quantile(carseats$Price, probs = c(0.25, 0.50, 0.75))
+
+```
+
+## Spredning
+
+```{r, echo=TRUE, eval=TRUE}
+# IQR (Avstand mellom Q1 Q3)
+IQR(carseats$Price)
+
+# Standardavvik
+sd(carseats$Sales)
 
 ```
 
@@ -413,11 +433,21 @@ mean(x, na.rm = TRUE)
 +-------------------------+-------------------------------------+
 | IQR(x)                  | Avstanden mellom Q1 og Q3           |
 +-------------------------+-------------------------------------+
-| quantile(x)             | Kvartiler   |
+| quantile(x)             | Kvartiler                           |
 +-------------------------+-------------------------------------+
 | sd(x)                   | Standardavvik                       |                 
 +-------------------------+-------------------------------------+
 
+## Oppgaver {.flexbox .vleft. .extraspace}
+
+Les inn datasettet `komp_oppgave.RDS` med `komp_oppgave <- readRDS('komp_oppgave.RDS')`
+
+1. Lag en frekvenstabell basert på `sektorkode`.
+2. Bruk `aggregate()` og `sum()` til å summere `belop` fordelt på `sektorkode`.
+3. Finn median og gjennomsnitt til variabelen `belop`. Tolk.
+4. Bruk `quantile()`-funksjonen til å printe ut 25te og 75te persentil. Tolk.
+5. Finn IQR uten å bruke funksjonen IQR basert på tallene over.
+6. Får du det samme tallet med funksjonen `IQR()`?
 
 ## Visualisere - base R {.flexbox .vleft}
 
@@ -493,15 +523,6 @@ boxplot(Sales~ShelveLoc, data = carseats, col = "steelblue",
         main = "Salg fordelt på hylleplassering")
 ```
 
-## Oppgaver
-
-Bruk datasettet om kompensasjonsordningen
-
-1. Oppgave 1
-2. Oppgave 2
-3. Oppgave 3
-4. Oppgave 4
-5. Oppgave 5
 
 ## Visualisering - `ggplot2` {.flexbox .vleft .extraspace}
 
@@ -616,17 +637,17 @@ ggplot(carseats, aes(x = Sales, y = Price, col = Urban)) +
 ```
 
 ## Legg til et kult eksempel bare for å vise
-
-## Et til kult eksempel bare for å vise
+https://www.r-graph-gallery.com/ggplot2-package.html
 
 ## Oppgaver
-Bruk data om kompensasjonsordningen
 
-1. x
-2. y
-3.
-4.
-5.
+Les inn datasettet `komp_oppgave.RDS` med `komp_oppgave <- readRDS('komp_oppgave.RDS')`
+
+1. Lag et boxplot med `boxplot()`
+2. Lag et boxplot med `ggplot()`
+3. Oppgave 3
+4. Oppgave 4
+5. Oppgave 5
 
 
 # (Mild introduksjon til) datavasking
@@ -668,39 +689,92 @@ Menneskelige og tekniske feil fører til _dirty data_
 
 ## Håndtering av missing data {.flexbox .vleft .extraspace}
 
-*  Droppe observasjoner
-*  Imputere (fylle inn verdier) basert på
-    - statistiske mål (gjennomsnitt, median)
-    - kjennskap til dataene
-    - algoritmer/maskinlæring
+* *Droppe observasjoner*
+* *Imputere (fylle inn verdier)* basert på
+    + statistiske mål (gjennomsnitt, median)
+    + kjennskap til dataene
+    + algoritmer/maskinlæring
 
-* Ikke én løsning, avhenger av
-    - hvor godt du kjenner data
-    - type missing du antar at du har
+* *Løsningen avhenger av*
+    + hvor godt du kjenner data
+    + type missing du antar at du har
 
-## Missing data - funksjoner i R MÅ OPPDATERES
+## Missing data - funksjoner i R 
 
-* Missing data i R: `NA`, `NaN` 
-* Kan også være 99 og 0
-* `visdat` - en pakke for visualisering av missing data
-* `naniar`
-
-* `is.na()`
-* `anyNA()`
-* `sapply(df, anyNA)`
-* NA + anything gir NA (hovedregel)
+* Missingverdier i R: `NA`, `NaN` 
+* Vit hvilke eventuelle andre verdier i ditt datasett som er missing (eks. 99, 0)
 
 ```{r, eval=TRUE, echo=TRUE}
-# Finne ut 
+# Missing
+is.na(c(NA, NaN)) 
+
+# Ikke missing
+is.na(0)
+
 ```
 
-## Et eksempeldatasett
+## Missing data - funksjoner i R 
+```{r, eval=TRUE, echo=TRUE}
+alder <- c(27, 40, 34, 25, 57, 45, 87, NA, 38, NA, 90)
+
+# Elementvis test for missing i vektor alder
+is.na(alder)
+
+# Test for om alder inneholder missingverdier
+anyNA(alder)
+
+```
+
+
+## Missing data - funksjoner i R 
+
+```{r, eval=TRUE, echo=TRUE}
+# Hovedregel: NA + noe = NA
+mean(alder)
+
+# Fjern missingverdier når funksjonen kjøres
+mean(alder, na.rm = TRUE)
+
+# Fjern missingverdier fra alder
+na.omit(alder)
+
+```
+
+## Missing data - funksjoner i R 
+```{r, eval=TRUE, echo=TRUE}
+# Missingverdier i en data frame
+data("airquality")
+anyNA(airquality)
+
+# Antall verdier missing
+sum(is.na(airquality))
+
+```
+
+## Missing data - funksjoner i R 
+
+```{r, eval=TRUE, echo=TRUE}
+# Samme hovedregel
+sapply(airquality, mean)
+
+# Ekskluderer missingverdier når funksjoner kjøres
+sapply(airquality, mean, na.rm=TRUE)
+
+```
+
+## Missing data - visualisering
+
+```{r, eval=TRUE, echo=TRUE}
+naniar::vis_miss(airquality)
+```
+
+## Videre med datavasking
 
 ```{r, eval=TRUE, echo=FALSE}
 dato <- c('01/03/2020', '01/04/2020', '01/05/2020', '01/06/2020', '01/07/2020', '01/08/2020', '01/09/2020', '01/10/2020','01/11/2020','01/12/2020')
 hk <- data.frame(
   navn = c(rep('Ove', 10), rep('Eivor', 10), rep('Lars', 10)),
-  alder = c(rep(36, 10) , rep(33, 8), 104,NA, rep(29, 8), NA, 58),
+  alder = c(rep(36, 10) , rep(34, 8), NA ,NA, rep(29, 8), NA, 58),
   dato = rep(dato, 3),
   stemning = c('OK', 'Glad', 'Superglad', 'Glad', 'Langt nede','Nede', 'Superglad', 'Langt nede','OK', 'Glad', 'Nede','Nede', 'Superglad', 'Langt nede','Glad', 'Langt nede', 'Glad', 'Langt nede','Nede', 'Superglad', 'Langt nede', 'OK', 'Superglad', 'Glad', 'nede','nede', 'Glad', 'OK', 'Ok', 'langt nede')
 )
@@ -708,7 +782,7 @@ hk <- data.frame(
 hk <- rbind(hk, hk[rep(1,5),])
 hk$dato[13] <- '01/05/2023'
 ```
-
+Et eksempeldatasett
 Humøret til Ove, Eivor og Lars i perioden 01.03.2020-01.12.2020
 
 ```{r, eval=TRUE, echo=TRUE}
@@ -747,12 +821,10 @@ Vi må fortelle R hvilket format datostrengene har
 
 ```{r, eval=TRUE, echo=TRUE}
 # Konvertere til dato med as.Date() 
-dato <- as.Date('01.03.2020', format = "%d.%m.%Y")
-dato
+as.Date('01.03.2020', format = "%d.%m.%Y")
 
 # Konverterer til datetime med as.POSIXct()
-datetime <- as.POSIXct('01.03.2020 13:09', format = "%d.%m.%Y %H:%M")
-datetime
+as.POSIXct('01.03.2020 13:09', format = "%d.%m.%Y %H:%M")
 
 ```
 
@@ -876,7 +948,7 @@ for en oversikt over regulære uttrykk i R
 
 
 ## Oppgave
-1. Les inn datasettet carseats_dirty.R med `readRDS(carseats_dirty.R)`
+1. Les inn datasettet carseats_dirty med `readRDS(carseats_dirty.RDS)`
 2. Oppgave 2
 3. Oppgave 3
 4. Oppgave 4
