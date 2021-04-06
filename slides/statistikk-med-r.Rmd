@@ -64,7 +64,6 @@ Du kan undersøke filstrukturen med funksjonen `readLines()`:
 readLines('carseats.csv', n = 3)
 ```
 
-
 ```{r, eval=TRUE, echo=FALSE, warning=FALSE}
 setwd(sprintf('%s/course-material/statistikk-med-r/', here::here()))
 readLines('carseats.csv', n = 3)
@@ -80,7 +79,6 @@ Vi kan lese inn _kommaseparerte_ filer med `read.csv()` og _semikolonseparerte f
 df <- read.csv('carseats.csv')
 print(df[1:5, 1:8])
 ```
-
 
 ```{r, eval=TRUE, echo=FALSE, warning=FALSE}
 setwd(sprintf('%s/course-material/statistikk-med-r/', here::here()))
@@ -438,7 +436,7 @@ sd(carseats$Sales)
 | sd(x)                   | Standardavvik                       |                 
 +-------------------------+-------------------------------------+
 
-## Oppgaver {.flexbox .vleft. .extraspace}
+## Oppgaver {.flexbox .vleft}
 
 Les inn datasettet `komp_oppgave.RDS` med `komp_oppgave <- readRDS('komp_oppgave.RDS')`
 
