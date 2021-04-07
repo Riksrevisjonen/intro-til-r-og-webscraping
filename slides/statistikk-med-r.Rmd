@@ -1459,9 +1459,38 @@ $$\hat{p}(X)=\frac{e^{\hat{\beta_0}}+\hat{\beta_1}X_1}{1+e^{\hat{\beta_0}}+\hat{
 predict(logit.mod, data.frame(balance = 2000), type = 'response')[[1]]
 ```
 
+## Vurdere modellen: sensitivitet og spesifisitet
+
+Vi kan vurdere modellen ut fra hvor god den er til å korrekt identifisere sanne positive verdier og sanne negative verdier.
+
+```{r, echo=TRUE}
+glm.preds <- predict(logit.mod, Default, type = 'response')
+glm.preds <- factor(ifelse(glm.preds > .5, 'Yes', 'No'))
+addmargins(table(glm.preds, Default$default, dnn = c('Estimert', 'Observert')))
+```
+
+## Vurdere modellen: sensitivitet og spesifisitet
+
+```{r, eval=TRUE, echo=FALSE}
+addmargins(table(glm.preds, Default$default, dnn = c('Estimert', 'Observert')))
+```
+
+Sensitivitet: $100\times\frac{100}{333}=30,03003$
+
+Spesifisitet: $100\times\frac{9625}{9667}=99,56553$
+
+Nøyaktighet: $100\frac{100+9625}{10000}=97,25$
+
+Pakken `caret` er nyttig for å vurdere ulike logistiske modeller mot hverandre.
+
 ## Oppgaver
 
+```{r, eval=FALSE, echo=TRUE}
+Default <- ISLR::Default
+```
 
+1. Bygg en logistisk modell med `glm()` på datasettet `Default`. Bruk `default` som avhengig variabel og alle andre variabler som uavhengige variabler. Tilordne modellen til `glm.mod`. Husk å sette argumentet `family`
+2. 
 
 # Estimere _nye_ data
 
