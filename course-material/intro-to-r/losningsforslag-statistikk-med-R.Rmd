@@ -1,0 +1,50 @@
+---
+title: "Statistikk med R: løsningsforslag"
+output: pdf_document
+date: "`r format(Sys.Date(), '%e. %B %Y')`"
+---
+
+```{r setup, include=FALSE, error = TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Oppgave 1: R som kalkulator
+
+### Oppgave 2: Les inn Excel-fielr
+
+1. Last inn pakken `readxl` med `library(readxl)`
+2. Les inn fila `carseats.xlsx` som `carseats_excel` med `read_xlsx` fra pakken `readxl`
+3. Bruk `summary` på `carseats_excel`. Hva er median for variabelen `Price`?
+4. Les inn fila `carseats.xlsx` på nytt, men kun med de 30 første radene med data og de 5 første kolonnene i Excel-fila
+
+### Oppgave X: Lineær regresjon
+
+1. Lag en regresjonsmodell med `Sales` som avhengig variabel. Inkluder _alle_ andre variabler som uavhengige variabler. Tilordne modellen til `car.mod1`
+2. Hva er justert R<sup>2</sup> for modellen`?
+3. Hvilke variabler i modellen er ikke signifikante?
+4. Bygg en ny modell, enten med å bruke `lm()` på nytt, eller med `update()`, men uten variablene som ikke var signifikante (hint: husk at faktorvariabler håndteres på en spesiell måte i modeller). Tilordne modellen til `car.mod2`
+5. Sammenlign F-statistikken og R<sup>2</sup> i den nye modellen med den gamle. Har modellen blitt bedre eller dårligere med de utelatte variablene?
+
+```{r}
+car.mod1 <- lm(Sales ~ ., data = carseats)
+summary(car.mod1)
+car.mod2 <- update(car.mod1, ~ . -Population -Education -Urban -US)
+summary(car.mod2)
+```
+
+### Oppgave X: Predict
+
+```{r}
+set.seed(42)
+x <- runif(nrow(carseats), 0, 1) < .7
+car.train <- carseats[x,]
+car.test <- carseats[!x,]
+train.mod <- lm(Sales ~ CompPrice + Advertising + Price + ShelveLoc, data = car.train)
+train.pred <- predict(train.mod, car.train)
+err <- train.pred - car.train$Sales
+sqrt(mean(err^2))
+test.pred <- predict(train.mod, car.test)
+err <- test.pred - car.test$Sales
+sqrt(mean(err^2))
+```
+
