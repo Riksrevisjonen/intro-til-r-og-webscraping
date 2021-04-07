@@ -105,6 +105,15 @@ bokstaver
   - *semikolonseparerte filer*: vanlig i _Europa_ og som regel med filendelse `.csv` eller `.txt`
   - *tabulatorseparerte filer*: har som regel filendelse `.txt` eller `.tsv`
   
+## Les inn data med basefunksjoner {.flexbox .vleft}
+
+* R har innebygde funksjoner (fra `utils`) for å lese inn tekstbaserte filer
+* Vanligste dataformat for tabulære data er CSV
+* Vi kan lese inn tabulære data fra tekstfiler med `read.table`
+* Funksjonen `read.delim` er en variant av `read.table` som leser inn _tabulatorseparerte_ filer
+* Funksjonen `read.csv` er en variant av `read.table` som leser inn _kommaseparerte_ filer
+* Funksjonen `read.csv2` er en variant av `read.table` som leser inn _semikolonseparerte_ filer
+  
 ## Kommaseparerte filer
 
 Du kan undersøke filstrukturen med funksjonen `readLines()`:
@@ -163,7 +172,6 @@ Her er samme fil, men denne har en annen struktur:
 readLines('carseats.tsv', n = 3)
 ```
 
-
 ```{r, eval=TRUE, echo=FALSE, warning=FALSE}
 setwd(sprintf('%s/course-material/statistikk-med-r/', here::here()))
 readLines('carseats.tsv', n = 3)
@@ -171,14 +179,20 @@ readLines('carseats.tsv', n = 3)
 
 Legg merke til at første rad i fila inneholder _kolonnenavn_, men denne fila er _tabulatorseparert_ (`\t` er tegn for tabulator), det er ingen tekstkvalifikator, og `,` er brukt som desimaltegn.
 
-## Les inn data med basefunksjoner {.flexbox .vleft}
+## Tabulatorseparerte filer (2)
 
-* R har innebygde funksjoner (fra `utils`) for å lese inn tekstbaserte filer
-* Vanligste dataformat for tabulære data er CSV
-* Vi kan lese inn tabulære data fra tekstfiler med `read.table`
-* Funksjonen `read.delim` er en variant av `read.table` som leser inn _tabulatorseparerte_ filer
-* Funksjonen `read.csv` er en variant av `read.table` som leser inn _kommaseparerte_ filer
-* Funksjonen `read.csv2` er en variant av `read.table` som leser inn _semikolonseparerte_ filer
+Vi leser inn tabulatorseparerte filer med `read.delim()`:
+
+```{r, eval=TRUE, echo=FALSE, warning=FALSE}
+setwd(sprintf('%s/course-material/statistikk-med-r/', here::here()))
+df <- read.delim('carseats.tsv')
+print(df[1:5, 1:8])
+```
+
+```{r, eval=FALSE, echo=TRUE}
+df <- read.delim('carseats.tsv')
+print(df[1:5, 1:8])
+```
 
 ## Vanlige problemer {.flexbox .vleft}
 
