@@ -4,7 +4,7 @@
 #' date: "`r format(Sys.Date(), '%e. %B %Y')`"
 #' ---
 #' 
-#' Vi har allerede hentet inn objektet `nokeur_df` og gjort det tilgjengelig via `hjemmeoppgave.RData`. Hvis du vil hente det inn på egenhånd, kan du kjøre koden under:
+#' Til denne oppgaven skal vi bruke et datasett fra Norges Bank over kursforholdet mellom norske kroner og euro fra januar 2011 og frem til desember 2020. Det er mulig å laste dette datasettet direkte i semikolonseparert format fra Norges Banks åpne API. Kjør koden under for å hente data og gjøre noen enkle transformasjoner. Når du har gjort dette, skal objektet `nokeur_df` være tilgjengelig i ditt arbeidsmiljø (environment):
 
 nokeur_df <- read.csv2(paste0(
   'https://data.norges-bank.no/api/data/EXR/M.EUR.NOK.SP?format=csv&apisrc=nbi',
@@ -28,7 +28,9 @@ colnames(nokeur_df) <- c('Tid', 'Verdi')
 #'
 #' Bruk `plot` til å lage et linjediagram med kursen over tid. Husk at du kan få opp informasjon om `plot` med `?plot` og du kan få listet argumentene til `plot` med `args(plot)`. Du får linjediagram med å sette argumentet `type` til `l`.
 #' 
-#' Denne oppgaven kan være litt vanskelig, for datasettet er ikke umiddelbart godt tilrettelagt for å analysere data over _tid_. I kurset har vi sett at du kan endre datatyper i R med flere funksjoner som starter med `as.*`, for eksempel ved å endre `character` til `numeric` med `as.numeric("10")`. R har en funksjon for å endre datatype til _dato_ som heter `as.Date()`. Denne forventer en vektor av type `character` som input, og forstår som standard datoformatet `YYYY-MM-DD`. Funksjonen `paste()` slår sammen tekst i R.
+#' Denne oppgaven kan være litt vanskelig, for datasettet er ikke umiddelbart godt tilrettelagt for å analysere data over _tid_. I kurset har vi sett at du kan endre datatyper i R med flere funksjoner som starter med `as.*`, for eksempel ved å endre `character` til `numeric` med `as.numeric("10")`. R har en funksjon for å endre datatype til _dato_ som heter `as.Date()`. Denne forventer en vektor av type `character` som input, og forstår som standard datoformatet `YYYY-MM-DD`.
+#' 
+#'  Til denne oppgaven, er det også nyttig å vite hvordan du slår sammen flere tekstelementer til ett tekstelement. Funksjonen `paste()` slår sammen tekst i R.
 
 x <- 'hello'
 y <- 'world'
