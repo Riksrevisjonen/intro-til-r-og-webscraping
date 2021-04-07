@@ -18,22 +18,72 @@ set.seed(42)
 library(haven); library(tibble); library(ggplot2)
 ```
 
-# Oversikt over kurset
-
 ## Oversikt over kurset
 
 * Importere data til R
   - Import av data
   - Eksport av data
-* Deskriptiv statistikk med R eksplorativ analyse
+* Deskriptiv statistikk med R
   - Eksplorerende analyse
   - Håndtering av missing
   - Mild introduksjon til å vaske data
 * Modellbygging i R
+  - Lineær regresjon
+  - Logistisk regresjon
 
-## Rask repetisjon
+## Rask repetisjon: _datatyper og strukturer_
+
+| Datatyper | Datastrukturer |
+|:---------:|:--------------:|
+| Heltall (integers) | **Vektor** |
+| Numerisk (float og double) | **Lister** |
+| Tekst (character) | **Matrise** |
+| Logisk (logical) | **Data frame** |
+
+## Rask repetisjon: _subsetting_
+
+**For vektorer bruker vi indeks**:
+
+```{r, echo=TRUE}
+min.vektor <- seq(1, 100, 2)
+min.vektor[4:6]
+```
+
+**For matriser og data frame bruker vi rad og kolonne-indeks**:
+
+```{r, echo=TRUE}
+min.matrise <- matrix(1:100, ncol = 5)
+min.matrise[2:4, 1:3]
+```
+
+## Rask repetisjon: _subsetting_
+
+**For data frame kan vi også bruke `$` for navngitte kolonner**:
+
+```{r, eval=TRUE, echo=TRUE}
+df <- data.frame(tall = 1:20, bokstaver = letters[1:20])
+tall <- df$tall
+head(tall)
+bokstaver <- df$bokstaver[1:10]
+bokstaver
+```
 
 
+## Rask repetisjon: _funksjoner_
+
+* Funksjoner kan ha ett eller flere _argumenter_
+* Argumenter kan være _posisjonsbaserte_ eller _navngitte_
+* Få informasjon om argumenter med `args()` og hjelp til bruk av funksjonen med `?`
+* Noen funksjoner er _vektoriserte_
+
+## Rask repetisjon: _kontrollflyt_
+
+* Test for likhet med `==` og ulikhet med `!=`
+* Bruk `%in%` for å sjekke om `x` er inkludert i `y` (`x %in% y`), og finn det motsatte med `!(x %in y)`
+* Sjekk for større enn `>`, større eller lik `>=`, mindre enn `<` og mindre eller lik `<=`
+* R har de logiske operatorene `&` for **og**, `|` for **eller** og `!` for **ikke**
+* Vi kan skrive betinget kode med `if (betingelse) { kode hvis sann } else { kode hvis ikke sann }`
+* Funksjonen `ifelse()` er en vektorisert funksjon som tester for én betingelse
 
 # Importere data
 
@@ -55,6 +105,15 @@ library(haven); library(tibble); library(ggplot2)
   - *semikolonseparerte filer*: vanlig i _Europa_ og som regel med filendelse `.csv` eller `.txt`
   - *tabulatorseparerte filer*: har som regel filendelse `.txt` eller `.tsv`
   
+## Les inn data med basefunksjoner {.flexbox .vleft}
+
+* R har innebygde funksjoner (fra `utils`) for å lese inn tekstbaserte filer
+* Vanligste dataformat for tabulære data er CSV
+* Vi kan lese inn tabulære data fra tekstfiler med `read.table`
+* Funksjonen `read.delim` er en variant av `read.table` som leser inn _tabulatorseparerte_ filer
+* Funksjonen `read.csv` er en variant av `read.table` som leser inn _kommaseparerte_ filer
+* Funksjonen `read.csv2` er en variant av `read.table` som leser inn _semikolonseparerte_ filer
+  
 ## Kommaseparerte filer
 
 Du kan undersøke filstrukturen med funksjonen `readLines()`:
@@ -63,7 +122,6 @@ Du kan undersøke filstrukturen med funksjonen `readLines()`:
 # Leser de tre første linjene av fila
 readLines('carseats.csv', n = 3)
 ```
-
 
 ```{r, eval=TRUE, echo=FALSE, warning=FALSE}
 setwd(sprintf('%s/course-material/statistikk-med-r/', here::here()))
@@ -87,11 +145,6 @@ setwd(sprintf('%s/course-material/statistikk-med-r/', here::here()))
 df <- read.csv('carseats.csv')
 print(df[1:5, 1:8])
 ```
-
-## Kommaseparerte filer (3)
-
-Sjekk data med `str()`
-og `head()`
 
 ## Kommaseparerte filer (4)
 
@@ -119,7 +172,6 @@ Her er samme fil, men denne har en annen struktur:
 readLines('carseats.tsv', n = 3)
 ```
 
-
 ```{r, eval=TRUE, echo=FALSE, warning=FALSE}
 setwd(sprintf('%s/course-material/statistikk-med-r/', here::here()))
 readLines('carseats.tsv', n = 3)
@@ -129,14 +181,18 @@ Legg merke til at første rad i fila inneholder _kolonnenavn_, men denne fila er
 
 ## Tabulatorseparerte filer (2)
 
-## Les inn data med basefunksjoner {.flexbox .vleft}
+Vi leser inn tabulatorseparerte filer med `read.delim()`:
 
-* R har innebygde funksjoner (fra `utils`) for å lese inn tekstbaserte filer
-* Vanligste dataformat for tabulære data er CSV
-* Vi kan lese inn tabulære data fra tekstfiler med `read.table`
-* Funksjonen `read.delim` er en variant av `read.table` som leser inn _tabulatorseparerte_ filer
-* Funksjonen `read.csv` er en variant av `read.table` som leser inn _kommaseparerte_ filer
-* Funksjonen `read.csv2` er en variant av `read.table` som leser inn _semikolonseparerte_ filer
+```{r, eval=TRUE, echo=FALSE, warning=FALSE}
+setwd(sprintf('%s/course-material/statistikk-med-r/', here::here()))
+df <- read.delim('carseats.tsv')
+print(df[1:5, 1:8])
+```
+
+```{r, eval=FALSE, echo=TRUE}
+df <- read.delim('carseats.tsv')
+print(df[1:5, 1:8])
+```
 
 ## Vanlige problemer {.flexbox .vleft}
 
@@ -147,7 +203,7 @@ To vanlige problemer med å lese inn data:
 
 Løsninger:
 
-* Les inn data med argumentet `stringsAsFactors` satt til `FALSE`
+* Les inn data med argumentet `stringsAsFactors` satt til `FALSE` (fra og med R 4.0 er standardvalget endret til `FALSE` for dette argumentet!)
 * Tekstkodingen kan angis med `encoding`: `CP1252` er vanlig på Windows, mens `UTF-8` er vanlig på macOS og web (for det meste)
 * **Hvis du kan velge tekstkoding på rådata, velg alltid UTF-8**
 
@@ -156,9 +212,9 @@ Løsninger:
 **Husk at du kan bruke `?read.csv` for å få informasjon om funksjonen!**
 
 1. Les inn fila `carseats.csv` som `carseats` med `read.csv()`
-2. Bruk `head(carseats)` for å se de første observasjonene
+2. Bruk `head()` for å se de første observasjonene og `tail()` for å se de siste observasjonene
 3. Bruk `sum()` og `mean()` for å finne sum og gjennomsnitt på variablene `Sales` og `Price`
-4. Les inn fila på nytt som `carseats_chr` men uten konvertering av tekst til faktorer. Sjekk resultatet med `class(carseats_chr$Urban)`
+4. Les inn fila på nytt, men bruk argumentet `stringsAsFactors` og sett dette til `TRUE`. Ser du en forskjell i hvordan fila er lest inn (hint: bruk for eksempel funksjonen `str()`)
 
 ## readxl {.flexbox .vleft}
 
@@ -169,14 +225,17 @@ To viktige funksjoner:
 
 `read_excel()` støtter både `xlsx` og `xls`-filer, og vil gjette type basert på filnavn. Hvis du vet hvilket format du skal lese, kan du bruke `read_xls()` eller `read_xlsx()`
 
-## Oppgaver {.flexbox .vleft .extraspace}
+## readxl {.flexbox .vleft .extraspace}
 
-1. Last inn pakken `readxl` med `library(readxl)`
-2. Les inn fila `carseats.xlsx` som `carseats_excel` med `read_xlsx` fra pakken `readxl`
-3. Bruk `summary` på `carseats_excel`. Hva er median for variabelen `Price`?
-4. Er `carseats` og `carseats_excel` like? Hvorfor ikke?*
+* Du kan endre hvilket _ark_ som skal leses inn med argumentet `sheet`
+* Du kan bruke funksjonen `excel_sheets()` for å finne ut at hvilke ark som finnes i en fil
+* Du kan endre hvilket _område_ som leses inn med argumentet `range` (bruker standard cellereferanser i Excel, slik som `'A2:C20'`)
 
-* Hint: likhet kan vurderes med `identical`. Husk også funksjonene `class` og `str`.
+```{r, eval=FALSE, echo=TRUE}
+# Eksempel
+read_excel('carseats.xlsx', sheet = 'Sheet1', range = 'A1:G20')
+```
+
 
 ## Les inn data fra Stata
 
@@ -193,6 +252,13 @@ library(haven)
 komp_ordning <- read_dta('kompensasjonsordning.dta')
 head(komp_ordning)
 ```
+
+## Oppgaver {.flexbox .vleft .extraspace}
+
+1. Last inn pakken `readxl` med `library(readxl)`
+2. Les inn fila `carseats.xlsx` som `carseats_excel` med `read_xlsx` fra pakken `readxl`
+3. Bruk `summary` på `carseats_excel`. Hva er median for variabelen `Price`?
+4. Les inn fila `carseats.xlsx` på nytt, men kun med de 30 første radene med data og de 5 første kolonnene i Excel-fila
 
 # Deskriptiv statistikk
 
@@ -1056,7 +1122,7 @@ for en oversikt over regulære uttrykk i R
 * Vi legger ved fjorårets slides om regulære uttrykk
 
 
-## Oppgaver
+## Oppgaver {.flexbox .vleft}
 
 Les inn datasettet `komp_oppgave.RDS` med `readRDS('komp_oppgave.RDS')`
 
@@ -1069,22 +1135,30 @@ Les inn datasettet `komp_oppgave.RDS` med `readRDS('komp_oppgave.RDS')`
 
 # Regresjonsbaserte modeller
 
-## Lineære modeller
+## Lineære modeller {.flexbox .vleft}
 
-$$Y=\alpha+\beta_1x_1+\beta_2x_2+\epsilon$$
+$$Y=\alpha+\beta x+\epsilon$$
 
-$$\bar{Y}$$
+Hvor $\alpha$ er konstantleddet, $\beta$ er helningen og $\epsilon$ er feilleddet.
 
-## Formelobjektet
+**NB!** I disse slidene vil vi bruke uttrykket _avhengig variabel_ for $Y$ og _uavhengige variabler_ for $x$. I dokumentasjon for R kalles disse som regel _response_ og _predictors_.
 
-## Kategoriske variabler (factor)
+## Formelobjektet {.flexbox .vleft}
+
+* Modellfunksjonene i R bruker et spesielt _formelobjekt_
+* Formelobjektet spesifiserer med tegnet `~` i formen `y ~ x`
+* Formelobjektet kan brukes både for å bygge additive modeller, og for å legge til transformasjoner eller samspillsledd
+* Når du bruker formelobjektet med en data frame, holder det å spesifisere kolonnenavnene i formelen
+
+## Kategoriske variabler (factor) {.flexbox .vleft}
 
 * R håndterer kategoriske variabler med datatypen `factor`
-* Frem til versjon 4, ble alle tekstkolonner automatisk importer om `factor` og ikke `character`
+* Frem til versjon 4, ble alle tekstkolonner automatisk importer om `factor` og ikke `character`. For å lese inn tekstkolonner som faktorer setter du argumentet `stringsAsFactors` til `TRUE`
+* Tekstvariabler (og numeriske variabler) kan også kodes om til faktorer med funksjonen `factor()`
 * Faktorvariabler kan brukes direkte i regresjonsmodeller _uten_ omkoding (det opprettes automatisk k-1 dummyvariabler)
 * Vi kan se dummyvariablene R oppretter med funksjonen `contrasts()`
 
-## Enkel regresjonsmodell
+## Enkel regresjonsmodell {.flexbox .vleft}
 
 * Vi kan bruke den innebygde funksjonen `lm()` for å lage en regresjonsmodell
 * Vi bruker formelobjektet for å spesifisere modellen
@@ -1093,7 +1167,11 @@ $$\bar{Y}$$
 
 ## Enkel regresjonsmodell (2)
 
-Eksempel:
+Eksempel på datasettet `Boston` fra pakken `MASS`:
+
+Her bygger vi en modell med median husverdi `medv` som avhengig variabel og per capita kriminalitetsrate `crim` som uavhengig variabel (se `?Boston` for en oversikt over datasettet). Merk at vi tilordner modellen til objektet `lm.mod`.
+
+Vi bruker `summary()` for å få informasjon om modellen.
 
 ```{r, eval=FALSE, echo=TRUE}
 library(MASS)
@@ -1101,7 +1179,7 @@ lm.mod <- lm(medv ~ crim, data = Boston)
 summary(lm.mod)
 ```
 
-## Enkel regresjonsmodell (3)
+## Enkel regresjonsmodell (3) {.small-code}
 
 ```{r, eval=TRUE, echo=FALSE}
 library(MASS)
@@ -1109,81 +1187,242 @@ lm.mod <- lm(medv ~ crim, data = Boston)
 summary(lm.mod)
 ```
 
-coef()
-confint()
+## 
 
-predict(mod, data, interval='confidence')
+Vi kan hente ut koeffisientene fra modellen med `coef()` og konfidensintervallene for hver koeffisient med `confint()`
 
-
-## Multippel regresjonsmodell
-
-$$Y=\alpha+\beta_1x_1+\beta_2x_2...\beta_nx_n+\epsilon$$
-
-* Vi kan gå fra en enkel regresjonsmodell til en multippel regresjonsmodell ved å utvide formelobjektet
-* For en vanlig additiv modell, bruker vi `+` for å legge til uavhengige variabler i modellen
-
-Eksempel
-
-```{r}
-lm(medv ~ lstat * age, data = Boston)
+```{r, echo=TRUE}
+coef(lm.mod)
+confint(lm.mod)
 ```
 
 
-## Oppdatere modeller
+##
 
-## Vurdere modeller
+Vi kan hente ut estimert verdi på avhengig variabel med `predict()`. Ved å bruke argumentet `interval` og sette dette til `'confidence'` får vi også ut konfidensintervallene for estimatene.
+
+```{r, echo=TRUE}
+mod.preds <- predict(lm.mod, Boston, interval='confidence')
+head(mod.preds)
+```
+
+## Hvor godt passer modellen til data?
+
+* Vi har flere mål for hvor godt modellen passer til og forklarer data
+* R oppgir som standard _residual standard error_ (RSE), _R<sup>2</sup>_ og F-statistic for modellen
+* Root mean standard error (RMSE) er et annet vanlig brukt mål for hvor god modellen er (RMSE er nesten lik RSE som oppgis av R)
+* RSE og RMSE forteller oss hvor mye en observasjon i snitt avviker fra regresjonslinjen
+* R<sup>2</sup> gir et standardisert (verdien er mellom 0 og 1) mål for hvor stor del av variasjonen i avhengig variabel som forklares av modellen (i multivariat lineær regresjon bruker vi en justert R<sup>2</sup>)
+* F-statistikken brukes for å teste hypotesen om at det er en sammenheng mellom de uavhengige variablene og den avhengige
+
+##
+
+La oss se på modellen igjen:
+
+```
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 24.03311    0.40914   58.74   <2e-16 ***
+crim        -0.41519    0.04389   -9.46   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 8.484 on 504 degrees of freedom
+Multiple R-squared:  0.1508,	Adjusted R-squared:  0.1491 
+F-statistic: 89.49 on 1 and 504 DF,  p-value: < 2.2e-16
+```
+
+Modellen er signifikant, men den forklarer lite a variasjonen i `medv`
+
+##
+
+Dette ser vi også i følgende plot:
+
+```{r, eval=FALSE, echo=TRUE}
+plot(crim ~ medv, data = Boston)
+abline(coef(lm.mod), col = 'red', lwd = 2)
+```
 
 
-## Samspill
+```{r, eval=TRUE, echo=FALSE}
+par(bg='transparent')
+plot(crim ~ medv, data = Boston)
+abline(coef(lm.mod), col = 'red', lwd = 2)
+```
 
-```{r}
+
+## Multivariat regresjonsmodell
+
+$$Y=\alpha+\beta_1x_1+\beta_2x_2...\beta_nx_n+\epsilon$$
+
+* Styrken med regresjonsmodellen, er at vi kan kontrollere for *mer enn én* uavhengig variabel
+* I R kan bygge en multivariat regresjonsmodell ved å utvide formelobjektet
+* For en vanlig additiv modell, bruker vi `+` for å legge til uavhengige variabler i modellen
+
+## 
+
+```{r, eval=TRUE, echo=FALSE}
+mult.mod <- lm(medv ~ ., data = Boston)
+```
+
+
+```{r, eval=FALSE, echo=TRUE}
+mult.mod <- lm(medv ~ ., data = Boston)
+summary(mult.mod)
+```
+
+```
+Call:
+lm(formula = medv ~ ., data = Boston)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-15.595  -2.730  -0.518   1.777  26.199 
+
+Coefficients:
+              Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  3.646e+01  5.103e+00   7.144 3.28e-12 ***
+crim        -1.080e-01  3.286e-02  -3.287 0.001087 ** 
+zn           4.642e-02  1.373e-02   3.382 0.000778 ***
+indus        2.056e-02  6.150e-02   0.334 0.738288    
+chas         2.687e+00  8.616e-01   3.118 0.001925 ** 
+nox         -1.777e+01  3.820e+00  -4.651 4.25e-06 ***
+rm           3.810e+00  4.179e-01   9.116  < 2e-16 ***
+```
+
+## 
+
+```{r, eval=FALSE, echo=TRUE}
+mult.mod <- lm(medv ~ ., data = Boston)
+summary(mult.mod)
+```
+
+```
+age          6.922e-04  1.321e-02   0.052 0.958229    
+dis         -1.476e+00  1.995e-01  -7.398 6.01e-13 ***
+rad          3.060e-01  6.635e-02   4.613 5.07e-06 ***
+tax         -1.233e-02  3.760e-03  -3.280 0.001112 ** 
+ptratio     -9.527e-01  1.308e-01  -7.283 1.31e-12 ***
+black        9.312e-03  2.686e-03   3.467 0.000573 ***
+lstat       -5.248e-01  5.072e-02 -10.347  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 4.745 on 492 degrees of freedom
+Multiple R-squared:  0.7406,	Adjusted R-squared:  0.7338 
+F-statistic: 108.1 on 13 and 492 DF,  p-value: < 2.2e-16
+```
+
+## Oppdatere modeller {.small-code}
+
+Vi kan oppdatere en eksisterende modell med funksjonen `update()`:
+
+```{r, echo=TRUE}
+# Fjerne age og indus fra modellen
+mult.mod <- update(mult.mod, ~ . -age -indus)
+summary(mult.mod)
+```
+
+## Samspill {.small-code}
+
+Vi introduserer samspill med `:`. Dette kan forkortes med `*`
+
+```{r, echo=TRUE}
+# Modell med samspill
+samspill.mod <- lm(medv ~ lstat + age + lstat:age, data = Boston)
+summary(samspill.mod)
+```
+
+## Samspill {.small-code}
+
+Vi introduserer samspill med `:`. Dette kan forkortes med `*`
+
+```{r, echo=TRUE}
+# Dette gir samme resultat, men er kortere å skrive
 samspill.mod <- lm(medv ~ lstat * age, data = Boston)
 summary(samspill.mod)
 ```
 
 
-## Transformasjoner
+## Transformasjoner {.small-code}
 
-```{r}
+For annengradsledd bruker vi `^`, men vi må sette annengradsleddet inn i `I()`:
+
+```{r, echo=TRUE}
 trans.mod <- lm(medv ~ lstat + I(lstat^2), data = Boston)
 summary(trans.mod)
 ```
 
-## Transformasjoner
+## Transformasjoner {.small-code}
 
-```{r}
+Vi kan også bruke funksjonen `poly()` for høyere grads polynomer:
+
+```{r, echo=TRUE}
 trans.mod2 <- lm(medv ~ poly(lstat, 4), data = Boston)
 summary(trans.mod2)
 ```
 
-## Transformasjoner
+## Transformasjoner {.small-code}
 
-```{r}
+Vi er ikke kun begrenset til polynomer; her gjør vi en logtransformering:
+
+```{r, echo=TRUE}
 trans.mod3 <- lm(medv ~ log(rm), data = Boston)
 summary(trans.mod3)
 ```
 
+## Standardisering {.flexbox .vleft}
 
-## Standardisering
-
-Håndtere at ulike variabler har ulik måleenhet
-I regresjonsanalyser kan vi se på de standardiserte beta-koeffisientene, men enkelte algoritmer er sensitive for målenivå (forskjellig resultat om en variabel er målt i kroner eller dollar)
-Gjennomsnitt på 0 og standardavvik på 1
-God praksis å skalere variabler
-I R kan vi gjøre dette med funksjonen `scale()`
+* Det er ofte god praksis å standardisere variabler i en analyse for å håndtere ulike måleenheter
+* Med standardisering, skaleres variablene slik at de har et gjennomsnitt på 0 og et standardavvik på 1
+* Standardiserte variabler gjør det lettere å tolke koeffisientene i regresjonsanalysene (R rapporterer ikke betakoeffisienter som standard), og andre modeller er sensitive for ulike måleenheter
+* I R kan vi standardisere variabler med funksjonen `scale()`
 
 ## Standardisering
 
 ```{r, echo=TRUE}
 lstat <- Boston$lstat
-mean(lstat); sd(lstat)
+paste('Snitt:', round(mean(lstat), 3))
+paste('Std.avvik:', round(sd(lstat), 3))
 ```
 
 ```{r, echo=TRUE}
 lstat.scaled <- as.vector(scale(lstat))
-mean(lstat.scaled); sd(lstat.scaled)
+paste('Snitt:', round(mean(lstat.scaled), 3))
+paste('Std.avvik:', round(sd(lstat.scaled), 3))
 ```
 
+## Undersøke modeller {.flexbox .vleft}
+
+En rask repetisjon av de viktigste forutsetningene for lineær regresjon:
+
+* Lineære parametre
+* Tilfeldig utvalg
+* Ikke perfekt kolinearitet
+* Feilleddet har forventing lik 0
+* Feilleddet har konstant varianse gitt de øvrige uavhengige variablene (homoskedastitet)
+
+## Multikolinearitet {.flexbox .vleft}
+
+* Kolinearitet i modellen reduserer nøyaktighetene i regresjonskoeffisisentene
+Vi kan undersøke multikolinearitet med _variance inflation factor_ eller VIF
+* I R kan vi bruke funksjonen `vif()` fra pakken `car`
+* Minste verdi for VIF er 1, verdier over 10 (noen mener 5) er en indikasjon på problematisk kolinearitet i data
+
+## Multikolinearitet
+
+```{r, echo=TRUE}
+library(car)
+mod <- lm(medv ~ ., data = Boston)
+vif(mod)
+```
+
+## Diagnostiske plot
+
+```{r, eval=TRUE, echo=FALSE}
+par(mfrow=c(2,2), bg='transparent')
+plot(lm.mod)
+```
 
 ## Oppgaver
 
@@ -1198,8 +1437,11 @@ carseats <- read.csv(
   stringsAsFactors = TRUE)
 ```
 
-1. Oppgave 1
-2. Oppgave 2
+1. Lag en regresjonsmodell med `Sales` som avhengig variabel. Inkluder _alle_ andre variabler som uavhengige variabler. Tilordne modellen til `car.mod1`
+2. Hva er justert R<sup>2</sup> for modellen?
+3. Hvilke variabler i modellen er ikke signifikante?
+4. Bygg en ny modell, enten med å bruke `lm()` på nytt, eller med `update()`, men uten variablene som ikke var signifikante (hint: husk at faktorvariabler håndteres på en spesiell måte i modeller). Tilordne modellen til `car.mod2`
+5. Sammenlign F-statistikken og R<sup>2</sup> i den nye modellen med den gamle. Har modellen blitt bedre eller dårligere med de utelatte variablene?
 
 # Logistisk regresjon
 
@@ -1269,69 +1511,126 @@ lines(
 )
 ```
 
+## Logistisk regresjon i R
 
-## {.small-code}
+* I R bruker vi funksjonen `glm()` (generalized linear models) for å bygge en logistisk regresjonsmodell
+* `glm()` støtter en rekke modeller, inkludert logistisk gjennom argumentet `familiy`
+* `glm()` kan også brukes til vanlige lineære modeller slik som med `lm()`
 
-```{r}
+## Eksempel: mislighold av gjeld
+
+Eksempeldatasett hentet fra pakken `ISLR`
+
+* `default`: en faktorvariabel for om gjelden er misligholdt eller ikke
+* `student`: en faktorvariabel som indikerer om personen er student eller ikke
+* `balance`: gjennomsnittlig kreditt som gjenstår på kredittkort etter innbetaling
+* `income`: inntekt til kunden
+
+## Logistisk modell {.small-code}
+
+```{r, eval=TRUE, echo=TRUE}
 logit.mod <- glm(default ~ balance, data = Default, family = binomial)
 summary(logit.mod)
 ```
 
 ## Tolkning av koeffisientene
 
+Hva er sannsynligheten for mislighold (default) når balansen på kredittkortet er 1000 dollar?
 
+$$\hat{p}(X)=\frac{e^{\hat{\beta_0}}+\hat{\beta_1}X_1}{1+e^{\hat{\beta_0}}+\hat{\beta_1}X_1}=\frac{e^{-10.6513+0.0055\times1000}}{1+e^{-10.6513+0.0055\times1000}}=0.00576$$
 
-
-# Predict-funksjonen
-
-## Predict
-
-```{r, eval=FALSE}
-# Lage modell
-mod <- lm()
-# Bruke modell
-preds <- predict(mod, data)
-
+```{r, echo=TRUE}
+predict(logit.mod, data.frame(balance = 1000), type = 'response')[[1]]
 ```
+
+## Tolkning av koeffisientene
+
+Hva når balansen er 2000 dollar?
+
+$$\hat{p}(X)=\frac{e^{\hat{\beta_0}}+\hat{\beta_1}X_1}{1+e^{\hat{\beta_0}}+\hat{\beta_1}X_1}=\frac{e^{-10.6513+0.0055\times2000}}{1+e^{-10.6513+0.0055\times2000}}=0.586$$
+
+```{r, echo=TRUE}
+predict(logit.mod, data.frame(balance = 2000), type = 'response')[[1]]
+```
+
+## Oppgaver
+
+
+
+# Estimere _nye_ data
+
+## Estimering av nye data
+
+* Vi har allerede sett hvordan vi kan finne estimert verdi med `predict()`-funksjonen
+* Denne funksjonen kan også benyttes til å estimere _nye_ data
+* Dette er den grunnleggende funksjonen for maskinlæring i R!
+* Vi skal her se på noen veldig forenklede eksempler på bruk av `predict()` for å estimere nye data
+
+## Fremgangsmåte
+
+1. Splitte datasettet tilfeldig i et _treningsdatasett_ og et _testdatasett_
+2. Bygge en modell på _treningsdatasettet_
+3. Estimere verdier på _testdatasettet_
+4. Evaluere modellens presisjon på _testdatasettet_
 
 ## Prediksjon på nye data
 
+Vi starter med å lage en vektor med tilfeldige tall fra en _uniform_ distribusjon.
+
+Denne kan vi bruke for å splitte datasettet. Vi gir alle verdier som er mindre enn `0.7` verdien `TRUE` og alle andre verdien `FALSE`. Dette bør gi oss (omtrent) en 70/30 splitt av data.
+
 ```{r, eval=TRUE, echo=FALSE}
-default <- ISLR::Default
+credit <- read.csv2(sprintf('%s/course-material/statistikk-med-r/credit.csv', here::here()))
 ```
 
 
-```{r}
-set.seed(42)
-x <- runif(nrow(default), 0, 1)
+```{r, echo=TRUE}
+set.seed(1984)
+x <- runif(nrow(Boston), 0, 1)
 x <- ifelse(x < .7, TRUE, FALSE)
 table(x)
 ```
 
-## Prediksjon på nye data
+## Prediksjon på trening og testdata
 
-```{r}
-default.trening <- default[x,]
-default.test <- default[!x,]
+Vi starter med å dele data i et **treningsdatasett** og et **testdatasett**:
+
+```{r, echo=TRUE}
+boston.trening <- Boston[x,]
+boston.test <- Boston[!x,]
 ```
 
-```{r}
-mod <- glm(default ~ balance, data = default.trening, family = 'binomial')
-preds <- predict(mod, default.test, type = 'response')
-preds <- factor(ifelse(preds > .5, 'Yes', 'No'))
+Vi bygger så en regresjonsmodell på _treningsdata_.
+
+```{r, echo=TRUE}
+mod <- lm(medv ~ ., data = boston.trening)
 ```
 
-```{r}
-table(preds, default.test$default)
+Vi kan så bruke modellen til å estimere husverdi både for begge datasettene med `predict()`:
+
+```{r, echo=TRUE}
+preds.trening <- predict(mod, boston.trening)
+preds.test <- predict(mod, boston.test)
 ```
 
-```{r}
-caret::confusionMatrix(table(preds, default.test$default))
+## Prediksjon på trening og testdata
+
+Vi beregner RMSE ved å ta differansen mellom de estimerte og de observerte verdiene. Vi beregner RMSE både for trenings- og testdata:
+
+```{r, echo=TRUE}
+err.trening <- preds.trening - boston.trening$medv
+sqrt(mean(err.trening^2))
+err.test <- preds.test - boston.test$medv
+sqrt(mean(err.test^2))
 ```
 
 
+## Oppgaver {.flexbox .vleft}
 
-## Nyttige pakker
+1. Lag trenings- og testdata med en 70/30 splitt på `carseats`. Tilordne treningsdata til `car.train` og testdata til `car.test`. Sett seed til 42 før du bruker en funksjon som trekker fra en sannsynlighetsfordeling.
+2. Bygg en modell på treningsdata med `Sales` som avhengig variabel og `CompPrice`, `Advertising`, `Price` og `ShelveLoc` som uavhengige variabler. Tilordne modellen til `train.mod`
+3. Bruk `predict()` til å estimere salgsvolum på _treningsdata_. Beregn RMSE for treningsdata.*
+4. Bruk `predict()` til å estimere salgsvolum på _testdata_. Beregn RMSE for testdata.*
+5. Hvor godt predikerer modellen på testdata sammenlignet med treningsdata?
 
-* caret
-* mlbench
+* Hint: RMSE kan beregnes med `sqrt(mean(error^2))` hvor `error` er en vektor med differansen mellom estimert verdi og observert verdi.
