@@ -471,109 +471,201 @@ boxplot(x1~x2,
 
 ```
 
-## Histogram {.flexbox .vleft}
+## Histogram {.flexbox .vleft .small-code}
 
-```{r, echo=TRUE, eval=TRUE}
+```{r, echo=TRUE, eval=FALSE}
 hist(carseats$Sales)
 ```
 
-## Histogram
+```{r, echo=FALSE, eval=TRUE}
+par(bg = 'transparent')
+hist(carseats$Sales)
+```
 
-```{r, echo=TRUE, eval=TRUE}
+## Histogram {.small-code}
+
+```{r, echo=TRUE, eval=FALSE}
 # Endre antallet intervaller (bins/breaks)
 hist(carseats$Sales, breaks = 15)
 ```
 
-## Histogram
-```{r, echo=TRUE, eval=TRUE}
+```{r, echo=FALSE, eval=TRUE}
+# Endre antallet intervaller (bins/breaks)
+par(bg = 'transparent')
+hist(carseats$Sales, breaks = 15)
+```
+
+## Histogram {.small-code}
+```{r, echo=TRUE, eval=FALSE}
 # Endre fra frekvenser til 'density'
 hist(carseats$Sales, freq = FALSE)
 ```
 
-## Histogram
-```{r, echo=TRUE, eval=TRUE}
+```{r, echo=FALSE, eval=TRUE}
+# Endre fra frekvenser til 'density'
+par(bg = 'transparent')
+hist(carseats$Sales, freq = FALSE)
+```
+
+## Histogram {.small-code}
+```{r, echo=TRUE, eval=FALSE}
 hist(carseats$Sales, main = "Antall solgte bilseter (1000)")
 rug(carseats$Sales, main = "Antall solgte bilseter (1000)")
 ```
 
-## Data skew(ed) - what to do?
+```{r, echo=FALSE, eval=TRUE}
+par(bg = 'transparent')
+hist(carseats$Sales, main = "Antall solgte bilseter (1000)")
+rug(carseats$Sales, main = "Antall solgte bilseter (1000)")
+```
+
+## Data skew(ed) - what to do? {.small-code}
 
 ```{r, echo=FALSE, eval=TRUE}
 komp_oppg <- readRDS(sprintf('%s/course-material/statistikk-med-r/komp_oppg.RDS', here::here()))
-fb_venner <- komp_oppg$fastekostnader/1000
+fb_venner <- komp_oppg$omsetning_sp/1000
 ```
 
-```{r, echo=TRUE, eval=TRUE, warning = FALSE, message = FALSE}
+```{r, echo=TRUE, eval=FALSE, warning = FALSE, message = FALSE}
 # Hva hvis fordelingen var veldig skjev?
 hist(fb_venner, breaks = 15)
 rug(fb_venner, breaks = 15)
 ```
 
-## Data skew(ed) - what to do?
+```{r, echo=FALSE, eval=TRUE, warning = FALSE, message = FALSE}
+# Hva hvis fordelingen var veldig skjev?
+par(bg = 'transparent')
+hist(fb_venner, breaks = 15)
+rug(fb_venner, breaks = 15)
+```
 
-```{r, echo=TRUE, eval=TRUE, warning = FALSE, message = FALSE}
+## Data skew(ed) - what to do? {.small-code}
+
+```{r, echo=TRUE, eval=FALSE, warning = FALSE, message = FALSE}
 # En løsning er å logtransformere data
 hist(log10(fb_venner), breaks = 15)
 rug(log10(fb_venner), breaks = 15)
-```
-
-## Data skew(ed) - what to do?
-
-```{r, echo=TRUE, eval=TRUE, warning = FALSE, message = FALSE}
-round(10^(c(1.5, 2.5, 3.0, 3.5)))
 ```
 
 ```{r, echo=FALSE, eval=TRUE, warning = FALSE, message = FALSE}
 # En løsning er å logtransformere data
+par(bg = 'transparent')
 hist(log10(fb_venner), breaks = 15)
 rug(log10(fb_venner), breaks = 15)
 ```
 
-## Boxplot
+## Data skew(ed) - what to do? {.small-code}
 
-```{r, echo=TRUE, eval=TRUE}
+```{r, echo=TRUE, eval=TRUE, warning = FALSE, message = FALSE}
+10^(c(2, 4, 4.5))
+```
+```{r, echo=FALSE, eval=TRUE, warning = FALSE, message = FALSE}
+# En løsning er å logtransformere data
+par(bg = 'transparent')
+hist(log10(fb_venner), breaks = 15)
+rug(log10(fb_venner), breaks = 15)
+```
+
+
+## Boxplot {.small-code}
+
+```{r, echo=TRUE, eval=FALSE}
 boxplot(carseats$Sales)
 ```
 
-## Boxplot
+```{r, echo=FALSE, eval=TRUE}
+par(bg = 'transparent')
+boxplot(carseats$Sales)
+```
 
-```{r, echo=TRUE, eval=TRUE}
+## Boxplot {.small-code}
+
+```{r, echo=TRUE, eval=TRUE, fig.show='hide'}
+boxplot(carseats$Sales)$stats[, 1]   # Boxplot.stats viser hvilke verdier som boxplottet er basert på
+
+quantile(carseats$Sales)             # Under the hood ca de samme verdiene som persentilene fra i stad
+
+IQR(carseats$Sales)                  # Kvartilbredden - Q3(9.32)-Q1(5.38)
+
+IQR(carseats$Sales)*1.5 + 9.32       # Uteligger = obs IQR*1.5 fra 75te persentil
+
+```
+
+## Boxplot {.small-code}
+
+```{r, echo=TRUE, eval=FALSE}
 boxplot(Sales~ShelveLoc, data = carseats)
 ```
 
-## Boxplot
+```{r, echo=FALSE, eval=TRUE}
+par(bg = 'transparent')
+boxplot(Sales~ShelveLoc, data = carseats)
+```
 
-```{r, echo=TRUE, eval=TRUE}
+
+## Boxplot {.small-code}
+
+```{r, echo=TRUE, eval=FALSE}
 boxplot(Sales~ShelveLoc, data = carseats, col = "steelblue")
 ```
 
-## Boxplot
+```{r, echo=FALSE, eval=TRUE}
+par(bg = 'transparent')
+boxplot(Sales~ShelveLoc, data = carseats, col = "steelblue")
+```
 
-```{r, echo=TRUE, eval=TRUE}
+## Boxplot {.small-code}
+
+```{r, echo=TRUE, eval=FALSE}
 boxplot(Sales~ShelveLoc, data = carseats, col = "steelblue", 
         main = "Salg fordelt på hylleplassering")
 ```
 
-## Plot
+```{r, echo=FALSE, eval=TRUE}
+par(bg = 'transparent')
+boxplot(Sales~ShelveLoc, data = carseats, col = "steelblue")
+```
 
-```{r, echo=TRUE, eval=TRUE}
+## Plot {.small-code}
+
+```{r, echo=TRUE, eval=FALSE}
 plot(carseats$Sales, carseats$Price)
 ```
 
-## Plot
+```{r, echo=FALSE, eval=TRUE}
+par(bg = 'transparent')
+plot(carseats$Sales, carseats$Price)
+```
 
-```{r, echo=TRUE, eval=TRUE}
+## Plot {.small-code}
+
+```{r, echo=TRUE, eval=FALSE}
 plot(carseats$Sales, carseats$Price, 
      panel.first = lines(stats::lowess(carseats$Sales, carseats$Price)))
 ```
 
-## Plot
+```{r, echo=FALSE, eval=TRUE}
+par(bg = 'transparent')
+plot(carseats$Sales, carseats$Price, 
+     panel.first = lines(stats::lowess(carseats$Sales, carseats$Price)))
+```
 
-```{r, echo=TRUE, eval=TRUE}
+
+## Plot {.small-code}
+
+```{r, echo=TRUE, eval=FALSE}
 plot(carseats$Sales, carseats$Price, 
      panel.first = lines(stats::lowess(carseats$Sales, carseats$Price)),
      xlab = "Sales", ylab = "Price")
 ```
+
+```{r, echo=FALSE, eval=TRUE}
+par(bg = 'transparent')
+plot(carseats$Sales, carseats$Price, 
+     panel.first = lines(stats::lowess(carseats$Sales, carseats$Price)),
+     xlab = "Sales", ylab = "Price")
+```
+
 
 ## Visualisering - `ggplot2` {.flexbox .vleft .extraspace}
 
@@ -583,7 +675,7 @@ plot(carseats$Sales, carseats$Price,
 * [ggplot2 cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
 * [R Graph Gallery](https://www.r-graph-gallery.com/ggplot2-package.html)
 
-## ggplot2 - Histogram
+## ggplot2 - Histogram {.small-code}
 
 ```{r, echo=FALSE, eval=TRUE, warning=FALSE, message=FALSE}
 library(hrbrthemes)
@@ -594,7 +686,7 @@ ggplot(carseats, aes(Sales)) +
   theme(plot.title = element_text(size = 12))
 ```
 
-## ggplot2 - Histogram kode
+## ggplot2 - Histogram kode {.small-code}
 
 ```{r, echo=TRUE, eval=FALSE}
 library(hrbrthemes)
@@ -605,7 +697,7 @@ ggplot(carseats, aes(Sales)) +
   theme(plot.title = element_text(size = 12))
 ```
 
-## ggplot2 - Boxplot
+## ggplot2 - Boxplot {.small-code}
 
 ```{r, echo=FALSE, eval=TRUE, warning=FALSE, message=FALSE}
 library(hrbrthemes)
@@ -616,7 +708,7 @@ ggplot(carseats, aes(ShelveLoc, Sales)) +
   theme(plot.title = element_text(size = 10))
 ```
 
-## ggplot2 - Boxplot kode
+## ggplot2 - Boxplot kode {.small-code}
 
 ```{r, echo=TRUE, eval=FALSE}
 library(hrbrthemes)
@@ -628,7 +720,7 @@ ggplot(carseats, aes(ShelveLoc, Sales)) +
 ```
 
 
-## ggplot2 - Scatterplot
+## ggplot2 - Scatterplot {.small-code}
 
 ```{r, echo=FALSE, eval=TRUE, warning=FALSE, message=FALSE}
 library(hrbrthemes)
@@ -640,7 +732,7 @@ ggplot(carseats, aes(x = Sales, y = Price, color = Urban)) +
   theme(plot.title = element_text(size = 10))
 ```
 
-## ggplot2 - Scatterplot kode
+## ggplot2 - Scatterplot kode {.small-code}
 
 ```{r, echo=TRUE, eval=FALSE, warning=FALSE}
 library(hrbrthemes)
@@ -706,13 +798,13 @@ Menneskelige og tekniske feil fører til _dirty data_
 
 ## Håndtering av missing data {.flexbox .vleft .extraspace}
 
-* *Droppe observasjoner*
-* *Imputere (fylle inn verdier)* basert på
+* **Droppe observasjoner**
+* **Imputere (fylle inn verdier)** basert på
     + statistiske mål (gjennomsnitt, median)
     + kjennskap til dataene
     + algoritmer/maskinlæring
 
-* *Løsningen avhenger av*
+* **Løsningen avhenger av**
     + hvor godt du kjenner data
     + type missing du antar at du har
 
@@ -771,11 +863,11 @@ sum(is.na(airquality))
 ## Missing data - funksjoner i R 
 
 ```{r, eval=TRUE, echo=TRUE}
-# Samme hovedregel
-sapply(airquality, mean)
+# Per kolonne i et datasett med sapply
+sapply(airquality, anyNA)
 
-# Ekskluderer missingverdier når funksjoner kjøres
-sapply(airquality, mean, na.rm=TRUE)
+# Per kolonne i et datasett med lapply
+unlist(lapply(airquality, function(x) sum(is.na(x))))
 
 ```
 
@@ -799,8 +891,8 @@ hk <- data.frame(
 hk <- rbind(hk, hk[rep(1,5),])
 hk$dato[13] <- '01/05/2023'
 ```
-Et eksempeldatasett
-Humøret til Ove, Eivor og Lars i perioden 01.03.2020-01.12.2020
+
+Et eksempeldatasett: Humøret til Ove, Eivor og Lars i perioden 01.03.2020-01.12.2020
 
 ```{r, eval=TRUE, echo=TRUE}
 str(hk)
@@ -969,9 +1061,11 @@ for en oversikt over regulære uttrykk i R
 Les inn datasettet `komp_oppgave.RDS` med `readRDS('komp_oppgave.RDS')`
 
 1. Hvilke kolonner i `komp_oppgave` har missingverdier?
-2. Hvor mange missingverdier er det i datasettet totalt?
-3. Hvilken datatype har `variabel` og `tildelingsdato`?
-
+2. Lag en ny kolonne som konverterer `stiftelsesdato` til dato
+    + sjekk at den nye kolonnen har datatype `Date`
+3. Gjør oppgave 1 på nytt
+4. Finnes det duplikater i datasettet?
+5. Hvor mange unike verdier har kolonnene `stiftelsesdato` og `navn`?
 
 # Regresjonsbaserte modeller
 
