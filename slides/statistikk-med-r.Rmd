@@ -132,7 +132,7 @@ Legg merke til at første rad i fila inneholder _kolonnenavn_, fila er _kommasep
 
 ## Kommaseparerte filer (2)
 
-Vi kan lese inn _kommaseparerte_ filer med `read.csv()` og _semikolonseparerte filer med `read.csv2()`.
+Vi kan lese inn _kommaseparerte_ filer med `read.csv()` og _semikolonseparerte_ filer med `read.csv2()`.
 
 ```{r, eval=FALSE, echo=TRUE}
 df <- read.csv('carseats.csv')
@@ -177,7 +177,7 @@ setwd(sprintf('%s/course-material/statistikk-med-r/', here::here()))
 readLines('carseats.tsv', n = 3)
 ```
 
-Legg merke til at første rad i fila inneholder _kolonnenavn_, men denne fila er _tabulatorseparert_ (`\t` er tegn for tabulator), det er ingen tekstkvalifikator, og `,` er brukt som desimaltegn.
+Legg merke til at første rad i fila inneholder _kolonnenavn_, men denne fila er _tabulatorseparert_ (`\t` er tegn for tabulator), det er ingen tekstkvalifikator, og `.` er brukt som desimaltegn.
 
 ## Tabulatorseparerte filer (2)
 
@@ -1580,11 +1580,14 @@ Pakken `caret` er nyttig for å vurdere ulike logistiske modeller mot hverandre.
 ## Oppgaver
 
 ```{r, eval=FALSE, echo=TRUE}
-Default <- ISLR::Default
+Weekly <- ISLR::Weekly
 ```
 
-1. Bygg en logistisk modell med `glm()` på datasettet `Default`. Bruk `default` som avhengig variabel og alle andre variabler som uavhengige variabler. Tilordne modellen til `glm.mod`. Husk å sette argumentet `family`
-2. 
+1. Bygg en logistisk modell med `glm()` på datasettet `Weekly`. Bruk `Direction` som avhengig variabel og `Lag`-variablene samt `Volume` som uavhengige variabler. Tilordne modellen til `glm.mod`. Husk å sette argumentet `family`
+2. Bruk `summary()` på modellen. Virker noen av variablene signifikante?
+3. Bruk `predict()` for å estimere sannsynligheten for at en observasjon har verdien `Up` på `Direction`. Husk å sette argumentet `type` til `'response'`. Tilordne til `glm.preds`
+4. Endre `glm.preds` slik at denne har verdien `'Up'` hvis sannsynligheten er _større enn_ `0.5` og `'Down'` hvis ikke. Du kan bruke `ifelse()` til dette, og eventuelt også konvertere til en faktor med `factor()`
+5. Lag en klassifiseringtabell (confusion matrix) med predikterte verdier og observerte verdier. Hva forteller resultatene deg?
 
 # Estimere _nye_ data
 
