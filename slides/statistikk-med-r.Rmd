@@ -1027,11 +1027,13 @@ Les inn datasettet `komp_oppgave.RDS` med `readRDS('komp_oppgave.RDS')`
 
 # Regresjonsbaserte modeller
 
-## Lineære modeller
+## Lineære modeller {.flexbox .vleft}
 
-$$Y=\alpha+\beta_1x_1+\beta_2x_2+\epsilon$$
+$$Y=\alpha+\beta x+\epsilon$$
 
-$$\bar{Y}$$
+Hvor $\alpha$ er konstantleddet, $\beta$ er helningen og $\epsilon$ er feilleddet.
+
+**NB!** I disse slidene vil vi bruke uttrykket _avhengig variabel_ for $Y$ og _uavhengige variabler_ for $x$. I dokumentasjon for R kalles disse som regel _response_ og _predictors_.
 
 ## Formelobjektet {.flexbox .vleft}
 
@@ -1043,7 +1045,8 @@ $$\bar{Y}$$
 ## Kategoriske variabler (factor) {.flexbox .vleft}
 
 * R håndterer kategoriske variabler med datatypen `factor`
-* Frem til versjon 4, ble alle tekstkolonner automatisk importer om `factor` og ikke `character`
+* Frem til versjon 4, ble alle tekstkolonner automatisk importer om `factor` og ikke `character`. For å lese inn tekstkolonner som faktorer setter du argumentet `stringsAsFactors` til `TRUE`
+* Tekstvariabler (og numeriske variabler) kan også kodes om til faktorer med funksjonen `factor()`
 * Faktorvariabler kan brukes direkte i regresjonsmodeller _uten_ omkoding (det opprettes automatisk k-1 dummyvariabler)
 * Vi kan se dummyvariablene R oppretter med funksjonen `contrasts()`
 
@@ -1054,9 +1057,13 @@ $$\bar{Y}$$
 * Hvis vi kjører funksjonen direkte, får vi ut koeffisientene til modellen
 * Vi kan også lagre modellen til et eget objekt som vi kan jobbe videre med
 
-## Enkel regresjonsmodell (2) {.small-code}
+## Enkel regresjonsmodell (2)
 
-Eksempel:
+Eksempel på datasettet `Boston` fra pakken `MASS`:
+
+Her bygger vi en modell med median husverdi `medv` som avhengig variabel og per capita kriminalitetsrate `crim` som uavhengig variabel (se `?Boston` for en oversikt over datasettet). Merk at vi tilordner modellen til objektet `lm.mod`.
+
+Vi bruker `summary()` for å få informasjon om modellen.
 
 ```{r, eval=FALSE, echo=TRUE}
 library(MASS)
@@ -1074,6 +1081,8 @@ summary(lm.mod)
 
 ## 
 
+Vi kan hente ut koeffisientene fra modellen med `coef()` og konfidensintervallene for hver koeffisient med `confint()`
+
 ```{r, echo=TRUE}
 coef(lm.mod)
 confint(lm.mod)
@@ -1082,6 +1091,8 @@ confint(lm.mod)
 
 ##
 
+Vi kan hente ut estimert verdi på avhengig variabel med `predict()`. Ved å bruke argumentet `interval` og sette dette til `'confidence'` får vi også ut konfidensintervallene for estimatene.
+
 ```{r, echo=TRUE}
 mod.preds <- predict(lm.mod, Boston, interval='confidence')
 head(mod.preds)
@@ -1089,46 +1100,109 @@ head(mod.preds)
 
 ## Hvor godt passer modellen til data?
 
-## RMSE, R<sup>2</sup> og F-statistikken
+* Vi har flere mål for hvor godt modellen passer til og forklarer data
+* R oppgir som standard _residual standard error_ (RSE), _R<sup>2</sup>_ og F-statistic for modellen
+* Root mean standard error (RMSE) er et annet vanlig brukt mål for hvor god modellen er (RMSE er nesten lik RSE som oppgis av R)
+* RSE og RMSE forteller oss hvor mye en observasjon i snitt avviker fra regresjonslinjen
+* R<sup>2</sup> gir et standardisert (verdien er mellom 0 og 1) mål for hvor stor del av variasjonen i avhengig variabel som forklares av modellen (i multivariat lineær regresjon bruker vi en justert R<sup>2</sup>)
+* F-statistikken brukes for å teste hypotesen om at det er en sammenheng mellom de uavhengige variablene og den avhengige
 
-```{r}
-anova(lm.mod)
+##
+
+La oss se på modellen igjen:
+
+```
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 24.03311    0.40914   58.74   <2e-16 ***
+crim        -0.41519    0.04389   -9.46   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 8.484 on 504 degrees of freedom
+Multiple R-squared:  0.1508,	Adjusted R-squared:  0.1491 
+F-statistic: 89.49 on 1 and 504 DF,  p-value: < 2.2e-16
+```
+
+Modellen er signifikant, men den forklarer lite a variasjonen i `medv`
+
+##
+
+Dette ser vi også i følgende plot:
+
+```{r, eval=FALSE, echo=TRUE}
+plot(crim ~ medv, data = Boston)
+abline(coef(lm.mod), col = 'red', lwd = 2)
 ```
 
 
-## Standardisering
-
-* Det er ofte god praksis å standardisere variabler i en analyse for å håndtere ulike måleenheter
-* Med standardisering, skaleres variablene slik at de har et gjennomsnitt på 0 og et standardavvik på 1
-* Standardiserte variabler gjør det lettere å tolke koeffisientene i regresjonsanalysene (R rapporterer ikke betakoeffisienter som standard), og andre modeller er sensitive for ulike måleenheter
-* I R kan vi standardisere variabler med funksjonen `scale()`
-
-## Standardisering
-
-```{r, echo=TRUE}
-lstat <- Boston$lstat
-paste('Snitt:', round(mean(lstat), 3))
-paste('Std.avvik:', round(sd(lstat), 3))
+```{r, eval=TRUE, echo=FALSE}
+par(bg='transparent')
+plot(crim ~ medv, data = Boston)
+abline(coef(lm.mod), col = 'red', lwd = 2)
 ```
 
-```{r, echo=TRUE}
-lstat.scaled <- as.vector(scale(lstat))
-paste('Snitt:', round(mean(lstat.scaled), 3))
-paste('Std.avvik:', round(sd(lstat.scaled), 3))
-```
 
-## Multippel regresjonsmodell
+## Multivariat regresjonsmodell
 
 $$Y=\alpha+\beta_1x_1+\beta_2x_2...\beta_nx_n+\epsilon$$
+
 * Styrken med regresjonsmodellen, er at vi kan kontrollere for *mer enn én* uavhengig variabel
-* I R kan bygge en multippel regresjonsmodell ved å utvide formelobjektet
+* I R kan bygge en multivariat regresjonsmodell ved å utvide formelobjektet
 * For en vanlig additiv modell, bruker vi `+` for å legge til uavhengige variabler i modellen
 
-## Eksempel {.small-code}
+## 
 
-```{r, echo=TRUE}
+```{r, eval=TRUE, echo=FALSE}
+mult.mod <- lm(medv ~ ., data = Boston)
+```
+
+
+```{r, eval=FALSE, echo=TRUE}
 mult.mod <- lm(medv ~ ., data = Boston)
 summary(mult.mod)
+```
+
+```
+Call:
+lm(formula = medv ~ ., data = Boston)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-15.595  -2.730  -0.518   1.777  26.199 
+
+Coefficients:
+              Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  3.646e+01  5.103e+00   7.144 3.28e-12 ***
+crim        -1.080e-01  3.286e-02  -3.287 0.001087 ** 
+zn           4.642e-02  1.373e-02   3.382 0.000778 ***
+indus        2.056e-02  6.150e-02   0.334 0.738288    
+chas         2.687e+00  8.616e-01   3.118 0.001925 ** 
+nox         -1.777e+01  3.820e+00  -4.651 4.25e-06 ***
+rm           3.810e+00  4.179e-01   9.116  < 2e-16 ***
+```
+
+## 
+
+```{r, eval=FALSE, echo=TRUE}
+mult.mod <- lm(medv ~ ., data = Boston)
+summary(mult.mod)
+```
+
+```
+age          6.922e-04  1.321e-02   0.052 0.958229    
+dis         -1.476e+00  1.995e-01  -7.398 6.01e-13 ***
+rad          3.060e-01  6.635e-02   4.613 5.07e-06 ***
+tax         -1.233e-02  3.760e-03  -3.280 0.001112 ** 
+ptratio     -9.527e-01  1.308e-01  -7.283 1.31e-12 ***
+black        9.312e-03  2.686e-03   3.467 0.000573 ***
+lstat       -5.248e-01  5.072e-02 -10.347  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 4.745 on 492 degrees of freedom
+Multiple R-squared:  0.7406,	Adjusted R-squared:  0.7338 
+F-statistic: 108.1 on 13 and 492 DF,  p-value: < 2.2e-16
 ```
 
 ## Oppdatere modeller {.small-code}
@@ -1189,7 +1263,30 @@ trans.mod3 <- lm(medv ~ log(rm), data = Boston)
 summary(trans.mod3)
 ```
 
-## Vurdere modeller
+## Standardisering {.flexbox .vleft}
+
+* Det er ofte god praksis å standardisere variabler i en analyse for å håndtere ulike måleenheter
+* Med standardisering, skaleres variablene slik at de har et gjennomsnitt på 0 og et standardavvik på 1
+* Standardiserte variabler gjør det lettere å tolke koeffisientene i regresjonsanalysene (R rapporterer ikke betakoeffisienter som standard), og andre modeller er sensitive for ulike måleenheter
+* I R kan vi standardisere variabler med funksjonen `scale()`
+
+## Standardisering
+
+```{r, echo=TRUE}
+lstat <- Boston$lstat
+paste('Snitt:', round(mean(lstat), 3))
+paste('Std.avvik:', round(sd(lstat), 3))
+```
+
+```{r, echo=TRUE}
+lstat.scaled <- as.vector(scale(lstat))
+paste('Snitt:', round(mean(lstat.scaled), 3))
+paste('Std.avvik:', round(sd(lstat.scaled), 3))
+```
+
+## Undersøke modeller {.flexbox .vleft}
+
+En rask repetisjon av de viktigste forutsetningene for lineær regresjon:
 
 * Lineære parametre
 * Tilfeldig utvalg
@@ -1197,7 +1294,7 @@ summary(trans.mod3)
 * Feilleddet har forventing lik 0
 * Feilleddet har konstant varianse gitt de øvrige uavhengige variablene (homoskedastitet)
 
-## Multikolinearitet
+## Multikolinearitet {.flexbox .vleft}
 
 * Kolinearitet i modellen reduserer nøyaktighetene i regresjonskoeffisisentene
 Vi kan undersøke multikolinearitet med _variance inflation factor_ eller VIF
@@ -1233,7 +1330,7 @@ carseats <- read.csv(
 ```
 
 1. Lag en regresjonsmodell med `Sales` som avhengig variabel. Inkluder _alle_ andre variabler som uavhengige variabler. Tilordne modellen til `car.mod1`
-2. Hva er justert R<sup>2</sup> for modellen`?
+2. Hva er justert R<sup>2</sup> for modellen?
 3. Hvilke variabler i modellen er ikke signifikante?
 4. Bygg en ny modell, enten med å bruke `lm()` på nytt, eller med `update()`, men uten variablene som ikke var signifikante (hint: husk at faktorvariabler håndteres på en spesiell måte i modeller). Tilordne modellen til `car.mod2`
 5. Sammenlign F-statistikken og R<sup>2</sup> i den nye modellen med den gamle. Har modellen blitt bedre eller dårligere med de utelatte variablene?
