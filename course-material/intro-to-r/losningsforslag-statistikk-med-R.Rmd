@@ -26,6 +26,7 @@ knitr::opts_chunk$set(echo = TRUE)
 5. Sammenlign F-statistikken og R<sup>2</sup> i den nye modellen med den gamle. Har modellen blitt bedre eller dårligere med de utelatte variablene?
 
 ```{r}
+carseats <- read.csv('carseats.csv', stringsAsFactors = TRUE)
 car.mod1 <- lm(Sales ~ ., data = carseats)
 summary(car.mod1)
 car.mod2 <- update(car.mod1, ~ . -Population -Education -Urban -US)
