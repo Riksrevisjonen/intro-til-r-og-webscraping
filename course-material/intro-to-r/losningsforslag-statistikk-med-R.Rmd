@@ -1,11 +1,19 @@
 ---
-title: "Statistikk med R: løsningsforslag"
-output: pdf_document
+title: 'Statistikk med R: løsningsforslag'
+output:
+  html_document:
+    df_print: paged
 date: "`r format(Sys.Date(), '%e. %B %Y')`"
 ---
 
 ```{r setup, include=FALSE, error = TRUE}
 knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, include=FALSE}
+setwd(sprintf('%s/course-material/statistikk-med-r/', here::here()))
+komp_oppg <- readRDS('komp_oppg.RDS')
+carseats <- ISLR::Carseats
 ```
 
 ### Oppgave 1: R som kalkulator
@@ -16,6 +24,191 @@ knitr::opts_chunk$set(echo = TRUE)
 2. Les inn fila `carseats.xlsx` som `carseats_excel` med `read_xlsx` fra pakken `readxl`
 3. Bruk `summary` på `carseats_excel`. Hva er median for variabelen `Price`?
 4. Les inn fila `carseats.xlsx` på nytt, men kun med de 30 første radene med data og de 5 første kolonnene i Excel-fila
+
+### Oppgave 3: Deskriptiv statistikk - Beskrive
+
+Les inn datasettet `komp_oppg.RDS` med `readRDS('komp_oppg.RDS')`
+
+1. Lag en frekvenstabell basert på `sektorkode`.
+
+```{r}
+table(komp_oppg$sektorkode)
+```  
+
+2. Bruk `aggregate()` og `sum()` til å summere `belop` fordelt på `sektorkode`.
+
+```{r, echo=TRUE, eval=TRUE}
+aggregate(komp_oppg$belop, list(Sektorkode = komp_oppg$sektorkode), FUN = sum, na.rm = TRUE)
+
+agg_belop <- aggregate(komp_oppg$belop, list(Sektorkode = komp_oppg$sektorkode), FUN = sum, na.rm = TRUE)
+
+colnames(agg_belop)[colnames(agg_belop) == 'x'] <- 'Snitt_Salg'
+```  
+
+3. Finn median og gjennomsnitt til variabelen `belop`. Tolk.
+
+```{r}
+median(komp_oppg$belop)
+mean(komp_oppg$belop)
+```  
+Gjennomsnittet er veldig forskjellig fra medianen, som indikerer at datamaterialet inneholder ekstreme verdier som påvirker gjennomsnittet. Median er derfor det beste målet på sentraltendens i dette tilfellet.
+
+4. Bruk `quantile()`-funksjonen til å printe ut 25te, 75te og 90nde persentil. Sammenlign med `min()` og `max()`.
+
+```{r}
+quantile(komp_oppg$belop, probs = c(0.25, 0.75, 0.90))
+range(komp_oppg$belop)
+```  
+Range viser min- og maksverdi. Du kan også bruke funksjonene min `min(komp_oppg$belop)` og `max(komp_oppg$belop)` for å printe min og maks.
+
+5. Finn IQR uten å bruke funksjonen IQR basert på tallene over.
+   + Får du det samme tallet med funksjonen `IQR()`?
+```{r}
+123433-24006
+IQR(komp_oppg$belop)
+```
+
+Interkvartil-avstand er et mål på spredning som er lite sensitivt for ekstreme verdier. IQR regnes ut ved avstanden mellom tredje og første kvartil(Q3-Q1). Andre navn for Q3 og Q3 er hhv. øvre og nedre kvartil eller 75te og 25te persentil. Inndeling i kvartiler splitter observasjonene opp i like store grupper (antall observasjoner, uavhengig av verdier), og observasjonene innenfor Q1 og Q3 utgjør de 50 % av dataene som befinner seg nærmest medianen.
+
+
+### Oppgave 4: Deskriptiv statistikk - Visualisere
+
+Les inn datasettet `komp_oppgave.RDS` med `readRDS('komp_oppg.RDS')`.
+
+1. Lag en variabel `belop_1000` som viser beløp i 1000 kroner
+
+```{r}
+belop_1000 <- komp_oppg$belop/1000
+```
+
+2. Lag et histogram av `belop_1000` med `breaks = 15` og bruk funksjonen `rug()` rett etterpå
+  + Hvordan vil du beskrive fordelingen?
+  + Hva kan du gjøre med variabelen for å visualisere data bedre?
+  + Lag histogrammet på nytt
+
+```{r, warning=FALSE}
+hist(belop_1000, breaks = 15)
+rug(belop_1000, breaks = 15)
+```
+
+Fordelingen er ekstremt høyreskjev og gir ikke en god representasjon av verken typiske verdier eller
+spredning. Vi kan logtransformere data, som er vanlig å gjøre ved skjeve fordelinger.
+
+Her gjør vi det med funksjonen `log10()`, som er den Briggske logaritmen hvor hvert tall x endrer seg i tierpotenser.
+Det vil si at den naturlige verdien 10 har verdien 1, den naturlige verdien 100 har verdien 2:
+
+```{r}
+log10(100)
+10^2 # Vi kan regne tilbake til den naturlige verdien
+```
+
+Lager et nytt histogram:
+
+```{r, warning=FALSE}
+hist(log10(belop_1000), breaks = 15)
+rug(log10(belop_1000), breaks = 15)
+```
+
+Vi ser nå bedre fordelingen av både de vanligste verdiene og de ekstreme verdiene i datamaterialet. Vi ser fortsatt på akkurat de samme dataene, men på logaritmisk skala.
+
+I det første histogrammet så vi på fordelingen på en lineær skala, der avstanden mellom de ulike punktene på x-aksen var lik de faktiske verdiene i datamaterialet. For eksempel så vi at nesten alle observasjonene befant seg i et intervall mellom 0 og 500 (i 1000 kr), men på grunn av ekstreme verdier (opp til over 3500, dvs. 3 500 000 kr), var det vanskelig å si noe særlig nyttig om spredning og sentraltendens. En slik skjevfordelt variabel vil heller ikke egne seg spesielt godt til videre analyse.
+
+I et histogram ser vi på antallet observasjoner innenfor ulike grupper/klasser/bins, som kan ha ulik bredde/binwidth. Antallet verdier en _bin_ dekker på x-aksen er det samme som _klassebredde_  eller _binwidth_. I det første histogrammet ser vi at 2.5 _bins_ dekker verdiintervallet 0-500 på x-aksen. Klassebredden er dermed `500/2.5=200`. Det vil si at den første _bin_-en er gruppen observasjoner som har verdiene 0-200 på variabelen belop_1000, og den andre er gruppen observasjoner som har verdiene 200-400.
+
+Når vi nå skal tolke det logtransformerte histogrammet, er ikke verdiene på x-aksen like intuitive, fordi verken verdiene eller avstanden mellom verdiene er det samme som de faktiske verdiene i datamaterialet. Vi kan derimot se at mange observasjoner befinner seg i de (her) tre midterste gruppene/bins. Klassebredden eller binwidth i dette tilfellet er `0.5/2.5=0.2` fordi 2.5 bins dekker intervallet mellom 1.5 og 2 på x-aksen. Observasjonene i de fem midterse søylene dekker dermed intervallet 1.3 til 3. Hvis vi ønsker å vite hvilke faktiske verdier dette er, kan vi regne tilbake med `10^1.4` og `10^2`, som er hhv. 25 og 100 (25 000 og 100 000 kr.).  
+
+Vi kan se på median og 25te og 75te persentil (Q1 og Q3) for å sammenligne utregningen med statistiske mål på sentraltendens og spredning. 
+
+```{r}
+quantile(belop_1000, probs = c(0.25,0.50,0.75))
+```
+
+Vi så at de tre midterste _bins_ dekket verdiintervallet 25 til 100 da vi regnet oss tilbake. Dette stemmer godt med median og interkvartil-avstand (IQR, Q3-Q1): 50 prosent av datapunktene som er nærmest medianen, befinner seg i verdiintervallet 24 til 123 (i 1000 kr).
+
+Formålet med visualisering av data i et histogram er imidlertid ikke nødvendigvis å regne ut presise verdier, men illustrere sentraltendens og spredning. I dette tilfellet gjør logtransformasjonen at vi kan illustrere fordelingen bedre.
+
+
+3. Lag et boxplot med `belop_1000` fordelt på `sektorkode`
+  + Hvordan kan du forbedre boxplottet?
+  + Lag boxplottet på nytt
+
+```{r, warning=FALSE }
+boxplot(belop_1000~sektorkode, data = komp_oppg)
+```
+
+Tilsvarende som for histogram.
+
+```{r, warning=FALSE}
+boxplot(log10(belop_1000)~sektorkode, data = komp_oppg)
+```
+
+I et boxplot, vil selve boksen vise de 50 % av observasjonene som er nærmest medianen (midtstreken) observasjonene mellom Q1(25te persentil) og Q3(75te persentil). I tillegg viser den _whiskers_ for laveste og høyeste verdi unntatt de verdiene som defineres som uteliggere. En tommelfingerregel er at verdier under/over `Q1-IQR*1.5` eller `Q3+IQR*1.5` defineres som uteliggere, som vises som sirkler. Du kan printe ut hvilke verdier R bruker til å plotte med `boxplot(log10(belop_1000)~sektorkode, data = komp_oppg)$stats`. 
+
+### Oppgave 5: Datavasking
+
+Les inn datasettet `komp_oppg.RDS` med `readRDS('komp_oppg.RDS')`
+
+1. Hvilke kolonner i `komp_oppgave` har missingverdier?
+
+```{r}
+# Vi bruker funksjonen sapply til å iterere over kolonnene
+sapply(komp_oppg, anyNA)
+
+# Ser ikke ut som det er noen missing-verdier i datasettet
+```
+
+Se gjerne foilene fra det første kurset for en innføring i `apply`-familien.
+Vi bruker  `sapply` til å kjøre funksjonen `anyNA` på alle kolonnene i datasettet, som spør om det er én eller
+flere missingverdier i kolonnen. Denne evaluerer til `TRUE` eller `FALSE`, 
+men sier ingenting om _antallet_ missing i de ulike kolonnene.
+
+Hvis vi vil telle antall missingverdier per kolonne, kan vi skrive:
+
+```{r}
+unlist(lapply(komp_oppg, function(x) sum(is.na(x))))
+```
+
+Her bruker vi `lapply`, som returnerer en liste (her er listen "unlistet" med `unlist()` for å spare plass). Det vi egentlig sier til R
+er at vi vil iterere over kolonnene i datasettet, og at vi for hver kolonne (x)
+ønsker å ha ut antallet (`sum`) verdier som er missing(`is.na`). `is.na` evaluerer
+elementvis hvorvidt en verdi er missing (da evalueres den til `TRUE`, som er 1) eller ikke (`FALSE`, 0). Derfor blir 
+summen av antallet `TRUE` det samme som summen av antallet missingverdier.
+
+Prøv gjerne denne funksjonen selv, både med og uten `unlist()`.
+
+
+2. Lag en ny kolonne `st_dato` som konverterer `stiftelsesdato` til dato
+    + sjekk at den nye kolonnen har datatype `Date`
+
+```{r}
+class(komp_oppg$stiftelsesdato) # Sjekker datatype
+head(komp_oppg$stiftelsesdato)  # Ser på verdiene som å se hvordan formater 
+
+komp_oppg$st_dato <- as.Date(komp_oppg$stiftelsesdato, format = '%Y-%m-%d') # Merk separator
+class(komp_oppg$st_dato)
+```    
+
+3. Gjør oppgave 1 på nytt
+
+```{r}
+sapply(komp_oppg, anyNA)
+```  
+
+Nå finner R missingverdier i kolonnen `st_dato`. Hvorfor? Fordi kolonnen `stiftelsesdato` hadde flere observasjoner som var tomme celler ("").
+Vær oppmerksom på hvilke typer verdier i ditt datasett som er "missing", slik at R evaluerer dette riktig.
+
+4. Finnes det duplikater i datasettet?
+
+```{r}
+table(duplicated(komp_oppg))
+```  
+
+5. Hvor mange unike verdier har kolonnene `st_dato` og `navn`?
+
+```{r}
+length(unique(komp_oppg$st_dato))
+length(unique(komp_oppg$navn))
+```  
 
 ### Oppgave X: Lineær regresjon
 
