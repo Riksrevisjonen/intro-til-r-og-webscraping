@@ -1,8 +1,6 @@
 ---
 title: 'Statistikk med R: løsningsforslag'
-output:
-  html_document:
-    df_print: paged
+output: pdf_document
 date: "`r format(Sys.Date(), '%e. %B %Y')`"
 ---
 
