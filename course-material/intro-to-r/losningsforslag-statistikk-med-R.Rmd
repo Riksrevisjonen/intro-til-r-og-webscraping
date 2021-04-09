@@ -6,11 +6,31 @@ date: "`r format(Sys.Date(), '%e. %B %Y')`"
 
 ```{r setup, include=FALSE, error = TRUE}
 knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = sprintf('%s/course-material/statistikk-med-r/', here::here()))
 ```
 
-### Oppgave 1: R som kalkulator
+### Oppgave 1: Les inn flatfiler
 
-### Oppgave 2: Les inn Excel-fielr
+1. Les inn `carseats.csv` som varseats med `read.csv()`
+2. Bruk `head(carseats)` for å se de første observasjonene
+3. Bruk `sum()` og `mean()` for å finne sum og gjennomsnitt på variablene `Sales` og `Price`
+4. Les inn fila på nytt, men bruk argumentet `stringsAsFactors` og sett dette til `TRUE`. Ser du en forskjell i hvordan fila er lest inn?
+
+
+```{r}
+carseats <- read.csv("carseats.csv")
+str(carseats)
+head(carseats)
+sum(carseats$Sales)
+sum(carseats[['Sales']])
+sum(carseats[,1])
+
+carseats <- read.csv("carseats.csv", stringsAsFactors = TRUE)
+str(carseats)
+class(carseats$ShelveLoc)
+```
+
+### Oppgave 2: Les inn Excel-filer
 
 1. Last inn pakken `readxl` med `library(readxl)`
 2. Les inn fila `carseats.xlsx` som `carseats_excel` med `read_xlsx` fra pakken `readxl`
@@ -31,6 +51,22 @@ summary(car.mod1)
 car.mod2 <- update(car.mod1, ~ . -Population -Education -Urban -US)
 summary(car.mod2)
 ```
+
+### Oppgave X: Logistisk regresjon
+
+```{r}
+Weekly <- ISLR::Weekly
+head(Weekly)
+glm.mod <- glm(
+  Direction ~ Lag1 + Lag2 + Lag3 + Lag4 + Lag5 + Volume,
+  data = Weekly,
+  family = binomial
+)
+summary(glm(Direction ~ Lag2, data = Weekly, family = binomial))
+glm.preds <- factor(ifelse(predict(glm.mod, Weekly, type = 'response') > .5, 'Up', 'Down'))
+table(glm.preds, Weekly$Direction)
+```
+
 
 ### Oppgave X: Predict
 
