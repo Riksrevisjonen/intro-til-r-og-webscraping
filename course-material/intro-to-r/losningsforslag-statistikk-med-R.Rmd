@@ -7,37 +7,90 @@ date: "`r format(Sys.Date(), '%e. %B %Y')`"
 ```{r setup, include=FALSE, error = TRUE}
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir = sprintf('%s/course-material/statistikk-med-r/', here::here()))
+```
+
+```{r, echo=FALSE}
 komp_oppg <- readRDS('komp_oppg.RDS')
-carseats <- ISLR::Carseats
+Weekly <- ISLR::Weekly
 ```
 
 ### Oppgave 1: Les inn flatfiler
 
 1. Les inn `carseats.csv` som varseats med `read.csv()`
 2. Bruk `head(carseats)` for å se de første observasjonene
-3. Bruk `sum()` og `mean()` for å finne sum og gjennomsnitt på variablene `Sales` og `Price`
-4. Les inn fila på nytt, men bruk argumentet `stringsAsFactors` og sett dette til `TRUE`. Ser du en forskjell i hvordan fila er lest inn?
-
 
 ```{r}
 carseats <- read.csv("carseats.csv")
 str(carseats)
 head(carseats)
+```
+
+3. Bruk `sum()` og `mean()` for å finne sum og gjennomsnitt på variablene `Sales` og `Price`
+
+```{r}
+sum(carseats$Sales)
+sum(carseats$Price)
+mean(carseats$Sales)
+mean(carseats$Price)
+```
+
+Sum for `Sales` er `r sum(carseats$Sales)` og `r sum(carseats$Price)` for `Price`. Gjennomsnitt er henholdsvis `r round(mean(carseats$Sales), 2)` og `r round(mean(carseats$Price), 2)`.
+
+Merk at det er flere måter vi kan hente ut kolonnen `Sales` ved å bruke subsetting i R. Alle disse funksjonskallene gir det samme resultatet:
+
+```{r}
 sum(carseats$Sales)
 sum(carseats[['Sales']])
 sum(carseats[,1])
+```
 
+4. Les inn fila på nytt, men bruk argumentet `stringsAsFactors` og sett dette til `TRUE`. Ser du en forskjell i hvordan fila er lest inn?
+
+For den siste oppgaven, leser vi inn filen på nytt, men denne gangen med `stringsAsFactors` satt til `TRUE` (hva som er standardverdi for dette argumentet ble endret med R 4.0). Ved innlesning blir nå tekstvariabler (`character`) lest inn som faktorvariabler. Dette kan vi se med `str()` og ved å bruke `class()` på de aktuelle kolonnene:
+
+```{r}
 carseats <- read.csv("carseats.csv", stringsAsFactors = TRUE)
 str(carseats)
 class(carseats$ShelveLoc)
 ```
 
+
 ### Oppgave 2: Les inn Excel-filer
 
 1. Last inn pakken `readxl` med `library(readxl)`
+
+```{r}
+library(readxl)
+```
+
 2. Les inn fila `carseats.xlsx` som `carseats_excel` med `read_xlsx` fra pakken `readxl`
+
+```{r}
+carseats_excel <- read_xlsx('carseats.xlsx')
+```
+
 3. Bruk `summary` på `carseats_excel`. Hva er median for variabelen `Price`?
+
+```{r}
+summary(carseats_excel)
+```
+
+Median for `Price` er `r round(median(carseats_excel$Price), 2)`.
+
 4. Les inn fila `carseats.xlsx` på nytt, men kun med de 30 første radene med data og de 5 første kolonnene i Excel-fila
+
+Vi bruker vanlige cellereferanser i Excel for å gjøre et uttrekk fra fila. Siden vi skal ha de første 30 radene med _data_, må vi hente inn til og med rad 31 fra kolonne E:
+
+```{r}
+carseats_excel <- read_xlsx('carseats.xlsx', range = 'A1:E31')
+```
+
+Vi kan sjekke dimensjonene til objektet vi har lest inn med `dim()`:
+
+```{r}
+dim(carseats_excel)
+```
+
 
 ### Oppgave 3: Deskriptiv statistikk - Beskrive
 
@@ -52,9 +105,17 @@ table(komp_oppg$sektorkode)
 2. Bruk `aggregate()` og `sum()` til å summere `belop` fordelt på `sektorkode`.
 
 ```{r, echo=TRUE, eval=TRUE}
-aggregate(komp_oppg$belop, list(Sektorkode = komp_oppg$sektorkode), FUN = sum, na.rm = TRUE)
+aggregate(
+  komp_oppg$belop,
+  list(Sektorkode = komp_oppg$sektorkode),
+  FUN = sum,
+  na.rm = TRUE)
 
-agg_belop <- aggregate(komp_oppg$belop, list(Sektorkode = komp_oppg$sektorkode), FUN = sum, na.rm = TRUE)
+agg_belop <- aggregate(
+  komp_oppg$belop,
+  list(Sektorkode = komp_oppg$sektorkode),
+  FUN = sum,
+  na.rm = TRUE)
 
 colnames(agg_belop)[colnames(agg_belop) == 'x'] <- 'Snitt_Salg'
 ```  
@@ -65,6 +126,7 @@ colnames(agg_belop)[colnames(agg_belop) == 'x'] <- 'Snitt_Salg'
 median(komp_oppg$belop)
 mean(komp_oppg$belop)
 ```  
+
 Gjennomsnittet er veldig forskjellig fra medianen, som indikerer at datamaterialet inneholder ekstreme verdier som påvirker gjennomsnittet. Median er derfor det beste målet på sentraltendens i dette tilfellet.
 
 4. Bruk `quantile()`-funksjonen til å printe ut 25te, 75te og 90nde persentil. Sammenlign med `min()` og `max()`.
@@ -73,17 +135,18 @@ Gjennomsnittet er veldig forskjellig fra medianen, som indikerer at datamaterial
 quantile(komp_oppg$belop, probs = c(0.25, 0.75, 0.90))
 range(komp_oppg$belop)
 ```  
+
 Range viser min- og maksverdi. Du kan også bruke funksjonene min `min(komp_oppg$belop)` og `max(komp_oppg$belop)` for å printe min og maks.
 
 5. Finn IQR uten å bruke funksjonen IQR basert på tallene over.
    + Får du det samme tallet med funksjonen `IQR()`?
+
 ```{r}
 123433-24006
 IQR(komp_oppg$belop)
 ```
 
-Interkvartil-avstand er et mål på spredning som er lite sensitivt for ekstreme verdier. IQR regnes ut ved avstanden mellom tredje og første kvartil(Q3-Q1). Andre navn for Q3 og Q3 er hhv. øvre og nedre kvartil eller 75te og 25te persentil. Inndeling i kvartiler splitter observasjonene opp i like store grupper (antall observasjoner, uavhengig av verdier), og observasjonene innenfor Q1 og Q3 utgjør de 50 % av dataene som befinner seg nærmest medianen.
-
+Interkvartilavstand er et mål på spredning som er lite sensitivt for ekstreme verdier. IQR regnes ut ved avstanden mellom tredje og første kvartil (Q3-Q1). Andre navn for Q3 og Q3 er henholdsvis øvre og nedre kvartil eller 75te og 25te persentil. Inndeling i kvartiler splitter observasjonene opp i like store grupper (antall observasjoner, uavhengig av verdier), og observasjonene innenfor Q1 og Q3 utgjør de 50 prosent av dataene som befinner seg nærmest medianen.
 
 ### Oppgave 4: Deskriptiv statistikk - Visualisere
 
@@ -108,8 +171,16 @@ rug(belop_1000, breaks = 15)
 Fordelingen er ekstremt høyreskjev og gir ikke en god representasjon av verken typiske verdier eller
 spredning. Vi kan logtransformere data, som er vanlig å gjøre ved skjeve fordelinger.
 
-Her gjør vi det med funksjonen `log10()`, som er den Briggske logaritmen hvor hvert tall x endrer seg i tierpotenser.
-Det vil si at den naturlige verdien 10 har verdien 1, den naturlige verdien 100 har verdien 2:
+Her gjør vi det med funksjonen `log10()` som er en vanlig logaritme med base 10 (også kjent som Briggs' logaritme eller standard logaritme). For hver økning av den den logaritmiske verdien, øker den naturlige verdien med en faktor på 10:
+
+| Naturlig verdi | Logaritme         | Logaritmisk verdi |
+|---------------:|-------------------|------------------:|
+| 10             | $log_{10}(10)$    | $1$               |
+| 100            | $log_{10}(100)$   | $2$               |
+| 1000           | $log_{10}(1000)$  | $3$               |
+| 10000          | $log_{10}(10000)$ | $4$               |
+
+I R:
 
 ```{r}
 log10(100)
@@ -129,34 +200,33 @@ I det første histogrammet så vi på fordelingen på en lineær skala, der avst
 
 I et histogram ser vi på antallet observasjoner innenfor ulike grupper/klasser/bins, som kan ha ulik bredde/binwidth. Antallet verdier en _bin_ dekker på x-aksen er det samme som _klassebredde_  eller _binwidth_. I det første histogrammet ser vi at 2.5 _bins_ dekker verdiintervallet 0-500 på x-aksen. Klassebredden er dermed `500/2.5=200`. Det vil si at den første _bin_-en er gruppen observasjoner som har verdiene 0-200 på variabelen belop_1000, og den andre er gruppen observasjoner som har verdiene 200-400.
 
-Når vi nå skal tolke det logtransformerte histogrammet, er ikke verdiene på x-aksen like intuitive, fordi verken verdiene eller avstanden mellom verdiene er det samme som de faktiske verdiene i datamaterialet. Vi kan derimot se at mange observasjoner befinner seg i de (her) tre midterste gruppene/bins. Klassebredden eller binwidth i dette tilfellet er `0.5/2.5=0.2` fordi 2.5 bins dekker intervallet mellom 1.5 og 2 på x-aksen. Observasjonene i de fem midterse søylene dekker dermed intervallet 1.3 til 3. Hvis vi ønsker å vite hvilke faktiske verdier dette er, kan vi regne tilbake med `10^1.4` og `10^2`, som er hhv. 25 og 100 (25 000 og 100 000 kr.).  
+Når vi nå skal tolke det logtransformerte histogrammet, er ikke verdiene på x-aksen like intuitive, fordi verken verdiene eller avstanden mellom verdiene er det samme som de faktiske verdiene i datamaterialet. Vi kan derimot se at mange observasjoner befinner seg i de (her) tre midterste gruppene/bins. Klassebredden eller binwidth i dette tilfellet er `0.5/2.5=0.2` fordi 2.5 bins dekker intervallet mellom 1.5 og 2 på x-aksen. Observasjonene i de fem midterse søylene dekker dermed intervallet 1.3 til 3. Hvis vi ønsker å vite hvilke faktiske verdier dette er, kan vi regne tilbake med `10^1.4` og `10^2`, som er hhv. 25 og 100 (25.000 og 100.000 kr.).
 
 Vi kan se på median og 25te og 75te persentil (Q1 og Q3) for å sammenligne utregningen med statistiske mål på sentraltendens og spredning. 
 
 ```{r}
-quantile(belop_1000, probs = c(0.25,0.50,0.75))
+quantile(belop_1000, probs = c(.25, .50, .75))
 ```
 
 Vi så at de tre midterste _bins_ dekket verdiintervallet 25 til 100 da vi regnet oss tilbake. Dette stemmer godt med median og interkvartil-avstand (IQR, Q3-Q1): 50 prosent av datapunktene som er nærmest medianen, befinner seg i verdiintervallet 24 til 123 (i 1000 kr).
 
 Formålet med visualisering av data i et histogram er imidlertid ikke nødvendigvis å regne ut presise verdier, men illustrere sentraltendens og spredning. I dette tilfellet gjør logtransformasjonen at vi kan illustrere fordelingen bedre.
 
-
 3. Lag et boxplot med `belop_1000` fordelt på `sektorkode`
   + Hvordan kan du forbedre boxplottet?
   + Lag boxplottet på nytt
 
 ```{r, warning=FALSE }
-boxplot(belop_1000~sektorkode, data = komp_oppg)
+boxplot(belop_1000 ~ sektorkode, data = komp_oppg)
 ```
 
 Tilsvarende som for histogram.
 
 ```{r, warning=FALSE}
-boxplot(log10(belop_1000)~sektorkode, data = komp_oppg)
+boxplot(log10(belop_1000) ~ sektorkode, data = komp_oppg)
 ```
 
-I et boxplot, vil selve boksen vise de 50 % av observasjonene som er nærmest medianen (midtstreken) observasjonene mellom Q1(25te persentil) og Q3(75te persentil). I tillegg viser den _whiskers_ for laveste og høyeste verdi unntatt de verdiene som defineres som uteliggere. En tommelfingerregel er at verdier under/over `Q1-IQR*1.5` eller `Q3+IQR*1.5` defineres som uteliggere, som vises som sirkler. Du kan printe ut hvilke verdier R bruker til å plotte med `boxplot(log10(belop_1000)~sektorkode, data = komp_oppg)$stats`. 
+I et boxplot, vil selve boksen vise de 50 prosent av observasjonene som er nærmest medianen (midtstreken) observasjonene mellom Q1 (25te persentil) og Q3 (75te persentil). I tillegg viser den _whiskers_ for laveste og høyeste verdi unntatt de verdiene som defineres som uteliggere. En tommelfingerregel er at verdier under/over `Q1-IQR*1.5` eller `Q3+IQR*1.5` defineres som uteliggere, som vises som sirkler. Du kan printe ut hvilke verdier R bruker til å plotte med `boxplot(log10(belop_1000)~sektorkode, data = komp_oppg)$stats`. 
 
 ### Oppgave 5: Datavasking
 
@@ -172,9 +242,8 @@ sapply(komp_oppg, anyNA)
 ```
 
 Se gjerne foilene fra det første kurset for en innføring i `apply`-familien.
-Vi bruker  `sapply` til å kjøre funksjonen `anyNA` på alle kolonnene i datasettet, som spør om det er én eller
-flere missingverdier i kolonnen. Denne evaluerer til `TRUE` eller `FALSE`, 
-men sier ingenting om _antallet_ missing i de ulike kolonnene.
+
+Vi bruker  `sapply` til å kjøre funksjonen `anyNA` på alle kolonnene i datasettet, som spør om det er én eller flere missingverdier i kolonnen. Denne evaluerer til `TRUE` eller `FALSE`, men sier ingenting om _antallet_ missing i de ulike kolonnene.
 
 Hvis vi vil telle antall missingverdier per kolonne, kan vi skrive:
 
@@ -182,14 +251,9 @@ Hvis vi vil telle antall missingverdier per kolonne, kan vi skrive:
 unlist(lapply(komp_oppg, function(x) sum(is.na(x))))
 ```
 
-Her bruker vi `lapply`, som returnerer en liste (her er listen "unlistet" med `unlist()` for å spare plass). Det vi egentlig sier til R
-er at vi vil iterere over kolonnene i datasettet, og at vi for hver kolonne (x)
-ønsker å ha ut antallet (`sum`) verdier som er missing(`is.na`). `is.na` evaluerer
-elementvis hvorvidt en verdi er missing (da evalueres den til `TRUE`, som er 1) eller ikke (`FALSE`, 0). Derfor blir 
-summen av antallet `TRUE` det samme som summen av antallet missingverdier.
+Her bruker vi `lapply`, som returnerer en liste (her er listen "unlistet" med `unlist()` for å spare plass). Det vi egentlig sier til R er at vi vil iterere over kolonnene i datasettet, og at vi for hver kolonne (x) ønsker å ha ut antallet (`sum`) verdier som er missing(`is.na`). `is.na` evaluerer elementvis hvorvidt en verdi er missing (da evalueres den til `TRUE`, som er 1) eller ikke (`FALSE`, 0). Derfor blir  summen av antallet `TRUE` det samme som summen av antallet missingverdier.
 
 Prøv gjerne denne funksjonen selv, både med og uten `unlist()`.
-
 
 2. Lag en ny kolonne `st_dato` som konverterer `stiftelsesdato` til dato
     + sjekk at den nye kolonnen har datatype `Date`
@@ -209,6 +273,7 @@ sapply(komp_oppg, anyNA)
 ```  
 
 Nå finner R missingverdier i kolonnen `st_dato`. Hvorfor? Fordi kolonnen `stiftelsesdato` hadde flere observasjoner som var tomme celler ("").
+
 Vær oppmerksom på hvilke typer verdier i ditt datasett som er "missing", slik at R evaluerer dette riktig.
 
 4. Finnes det duplikater i datasettet?
@@ -224,51 +289,193 @@ length(unique(komp_oppg$st_dato))
 length(unique(komp_oppg$navn))
 ```  
 
-### Oppgave X: Lineær regresjon
+### Oppgave 6: Lineær regresjon
 
 1. Lag en regresjonsmodell med `Sales` som avhengig variabel. Inkluder _alle_ andre variabler som uavhengige variabler. Tilordne modellen til `car.mod1`
-2. Hva er justert R<sup>2</sup> for modellen`?
-3. Hvilke variabler i modellen er ikke signifikante?
-4. Bygg en ny modell, enten med å bruke `lm()` på nytt, eller med `update()`, men uten variablene som ikke var signifikante (hint: husk at faktorvariabler håndteres på en spesiell måte i modeller). Tilordne modellen til `car.mod2`
-5. Sammenlign F-statistikken og R<sup>2</sup> i den nye modellen med den gamle. Har modellen blitt bedre eller dårligere med de utelatte variablene?
 
 ```{r}
 carseats <- read.csv('carseats.csv', stringsAsFactors = TRUE)
 car.mod1 <- lm(Sales ~ ., data = carseats)
+```
+
+Vi bruker formelobjektet i R (se `?formula`) for å bygge den lineære regresjonsmodellen. Avhengig variabel (response) er `Sales` og alle andre kolonner i tabellen skal være uavhengige variabler (predictors). Med formelobjektet kan vi slippe å skrive inn alle variablene og i stedet bruke punktum `.` for å fortelle R at vi skal ha med alle andre variabler. Formelen blir derfor `Sales ~ .`.
+
+2. Hva er justert R<sup>2</sup> for modellen`?
+
+```{r, echo=FALSE}
+m <- summary(car.mod1)
+```
+
+```{r}
 summary(car.mod1)
+```
+
+$R^2$ for modellen er `r round(m$adj.r.squared, 3)`. $R^2$ forteller oss hvor mye av variansen i $Y$ modellen forklarer. Modellen fanger med andre ord opp `r round(m$adj.r.squared*100, 2)` prosent av variasjonen i `Sales`.
+
+3. Hvilke variabler i modellen er ikke signifikante?
+
+Oppsummeringen av modellen viser at variablene `Population`, `Education`, `Urban` og `US` ikke er signifikante (verken på 0,1, 1 eller 5-prosentnivå).
+
+4. Bygg en ny modell, enten med å bruke `lm()` på nytt, eller med `update()`, men uten variablene som ikke var signifikante (hint: husk at faktorvariabler håndteres på en spesiell måte i modeller). Tilordne modellen til `car.mod2`
+
+```{r}
 car.mod2 <- update(car.mod1, ~ . -Population -Education -Urban -US)
+```
+
+Vi kan bruke `update()` til å endre en eksisterende regresjonsmodell. Vi spesifiserer modellen på nytt. Vi trenger kun å spesifisere de delene av modellen som skal endres. Vi skal fjerne de fire variablene som ikke var signifikante i forrige modell. Vi bruker `-` til å fjerne variabler fra modellen.
+
+5. Sammenlign F-statistikken og R<sup>2</sup> i den nye modellen med den gamle. Har modellen blitt bedre eller dårligere med de utelatte variablene?
+
+```{r, echo=FALSE}
+m2 <- summary(car.mod2)
+```
+
+```{r}
 summary(car.mod2)
 ```
 
-### Oppgave X: Logistisk regresjon
+$R^2$ for den andre modellen er `r round(m2$adj.r.squared, 4)` som bare er marginalt mindre enn den første modellen som hadde $R^2$ på `r round(m$adj.r.squared, 4)`.
+
+F-statistikken er `r round(unname(m2$fstatistic[1]), 1)` for den andre modellen, mot `r round(unname(m$fstatistic[1]), 1)` for den første modellen. F-statistikken er tydelig forbedret selv om vi har fjernet flere variabler fra modellen. Det indikerer at den andre modellen er bedre enn den første.
+
+### Oppgave 7: Logistisk regresjon
+
+1. Bygg en logistisk modell med `glm()` på datasettet `Weekly`. Bruk `Direction` som avhengig variabel og `Lag`-variablene samt `Volume` som uavhengige variabler. Tilordne modellen til `glm.mod`. Husk å sette argumentet `family`.
 
 ```{r}
-Weekly <- ISLR::Weekly
-head(Weekly)
 glm.mod <- glm(
   Direction ~ Lag1 + Lag2 + Lag3 + Lag4 + Lag5 + Volume,
   data = Weekly,
   family = binomial
 )
-summary(glm(Direction ~ Lag2, data = Weekly, family = binomial))
-glm.preds <- factor(ifelse(predict(glm.mod, Weekly, type = 'response') > .5, 'Up', 'Down'))
-table(glm.preds, Weekly$Direction)
 ```
 
+Vi bygger modellen med `glm()`. For å få en oversikt over kolonnene i datasettet, kan vi bruke `colnames()`. Det er kolonnenavnene her vi bruker for å spesifisere modellen. Siden dette skal være en vanlig additiv modell, bruker vi `+` for å legge til variabler i modellen. Merk at vi også kunne bygget denne modellen på en annen måte. Vi kunne startet med å definere _alle_ andre variabler i modellen, og så fjerne variablene `Today` og `Year`. Modellen ville da sett slik ut:
 
-### Oppgave X: Predict
+```{r, eval=FALSE, echo=TRUE}
+glm(Direction ~ . -Today -Year, data = Weekly, family = binomial)
+```
+
+2. Bruk `summary()` på modellen. Virker noen av variablene signifikante?
+
+```{r}
+summary(glm.mod)
+```
+
+Variablen `Lag2` er sigifikant på 5-prosentnivå. De øvrige variablene er ikke signifikante.
+
+3. Bruk `predict()` for å estimere sannsynligheten for at en observasjon har verdien `Up` på `Direction`. Husk å sette argumentet `type` til `'response'`. Tilordne til `glm.preds`
+4. Endre `glm.preds` slik at denne har verdien `'Up'` hvis sannsynligheten er _større enn_ `0.5` og `'Down'` hvis ikke. Du kan bruke `ifelse()` til dette, og eventuelt også konvertere til en faktor med `factor()`
+
+```{r}
+glm.preds <- predict(glm.mod, Weekly, type = 'response')
+glm.preds <- factor(
+  ifelse(
+    glm.preds > .5,
+    'Up', 'Down')
+  )
+```
+
+Her skjer det ganske mye på få linjer med kode, og vi skal bryte ned hva vi gjør her:
+
+* Først bruker vi funksjonen `predict()` for å få estimatene av sannsynligheten for høy verdi på den avhengige variabelen `Direction` (som er `Up`). `predict()` tar modellen som første argument, og data vi skal estimere som andre argument. Siden vi ønsker å få den estimerte _sannsynligheten_, må vi sette argumentet `type` til `'response'`. Hvis ikke hadde vi fått rapportert til bake log-odds (se `?predict.glm` for mer informasjon).
+* Vi setter en sannsynlighet på 0.5 som grense for om kursen går opp eller ikke. Her kunne vi valgt en hvilken som helst verdi mellom 0 og 1, men 0.5 virker mest fornuftig. Vi kan bruke `ifelse()` til å returnere en ny vektor med enten verdiene `Up` eller `Down` hvis verdien er henholdvis over eller under 0.5.
+* Vi konverterer vektoren som returneres fra `ifelse()` til en faktor lik den som er i datasettet. Funksjonen `factor()` vil rangere faktorene etter alfabetisk rekkefølge, så med verdiene `Up` og `Down`, blir `Up` den høye verdien, på lik måte som i datasettet.
+
+**Pro-tips!** Det kan være litt forvirrende å lese nestede funksjoner i R slik vi har brukt her. R evaluerer det _innerste_ uttrykket først, og jobber seg så utover. Dette er motsatt rekkefølge av hvordan vi tenker på et problem. Pakken `magrittr` er laget for at det skal være enklere å skrive kode i R mer slik vi tenker på den rent logisk. Med `magrittr` kunne vi skrevet koden over som følger:
+
+```{r, eval=FALSE}
+library(magrittr)
+glm.preds <- glm.mod %>%
+  predict(data = Weekly, type = 'response') %>%
+  { ifelse(. > 0.5, 'Up', 'Down') } %>%
+  factor()
+```
+
+5. Lag en klassifiseringtabell (confusion matrix) med predikterte verdier og observerte verdier. Hva forteller resultatene deg?
+
+```{r}
+addmargins(
+  table(
+    glm.preds, Weekly$Direction,
+    dnn = c('Estimert', 'Ovservert')
+    ))
+```
+
+Vi bruker tabellfunksjonen `table()` til å lage en tabell over de estimerte og de observerte verdiene på `Direction`. Her bruker vi også funksjonen `addmargins()` for å få rad og kolonnesummer. Vi kan bruke argumentet `dnn` (dimension names) til å gi vår tabell litt mer fornuftige navn for rader og kolonner.
+
+Ut fra tabellen, ser vi at modellen har klassifisert 557 av 605 observasjoner korrekt til `Up`, men kun 54 av 484 observasjoner er korrekt klassifisert til `Down`. Modellens evne til å korrekt klassifisere observasjonene, virker dermed ganske dårlig. Vi kan tallfeste dette nærmere med å se på spesifisitet og sensitivitet og totalt nøyaktighet:
+
+Sensitivitet: $100\frac{54}{484}=11,157$
+
+Spesifisitet: $100\frac{557}{605}=92,066$
+
+Nøyaktighet: $100\frac{54+557}{484+605}=100\frac{611}{1089}=56,11$
+
+### Oppgave 8: Predict
+
+1. Lag trenings- og testdata med en 70/30 splitt på `carseats`. Tilordne treningsdata til `car.train` og testdata til `car.test`. Sett seed til 42 før du bruker en funksjon som trekker fra en sannsynlighetsfordeling.
 
 ```{r}
 set.seed(42)
 x <- runif(nrow(carseats), 0, 1) < .7
 car.train <- carseats[x,]
 car.test <- carseats[!x,]
+```
+
+Funksjonen `set.seed()` gjør at vi får reproduserbare resultater selv om vi bruker tilfeldighetsfunksjoner slik som `runif()`. Når vi gjør et faktisk utvalg på et analysedatasett, så vil vi normalt sett ikke bruke `set.seed()`, men det er nyttig til dette formålet.
+
+Vi starter med å lage en vektor som har en lengde lik antall rader i datasettet `carseats`. Det kan vi finne med funksjonen `nrow()`. Vi bruker `runif()` til å generere en sekvens med tilfeldige tall mellom 0 og 1 basert på en _uniform distribusjon_. Det vil si at hver verdi mellom 0 og 1 har lik sannsynlighet for å bli trukket ut. Dette gir et et veldig god utgangspunkt for å splitte data i et trenings- og et testdatasett.
+
+**Pro-tips!** Hvis du vil sjekke at `runif()` faktisk gir en uniform distibusjon, kan du prøve å kjøre følgende kommando i R-konsollvinduet: `hist(runif(1000000, 1, 10), breaks = 10, col = 'steelblue')`. Forsøk å endre antallet observasjoner i det første argumentet til `runif()`. Legg merke til at jo høyere dette er, jo mer uniform blir distibusjonen. (Pseudo)-sannsynlighet i praksis!
+
+I koden over har vi tatt en liten snarvei. Vi har lagt til `<- 7` etter `runif()`-funksjonen. Dette leses av R som et sammenhengende logisk uttrykk (vi husker igjen dette fra forrige seminar), som vil evaluere til `TRUE` hvis verdien er mindre enn 0,7 og `FALSE` hvis ikke. Vi får da omtrent en 70/30-splitt. Dette kan vi sjekke på følgende måte:
+
+```{r}
+table(x)
+```
+
+Vi bruker vektoren `x` til å subsette `carseats`. Først lager vi `car.train` basert på at `x` er `TRUE`, og så lager vi `car.test` basert på at `x` er `FALSE` (vi må her bruke ikke-operatoren i R `!`). La oss sjekke hvor mange rader vi har i `car.train` og `car.test`:
+
+```{r}
+nrow(car.train)
+nrow(car.test)
+```
+
+2. Bygg en modell på treningsdata med `Sales` som avhengig variabel og `CompPrice`, `Advertising`, `Price` og `ShelveLoc` som uavhengige variabler. Tilordne modellen til `train.mod`
+
+```{r}
 train.mod <- lm(Sales ~ CompPrice + Advertising + Price + ShelveLoc, data = car.train)
+```
+
+Vi bruker funksjonen `lm()` slik som tidligere til å bygge en lineær regresjonsmodell.
+
+3. Bruk `predict()` til å estimere salgsvolum på _treningsdata_. Beregn RMSE for treningsdata.
+
+```{r}
 train.pred <- predict(train.mod, car.train)
 err <- train.pred - car.train$Sales
 sqrt(mean(err^2))
+```
+
+Formelen for RMSE (root mean squared error) er:
+
+$$RMSE=\sqrt{\frac{\sum^n_{i=1}{(\hat{Y_i}-Y_i)^2}}{n}}$$
+
+RMSE er ganske lik RSE som oppgis av R med `summary.lm`. Forskjellen er at vi her deler på $n$ (antall observasjoner), mens RSE deles på antall _frihetsgrader_, som vil være noe mindre enn $n$. Å regne ut RMSE i R, er enkelt. Først tar vi differansen av estimert og observert verdi. Vi kvadrerer denne med `^`, tar gjennomsnittet med `mean()` og finner roten av gjennomsnittet med `sqrt()`
+
+For treningsdatasettet får vi en RMSE på `r round(sqrt(mean(err^2)), 3)`.
+
+4. Bruk `predict()` til å estimere salgsvolum på _testdata_. Beregn RMSE for testdata.
+
+```{r}
 test.pred <- predict(train.mod, car.test)
 err <- test.pred - car.test$Sales
 sqrt(mean(err^2))
 ```
 
+For testdatasettet får vi en RMSE på `r round(sqrt(mean(err^2)), 3)`.
+
+5. Hvor godt predikerer modellen på testdata sammenlignet med treningsdata?
+
+For denne modellkjøringen, så passer modellen litt bedre på testdata enn på treningsdata (den gjennomsnittlige avstanden mellom estimert verdi og observert verdi er noe lavere). Merk at det er vanlig at RMSE for testdata er noe lavere enn for treningsdata. Dette kan skje på grunn av rene tilfeldigheter i hvordan data er splittet opp. Forsøk gjerne å kjøre oppgaven på nytt, men bruk en annen verdi enn 42 i funksjonen `set.seed()` i starten av oppgaven. Du vil da få en annen RMSE for både trenings- og testdatasettet.
