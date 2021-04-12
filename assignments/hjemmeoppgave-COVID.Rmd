@@ -1,0 +1,57 @@
+---
+title: "Hjemmeoppgave"
+author: "Eivor Hovde Hoff"
+date: "12 4 2021"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+carseats <- ISLR::Carseats
+carseats$Urban <- as.character(carseats$Urban)
+```
+
+## Hvordan løse og levere oppgaven
+
+Oppgavene løses i Rscript. For eksempel hvis Oppgave 1 er å dele 100 på 5, er en måte å løse oppgaven:
+
+```{r, eval = FALSE}
+# Oppgave 1
+100/5
+
+# Eventuelle svar på oppgaven som ikke er kode
+```
+
+Det kan være flere måter å løse oppgaven på, og hvilken måte du løser oppgaven på er ikke viktig så lenge du løser eller forsøker å løse oppgaven.
+Oppgaven leveres i form av rscript [på hvilken måte?].
+
+## Oppgaver
+Datasettet vi skal bruker inneholder data om testing for COVID19 i europeiske land.
+
+1. Innlesing av fil
+- Les inn datasettet `covid.xlsx` ved å bruke `readxl`-pakken. Tilordne datasettet et objekt når du leser det inn.
+
+2. Inspisere datasettet
+- Se på de 10 øverste og nederste observasjonene (hint: `head()` og `tail()`)   
+- Se på strukturen i datasettet (hint: `str()`)
+  + Hvor mange observasjoner har datasettet?
+- Hvilke verdier har variabelen `level`, og hva sier den noe om? (hint: `unique()`, `View()`)
+
+3. Databehandling
+- Lag et nytt objekt som kun inneholder data på nasjonalt nivå i Europa (hint: `df <- df[ , ]`)
+  + Hvor mange observasjoner har datasettet nå?
+- Hvor mange land er det data for? (hint: `unique()` og `length(unique())`)
+- Hvor mange missingverdier er det i datasettet? (hint: `is.na()`, `table(is.na())`, `anyNA()`)
+  + Hvilken variabel har missing data?
+  
+4. Deskriptivt statistikk
+- Hvilke land har høyeste og laveste verdi av `positivity_rate` i løpet av perioden, og i hvilke uker? (hint: `na.rm`-argumentet)
+- Hva er gjennomsnittlig `positivity_rate` i løpet av perioden? 
+- Hva er median `positivity_rate`?
+
+
+
+
+
