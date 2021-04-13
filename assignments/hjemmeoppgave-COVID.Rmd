@@ -1,8 +1,10 @@
 ---
 title: "Hjemmeoppgave"
 author: "Eivor Hovde Hoff"
-date: "12 4 2021"
-output: pdf_document
+date: "`r format(Sys.Date(), '%e. %B %Y')`"
+output:
+  html_document:
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
@@ -29,7 +31,7 @@ Datasettet vi skal bruker inneholder data om testing for COVID19 i europeiske la
 1. **Innlesing av fil**
 - Les inn datasettet `covid.xlsx` ved å bruke `readxl`-pakken. Tilordne datasettet et objekt når du leser det inn.
 
-2. Inspisere datasettet
+2. **Inspisere datasettet**
 - Se på de 10 øverste og nederste observasjonene (hint: `head()` og `tail()`)   
 - Se på strukturen i datasettet (hint: `str()`)
   + Hvor mange observasjoner har datasettet?
