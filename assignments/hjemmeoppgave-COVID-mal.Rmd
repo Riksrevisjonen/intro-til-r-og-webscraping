@@ -1,33 +1,23 @@
 ---
 title: "Hjemmeoppgave"
-author: "Eivor Hovde Hoff"
+author: "FORNAVN ETTERNAVN"
 date: "`r format(Sys.Date(), '%e. %B %Y')`"
-output:
-  pdf_document: default
+output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Hvordan løse og levere oppgaven
-
-Oppgaven kan enten løses med å skrive et R-skript, eller et Rmarkdown-dokument hvor du fyller ut malen som legges ved oppgaven. Hvis du bruker et R-skript, er det viktig at du legger inn kommentarer i skriptet. Dette gjør du med å bruke tegnet `#`. Hvis for eksempel Oppgave 1 er å dele 100 på 5, er en måte å løse oppgaven på som følger:
-
-```{r, eval = FALSE}
-# Oppgave 1
-100/5
-
-# Eventuelle svar på oppgaven som ikke er kode
-```
-
-Det kan være flere måter å løse oppgaven på, og hvilken måte du løser oppgaven på er ikke viktig så lenge du løser eller forsøker å løse oppgaven.
-
 ## Oppgaver
-Datasettet vi skal bruker inneholder data om testing for COVID19 i europeiske land.
 
 1. **Innlesing av fil**
 - Les inn datasettet `covid.xlsx` ved å bruke `readxl`-pakken. Tilordne datasettet et objekt når du leser det inn.
+
+```{r}
+
+```
+
 
 2. **Inspisere datasettet**
 - Se på de 10 øverste og nederste observasjonene (hint: `head()` og `tail()`)   
@@ -35,18 +25,35 @@ Datasettet vi skal bruker inneholder data om testing for COVID19 i europeiske la
   + Hvor mange observasjoner har datasettet?
 - Hvilke verdier har variabelen `level`, og hva sier den noe om? (hint: `unique()`, `View()`)
 
+```{r}
+
+```
+
+DINE SVAR PÅ OPPGAVEN HER
+
 3. **Databehandling**
 - Lag et nytt objekt `national` som kun inneholder data på nasjonalt nivå i Europa (hint: `df <- df[ , ]`).
   + Hvor mange observasjoner har datasettet nå?
 - Hvor mange land er det data for? (hint: `unique()` og `length(unique())`)
 - Hvor mange missingverdier er det i datasettet? (hint: `is.na()`, `table(is.na())`, `anyNA()`)
   + Hvilken variabel har missing data?
-  
+
+```{r}
+
+```
+
+DINE SVAR PÅ OPPGAVEN HER
+
 4. **Deskriptivt statistikk**
 - Hvilke land har høyeste og laveste verdi av `positivity_rate` i løpet av perioden, og i hvilke uker? (hint: `na.rm`-argumentet)
 - Hva er gjennomsnittlig `positivity_rate` i løpet av perioden? 
 - Hva er median `positivity_rate`?
 
+```{r}
+
+```
+
+DINE SVAR PÅ OPPGAVEN HER
 
 5. **Visualisere**
 - Bruk aggregate-funksjonen for å aggregere data på samme måte som i kodesnutten under, men for **summen** av `new_cases`
@@ -55,9 +62,8 @@ Datasettet vi skal bruker inneholder data om testing for COVID19 i europeiske la
 - Hva kan være ulike årsaker til at det er så få `new_cases` i starten av observasjonsperioden? 
 Ta gjerne også en titt på [Dokumentasjonen for datasettet](https://www.ecdc.europa.eu/sites/default/files/documents/2021-01-13_Variable_Dictionary_and_Disclaimer_weekly_testing_data_EUEEAUK.pdf)
 
-**Kodesnutt**
-```{r, eval=FALSE}
-covid_sum <- aggregate(new_cases ~ year_week, data = national, FUN = median)
+```{r}
+covid_sum <- aggregate(new_cases ~ year_week, data = national, FUN = sum)
 start <- as.numeric(as.Date('2020-01-05'))
 stop <- as.numeric(as.Date('2021-04-04'))
 covid_sum$date <- as.Date(seq(start, stop, 7), origin = '1970-01-01')
@@ -65,11 +71,14 @@ plot(
   new_cases ~ date,
   data = covid_sum,
   xlab = 'Tid',
-  ylab = 'Median av nye smittede',
+  ylab = 'Sum av nye smittede',
   type = 'l',
   col = 'red',
   lwd = 2)
 ```
 
-**Forklaring til håndtering av datovariabel over**
-Det kan være problematisk å få R til å gi en dato for et ukenummer. I det nye aggregerte datasettet har vi 66 rader fra uke 1 i 2020 til uke 13 i 2021. Vi kan lage en datovariabel ut fra dette. Søndag i uke 1 2020 var 5. januar, mens søndag i uke 13 2021 var 13. april. Vi lager en ny variabel som starter på 5. januar 2020 og går frem syv dager frem til 13. april 2021. Vi får da en datovariabel vi kan bruke til visualiseringer og til analyse. R lagrer internt datoer som et heltall som teller antall dager siden 1. januar 1970. Vi kan se hvilken tall en dag har med å konvertere til numeric med as.numeric(), og vi kan konvertere et heltall tilbake til en dato med as.Date(). Vi må da sette startpunktet med origin, som da er 1. januar 1970.
+```{r}
+
+```
+
+DINE SVAR PÅ OPPGAVEN HER
