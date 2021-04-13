@@ -51,9 +51,9 @@ Datasettet vi skal bruker inneholder data om testing for COVID19 i europeiske la
 
 
 5. **Visualisere**
-1. Bruk aggregate-funksjonen for å aggregere data på samme måte som i kodesnutten under, men for gjennomsnittet av `new_cases`
-2. Gjør så det samme som over, men for det nye datasettet
-3. Hva kan være ulike årsaker til at det er så få `new_cases` i starten av observasjonsperioden? 
+- Bruk aggregate-funksjonen for å aggregere data på samme måte som i kodesnutten under, men for gjennomsnittet av `new_cases`
+- Gjør så det samme som over, men for det nye datasettet
+- Hva kan være ulike årsaker til at det er så få `new_cases` i starten av observasjonsperioden? 
 Ta gjerne også en titt på [Dokumentasjonen for datasettet](https://www.ecdc.europa.eu/sites/default/files/documents/2021-01-13_Variable_Dictionary_and_Disclaimer_weekly_testing_data_EUEEAUK.pdf)
 
 **Kodesnutt**
