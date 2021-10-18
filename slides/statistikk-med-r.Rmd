@@ -1,7 +1,7 @@
 ---
 title: "Statistikk med R"
 author: "Ove Haugland Jakobsen og Eivor Hovde Hoff"
-date: "7. april 2021"
+date: "25. oktober 2021"
 always_allow_html: yes
 output:
   ioslides_presentation:
@@ -733,83 +733,6 @@ plot(carseats$Sales, carseats$Price,
 ```
 
 
-## Visualisering - `ggplot2` {.flexbox .vleft .extraspace}
-
-* Uendelige muligheter for enkle og kompliserte visualiseringer som ser bra ut
-* Krever at man lærer seg syntaksen
-* Eget kurs i ggplot2 på [Datacamp](https://www.datacamp.com)
-* [ggplot2 cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
-* [R Graph Gallery](https://www.r-graph-gallery.com/ggplot2-package.html)
-
-## ggplot2 - Histogram {.small-code}
-
-```{r, echo=FALSE, eval=TRUE, warning=FALSE, message=FALSE}
-library(hrbrthemes)
-ggplot(carseats, aes(Sales)) + 
-  geom_histogram(binwidth = 2, fill="#69b3a2", color="#e9ecef", alpha=0.8) + 
-  ggtitle("Histogram - Salg av bilseter (1000)") + 
-  theme_ipsum() +
-  theme(plot.title = element_text(size = 12))
-```
-
-## ggplot2 - Histogram kode {.small-code}
-
-```{r, echo=TRUE, eval=FALSE}
-library(hrbrthemes)
-ggplot(carseats, aes(Sales)) + 
-  geom_histogram(binwidth = 2, fill="#69b3a2", color="#e9ecef", alpha=0.8) + 
-  ggtitle("Histogram - Salg av bilseter (1000)") + 
-  theme_ipsum() +
-  theme(plot.title = element_text(size = 12))
-```
-
-## ggplot2 - Boxplot {.small-code}
-
-```{r, echo=FALSE, eval=TRUE, warning=FALSE, message=FALSE}
-library(hrbrthemes)
-ggplot(carseats, aes(ShelveLoc, Sales)) + 
-  geom_boxplot(fill="#69b3a2", alpha=0.9) + 
-  ggtitle("Boxplot - Salg av bilseter (1000) fordelt på hylleplassering") + 
-  theme_ipsum() +
-  theme(plot.title = element_text(size = 10))
-```
-
-## ggplot2 - Boxplot kode {.small-code}
-
-```{r, echo=TRUE, eval=FALSE}
-library(hrbrthemes)
-ggplot(carseats, aes(ShelveLoc, Sales)) + 
-  geom_boxplot(fill="#69b3a2", alpha=0.9) + 
-  ggtitle("Boxplot - Salg av bilseter (1000) fordelt på hylleplassering") + 
-  theme_ipsum() +
-  theme(plot.title = element_text(size = 10))
-```
-
-
-## ggplot2 - Scatterplot {.small-code}
-
-```{r, echo=FALSE, eval=TRUE, warning=FALSE, message=FALSE}
-library(hrbrthemes)
-ggplot(carseats, aes(x = Sales, y = Price, color = Urban)) + 
-  geom_point(alpha = 0.3) + 
-  ggtitle("Sales vs. Price med LOESS-kurve") +
-  stat_smooth() +
-  theme_ipsum() +
-  theme(plot.title = element_text(size = 10))
-```
-
-## ggplot2 - Scatterplot kode {.small-code}
-
-```{r, echo=TRUE, eval=FALSE, warning=FALSE}
-library(hrbrthemes)
-ggplot(carseats, aes(x = Sales, y = Price, color = Urban)) + 
-  geom_point(alpha = 0.3) + 
-  ggtitle("Sales vs. Price med LOESS-kurve") +
-  stat_smooth() +
-  theme_ipsum() +
-  theme(plot.title = element_text(size = 10))
-```
-
 ## Oppgaver - Visualisering {.flexbox .vleft .extraspace}
 
 Les inn datasettet `komp_oppgave.RDS` med `readRDS('komp_oppg.RDS')`.
@@ -822,7 +745,6 @@ Les inn datasettet `komp_oppgave.RDS` med `readRDS('komp_oppg.RDS')`.
 3. Lag et boxplot med `belop_1000` fordelt på `sektorkode`
     + Hvordan kan du forbedre boxplottet?
     + Lag boxplottet på nytt
-4. Hva er `ggplot2`?
 
 
 # (Mild introduksjon til) datavasking
