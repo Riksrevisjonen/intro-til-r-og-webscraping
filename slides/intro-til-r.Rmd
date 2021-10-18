@@ -1,7 +1,7 @@
 ---
 title: "Introduksjon til R"
 author: "Ove Haugland Jakobsen og Eivor Hovde Hoff"
-date: "24. mars 2021"
+date: "19. oktober 2021"
 always_allow_html: yes
 output:
   ioslides_presentation:
@@ -906,7 +906,7 @@ Bruk et R-skript for å skrive koden for disse oppgavene
 
 1. Hva er resultatet av `if (nchar('riksrevisjonen') > 5) TRUE else FALSE`?
 2. Skriv kode som returerer `Sant` hvis uttrykket `abs(-20)` er **større enn** `0`
-3. Skriv kode som tilordner `x` verdien `"Mindre enn 5"` hvis uttrykket `runif(1, 1, 10)` er **mindre enn** `5` og verdien `"Større enn 5"` hvis ikke. Kjør koden. Hva er verdien av `x`?
+3. Skriv kode som tilordner `x` verdien `"Mindre enn 5"` hvis uttrykket `runif(1, 1, 10)` er **mindre enn** `5` og verdien `"Større enn eller lik 5"` hvis ikke. Kjør koden. Hva er verdien av `x`?
 4. Kjør koden på nytt. Er verdien den samme?
 
 ## Looper
@@ -997,9 +997,9 @@ sapply(x, nchar, USE.NAMES = FALSE)
 
 Objektet `nokeur` skal være tilgjengelig i ditt arbeidmiljø. Objektet inneholder en liste med gjennomsnittverdien per måned for én euro i norske kroner etter år.
 
-1. Hva er gjennomsnittet hvor hver vektor?
-2. Hva er maksimal verdi hvor hver vektor?
-3. Hva er minimal verdi hvor hver vektor?
+1. Hva er gjennomsnittet for hver vektor?
+2. Hva er maksimal verdi for hver vektor?
+3. Hva er minimal verdi for hver vektor?
 4. Hva er maksimal verdi for hele datasettet?
 
 # God kodepraksis
