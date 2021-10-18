@@ -400,9 +400,9 @@ mtcars[mtcars$gear == 5, c('mpg', 'cyl')] # Velg mpg og cyl for rader hvor gear 
 
 1. Jobb videre med datasettet `USArrests`. Kjør `?USArrests` eller `help(USArrests)` for mer informasjon om datasettet.
 2. Hva er verdien i rad 1, kolonne 2?
-2. Hvilken delstat finner du i rad 3?  
-3. Hva er mordraten i denne delstaten?
-4. I hvilke delstater bor 66 % av populasjonen i urbane områder?
+3. Hvilken delstat finner du i rad 3?  
+4. Hva er mordraten i denne delstaten?
+5. I hvilke delstater bor 66 % av populasjonen i urbane områder?
 
 ## Lister
 
@@ -521,11 +521,11 @@ Få mer informasjon om funksjonen `dim()`
 
 ## Oppgaver {.flexbox .vleft .extraspace}
 
-* Sjekk ut hjelpesiden til funksjonen `sum`. Hvilke argumenter tar funksjonen?
-* Lag en vektor `x <- c(1:10, NA)`.
-* Hva er summen av `x` ?
-* Hva er gjennomsnittet av `x` ?
-* Hva er standardavviket til `x` ?
+1. Sjekk ut hjelpesiden til funksjonen `sum`. Hvilke argumenter tar funksjonen?
+2. Lag en vektor `x <- c(1:10, NA)`.
+3. Hva er summen av `x` ?
+4. Hva er gjennomsnittet av `x` ?
+5. Hva er standardavviket til `x` ?
 
 ## Argumenter
 
@@ -575,14 +575,6 @@ sample(size = 1, x  = 1:10)
 args(sum)
 args(sample)
 ```
-
-## Oppgaver {.flexbox .vleft .extraspace}
-
-* Sjekk ut hjelpesiden til funksjonen `sample`. Hvilke argumenter tar funksjonen?
-* Lag en vektor `my_vec` med 5 tilfeldig heltall trukket fra en vektor med alle tallene fra `10` til `20`.
-* Hva skjer hvis du setter `replace` til `TRUE`?
-* Hva skjer hvis du setter et seed, `set.seed(42)`, før hver gang du kjører funksjonen?
-
 
 ## Vektoriserte funksjoner
 
@@ -908,25 +900,14 @@ ifelse(x >= 10, 'Over', 'Under')
 ```
 
 
-## Oppgaver (1)
+## Oppgaver
 
 Bruk et R-skript for å skrive koden for disse oppgavene
 
-* Hva er resultatet av `if (nchar('riksrevisjonen') > 5) TRUE else FALSE`?
-* Skriv kode som returerer `Sant` hvis uttrykket `abs(-20)` er **større enn** `0`
-* Skriv kode som tilordner `x` verdien `"Mindre enn 5"` hvis uttrykket `runif(1, 1, 10)` er **mindre enn** `5` og verdien `"Større enn 5"` hvis ikke. Kjør koden. Hva er verdien av `x`?
-* Kjør koden på nytt. Er verdien den samme?
-
-## Oppgaver (2)
-
-Lag en ny vektor `x` med verdiene `17, 33, 3, 32, 29, 8, 12, 22, 29, 41`.
-
-* Skriv kode som returnerer `0` hvis verdien av hver enkel verdi av `x` er **mindre enn** 20 og `1` hvis verdien er **større eller lik** 20
-
-Lag en vektor `a` med verdiene `3, 2, 1` og en vektor `b` med verdiene `1, 2, 3` (kan forkortes til `3:1` og `1:3`).
-
-* Skriv kode som returnerer `Lik` hvis uttrykket `a == b` er **sant** og `Ulik` hvis ikke
-* Forklar resultatet av denne koden
+1. Hva er resultatet av `if (nchar('riksrevisjonen') > 5) TRUE else FALSE`?
+2. Skriv kode som returerer `Sant` hvis uttrykket `abs(-20)` er **større enn** `0`
+3. Skriv kode som tilordner `x` verdien `"Mindre enn 5"` hvis uttrykket `runif(1, 1, 10)` er **mindre enn** `5` og verdien `"Større enn 5"` hvis ikke. Kjør koden. Hva er verdien av `x`?
+4. Kjør koden på nytt. Er verdien den samme?
 
 ## Looper
 
