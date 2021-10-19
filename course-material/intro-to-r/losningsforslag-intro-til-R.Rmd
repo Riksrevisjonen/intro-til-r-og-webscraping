@@ -95,6 +95,18 @@ x[c(2:3,7)]
 
 Bruk funksjonen `c()` for å angi spesifikke rekker av verdier eller enkeltverdier du ønsker å se på.
 
+**Profftips**
+
+I R er det ofte flere veier til målet, og disse kan være nyttige i hvert sitt tilfelle. For å lage en vektor fra 10 til 19, kan vi gjøre dette på flere måter, her er tre av dem:
+
+```{r}
+(x <- 10:19)
+(x <- seq(10, 19, 1))
+(x <- seq_len(10) + 9)
+```
+
+Bruk `?seq` for å få mer informasjon om hva funksjonene `seq()` og `seq_len()` kan gjøre.
+
 ### Oppgave 4: Se på datasettet USAarrests
 
 1. Last inn datasettet `USArrests` med `data(USArrests)`.
