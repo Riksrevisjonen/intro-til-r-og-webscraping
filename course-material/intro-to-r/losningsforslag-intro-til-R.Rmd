@@ -276,9 +276,9 @@ load("intro-til-r.RData")
 Objektet nokeur skal være tilgjengelig i ditt arbeidmiljø. Objektet inneholder en
 liste med gjennomsnittverdien per måned for én euro i norske kroner etter år.
 
-1. Hva er gjennomsnittet hvor hver vektor?
-2. Hva er maksimal verdi hvor hver vektor?
-3. Hva er minimal verdi hvor hver vektor?
+1. Hva er gjennomsnittet for hver vektor?
+2. Hva er maksimal verdi for hver vektor?
+3. Hva er minimal verdi for hver vektor?
 4. Hva er maksimal verdi for hele datasettet?
 
 ```{r}
