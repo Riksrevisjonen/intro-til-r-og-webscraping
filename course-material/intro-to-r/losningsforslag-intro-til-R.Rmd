@@ -188,7 +188,7 @@ sd(x, na.rm = TRUE)
 
 ```{r}
 set.seed(42)
-my_numbers <- round(runif(10,min = 10, max = 20))
+my_numbers <- round(runif(10, min = 0, max = 20))
 my_numbers
 ```
 
@@ -200,6 +200,36 @@ sum(my_numbers)
 ```
 
 Forskjellen mellom `log()` og `sum()` er at `log()` tar logaritmen til hvert tall, mens `sum()` summerer alle elementene i vektoren. Hvorvidt en funksjon er vektorisert eller ikke, har noe å si for hvordan du kan bruke funksjonen. 
+
+**Profftips:**
+
+I oppgaven ba vi deg generere tilfeldige tall mellom 0 og 20 ved å bruke en kombinasjon av funksjonene `round()`, som runder av et tall til nærmeste heltall, og `runif()` som trekker en tilfeldige tall fra en uniform distribusjon (hvert tall har lik sannsynlighet for å forekomme). Men det er alltid flere måter å komme i mål på i R. Her er fire andre måter å få heltall mellom 0 og 20 på:
+
+```{r}
+as.integer(runif(10, 0, 20))
+floor(runif(10, 0, 20))
+ceiling(runif(10, 0, 20))
+rbinom(10, 20, .5)
+```
+
+Bruk gjerne hjelpefunksjonen i R for å finne mer ut om funksjonene som er brukt her. Vi kan også bruke funksjonen `sample()` for å trekke tilfeldige tall mellom 0 og 20. Vi oppgir `0:20` som første argument og setter det andre argumentet til `10`. Vi får da ti heltall mellom 0 og 20. Ved å sette argumentet `replace` til `TRUE`, så trekker vi et utvalg med tilbakelegging, slik at ett tall kan trekkes mer enn én gang.
+
+```{r}
+sample(0:20, 10)
+sample(0:20, 10, replace = TRUE)
+```
+
+Dette fungerer fint når vi bare skal ha ti siffer. Men hva skjer hvis vi skal ha 50 tall?
+
+```{r}
+sample(0:20, 50)
+```
+
+Vi får en feilmelding siden vi forsøker å trekke et utvalg som er større enn vektoren vi har gitt til funksjonen (vi har totalt 21 heltall som gis til `sample()`). Men hvis vi trekker et utvalg med tilbakelegging, så vil dette gå fint, siden ett tall da kan forekomme mer enn en gang.
+
+```{r}
+sample(0:20, 50, replace = TRUE)
+```
 
 ### Oppgave 9: Likhet
 
@@ -255,6 +285,16 @@ liste med gjennomsnittverdien per måned for én euro i norske kroner etter år.
 sapply(nokeur, mean)
 sapply(nokeur, max)
 sapply(nokeur, min)
+```
+
+For å få maksimal verdi for hele datasettet, kan vi bruke `max()` på vektoren vi fikk returnert på andre deloppgave.
+
+```{r}
 max(sapply(nokeur, max))
 ```
 
+Et alternativ er å bruke `max()` på resultatet av `unlist()`. Siden vi har en liste med vektorer hvor alle er numeriske, vil `unlist()` gi oss en vektor med alle elementene fra alle listene:
+
+```{r}
+max(unlist(nokeur))
+```
