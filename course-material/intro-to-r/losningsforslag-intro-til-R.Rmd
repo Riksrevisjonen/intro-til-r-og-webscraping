@@ -25,9 +25,6 @@ For å gange med tallet pi, kan du enten gange ved å skrive ut tallet selv, ell
 2. Hva blir summen av `x * y`?
 3. Hva blir summen av `x ^ y`?
 4. Tilordne summen av `x + x ^ y` til `z`. Hva er verdien av `z`?
-5. Tilordne verdiene `"14"` til `x` og `22` til `y`
-6. Hva blir summen av `x + y`? Kan du gjøre noe med `x` for at uttrykket skal evalueres til en numerisk verdi?
-7. Slett objektene `x`, `y` og `z` fra ditt arbeidsmiljø
 
 ```{r}
 x <- 4
@@ -36,15 +33,17 @@ x * y
 x ^ y
 
 (z <- x + x ^ y)
-
 ```
 
-Merk at det ikke er nødvendig å sette uttrykket `z <- x + x ^ y` i parentes for å lage `z`, men det kan være nyttig for å se resultatet med én gang. Alternativet er:
+Merk at det ikke er nødvendig å sette uttrykket `z <- x + x ^ y` i parentes for å lage `z`, men det kan være nyttig for å se resultatet med én gang; vanligvis får du ikke skrevet resultatet av et funksjonskall når du tilordner resultatet til et nytt objekt. Alternativet er å først tilordne resultatet til et nytt objekt `z`, og så skrive innholdet av `z` til konsollen:
 
 ```{r}
 z <- x + x ^ y
 z
 ```
+
+5. Tilordne verdiene `"14"` til `x` og `22` til `y`
+6. Hva blir summen av `x + y`? Kan du gjøre noe med `x` for at uttrykket skal evalueres til en numerisk verdi?
 
 ```{r, error = TRUE}
 x <- "14"
@@ -60,6 +59,8 @@ x <- as.numeric(x)
 x + y
 ```
 
+7. Slett objektene `x`, `y` og `z` fra ditt arbeidsmiljø
+
 ```{r}
 rm(x, y, z)
 ```
@@ -68,17 +69,13 @@ rm(x, y, z)
 
 1. Lag en vektor `x` med verdier fra 10 til 19.
 2. Hvor mange elementer er det i `x`?
-3. Hva er den tredje verdien i `x`?
-4. Hva inneholder elementene 5 til 8?.
-5. Hva inneholder elementene 2, 3, og 7?
 
 ```{r} 
 x <- 10:19
 length(x)
 ```
 
-Det er `r length(x)` elementer i x.
-Hvis man ønsker å se den siste eller nest siste verdien i `x`:
+Det er `r length(x)` elementer i x. Hvis man ønsker å se den siste eller nest siste verdien i `x`:
 
 ```{r}
 x[length(x)]
@@ -87,10 +84,14 @@ x[(length(x)-1)]
 
 19 er siste og 18 er nest siste verdi.
 
+3. Hva er den tredje verdien i `x`?
+4. Hva inneholder elementene 5 til 8?.
+5. Hva inneholder elementene 2, 3, og 7?
+
 ```{r}
 x[3]
 x[5:8]
-x[c(2:3,7)]
+x[c(2,3,7)]
 ```
 
 Bruk funksjonen `c()` for å angi spesifikke rekker av verdier eller enkeltverdier du ønsker å se på.
@@ -129,17 +130,22 @@ rownames(USArrests)
 2. Hva er verdien i rad 1, kolonne 2?
 3. Hvilken delstat i rad 3?
 4. Hvilken mordrate i denne delstaten?
-5. I hvilke delstater bor 66 prosent av populasjonen i urbane områder?
 
 ```{r USArrests, include = TRUE}
 USArrests[1,2]
 USArrests[3,]
 USArrests[3,]$Murder
 USArrests[3,'Murder']
-USArrests[USArrests$UrbanPop == 66,] 
 ```
 
 Delstaten i rad 3 er Arizona. Fra output kan vi også se at mordraten er 8,1. Vi kan også kjøre ut kun denne verdien ved å spesifisere radnummer og kolonnenavn, som vist på to måter her.
+
+5. I hvilke delstater bor 66 prosent av populasjonen i urbane områder?
+
+```{r}
+USArrests[USArrests$UrbanPop == 66,] 
+```
+
 Delstatene hvor 66 prosent av populasjonen bor i urbane områder er Kansas, Lousiana, Minnesota, Wisconsin.
 
 ### Oppgave 6: Lister
@@ -147,7 +153,6 @@ Delstatene hvor 66 prosent av populasjonen bor i urbane områder er Kansas, Lous
 1. Lage et listeobjekt `my_list` med elementene `x = 1`, `y = c("R", "er gøy")` og `z = 1:20` (i denne rekkefølgen)
 2. Hva inneholder `my_list[2]`? Hva inneholder `my_list[[2]]`? Hva inneholder `my_list[[2]][2]`?
 3. Hvorfor gir `my_list[[1]][2]` en feilmelding?
-4. Hva er den fjerde verdien i det tredje listeelementet?
 
 ```{r}
 my_list <- list(x = 1, y = c("R", "er gøy"), z = 1:20)
@@ -157,11 +162,13 @@ my_list[[2]][2]
 my_list[[1]][2]
 ```
 
-Resultatet blir `NA` fordi det bare er ett element i listens første element, mens vi forsøker å hente ut det andre elementet (som ikke finnes og derfor er missing).
+4. Hva er den fjerde verdien i det tredje listeelementet?
 
 ```{r}
 my_list[[3]][4]
 ```
+
+Resultatet blir `NA` fordi det bare er ett element i listens første element, mens vi forsøker å hente ut det andre elementet (som ikke finnes og derfor er missing).
 
 ### Oppgave 7: Innebygde funksjoner
 
@@ -174,6 +181,11 @@ my_list[[3]][4]
 ```{r}
 x <- c(1:10, NA)
 sum(x)
+```
+
+`sum(x)` gir `NA` fordi den siste verdien i vektoren er `NA`. R må vite hvordan missing-verdier skal håndteres. Hvis vi ser på hjelpfilen til `sum()`, ser vi at argumentet `na.rm` (forkortelse for slett missing), er satt til `FALSE`. Hvis vi endrer dette til `TRUE`, får vi det resultatet vi regnet med.
+
+```{r}
 sum(x, na.rm = TRUE)
 mean(x, na.rm = TRUE)
 sd(x, na.rm = TRUE)
@@ -184,7 +196,6 @@ sd(x, na.rm = TRUE)
 1. Lag en vektor `my_numbers` med 10 tilfeldig heltall fra 0 til 20. Bruk for eksempel `round(runif(n, min, max))`. Set seed 42 før du kjører kommandoen.
 2. Hva er resultatet av `log(my_numbers)`?
 3. Hva er resultatet av `sum(my_numbers)`?
-4. Hva er forskjellen på kommandoene `sum` og `log`?
 
 ```{r}
 set.seed(42)
@@ -194,12 +205,14 @@ my_numbers
 
 `round` runder av tallene til heltall
 
+4. Hva er forskjellen på kommandoene `sum` og `log`?
+
 ```{r}
 log(my_numbers)
 sum(my_numbers)
 ```
 
-Forskjellen mellom `log()` og `sum()` er at `log()` tar logaritmen til hvert tall, mens `sum()` summerer alle elementene i vektoren. Hvorvidt en funksjon er vektorisert eller ikke, har noe å si for hvordan du kan bruke funksjonen. 
+Forskjellen mellom `log()` og `sum()` er at `log()` tar logaritmen til hvert tall (den er vektorisert), mens `sum()` summerer alle elementene i vektoren. Hvorvidt en funksjon er vektorisert eller ikke, har noe å si for hvordan du kan bruke funksjonen.
 
 **Profftips:**
 
@@ -273,8 +286,7 @@ Resultatet blir ikke _nødvendigvis_ det samme fordi vi bruker en tilfeldig funk
 load("intro-til-r.RData")
 ```
 
-Objektet nokeur skal være tilgjengelig i ditt arbeidmiljø. Objektet inneholder en
-liste med gjennomsnittverdien per måned for én euro i norske kroner etter år.
+Objektet nokeur skal være tilgjengelig i ditt arbeidmiljø. Objektet inneholder en liste med gjennomsnittverdien per måned for én euro i norske kroner etter år.
 
 1. Hva er gjennomsnittet for hver vektor?
 2. Hva er maksimal verdi for hver vektor?
