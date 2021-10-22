@@ -92,6 +92,7 @@ bokstaver
 * Flatfiler (semikomma- eller kommaseparerte filer)
 * Excel-filer
 * Filer fra statistikkpakker (Stata, SAS, SPSS)
+* Strukturerte datafiler som JSON, XML og YAML
 * Databaser (SQL)
 * APIer over internett (Stortingets API, SSB)
 * Skytjenester (AWS, Hadoop)
@@ -194,17 +195,13 @@ df <- read.delim('carseats.tsv')
 print(df[1:5, 1:8])
 ```
 
-## Vanlige problemer {.flexbox .vleft}
+## Tekstkoding {.flexbox .vleft}
 
-To vanlige problemer med å lese inn data:
-
-1. R forsøker å konvertere tekstvariabler til faktorer
-2. Norske tegn (alle ikke-ASCII-tegn) leses inn feil på grunn av problemer med tekstkoding (encoding)
+Et vanlig problem med innlesning av data, er å håndtere norske tegn (ikke-ASCII). Ofte er det tekstkodingen som er årsaken.
 
 Løsninger:
 
-* Les inn data med argumentet `stringsAsFactors` satt til `FALSE` (fra og med R 4.0 er standardvalget endret til `FALSE` for dette argumentet!)
-* Tekstkodingen kan angis med `encoding`: `CP1252` er vanlig på Windows, mens `UTF-8` er vanlig på macOS og web (for det meste)
+* Tekstkodingen kan angis med agumentene `fileEncoding` og `encoding` (varierer litt etter funksjon): `CP1252` er vanlig på Windows, mens `UTF-8` er vanlig på macOS og web (for det meste)
 * **Hvis du kan velge tekstkoding på rådata, velg alltid UTF-8**
 
 ## Oppgaver {.flexbox .vleft}
@@ -1241,8 +1238,8 @@ F-statistic: 108.1 on 13 and 492 DF,  p-value: < 2.2e-16
 Vi kan oppdatere en eksisterende modell med funksjonen `update()`:
 
 ```{r, echo=TRUE}
-# Fjerne age og indus fra modellen
-mult.mod <- update(mult.mod, ~ . -age -indus)
+# Legger til lstat fra vår bivariate modell
+mult.mod <- update(lm.mod, ~ . +lstat)
 summary(mult.mod)
 ```
 
