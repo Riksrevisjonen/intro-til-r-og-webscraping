@@ -1068,14 +1068,14 @@ Hvor $\alpha$ er konstantleddet, $\beta$ er helningen og $\epsilon$ er feilledde
 ## Formelobjektet {.flexbox .vleft}
 
 * Modellfunksjonene i R bruker et spesielt _formelobjekt_
-* Formelobjektet spesifiserer med tegnet `~` i formen `y ~ x`
+* Formelobjektet spesifiseres ved å bruke tegnet `~` i formen `y ~ x`
 * Formelobjektet kan brukes både for å bygge additive modeller, og for å legge til transformasjoner eller samspillsledd
 * Når du bruker formelobjektet med en data frame, holder det å spesifisere kolonnenavnene i formelen
 
 ## Kategoriske variabler (factor) {.flexbox .vleft}
 
 * R håndterer kategoriske variabler med datatypen `factor`
-* Frem til versjon 4, ble alle tekstkolonner automatisk importer om `factor` og ikke `character`. For å lese inn tekstkolonner som faktorer setter du argumentet `stringsAsFactors` til `TRUE`
+* R leser nå alle tekstkolonner som `character`, men dette kan endres til `factor` ved å sette argumentet `stringsAsFactors` til `TRUE`
 * Tekstvariabler (og numeriske variabler) kan også kodes om til faktorer med funksjonen `factor()`
 * Faktorvariabler kan brukes direkte i regresjonsmodeller _uten_ omkoding (det opprettes automatisk k-1 dummyvariabler)
 * Vi kan se dummyvariablene R oppretter med funksjonen `contrasts()`
@@ -1086,14 +1086,14 @@ Hvor $\alpha$ er konstantleddet, $\beta$ er helningen og $\epsilon$ er feilledde
 * Vi bruker formelobjektet for å spesifisere modellen
 * Hvis vi kjører funksjonen direkte, får vi ut koeffisientene til modellen
 * Vi kan også lagre modellen til et eget objekt som vi kan jobbe videre med
+* Funksjonen `summary()` benyttes for å få en oppsummering av modellen og dens tilpasning til data
+* `lm()`gir ikke standardiserte koeffisienter; dette løses ved å standardisere variablene først med `scale()` eller bruke pakken `lm.beta`
 
 ## Enkel regresjonsmodell (2)
 
 Eksempel på datasettet `Boston` fra pakken `MASS`:
 
 Her bygger vi en modell med median husverdi `medv` som avhengig variabel og per capita kriminalitetsrate `crim` som uavhengig variabel (se `?Boston` for en oversikt over datasettet). Merk at vi tilordner modellen til objektet `lm.mod`.
-
-Vi bruker `summary()` for å få informasjon om modellen.
 
 ```{r, eval=FALSE, echo=TRUE}
 library(MASS)
@@ -1184,6 +1184,7 @@ $$Y=\alpha+\beta_1x_1+\beta_2x_2...\beta_nx_n+\epsilon$$
 ## 
 
 ```{r, eval=TRUE, echo=FALSE}
+options(digits=10)
 mult.mod <- lm(medv ~ ., data = Boston)
 ```
 
@@ -1314,38 +1315,6 @@ paste('Snitt:', round(mean(lstat.scaled), 3))
 paste('Std.avvik:', round(sd(lstat.scaled), 3))
 ```
 
-## Undersøke modeller {.flexbox .vleft}
-
-En rask repetisjon av de viktigste forutsetningene for lineær regresjon:
-
-* Lineære parametre
-* Tilfeldig utvalg
-* Ikke perfekt kolinearitet
-* Feilleddet har forventing lik 0
-* Feilleddet har konstant varianse gitt de øvrige uavhengige variablene (homoskedastitet)
-
-## Multikolinearitet {.flexbox .vleft}
-
-* Kolinearitet i modellen reduserer nøyaktighetene i regresjonskoeffisisentene
-Vi kan undersøke multikolinearitet med _variance inflation factor_ eller VIF
-* I R kan vi bruke funksjonen `vif()` fra pakken `car`
-* Minste verdi for VIF er 1, verdier over 10 (noen mener 5) er en indikasjon på problematisk kolinearitet i data
-
-## Multikolinearitet
-
-```{r, echo=TRUE}
-library(car)
-mod <- lm(medv ~ ., data = Boston)
-vif(mod)
-```
-
-## Diagnostiske plot
-
-```{r, eval=TRUE, echo=FALSE}
-par(mfrow=c(2,2), bg='transparent')
-plot(lm.mod)
-```
-
 ## Oppgaver
 
 ```{r, eval=FALSE, echo=TRUE}
@@ -1367,74 +1336,13 @@ carseats <- read.csv(
 
 # Logistisk regresjon
 
-## Motivasjon for logistiske modeller
+## Logistisk regresjon i R
 
 ```{r, eval=TRUE, echo=FALSE}
 Default <- ISLR::Default
 ```
 
-```{r, eval=TRUE, echo=FALSE}
-layout(mat = matrix(1:3, nrow = 1), heights = rep(1, 3), widths = c(2, 1, 1))
-par(bg = 'transparent')
-plot(
-  income~balance,
-  col = ifelse(default == 'Yes', 'chocolate', 'lightskyblue'),
-  pch = ifelse(default == 'Yes', 3, 1),
-  cex = .7,
-  data = Default,
-  xlab = 'Balance',
-  ylab = 'Income')
-boxplot(
-  balance~default,
-  data = Default,
-  col = c('lightskyblue', 'chocolate'),
-  xlab = 'Default',
-  ylab = 'Balance')
-boxplot(
-  income~default,
-  data = Default,
-  col = c('lightskyblue', 'chocolate'),
-  xlab = 'Default',
-  ylab = 'Income')
-```
-
-## Lineær vs. logistisk regresjon
-
-```{r, eval=TRUE, echo=FALSE}
-default.num <- ifelse(Default$default == 'Yes', 1, 0)
-
-lm.mod <- lm(default.num ~ balance, data = Default)
-logit.mod <- glm(default ~ balance, data = Default, family = binomial)
-lm.preds <- predict(lm.mod, Default)
-logit.preds <- predict(logit.mod, Default, type = 'response')
-
-par(mfrow = c(1, 2), bg = 'transparent')
-
-plot(
-  Default$balance, default.num, col = 'gold', pch = 3,
-  xlab = 'Balance', ylab = 'Sannsynlighet for default',
-  main = 'Lineær modell', cex = .8
-)
-abline(h = 1, lty = 2)
-abline(h = 2, lty = 2)
-abline(coefficients(lm.mod), col = 'steelblue', lwd = 2)
-
-plot(
-  Default$balance, default.num, col = 'gold', pch = 3,
-  xlab = 'Balance', ylab = 'Sannsynlighet for default',
-  main = 'Logistisk model', cex = .8
-)
-abline(h = 1, lty = 2)
-abline(h = 2, lty = 2)
-lines(
-  Default$balance[order(logit.preds)],
-  logit.preds[order(logit.preds)],
-  lwd = 2, col = 'steelblue'
-)
-```
-
-## Logistisk regresjon i R
-
+* For data hvor vi har en dikotom/binær avhengig variabel, så egner den lineære modellen seg dårlig
 * I R bruker vi funksjonen `glm()` (generalized linear models) for å bygge en logistisk regresjonsmodell
 * `glm()` støtter en rekke modeller, inkludert logistisk gjennom argumentet `familiy`
 * `glm()` kan også brukes til vanlige lineære modeller slik som med `lm()`
@@ -1453,26 +1361,6 @@ Eksempeldatasett hentet fra pakken `ISLR`
 ```{r, eval=TRUE, echo=TRUE}
 logit.mod <- glm(default ~ balance, data = Default, family = binomial)
 summary(logit.mod)
-```
-
-## Tolkning av koeffisientene
-
-Hva er sannsynligheten for mislighold (default) når balansen på kredittkortet er 1000 dollar?
-
-$$\hat{p}(X)=\frac{e^{\hat{\beta_0}}+\hat{\beta_1}X_1}{1+e^{\hat{\beta_0}}+\hat{\beta_1}X_1}=\frac{e^{-10.6513+0.0055\times1000}}{1+e^{-10.6513+0.0055\times1000}}=0.00576$$
-
-```{r, echo=TRUE}
-predict(logit.mod, data.frame(balance = 1000), type = 'response')[[1]]
-```
-
-## Tolkning av koeffisientene
-
-Hva når balansen er 2000 dollar?
-
-$$\hat{p}(X)=\frac{e^{\hat{\beta_0}}+\hat{\beta_1}X_1}{1+e^{\hat{\beta_0}}+\hat{\beta_1}X_1}=\frac{e^{-10.6513+0.0055\times2000}}{1+e^{-10.6513+0.0055\times2000}}=0.586$$
-
-```{r, echo=TRUE}
-predict(logit.mod, data.frame(balance = 2000), type = 'response')[[1]]
 ```
 
 ## Vurdere modellen: sensitivitet og spesifisitet
