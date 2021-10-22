@@ -4,7 +4,7 @@ output: pdf_document
 date: "`r format(Sys.Date(), '%e. %B %Y')`"
 ---
 
-```{r setup, include=FALSE, error = TRUE}
+```{r setup, include=FALSE, error=TRUE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -45,7 +45,7 @@ z
 5. Tilordne verdiene `"14"` til `x` og `22` til `y`
 6. Hva blir summen av `x + y`? Kan du gjøre noe med `x` for at uttrykket skal evalueres til en numerisk verdi?
 
-```{r, error = TRUE}
+```{r, error=TRUE}
 x <- "14"
 y <- 22
 
@@ -234,7 +234,7 @@ sample(0:20, 10, replace = TRUE)
 
 Dette fungerer fint når vi bare skal ha ti siffer. Men hva skjer hvis vi skal ha 50 tall?
 
-```{r}
+```{r, error=TRUE}
 sample(0:20, 50)
 ```
 
