@@ -73,6 +73,7 @@ bokstaver
 
 * Funksjoner kan ha ett eller flere _argumenter_
 * Argumenter kan være _posisjonsbaserte_ eller _navngitte_
+* Noen argumenter må angis, mens andre er valgfrie (og har da standardverdier)
 * Få informasjon om argumenter med `args()` og hjelp til bruk av funksjonen med `?`
 * Noen funksjoner er _vektoriserte_
 
@@ -115,7 +116,7 @@ bokstaver
 * Funksjonen `read.csv` er en variant av `read.table` som leser inn _kommaseparerte_ filer
 * Funksjonen `read.csv2` er en variant av `read.table` som leser inn _semikolonseparerte_ filer
   
-## Kommaseparerte filer
+## Kommaseparerte filer {.build}
 
 Du kan undersøke filstrukturen med funksjonen `readLines()`:
 
@@ -131,7 +132,7 @@ readLines('carseats.csv', n = 3)
 
 Legg merke til at første rad i fila inneholder _kolonnenavn_, fila er _kommaseparert_, bruker `"` for å markere tekst, og har `.` som desimaltegn.
 
-## Kommaseparerte filer (2)
+## Kommaseparerte filer (2) {.build}
 
 Vi kan lese inn _kommaseparerte_ filer med `read.csv()` og _semikolonseparerte_ filer med `read.csv2()`.
 
@@ -140,14 +141,13 @@ df <- read.csv('carseats.csv')
 print(df[1:5, 1:8])
 ```
 
-
 ```{r, eval=TRUE, echo=FALSE, warning=FALSE}
 setwd(sprintf('%s/course-material/statistikk-med-r/', here::here()))
 df <- read.csv('carseats.csv')
 print(df[1:5, 1:8])
 ```
 
-## Kommaseparerte filer (4)
+## Kommaseparerte filer (3)
 
 `read.csv()` har flere argumenter vi kan bruke for å styre hvordan fila blir lest inn:
 
@@ -164,7 +164,7 @@ df <- read.csv(
 
 Se flere muligheter med `?read.csv`
 
-## Tabulatorseparerte filer
+## Tabulatorseparerte filer {.build}
 
 Her er samme fil, men denne har en annen struktur:
 
@@ -180,17 +180,17 @@ readLines('carseats.tsv', n = 3)
 
 Legg merke til at første rad i fila inneholder _kolonnenavn_, men denne fila er _tabulatorseparert_ (`\t` er tegn for tabulator), det er ingen tekstkvalifikator, og `.` er brukt som desimaltegn.
 
-## Tabulatorseparerte filer (2)
+## Tabulatorseparerte filer (2) {.build}
 
 Vi leser inn tabulatorseparerte filer med `read.delim()`:
 
-```{r, eval=TRUE, echo=FALSE, warning=FALSE}
-setwd(sprintf('%s/course-material/statistikk-med-r/', here::here()))
+```{r, eval=FALSE, echo=TRUE}
 df <- read.delim('carseats.tsv')
 print(df[1:5, 1:8])
 ```
 
-```{r, eval=FALSE, echo=TRUE}
+```{r, eval=TRUE, echo=FALSE, warning=FALSE}
+setwd(sprintf('%s/course-material/statistikk-med-r/', here::here()))
 df <- read.delim('carseats.tsv')
 print(df[1:5, 1:8])
 ```
@@ -220,7 +220,9 @@ To viktige funksjoner:
 * `excel_sheets` og
 * `read_excel`
 
-`read_excel()` støtter både `xlsx` og `xls`-filer, og vil gjette type basert på filnavn. Hvis du vet hvilket format du skal lese, kan du bruke `read_xls()` eller `read_xlsx()`
+`read_excel()` støtter både `xlsx` og `xls`-filer, og vil gjette type basert på filnavn.
+
+Hvis du vet hvilket format du skal lese, kan du bruke `read_xls()` eller `read_xlsx()`
 
 ## readxl {.flexbox .vleft .extraspace}
 
@@ -1086,21 +1088,24 @@ Hvor $\alpha$ er konstantleddet, $\beta$ er helningen og $\epsilon$ er feilledde
 * Funksjonen `summary()` benyttes for å få en oppsummering av modellen og dens tilpasning til data
 * `lm()`gir ikke standardiserte koeffisienter; dette løses ved å standardisere variablene først med `scale()` eller bruke pakken `lm.beta`
 
-## Enkel regresjonsmodell (2)
+## Enkel regresjonsmodell (2) {.build}
 
-Eksempel på datasettet `Boston` fra pakken `MASS`:
+For disse eksemplene bruker vi datasettet `Boston` fra pakken `MASS`
 
-Her bygger vi en modell med median husverdi `medv` som avhengig variabel og per capita kriminalitetsrate `crim` som uavhengig variabel (se `?Boston` for en oversikt over datasettet). Merk at vi tilordner modellen til objektet `lm.mod`.
-
-```{r, eval=FALSE, echo=TRUE}
+```{r, echo=TRUE, eval=TRUE}
 library(MASS)
-lm.mod <- lm(medv ~ crim, data = Boston)
-summary(lm.mod)
+data('Boston')
+```
+
+Vi bygger en modell for å estimere median husverdi `medv` i ulike bydeler i Boston (se `?Boston` for detaljer).
+
+```{r, echo=TRUE, eval=TRUE}
+summary(Boston$medv)
 ```
 
 ## Enkel regresjonsmodell (3) {.small-code}
 
-```{r, eval=TRUE, echo=FALSE}
+```{r, echo=TRUE, eval=TRUE}
 library(MASS)
 lm.mod <- lm(medv ~ crim, data = Boston)
 summary(lm.mod)
@@ -1115,7 +1120,6 @@ coef(lm.mod)
 confint(lm.mod)
 ```
 
-
 ##
 
 Vi kan hente ut estimert verdi på avhengig variabel med `predict()`. Ved å bruke argumentet `interval` og sette dette til `'confidence'` får vi også ut konfidensintervallene for estimatene.
@@ -1127,14 +1131,16 @@ head(mod.preds)
 
 ## Hvor godt passer modellen til data?
 
-* Vi har flere mål for hvor godt modellen passer til og forklarer data
-* R oppgir som standard _residual standard error_ (RSE), _R<sup>2</sup>_ og F-statistic for modellen
-* Root mean standard error (RMSE) er et annet vanlig brukt mål for hvor god modellen er (RMSE er nesten lik RSE som oppgis av R)
-* RSE og RMSE forteller oss hvor mye en observasjon i snitt avviker fra regresjonslinjen
-* R<sup>2</sup> gir et standardisert (verdien er mellom 0 og 1) mål for hvor stor del av variasjonen i avhengig variabel som forklares av modellen (i multivariat lineær regresjon bruker vi en justert R<sup>2</sup>)
-* F-statistikken brukes for å teste hypotesen om at det er en sammenheng mellom de uavhengige variablene og den avhengige
+| Mål                                | Forklaring |
+|------------------------------------|------------|
+| Residual standard error (RSE)*     | Avvik fra regresjonslinjen |
+| Root mean standard deviation (RMSE)| Avvik fra regresjonslinjen |
+| R<sup>2</sup>*                     | Forklart varians (standardisert fra 0 til 1) |
+| F-statistic *                      | Test for om alle variabler er lik 0 |
 
-##
+Mål merket med * oppgis som standard av `summary()`
+
+## {.build}
 
 La oss se på modellen igjen:
 
@@ -1151,7 +1157,7 @@ Multiple R-squared:  0.1508,	Adjusted R-squared:  0.1491
 F-statistic: 89.49 on 1 and 504 DF,  p-value: < 2.2e-16
 ```
 
-Modellen er signifikant, men den forklarer lite a variasjonen i `medv`
+Modellen er signifikant, men den forklarer lite a variasjonen i `medv` og det er relativt store avvik fra regresjonslinjen.
 
 ##
 
@@ -1170,13 +1176,15 @@ abline(coef(lm.mod), col = 'red', lwd = 2)
 ```
 
 
-## Multivariat regresjonsmodell
+## Multivariat regresjonsmodell {.flexbox .vleft}
 
 $$Y=\alpha+\beta_1x_1+\beta_2x_2...\beta_nx_n+\epsilon$$
 
 * Styrken med regresjonsmodellen, er at vi kan kontrollere for *mer enn én* uavhengig variabel
 * I R kan bygge en multivariat regresjonsmodell ved å utvide formelobjektet
 * For en vanlig additiv modell, bruker vi `+` for å legge til uavhengige variabler i modellen
+* Vi kan også bruke modellobjektet til å introdusere samspill, høyere grads ledd og transformasjoner
+* Hvis vi vil inkludere _alle_ variabler i modellen kan vi forkorte formelen til `y ~ .`
 
 ## 
 
@@ -1184,7 +1192,6 @@ $$Y=\alpha+\beta_1x_1+\beta_2x_2...\beta_nx_n+\epsilon$$
 options(digits=10)
 mult.mod <- lm(medv ~ ., data = Boston)
 ```
-
 
 ```{r, eval=FALSE, echo=TRUE}
 mult.mod <- lm(medv ~ ., data = Boston)
@@ -1233,9 +1240,7 @@ Multiple R-squared:  0.7406,	Adjusted R-squared:  0.7338
 F-statistic: 108.1 on 13 and 492 DF,  p-value: < 2.2e-16
 ```
 
-## Oppdatere modeller {.small-code}
-
-Vi kan oppdatere en eksisterende modell med funksjonen `update()`:
+## Oppdatere modeller med `update()` {.small-code}
 
 ```{r, echo=TRUE}
 # Legger til lstat fra vår bivariate modell
@@ -1243,9 +1248,7 @@ mult.mod <- update(lm.mod, ~ . +lstat)
 summary(mult.mod)
 ```
 
-## Samspill {.small-code}
-
-Vi introduserer samspill med `:`. Dette kan forkortes med `*`
+## Samspill med `:` {.small-code}
 
 ```{r, echo=TRUE}
 # Modell med samspill
@@ -1253,9 +1256,7 @@ samspill.mod <- lm(medv ~ lstat + age + lstat:age, data = Boston)
 summary(samspill.mod)
 ```
 
-## Samspill {.small-code}
-
-Vi introduserer samspill med `:`. Dette kan forkortes med `*`
+## Samspill med `*` {.small-code}
 
 ```{r, echo=TRUE}
 # Dette gir samme resultat, men er kortere å skrive
@@ -1263,28 +1264,21 @@ samspill.mod <- lm(medv ~ lstat * age, data = Boston)
 summary(samspill.mod)
 ```
 
-
-## Transformasjoner {.small-code}
-
-For annengradsledd bruker vi `^`, men vi må sette annengradsleddet inn i `I()`:
+## Annengradsledd med `I(x^2)` {.small-code}
 
 ```{r, echo=TRUE}
 trans.mod <- lm(medv ~ lstat + I(lstat^2), data = Boston)
 summary(trans.mod)
 ```
 
-## Transformasjoner {.small-code}
-
-Vi kan også bruke funksjonen `poly()` for høyere grads polynomer:
+## Høyere grads ledd (polynomer) med `poly()` {.small-code}
 
 ```{r, echo=TRUE}
 trans.mod2 <- lm(medv ~ poly(lstat, 4), data = Boston)
 summary(trans.mod2)
 ```
 
-## Transformasjoner {.small-code}
-
-Vi er ikke kun begrenset til polynomer; her gjør vi en logtransformering:
+## Logtransformering med `log(x)` {.small-code}
 
 ```{r, echo=TRUE}
 trans.mod3 <- lm(medv ~ log(rm), data = Boston)
@@ -1298,7 +1292,7 @@ summary(trans.mod3)
 * Standardiserte variabler gjør det lettere å tolke koeffisientene i regresjonsanalysene (R rapporterer ikke betakoeffisienter som standard), og andre modeller er sensitive for ulike måleenheter
 * I R kan vi standardisere variabler med funksjonen `scale()`
 
-## Standardisering
+## Standardisering {.small-code}
 
 ```{r, echo=TRUE}
 lstat <- Boston$lstat
@@ -1318,7 +1312,6 @@ paste('Std.avvik:', round(sd(lstat.scaled), 3))
 carseats <- read.csv('carseats.csv', stringsAsFactors = TRUE)
 ```
 
-
 ```{r, eval=TRUE, echo=FALSE}
 carseats <- read.csv(
   sprintf('%s/course-material/statistikk-med-r/carseats.csv', here::here()),
@@ -1326,14 +1319,14 @@ carseats <- read.csv(
 ```
 
 1. Lag en regresjonsmodell med `Sales` som avhengig variabel. Inkluder _alle_ andre variabler som uavhengige variabler. Tilordne modellen til `car.mod1`
-2. Hva er justert R<sup>2</sup> for modellen?
+2. Hva er justert $R^2$ for modellen?
 3. Hvilke variabler i modellen er ikke signifikante?
 4. Bygg en ny modell, enten med å bruke `lm()` på nytt, eller med `update()`, men uten variablene som ikke var signifikante (hint: husk at faktorvariabler håndteres på en spesiell måte i modeller). Tilordne modellen til `car.mod2`
-5. Sammenlign F-statistikken og R<sup>2</sup> i den nye modellen med den gamle. Har modellen blitt bedre eller dårligere med de utelatte variablene?
+5. Sammenlign F-statistikken og $R^2$ i den nye modellen med den gamle. Har modellen blitt bedre eller dårligere med de utelatte variablene?
 
 # Logistisk regresjon
 
-## Logistisk regresjon i R
+## Logistisk regresjon i R {.flexbox .vleft}
 
 ```{r, eval=TRUE, echo=FALSE}
 Default <- ISLR::Default
@@ -1346,9 +1339,9 @@ Default <- ISLR::Default
 
 ## Eksempel: mislighold av gjeld
 
-Eksempeldatasett hentet fra pakken `ISLR`
+Eksempeldatasett hentet fra pakken `ISLR` {.flexbox .vleft}
 
-* `default`: en faktorvariabel for om gjelden er misligholdt eller ikke
+* `default`: en faktorvariabel for om gjelden er misligholdt eller ikke (vår _avhengige_ variabel)
 * `student`: en faktorvariabel som indikerer om personen er student eller ikke
 * `balance`: gjennomsnittlig kreditt som gjenstår på kredittkort etter innbetaling
 * `income`: inntekt til kunden
