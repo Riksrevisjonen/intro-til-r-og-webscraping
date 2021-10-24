@@ -261,12 +261,10 @@ head(komp_ordning)
 
 # Deskriptiv statistikk
 
-## Deskriptiv statistikk {.flexbox .vleft .extraspace}
+## Deskriptiv statistikk - basefunksjoner i R {.flexbox .vleft .extraspace}
 
 1. **Beskrive data** 
-    + basefunksjoner i R
 2. **Visualisere data**
-    + basefunksjoner i R og pakken `ggplot2`
 3. **(Mild introduksjon til) datavasking**
 
 
@@ -274,16 +272,9 @@ head(komp_ordning)
 
 * `dplyr` og `tidyverse`
 * `data.table`
+* `ggplot`
 
 # Beskrive data
-
-## Repetisjon av noen funksjoner {.flexbox .vleft}
-
-* `dim()` : dimensjoner i datasettet
-* `nrow()` og `ncol()` : antall rader og kolonner
-* `str()` : struktur
-* `head()`: øverste del av datasett
-* `tail()`: nederste del av datasett
 
 ## Enveis og toveis tabeller  {.flexbox .vleft}
 
@@ -622,7 +613,7 @@ rug(log10(fb_venner), breaks = 15)
 ## Data skew(ed) - what to do? {.small-code}
 
 ```{r, echo=TRUE, eval=TRUE, warning = FALSE, message = FALSE}
-10^(c(2, 4, 4.5))
+10^(c(2, 3, 4))
 ```
 ```{r, echo=FALSE, eval=TRUE, warning = FALSE, message = FALSE}
 # En løsning er å logtransformere data
