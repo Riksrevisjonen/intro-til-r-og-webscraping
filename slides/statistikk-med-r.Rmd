@@ -1292,18 +1292,29 @@ summary(trans.mod3)
 * Standardiserte variabler gjør det lettere å tolke koeffisientene i regresjonsanalysene (R rapporterer ikke betakoeffisienter som standard), og andre modeller er sensitive for ulike måleenheter
 * I R kan vi standardisere variabler med funksjonen `scale()`
 
-## Standardisering {.small-code}
-
 ```{r, echo=TRUE}
 lstat <- Boston$lstat
-paste('Snitt:', round(mean(lstat), 3))
-paste('Std.avvik:', round(sd(lstat), 3))
+### <b>
+lstat.scaled <- scale(lstat)
+### </b>
 ```
 
-```{r, echo=TRUE}
-lstat.scaled <- as.vector(scale(lstat))
-paste('Snitt:', round(mean(lstat.scaled), 3))
-paste('Std.avvik:', round(sd(lstat.scaled), 3))
+## Log-lineære modeller {.flexbox .vleft}
+
+* For data hvor vi har en dikotom/binær avhengig variabel, så egner den lineære modellen seg dårlig
+* I R bruker vi funksjonen `glm()` (generalized linear models) for å bygge en logistisk regresjonsmodell
+* `glm()` støtter en rekke modeller, inkludert logistisk gjennom argumentet `familiy`
+* `glm()` kan også brukes til vanlige lineære modeller slik som med `lm()`
+
+## Log-lineære modeller (2) {.small-code}
+
+```{r, eval=TRUE, echo=FALSE}
+Default <- ISLR::Default
+```
+
+```{r, eval=TRUE, echo=TRUE}
+logit.mod <- glm(default ~ balance, data = Default, family = binomial)
+summary(logit.mod)
 ```
 
 ## Oppgaver
@@ -1324,123 +1335,82 @@ carseats <- read.csv(
 4. Bygg en ny modell, enten med å bruke `lm()` på nytt, eller med `update()`, men uten variablene som ikke var signifikante (hint: husk at faktorvariabler håndteres på en spesiell måte i modeller). Tilordne modellen til `car.mod2`
 5. Sammenlign F-statistikken og $R^2$ i den nye modellen med den gamle. Har modellen blitt bedre eller dårligere med de utelatte variablene?
 
-# Logistisk regresjon
+# Statistisk læring
 
-## Logistisk regresjon i R {.flexbox .vleft}
+## Predikere nye data
 
-```{r, eval=TRUE, echo=FALSE}
-Default <- ISLR::Default
+> - Til nå har vi analysert data for å finne sammenhenger mellom _uavhengige_ variabler på _avhengig_ variabel
+> - Noen ganger står vi overfor et problem hvor vi ønsker å predikere nye observasjoner fra tidligere data
+> - Dette er det grunnleggende problemet innenfor veiledet (supervised) maskinlæring
+> - For _nye_ data er ikke verdien på responsvariablen kjent (vår tidligere avhengige variabel)
+> - Vi kan dele inn i to typer problem: regresjonsproblem og klassifiseringsproblem
+> - Vi trener en modell på data med kjente verdier på responsvariabelen, og bruker denne på nye data
+> - `predict()`-funksjonen i R kan også benyttes til dette
+
+## Fremgangsmåte {.flexbox .vleft}
+
+> 1. Splitte datasettet tilfeldig i et _treningsdatasett_ og et _testdatasett_
+> 2. Bygge en modell på _treningsdatasettet_
+> 3. Estimere verdier på _testdatasettet_
+> 4. Evaluere modellens på _testdatasettet_
+
+##
+
+```{r, eval=TRUE, echo=FALSE, fig.height=6, fig.width=10}
+set.seed(42)
+x <- seq(0, 1, .01)
+x <- sample(x, 600, TRUE) + rnorm(600, .2, .1)
+y <- 3 + 3*x + 120*x^2 + rnorm(length(x),0,40)
+
+quadric <- lm(y ~ poly(x, 2))
+sspline <- smooth.spline(x, y, df = 20)
+
+par(bg = 'transparent')
+plot(y ~ x,
+     pch = 19, col = rgb(.3,.3,.3,.6),
+     xlab = NA, ylab = NA, bty = 'n',
+     main='Over-, under- og normal tilpasning')
+abline(lm(y ~ x), col='blue', lwd=4)
+lines(sspline, col='red', lwd=4)
+lines(sort(x), predict(quadric, list(x = x))[order(x)], col='green', lwd=4)
 ```
 
-* For data hvor vi har en dikotom/binær avhengig variabel, så egner den lineære modellen seg dårlig
-* I R bruker vi funksjonen `glm()` (generalized linear models) for å bygge en logistisk regresjonsmodell
-* `glm()` støtter en rekke modeller, inkludert logistisk gjennom argumentet `familiy`
-* `glm()` kan også brukes til vanlige lineære modeller slik som med `lm()`
+## Splitt data i trening og test {.build}
 
-## Eksempel: mislighold av gjeld
-
-Eksempeldatasett hentet fra pakken `ISLR` {.flexbox .vleft}
-
-* `default`: en faktorvariabel for om gjelden er misligholdt eller ikke (vår _avhengige_ variabel)
-* `student`: en faktorvariabel som indikerer om personen er student eller ikke
-* `balance`: gjennomsnittlig kreditt som gjenstår på kredittkort etter innbetaling
-* `income`: inntekt til kunden
-
-## Logistisk modell {.small-code}
+For å splitte data i et _treningsdatasett_ og et _testdatasett_ kan vi bruke en tilfeldighetsfunksjon som `runif()`
 
 ```{r, eval=TRUE, echo=TRUE}
-logit.mod <- glm(default ~ balance, data = Default, family = binomial)
-summary(logit.mod)
-```
-
-## Vurdere modellen: sensitivitet og spesifisitet
-
-Vi kan vurdere modellen ut fra hvor god den er til å korrekt identifisere sanne positive verdier og sanne negative verdier.
-
-```{r, echo=TRUE}
-glm.preds <- predict(logit.mod, Default, type = 'response')
-glm.preds <- factor(ifelse(glm.preds > .5, 'Yes', 'No'))
-addmargins(table(glm.preds, Default$default, dnn = c('Estimert', 'Observert')))
-```
-
-## Vurdere modellen: sensitivitet og spesifisitet
-
-```{r, eval=TRUE, echo=FALSE}
-addmargins(table(glm.preds, Default$default, dnn = c('Estimert', 'Observert')))
-```
-
-Sensitivitet: $100\times\frac{100}{333}=30,03003$
-
-Spesifisitet: $100\times\frac{9625}{9667}=99,56553$
-
-Nøyaktighet: $100\frac{100+9625}{10000}=97,25$
-
-Pakken `caret` er nyttig for å vurdere ulike logistiske modeller mot hverandre.
-
-## Oppgaver
-
-```{r, eval=FALSE, echo=TRUE}
-Weekly <- ISLR::Weekly
-```
-
-1. Bygg en logistisk modell med `glm()` på datasettet `Weekly`. Bruk `Direction` som avhengig variabel og `Lag`-variablene samt `Volume` som uavhengige variabler. Tilordne modellen til `glm.mod`. Husk å sette argumentet `family`
-2. Bruk `summary()` på modellen. Virker noen av variablene signifikante?
-3. Bruk `predict()` for å estimere sannsynligheten for at en observasjon har verdien `Up` på `Direction`. Husk å sette argumentet `type` til `'response'`. Tilordne til `glm.preds`
-4. Endre `glm.preds` slik at denne har verdien `'Up'` hvis sannsynligheten er _større enn_ `0.5` og `'Down'` hvis ikke. Du kan bruke `ifelse()` til dette, og eventuelt også konvertere til en faktor med `factor()`
-5. Lag en klassifiseringtabell (confusion matrix) med predikterte verdier og observerte verdier. Hva forteller resultatene deg?
-
-# Estimere _nye_ data
-
-## Estimering av nye data
-
-* Vi har allerede sett hvordan vi kan finne estimert verdi med `predict()`-funksjonen
-* Denne funksjonen kan også benyttes til å estimere _nye_ data
-* Dette er den grunnleggende funksjonen for maskinlæring i R!
-* Vi skal her se på noen veldig forenklede eksempler på bruk av `predict()` for å estimere nye data
-
-## Fremgangsmåte
-
-1. Splitte datasettet tilfeldig i et _treningsdatasett_ og et _testdatasett_
-2. Bygge en modell på _treningsdatasettet_
-3. Estimere verdier på _testdatasettet_
-4. Evaluere modellens presisjon på _testdatasettet_
-
-## Prediksjon på nye data
-
-Vi starter med å lage en vektor med tilfeldige tall fra en _uniform_ distribusjon.
-
-Denne kan vi bruke for å splitte datasettet. Vi gir alle verdier som er mindre enn `0.7` verdien `TRUE` og alle andre verdien `FALSE`. Dette bør gi oss (omtrent) en 70/30 splitt av data.
-
-```{r, eval=TRUE, echo=FALSE}
-credit <- read.csv2(sprintf('%s/course-material/statistikk-med-r/credit.csv', here::here()))
-```
-
-
-```{r, echo=TRUE}
+# Opprett observasjoner fra en uniform distribusjon
 set.seed(1984)
 x <- runif(nrow(Boston), 0, 1)
-x <- ifelse(x < .7, TRUE, FALSE)
+```
+
+```{r, eval=TRUE, echo=TRUE}
+# Lag en 70/30 splitt ved at verdier under .7 blir kodet TRUE
+x <- x < .7
+```
+
+```{r, eval=TRUE, echo=TRUE}
 table(x)
 ```
 
-## Prediksjon på trening og testdata
+## Prediksjon på trening og testdata {.build}
 
-Vi starter med å dele data i et **treningsdatasett** og et **testdatasett**:
+Vi kan nå _trene_ en modell på treningsdata, og _evaluere_ denne på testdata:
 
 ```{r, echo=TRUE}
+# Splitt data i trening og test basert på x
 boston.trening <- Boston[x,]
 boston.test <- Boston[!x,]
 ```
 
-Vi bygger så en regresjonsmodell på _treningsdata_.
-
 ```{r, echo=TRUE}
+# Bygg en modell på treningdata
 mod <- lm(medv ~ ., data = boston.trening)
 ```
 
-Vi kan så bruke modellen til å estimere husverdi både for begge datasettene med `predict()`:
-
 ```{r, echo=TRUE}
+# Vi bruker predict både på trenings og testdata
 preds.trening <- predict(mod, boston.trening)
 preds.test <- predict(mod, boston.test)
 ```
@@ -1455,7 +1425,6 @@ sqrt(mean(err.trening^2))
 err.test <- preds.test - boston.test$medv
 sqrt(mean(err.test^2))
 ```
-
 
 ## Oppgaver {.flexbox .vleft}
 
