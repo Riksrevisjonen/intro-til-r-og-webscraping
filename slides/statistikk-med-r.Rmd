@@ -1079,20 +1079,20 @@ Hvor $\alpha$ er konstantleddet, $\beta$ er helningen og $\epsilon$ er feilledde
 * Funksjonen `summary()` benyttes for å få en oppsummering av modellen og dens tilpasning til data
 * `lm()`gir ikke standardiserte koeffisienter; dette løses ved å standardisere variablene først med `scale()` eller bruke pakken `lm.beta`
 
-## Enkel regresjonsmodell (2) {.build}
+## Enkel regresjonsmodell (2) {.small-code}
 
-For disse eksemplene bruker vi datasettet `Boston` fra pakken `MASS`
+For disse eksemplene bruker vi datasettet `Boston` fra pakken `MASS` med `medv` som _avhengig variabel_
 
 ```{r, echo=TRUE, eval=TRUE}
 library(MASS)
 data('Boston')
+str(Boston)
 ```
 
-Vi bygger en modell for å estimere median husverdi `medv` i ulike bydeler i Boston (se `?Boston` for detaljer).
-
-```{r, echo=TRUE, eval=TRUE}
-summary(Boston$medv)
-```
+<div class="notes">
+- Få mer informasjon om datasettet ved å skrive `?Boston`
+- Vi skal bygge en modell for å estimere median husverdi `medv`
+</div>
 
 ## Enkel regresjonsmodell (3) {.small-code}
 
@@ -1149,6 +1149,10 @@ F-statistic: 89.49 on 1 and 504 DF,  p-value: < 2.2e-16
 ```
 
 Modellen er signifikant, men den forklarer lite a variasjonen i `medv` og det er relativt store avvik fra regresjonslinjen.
+
+<div class="notes">
+p-verdien til F-testen er signifikant, altså er koeffisienten til den uavhengige variabelen signifikant forskjellig fra 0.
+</div>
 
 ##
 
@@ -1421,8 +1425,10 @@ sqrt(mean(err.test^2))
 
 1. Lag trenings- og testdata med en 70/30 splitt på `carseats`. Tilordne treningsdata til `car.train` og testdata til `car.test`. Sett seed til 42 før du bruker en funksjon som trekker fra en sannsynlighetsfordeling.
 2. Bygg en modell på treningsdata med `Sales` som avhengig variabel og `CompPrice`, `Advertising`, `Price` og `ShelveLoc` som uavhengige variabler. Tilordne modellen til `train.mod`
-3. Bruk `predict()` til å estimere salgsvolum på _treningsdata_. Beregn RMSE for treningsdata.*
-4. Bruk `predict()` til å estimere salgsvolum på _testdata_. Beregn RMSE for testdata.*
+3. Bruk `predict()` til å estimere salgsvolum på _treningsdata_. Beregn RMSE for treningsdata.
+4. Bruk `predict()` til å estimere salgsvolum på _testdata_. Beregn RMSE for testdata.
 5. Hvor godt predikerer modellen på testdata sammenlignet med treningsdata?
 
-* Hint: RMSE kan beregnes med `sqrt(mean(error^2))` hvor `error` er en vektor med differansen mellom estimert verdi og observert verdi.
+<div class="small">
+**Hint:** RMSE kan beregnes med `sqrt(mean(error^2))` hvor `error` er en vektor med differansen mellom estimert verdi og observert verdi.
+</div>
