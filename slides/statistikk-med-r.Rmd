@@ -28,8 +28,8 @@ library(haven); library(tibble); library(ggplot2)
   - Håndtering av missing
   - Mild introduksjon til å vaske data
 * Modellbygging i R
-  - Lineær regresjon
-  - Logistisk regresjon
+  - Regresjonsbaserte modeller
+  - Statistisk læring
 
 ## Rask repetisjon: _datatyper og strukturer_
 
