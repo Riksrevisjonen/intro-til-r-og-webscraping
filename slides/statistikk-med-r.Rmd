@@ -24,9 +24,9 @@ library(haven); library(tibble); library(ggplot2)
   - Import av data
   - Eksport av data
 * Deskriptiv statistikk med R
-  - Eksplorerende analyse
-  - Håndtering av missing
-  - Mild introduksjon til å vaske data
+  - Beskrive data
+  - Visualisere data
+  - Mild introduksjon til datavasking
 * Modellbygging i R
   - Regresjonsbaserte modeller
   - Statistisk læring
@@ -1129,11 +1129,18 @@ head(mod.preds)
 | R<sup>2</sup>*                     | Forklart varians (standardisert fra 0 til 1) |
 | F-statistic *                      | Test for om alle variabler er lik 0 |
 
+<div class="small">
 Mål merket med * oppgis som standard av `summary()`
+</div>
 
-## {.build}
+<div class="notes">
+- R oppgir som standard RSE, $R^2$ og F-statistic for modellen
+- RMSE er et annet vanlig brukt mål for hvor god modellen er (RMSE er nesten lik RSE som oppgis av R)
+- RSE og RMSE forteller oss hvor mye en observasjon i snitt avviker fra regresjonslinjen
+- $R^2$ gir et standardisert (verdien er mellom 0 og 1) mål for hvor stor del av variasjonen i avhengig variabel som forklares av modellen (i multivariat lineær regresjon bruker vi en justert $R^2$)
+</div>
 
-La oss se på modellen igjen:
+## 
 
 ```
 Coefficients:
@@ -1162,7 +1169,6 @@ Dette ser vi også i følgende plot:
 plot(crim ~ medv, data = Boston)
 abline(coef(lm.mod), col = 'red', lwd = 2)
 ```
-
 
 ```{r, eval=TRUE, echo=FALSE}
 par(bg='transparent')
@@ -1247,7 +1253,9 @@ summary(mult.mod)
 
 ```{r, echo=TRUE}
 # Modell med samspill
+### <b>
 samspill.mod <- lm(medv ~ lstat + age + lstat:age, data = Boston)
+### </b>
 summary(samspill.mod)
 ```
 
@@ -1255,28 +1263,36 @@ summary(samspill.mod)
 
 ```{r, echo=TRUE}
 # Dette gir samme resultat, men er kortere å skrive
+### <b>
 samspill.mod <- lm(medv ~ lstat * age, data = Boston)
+### </b>
 summary(samspill.mod)
 ```
 
 ## Annengradsledd med `I(x^2)` {.small-code}
 
 ```{r, echo=TRUE}
+### <b>
 trans.mod <- lm(medv ~ lstat + I(lstat^2), data = Boston)
+### </b>
 summary(trans.mod)
 ```
 
 ## Høyere grads ledd (polynomer) med `poly()` {.small-code}
 
 ```{r, echo=TRUE}
+### <b>
 trans.mod2 <- lm(medv ~ poly(lstat, 4), data = Boston)
+### </b>
 summary(trans.mod2)
 ```
 
 ## Logtransformering med `log(x)` {.small-code}
 
 ```{r, echo=TRUE}
+### <b>
 trans.mod3 <- lm(medv ~ log(rm), data = Boston)
+### </b>
 summary(trans.mod3)
 ```
 
