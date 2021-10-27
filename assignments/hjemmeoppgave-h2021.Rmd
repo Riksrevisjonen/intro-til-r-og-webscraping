@@ -1,0 +1,73 @@
+---
+title: "Hjemmeoppgave"
+author: "Eivor Hovde Hoff og Ove Haugland Jakobsen"
+date: "`r format(Sys.Date(), '%e. %B %Y')`"
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Hvordan løse og levere oppgaven
+
+Oppgaven kan enten løses med å skrive et R-skript, eller et Rmarkdown-dokument hvor du fyller ut malen som legges ved oppgaven. Hvis du bruker et R-skript, er det viktig at du legger inn kommentarer i skriptet. Dette gjør du med å bruke tegnet `#`. Hvis for eksempel Oppgave 1 er å dele 100 på 5, er en måte å løse oppgaven på som følger:
+
+```{r, eval = FALSE}
+# Oppgave 1
+100/5
+
+# Eventuelle svar på oppgaven som ikke er kode
+```
+
+Det kan være flere måter å løse oppgaven på, og hvilken måte du løser oppgaven på er ikke viktig så lenge du løser eller forsøker å løse oppgaven. Vis uansett framgangsmåten du brukte for å løse oppgavene.
+
+## Om datasettet
+Datasettet vi skal bruker inneholder data fra reseptregisteret om antibiotikabruk i Norge i perioden 2015-2020. (Ekskludert metenamin, som er brukt mot urinveisinfeksjon.)
+
+- **SumAntall_unike_pasienter**: personer som har hentet legemiddel på resept minst én gang per år
+- **SumPrevalens_pr_1000**: antall legemiddelbrukere per 1000 av befolkningsgrunnlaget
+- **SumBefolkning**: innbyggertall brukt for å beregne brukere per 1000
+- **SumSum_AUP**: omsetning i kroner beregnet fra apotekets utsalgspris (AUP)
+
+## Oppgaver
+
+1. **Oppgave 1**
+- Les inn datasettet `antibiotika.csv`. Tilordne datasettet et objekt når du leser det inn. Bruk gjerne `readLines()` først for å vurdere om du bør bruke `read.csv()` eller `read.csv2()`.
+- Valgfri: Se om du kan gi R riktig filbane for filen å bruke en kombinasjon av `list.files()` og `getwd()`, og eventuelt `paste0()` i stedet for å skrive inn filbanen/filnavnet.
+
+2. **Oppgave 2**
+- Hvor mange rader og kolonner er det i datasettet?
+- Hvilke datatyper har de ulike kolonnene?
+- Hvilke verdier har variabelen `Valuegender` og `Valuegeography`, og hva innebærer det for videre databehandling/analyse?
+- Tell antall missingverdier per kolonne i datasettet
+- Sjekk for duplikater
+
+3. **Oppgave 3**
+- Fjern første kolonne i datasettet
+- Endre navn på variablene til hhv. år, kjønn, fylke, unike_pas, prevalens_1000, befolkning, omsetning_apo med `colnames()`
+- Avgrens datasettet ved å lage et nytt objekt `norge`, som ikke inkluderer data på fylkesnivå (hint: `norge <- data[ , ]`)
+- Avgrens datasettet ved å lage et nytt objekt `fylker`, som ikke skiller mellom Kvinne/Mann og ikke inkluderer nasjonale tall.
+
+4. **Oppgave 4**
+- Hvilke fylker har høyeste og laveste verdi av `prevalens_1000` i løpet av perioden?
+- Hvilke fylker hadde i 2015 høyere prevalens enn landet totalt? 
+- Gjelder det samme for 2019 og 2020?
+
+
+5. **Oppgave 5**
+- Bruk fylker-datasettet til å aggregere total `omsetning_apo` per år
+- Test hvorvidt de aggregerte verdiene er like verdiene for hele landet i norge-datasettet
+- Hva utgjør forskjellene i kroner?
+- Bruk `round()` og `table()` for å teste om verdiene blir like når man runder opp til 1000 kr med 0 desimaler
+
+6. **Oppgave 6**
+- Bruk norge-datasettet til å plotte utviklingen i antibiotikabruk i perioden for begge kjønn
+- Gjør det samme for hhv. kvinner og menn
+- Kommenter
+
+
+
