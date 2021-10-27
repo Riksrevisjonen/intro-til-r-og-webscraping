@@ -1,217 +1,562 @@
-﻿Valuedrug,Valuetime,Valuegender,Valuegeography,SumAntall_unike_pasienter,SumPrevalens_pr_1000,SumBefolkning,SumSum_AUP
-Antibiotika ekskl. metenamin,2015,Begge kjønn,Hele landet,1140481,219.750345575458767,5189894,283134176
-Antibiotika ekskl. metenamin,2015,Begge kjønn,Agder,69115,232.659518960496861,297065,16908348
-Antibiotika ekskl. metenamin,2015,Begge kjønn,Innlandet,81652,221.581179765371224,368497,19500412
-Antibiotika ekskl. metenamin,2015,Begge kjønn,Møre og Romsdal,59303,226.241115812042438,262123,15460314
-Antibiotika ekskl. metenamin,2015,Begge kjønn,Nordland,49706,206.667442788717403,240512,14016658
-Antibiotika ekskl. metenamin,2015,Begge kjønn,Oslo,138573,212.199077228868985,653033,32759258
-Antibiotika ekskl. metenamin,2015,Begge kjønn,Rogaland,100492,214.617352713790850,468238,24349942
-Antibiotika ekskl. metenamin,2015,Begge kjønn,Troms og Finnmark,45267,187.943733548124590,240854,10757255
-Antibiotika ekskl. metenamin,2015,Begge kjønn,Trøndelag,96830,214.525144615602755,451369,27372052
-Antibiotika ekskl. metenamin,2015,Begge kjønn,Vestfold og Telemark,94301,230.319268457097080,409436,22629268
-Antibiotika ekskl. metenamin,2015,Begge kjønn,Vestland,139585,224.389373474840290,622066,34192956
-Antibiotika ekskl. metenamin,2015,Begge kjønn,Viken,265656,225.763767964449702,1176699,65187632
-Antibiotika ekskl. metenamin,2015,Kvinne,Hele landet,675244,261.933042298343707,2577926,164037872
-Antibiotika ekskl. metenamin,2015,Kvinne,Agder,39776,268.956656974778552,147890,9495173
-Antibiotika ekskl. metenamin,2015,Kvinne,Innlandet,48314,262.202733064875015,184262,11393911
-Antibiotika ekskl. metenamin,2015,Kvinne,Møre og Romsdal,34801,270.673241452260212,128572,8796891
-Antibiotika ekskl. metenamin,2015,Kvinne,Nordland,29968,252.187962838292716,118832,7898359.5
-Antibiotika ekskl. metenamin,2015,Kvinne,Oslo,82903,253.235586101565483,327375,18999138
-Antibiotika ekskl. metenamin,2015,Kvinne,Rogaland,58411,253.920021561748762,230037,14511334
-Antibiotika ekskl. metenamin,2015,Kvinne,Troms og Finnmark,27354,231.846961002856344,117983,6250014
-Antibiotika ekskl. metenamin,2015,Kvinne,Trøndelag,58086,260.456648850306704,223016,15453450
-Antibiotika ekskl. metenamin,2015,Kvinne,Vestfold og Telemark,55827,271.796494644595910,205400,13198919
-Antibiotika ekskl. metenamin,2015,Kvinne,Vestland,82316,268.211542910393051,306907,20219276
-Antibiotika ekskl. metenamin,2015,Kvinne,Viken,157487,267.994098538077873,587651,37821316
-Antibiotika ekskl. metenamin,2015,Mann,Hele landet,465237,178.117419508967951,2611968,119096312
-Antibiotika ekskl. metenamin,2015,Mann,Agder,29339,196.676364513923338,149174,7413174
-Antibiotika ekskl. metenamin,2015,Mann,Innlandet,33338,180.953673297690450,184235,8106500.5
-Antibiotika ekskl. metenamin,2015,Mann,Møre og Romsdal,24502,183.465492583357669,133551,6663422.5
-Antibiotika ekskl. metenamin,2015,Mann,Nordland,19738,162.212360289283366,121680,6118298.5
-Antibiotika ekskl. metenamin,2015,Mann,Oslo,55670,170.946207370922870,325658,13760119
-Antibiotika ekskl. metenamin,2015,Mann,Rogaland,42081,176.660985214229939,238202,9838608
-Antibiotika ekskl. metenamin,2015,Mann,Troms og Finnmark,17913,145.785858454326454,122872,4507241.5
-Antibiotika ekskl. metenamin,2015,Mann,Trøndelag,38744,169.667881165919283,228352,11918603
-Antibiotika ekskl. metenamin,2015,Mann,Vestfold og Telemark,38474,188.564763081024917,204036,9430350
-Antibiotika ekskl. metenamin,2015,Mann,Vestland,57269,181.714050006345983,315160,13973680
-Antibiotika ekskl. metenamin,2015,Mann,Viken,108169,183.633591829528324,589048,27366318
-Antibiotika ekskl. metenamin,2016,Begge kjønn,Hele landet,1097966,209.689521940830201,5236151,272533440
-Antibiotika ekskl. metenamin,2016,Begge kjønn,Agder,65859,219.795219564941696,299638,15698336
-Antibiotika ekskl. metenamin,2016,Begge kjønn,Innlandet,78606,212.872091511763941,369264,19557594
-Antibiotika ekskl. metenamin,2016,Begge kjønn,Møre og Romsdal,56728,215.387068726578251,263377,14790433
-Antibiotika ekskl. metenamin,2016,Begge kjønn,Nordland,47599,197.409567099926177,241118,12998444
-Antibiotika ekskl. metenamin,2016,Begge kjønn,Oslo,134640,203.207490785934854,662574,32331322
-Antibiotika ekskl. metenamin,2016,Begge kjønn,Rogaland,96616,205.085969008703035,471100,23274746
-Antibiotika ekskl. metenamin,2016,Begge kjønn,Troms og Finnmark,43497,179.589763916070057,242202,10493062
-Antibiotika ekskl. metenamin,2016,Begge kjønn,Trøndelag,93056,204.165990179601831,455786,25254234
-Antibiotika ekskl. metenamin,2016,Begge kjønn,Vestfold og Telemark,89511,217.112156786649850,412280,21462338
-Antibiotika ekskl. metenamin,2016,Begge kjønn,Vestland,134461,214.475642377366496,626929,32490524
-Antibiotika ekskl. metenamin,2016,Begge kjønn,Viken,257393,215.955102938042524,1191882,64182412
-Antibiotika ekskl. metenamin,2016,Kvinne,Hele landet,653201,251.324917373019934,2599030,159480944
-Antibiotika ekskl. metenamin,2016,Kvinne,Agder,38013,255.175608184308039,148968,9140780
-Antibiotika ekskl. metenamin,2016,Kvinne,Innlandet,46667,252.897918484357472,184529,11376660
-Antibiotika ekskl. metenamin,2016,Kvinne,Møre og Romsdal,33765,261.411848502678765,129164,8625701
-Antibiotika ekskl. metenamin,2016,Kvinne,Nordland,28557,239.970756794003462,119002,7144949.5
-Antibiotika ekskl. metenamin,2016,Kvinne,Oslo,81232,244.620175021230208,332074,19404746
-Antibiotika ekskl. metenamin,2016,Kvinne,Rogaland,56574,244.356907766864488,231522,13958379
-Antibiotika ekskl. metenamin,2016,Kvinne,Troms og Finnmark,26333,222.196908329958148,118512,6254782
-Antibiotika ekskl. metenamin,2016,Kvinne,Trøndelag,56225,250.013339973675785,224888,14914859
-Antibiotika ekskl. metenamin,2016,Kvinne,Vestfold og Telemark,53109,257.053246017801914,206607,12311258
-Antibiotika ekskl. metenamin,2016,Kvinne,Vestland,79853,258.387991315124433,309043,19373954
-Antibiotika ekskl. metenamin,2016,Kvinne,Viken,152873,257.049512209065748,594722,36974872
-Antibiotika ekskl. metenamin,2016,Mann,Hele landet,444765,168.655578813250819,2637120,113052504
-Antibiotika ekskl. metenamin,2016,Mann,Agder,27846,184.814495254529767,150670,6557556
-Antibiotika ekskl. metenamin,2016,Mann,Innlandet,31939,172.889961891564178,184736,8180934
-Antibiotika ekskl. metenamin,2016,Mann,Møre og Romsdal,22963,171.094984055077042,134212,6164732
-Antibiotika ekskl. metenamin,2016,Mann,Nordland,19042,155.933702381342330,122116,5853494
-Antibiotika ekskl. metenamin,2016,Mann,Oslo,53408,161.597090477789780,330501,12926576
-Antibiotika ekskl. metenamin,2016,Mann,Rogaland,40042,167.136244297240553,239577,9316367
-Antibiotika ekskl. metenamin,2016,Mann,Troms og Finnmark,17164,138.766270514997170,123690,4238280
-Antibiotika ekskl. metenamin,2016,Mann,Trøndelag,36831,159.511301478135462,230899,10339375
-Antibiotika ekskl. metenamin,2016,Mann,Vestfold og Telemark,36402,176.990548057100626,205672,9151079
-Antibiotika ekskl. metenamin,2016,Mann,Vestland,54608,171.784853689687498,317886,13116570
-Antibiotika ekskl. metenamin,2016,Mann,Viken,104520,175.028468082256012,597160,27207542
-Antibiotika ekskl. metenamin,2017,Begge kjønn,Hele landet,1050664,199.103727746690903,5276968,256547600
-Antibiotika ekskl. metenamin,2017,Begge kjønn,Agder,64465,213.268182299385983,302272,15327767
-Antibiotika ekskl. metenamin,2017,Begge kjønn,Innlandet,74704,201.660709850881645,370444,17872718
-Antibiotika ekskl. metenamin,2017,Begge kjønn,Møre og Romsdal,53926,204.161524074901376,264134,13081095
-Antibiotika ekskl. metenamin,2017,Begge kjønn,Nordland,45023,186.164692261572495,241845,13041570
-Antibiotika ekskl. metenamin,2017,Begge kjønn,Oslo,127816,190.737695377204476,670114,29867820
-Antibiotika ekskl. metenamin,2017,Begge kjønn,Rogaland,94164,199.172968113796203,472775,22813326
-Antibiotika ekskl. metenamin,2017,Begge kjønn,Troms og Finnmark,42605,174.984290226261813,243479,9945470
-Antibiotika ekskl. metenamin,2017,Begge kjønn,Trøndelag,88972,193.296370967741935,460288,23180526
-Antibiotika ekskl. metenamin,2017,Begge kjønn,Vestfold og Telemark,85265,205.586632589091961,414740,20435056
-Antibiotika ekskl. metenamin,2017,Begge kjønn,Vestland,127765,202.701201944433868,630312,30600150
-Antibiotika ekskl. metenamin,2017,Begge kjønn,Viken,245959,203.850431721099385,1206566,60382108
-Antibiotika ekskl. metenamin,2017,Kvinne,Hele landet,624509,238.524446780214635,2618218,148513888
-Antibiotika ekskl. metenamin,2017,Kvinne,Agder,37259,248.112139575148165,150170,8891028
-Antibiotika ekskl. metenamin,2017,Kvinne,Innlandet,44260,239.336390378958297,184928,10485331
-Antibiotika ekskl. metenamin,2017,Kvinne,Møre og Romsdal,31962,246.688895063443549,129564,7553731
-Antibiotika ekskl. metenamin,2017,Kvinne,Nordland,27047,226.891038277953476,119207,6978681
-Antibiotika ekskl. metenamin,2017,Kvinne,Oslo,76535,227.835628508999113,335922,17536628
-Antibiotika ekskl. metenamin,2017,Kvinne,Rogaland,55162,237.235506623086186,232520,13633245
-Antibiotika ekskl. metenamin,2017,Kvinne,Troms og Finnmark,25713,215.901457647612010,119096,5845638
-Antibiotika ekskl. metenamin,2017,Kvinne,Trøndelag,53758,236.995825085636443,226831,13254649
-Antibiotika ekskl. metenamin,2017,Kvinne,Vestfold og Telemark,50760,244.412130083493033,207682,11560193
-Antibiotika ekskl. metenamin,2017,Kvinne,Vestland,76058,244.795622787254586,310700,18330248
-Antibiotika ekskl. metenamin,2017,Kvinne,Viken,145995,242.679472602876349,601596,34444508
-Antibiotika ekskl. metenamin,2017,Mann,Hele landet,426155,160.283968030089328,2658750,108033720
-Antibiotika ekskl. metenamin,2017,Mann,Agder,27206,178.867989033602672,152101,6436738
-Antibiotika ekskl. metenamin,2017,Mann,Innlandet,30444,164.105328410101609,185515,7387387.5
-Antibiotika ekskl. metenamin,2017,Mann,Møre og Romsdal,21964,163.216170023036338,134570,5527364.5
-Antibiotika ekskl. metenamin,2017,Mann,Nordland,17976,146.577732839739722,122638,6062888.5
-Antibiotika ekskl. metenamin,2017,Mann,Oslo,51281,153.447718676688850,334192,12331190
-Antibiotika ekskl. metenamin,2017,Mann,Rogaland,39002,162.336527175406029,240254,9180080
-Antibiotika ekskl. metenamin,2017,Mann,Troms og Finnmark,16892,135.806340094707476,124383,4099832.5
-Antibiotika ekskl. metenamin,2017,Mann,Trøndelag,35214,150.837845247070112,233456,9925876
-Antibiotika ekskl. metenamin,2017,Mann,Vestfold og Telemark,34505,166.644933520721347,207057,8874863
-Antibiotika ekskl. metenamin,2017,Mann,Vestland,51707,161.780533897350538,319612,12269902
-Antibiotika ekskl. metenamin,2017,Mann,Viken,99964,165.237672549593286,604971,25937598
-Antibiotika ekskl. metenamin,2018,Begge kjønn,Hele landet,1012197,190.552147285461592,5311916,254131936
-Antibiotika ekskl. metenamin,2018,Begge kjønn,Agder,62767,206.132039842495378,304499,15328243
-Antibiotika ekskl. metenamin,2018,Begge kjønn,Innlandet,71035,191.456617361680107,371024,17505076
-Antibiotika ekskl. metenamin,2018,Begge kjønn,Møre og Romsdal,51695,195.299513404055974,264696,13708430
-Antibiotika ekskl. metenamin,2018,Begge kjønn,Nordland,44124,182.254513612087517,242101,12392201
-Antibiotika ekskl. metenamin,2018,Begge kjønn,Oslo,122005,180.142336143635478,677270,29315840
-Antibiotika ekskl. metenamin,2018,Begge kjønn,Rogaland,91449,192.690532881013085,474590,22560170
-Antibiotika ekskl. metenamin,2018,Begge kjønn,Troms og Finnmark,40416,165.553853338030361,244126,9577583
-Antibiotika ekskl. metenamin,2018,Begge kjønn,Trøndelag,85682,184.661870627637426,463994,22472868
-Antibiotika ekskl. metenamin,2018,Begge kjønn,Vestfold og Telemark,81894,196.509127905860672,416744,20673546
-Antibiotika ekskl. metenamin,2018,Begge kjønn,Vestland,123190,194.811150680945543,632356,31269650
-Antibiotika ekskl. metenamin,2018,Begge kjønn,Viken,237940,194.950172754660525,1220517,59328324
-Antibiotika ekskl. metenamin,2018,Kvinne,Hele landet,603532,229.027540287356453,2635194,149337248
-Antibiotika ekskl. metenamin,2018,Kvinne,Agder,36380,240.363650778968511,151354,8831058
-Antibiotika ekskl. metenamin,2018,Kvinne,Innlandet,42217,228.172865929457038,185022,10394189
-Antibiotika ekskl. metenamin,2018,Kvinne,Møre og Romsdal,30829,237.485941423883402,129814,7902381
-Antibiotika ekskl. metenamin,2018,Kvinne,Nordland,26701,223.911512142761304,119248,7246245
-Antibiotika ekskl. metenamin,2018,Kvinne,Oslo,72939,214.799392168873392,339568,17275068
-Antibiotika ekskl. metenamin,2018,Kvinne,Rogaland,53801,230.271098518245863,233642,13541488
-Antibiotika ekskl. metenamin,2018,Kvinne,Troms og Finnmark,24782,207.488404025519516,119438,5882385
-Antibiotika ekskl. metenamin,2018,Kvinne,Trøndelag,51950,227.336379071924942,228516,13025931
-Antibiotika ekskl. metenamin,2018,Kvinne,Vestfold og Telemark,48645,233.290331243975311,208517,11822015
-Antibiotika ekskl. metenamin,2018,Kvinne,Vestland,73866,236.819831488772330,311908,18890882
-Antibiotika ekskl. metenamin,2018,Kvinne,Viken,141422,232.538484558492254,608166,34525612
-Antibiotika ekskl. metenamin,2018,Mann,Hele landet,408665,152.673680718430976,2676722,104794672
-Antibiotika ekskl. metenamin,2018,Mann,Agder,26387,172.301885806822337,153144,6497185.5
-Antibiotika ekskl. metenamin,2018,Mann,Innlandet,28818,154.933817915936388,186002,7110886.5
-Antibiotika ekskl. metenamin,2018,Mann,Møre og Romsdal,20866,154.698180631959787,134882,5806049.5
-Antibiotika ekskl. metenamin,2018,Mann,Nordland,17423,141.821052974310553,122852,5145955.5
-Antibiotika ekskl. metenamin,2018,Mann,Oslo,49066,145.293779722951004,337702,12040770
-Antibiotika ekskl. metenamin,2018,Mann,Rogaland,37648,156.249481215864004,240948,9018682
-Antibiotika ekskl. metenamin,2018,Mann,Troms og Finnmark,15634,125.384960862312332,124688,3695198.25
-Antibiotika ekskl. metenamin,2018,Mann,Trøndelag,33732,143.249050866747637,235478,9446937
-Antibiotika ekskl. metenamin,2018,Mann,Vestfold og Telemark,33249,159.676698987163048,208227,8851532
-Antibiotika ekskl. metenamin,2018,Mann,Vestland,49324,153.922489522448330,320447,12378768
-Antibiotika ekskl. metenamin,2018,Mann,Viken,96518,157.619008736833510,612350,24802710
-Antibiotika ekskl. metenamin,2019,Begge kjønn,Hele landet,1031847,192.910136911723795,5348848,270798048
-Antibiotika ekskl. metenamin,2019,Begge kjønn,Agder,61503,200.833991862538287,306238,15944157
-Antibiotika ekskl. metenamin,2019,Begge kjønn,Innlandet,72081,194.173266526588007,371220,19134268
-Antibiotika ekskl. metenamin,2019,Begge kjønn,Møre og Romsdal,52533,198.159967409016839,265104,14680097
-Antibiotika ekskl. metenamin,2019,Begge kjønn,Nordland,44178,182.452691484880273,242134,12709579
-Antibiotika ekskl. metenamin,2019,Begge kjønn,Oslo,127787,185.930957016188406,687282,32055372
-Antibiotika ekskl. metenamin,2019,Begge kjønn,Rogaland,89764,187.880018335067072,477773,23056070
-Antibiotika ekskl. metenamin,2019,Begge kjønn,Troms og Finnmark,41438,169.954638295777998,243818,10484770
-Antibiotika ekskl. metenamin,2019,Begge kjønn,Trøndelag,88483,189.200458444879701,467668,23636998
-Antibiotika ekskl. metenamin,2019,Begge kjønn,Vestfold og Telemark,83949,200.569102194698892,418554,22205192
-Antibiotika ekskl. metenamin,2019,Begge kjønn,Vestland,124326,195.843257343767721,634824,32408936
-Antibiotika ekskl. metenamin,2019,Begge kjønn,Viken,245805,199.155752348620806,1234235,64482620
-Antibiotika ekskl. metenamin,2019,Kvinne,Hele landet,616038,232.246579381018105,2652517,159763376
-Antibiotika ekskl. metenamin,2019,Kvinne,Agder,35930,236.086470858794927,152190,9122458
-Antibiotika ekskl. metenamin,2019,Kvinne,Innlandet,42984,232.323341512717682,185018,11126629
-Antibiotika ekskl. metenamin,2019,Kvinne,Møre og Romsdal,31244,240.392087465665418,129971,8394314
-Antibiotika ekskl. metenamin,2019,Kvinne,Nordland,26675,223.723497047772410,119232,7599017
-Antibiotika ekskl. metenamin,2019,Kvinne,Oslo,76849,223.144623407696485,344391,19159870
-Antibiotika ekskl. metenamin,2019,Kvinne,Rogaland,53174,225.978088106550619,235306,14225275
-Antibiotika ekskl. metenamin,2019,Kvinne,Troms og Finnmark,25229,211.361884655339968,119364,6558517.5
-Antibiotika ekskl. metenamin,2019,Kvinne,Trøndelag,53612,232.947780973816621,230146,13748319
-Antibiotika ekskl. metenamin,2019,Kvinne,Vestfold og Telemark,49875,238.401384281521562,209206,12707892
-Antibiotika ekskl. metenamin,2019,Kvinne,Vestland,74568,238.105577765572912,313172,19609812
-Antibiotika ekskl. metenamin,2019,Kvinne,Viken,145898,237.417435693816810,614521,37511276
-Antibiotika ekskl. metenamin,2019,Mann,Hele landet,415809,154.212834324556472,2696332,111034680
-Antibiotika ekskl. metenamin,2019,Mann,Agder,25573,166.006699210635646,154048,6821699.5
-Antibiotika ekskl. metenamin,2019,Mann,Innlandet,29097,156.265775877810120,186202,8007639
-Antibiotika ekskl. metenamin,2019,Mann,Møre og Romsdal,21289,157.541089149208557,135133,6285782.5
-Antibiotika ekskl. metenamin,2019,Mann,Nordland,17503,142.414281297293779,122902,5110562
-Antibiotika ekskl. metenamin,2019,Mann,Oslo,50938,148.554063670193530,342892,12895502
-Antibiotika ekskl. metenamin,2019,Mann,Rogaland,36590,150.907756139005056,242466,8830795
-Antibiotika ekskl. metenamin,2019,Mann,Troms og Finnmark,16209,130.239845727371339,124455,3926252.5
-Antibiotika ekskl. metenamin,2019,Mann,Trøndelag,34871,146.811663761672603,237522,9888680
-Antibiotika ekskl. metenamin,2019,Mann,Vestfold og Telemark,34074,162.763259086588296,209347,9497300
-Antibiotika ekskl. metenamin,2019,Mann,Vestland,49758,154.695136358548991,321652,12799125
-Antibiotika ekskl. metenamin,2019,Mann,Viken,99907,161.214689356703253,619714,26971344
-Antibiotika ekskl. metenamin,2020,Begge kjønn,Hele landet,876104,162.860532460980386,5379474,246102688
-Antibiotika ekskl. metenamin,2020,Begge kjønn,Agder,52867,171.625486548693826,308037,14301607
-Antibiotika ekskl. metenamin,2020,Begge kjønn,Innlandet,60553,163.218273071801700,370994,17989728
-Antibiotika ekskl. metenamin,2020,Begge kjønn,Møre og Romsdal,45104,169.953012724621408,265391,13237371
-Antibiotika ekskl. metenamin,2020,Begge kjønn,Nordland,36982,153.586112380082229,240790,11659509
-Antibiotika ekskl. metenamin,2020,Begge kjønn,Oslo,107489,154.604373665951339,695252,28765552
-Antibiotika ekskl. metenamin,2020,Begge kjønn,Rogaland,78192,162.470806286725899,481268,21155470
-Antibiotika ekskl. metenamin,2020,Begge kjønn,Troms og Finnmark,35724,147.169811320754717,242740,9548488
-Antibiotika ekskl. metenamin,2020,Begge kjønn,Trøndelag,75789,161.283046010644524,469913,20949050
-Antibiotika ekskl. metenamin,2020,Begge kjønn,Vestfold og Telemark,71937,171.018379180247195,420639,20646858
-Antibiotika ekskl. metenamin,2020,Begge kjønn,Vestland,105051,164.740401081426932,637676,28556000
-Antibiotika ekskl. metenamin,2020,Begge kjønn,Viken,206416,165.560077447877482,1246774,59293052
-Antibiotika ekskl. metenamin,2020,Kvinne,Hele landet,531604,199.359175328250138,2666564,143262816
-Antibiotika ekskl. metenamin,2020,Kvinne,Agder,31363,205.032490880326347,152966,8131148
-Antibiotika ekskl. metenamin,2020,Kvinne,Innlandet,36662,198.295165669655896,184886,9894082
-Antibiotika ekskl. metenamin,2020,Kvinne,Møre og Romsdal,27302,209.895905407691007,130074,7738777.5
-Antibiotika ekskl. metenamin,2020,Kvinne,Nordland,22817,192.485173655927585,118539,6521908
-Antibiotika ekskl. metenamin,2020,Kvinne,Oslo,65539,188.149338998377998,348335,17313898
-Antibiotika ekskl. metenamin,2020,Kvinne,Rogaland,46673,197.017281699296744,236898,12906056
-Antibiotika ekskl. metenamin,2020,Kvinne,Troms og Finnmark,22275,187.367517916624609,118884,6004689
-Antibiotika ekskl. metenamin,2020,Kvinne,Trøndelag,46904,202.877237298545810,231194,12414679
-Antibiotika ekskl. metenamin,2020,Kvinne,Vestfold og Telemark,43347,206.369081058434819,210046,11448903
-Antibiotika ekskl. metenamin,2020,Kvinne,Vestland,64184,204.144336126969991,314405,17354456
-Antibiotika ekskl. metenamin,2020,Kvinne,Viken,124538,200.758296283638919,620338,33534220
-Antibiotika ekskl. metenamin,2020,Mann,Hele landet,344500,126.985414186242817,2712910,102839864
-Antibiotika ekskl. metenamin,2020,Mann,Agder,21504,138.672857419230025,155070,6170459.5
-Antibiotika ekskl. metenamin,2020,Mann,Innlandet,23891,128.371698153760182,186108,8095645.5
-Antibiotika ekskl. metenamin,2020,Mann,Møre og Romsdal,17802,131.557749580614409,135317,5498594
-Antibiotika ekskl. metenamin,2020,Mann,Nordland,14165,115.868172857481738,122251,5137601
-Antibiotika ekskl. metenamin,2020,Mann,Oslo,41950,120.922295534666793,346917,11451653
-Antibiotika ekskl. metenamin,2020,Mann,Rogaland,31519,128.980116298578800,244371,8249414
-Antibiotika ekskl. metenamin,2020,Mann,Troms og Finnmark,13449,108.585777031391293,123856,3543799
-Antibiotika ekskl. metenamin,2020,Mann,Trøndelag,28885,120.999497319034853,238720,8534371
-Antibiotika ekskl. metenamin,2020,Mann,Vestfold og Telemark,28590,135.759498178951817,210593,9197954
-Antibiotika ekskl. metenamin,2020,Mann,Vestland,40867,126.417154647339229,323271,11201544
-Antibiotika ekskl. metenamin,2020,Mann,Viken,81878,130.704493356065105,626436,25758832
+﻿Valuedrug,Valuetime,Valuegender,Valuegeography,SumAntall_unike_pasienter,SumPrevalens_pr_1000,SumBefolkning,SumSum_AUP,SumSum_DDD
+Antibiotika ekskl. metenamin,2004,Begge kjønn,Agder,60895,230.500480721915620,264186,13924283,1089039.25
+Antibiotika ekskl. metenamin,2004,Begge kjønn,Innlandet,81778,229.093129839423583,356964,18667702,1427808.125
+Antibiotika ekskl. metenamin,2004,Begge kjønn,Møre og Romsdal,57394,237.151569743899113,242014,12504430,1006002.875
+Antibiotika ekskl. metenamin,2004,Begge kjønn,Nordland,47590,202.075530984348594,235506,12151678,847895.25
+Antibiotika ekskl. metenamin,2004,Begge kjønn,Oslo,117956,224.308093696873348,525866,26959462,2054891.875
+Antibiotika ekskl. metenamin,2004,Begge kjønn,Rogaland,88884,227.338762481584547,390976,18456730,1463521
+Antibiotika ekskl. metenamin,2004,Begge kjønn,Troms og Finnmark,42900,188.769740518610760,227261,9930580,743862.4375
+Antibiotika ekskl. metenamin,2004,Begge kjønn,Trøndelag,86354,214.044219710489788,403440,18800734,1473153.875
+Antibiotika ekskl. metenamin,2004,Begge kjønn,Vestfold og Telemark,84526,222.511793446213461,379872,18636318,1461562.375
+Antibiotika ekskl. metenamin,2004,Begge kjønn,Vestland,129061,233.540464833486541,552628,29554692,2216361.75
+Antibiotika ekskl. metenamin,2004,Begge kjønn,Viken,232803,229.770942640910544,1013196,54352768,4101000.5
+Antibiotika ekskl. metenamin,2004,Kvinne,Agder,35275,265.245507180991052,132990,7754177.5,621103.4375
+Antibiotika ekskl. metenamin,2004,Kvinne,Innlandet,48411,268.487604680827464,180310,10720287,840443.125
+Antibiotika ekskl. metenamin,2004,Kvinne,Møre og Romsdal,33784,279.756877163346086,120762,7379583.5,593927.3125
+Antibiotika ekskl. metenamin,2004,Kvinne,Nordland,28560,242.679673028227657,117686,6852152.5,508618.96875
+Antibiotika ekskl. metenamin,2004,Kvinne,Oslo,70623,262.057782362501577,269494,15503616,1213083.75
+Antibiotika ekskl. metenamin,2004,Kvinne,Rogaland,51275,262.209153669138328,195550,10873079,849383.5625
+Antibiotika ekskl. metenamin,2004,Kvinne,Troms og Finnmark,26033,231.433245026047686,112486,5831811.5,449747
+Antibiotika ekskl. metenamin,2004,Kvinne,Trøndelag,51825,255.744063480784035,202644,11086295,883124.375
+Antibiotika ekskl. metenamin,2004,Kvinne,Vestfold og Telemark,50545,261.599772274409337,193215,10909765,869600.3125
+Antibiotika ekskl. metenamin,2004,Kvinne,Vestland,75514,272.597972680278395,277016,16941194,1297236
+Antibiotika ekskl. metenamin,2004,Kvinne,Viken,138372,269.626927618579963,513198,31742880,2416359
+Antibiotika ekskl. metenamin,2004,Mann,Agder,25620,195.278855461634031,131197,6170105.5,467935.84375
+Antibiotika ekskl. metenamin,2004,Mann,Innlandet,33367,188.883353900845721,176654,7947415,587365
+Antibiotika ekskl. metenamin,2004,Mann,Møre og Romsdal,23610,194.718437634018408,121252,5124847,412075.59375
+Antibiotika ekskl. metenamin,2004,Mann,Nordland,19030,161.517569173315227,117820,5299525.5,339276.3125
+Antibiotika ekskl. metenamin,2004,Mann,Oslo,47333,184.626246235938402,256372,11455846,841808.0625
+Antibiotika ekskl. metenamin,2004,Mann,Rogaland,37609,192.446245637734999,195426,7583650.5,614137.4375
+Antibiotika ekskl. metenamin,2004,Mann,Troms og Finnmark,16867,146.955809576915035,114776,4098768.25,294115.4375
+Antibiotika ekskl. metenamin,2004,Mann,Trøndelag,34529,171.960596824637941,200796,7714438.5,590029.5
+Antibiotika ekskl. metenamin,2004,Mann,Vestfold og Telemark,33981,182.051474369963998,186656,7726553.5,591962.0625
+Antibiotika ekskl. metenamin,2004,Mann,Vestland,53547,194.283993440053408,275612,12613496,919125.75
+Antibiotika ekskl. metenamin,2004,Mann,Viken,94431,188.862755451021804,499998,22609886,1684641.5
+Antibiotika ekskl. metenamin,2005,Begge kjønn,Agder,65756,247.541748859341354,265636,14694451,1188429.75
+Antibiotika ekskl. metenamin,2005,Begge kjønn,Innlandet,85914,240.791708473702207,356798,19806486,1522935.125
+Antibiotika ekskl. metenamin,2005,Begge kjønn,Møre og Romsdal,59859,247.100055315670847,242246,13398160,1070327.75
+Antibiotika ekskl. metenamin,2005,Begge kjønn,Nordland,53189,226.209108075463995,235132,13266148,960654.125
+Antibiotika ekskl. metenamin,2005,Begge kjønn,Oslo,125775,235.477263876823533,534128,30166266,2208624.25
+Antibiotika ekskl. metenamin,2005,Begge kjønn,Rogaland,93692,236.985549476538451,395349,19241504,1579313.875
+Antibiotika ekskl. metenamin,2005,Begge kjønn,Troms og Finnmark,45098,198.165895499105797,227577,10278834,780084.375
+Antibiotika ekskl. metenamin,2005,Begge kjønn,Trøndelag,91068,224.115527730199043,406344,20065174,1560965.75
+Antibiotika ekskl. metenamin,2005,Begge kjønn,Vestfold og Telemark,91410,239.806706507652512,381182,20182472,1597291.5
+Antibiotika ekskl. metenamin,2005,Begge kjønn,Vestland,136062,244.664782167749175,556116,31122742,2350789.25
+Antibiotika ekskl. metenamin,2005,Begge kjønn,Viken,249322,243.768228451196393,1022783,57562368,4439853.5
+Antibiotika ekskl. metenamin,2005,Kvinne,Agder,37954,283.989045687861964,133646,8373741,679803.4375
+Antibiotika ekskl. metenamin,2005,Kvinne,Innlandet,50685,281.214629707716549,180236,11401175,894239.5625
+Antibiotika ekskl. metenamin,2005,Kvinne,Møre og Romsdal,35046,289.998262294268054,120849,8125627.5,629956.4375
+Antibiotika ekskl. metenamin,2005,Kvinne,Nordland,31615,268.995150174423551,117530,7626133.5,574584.5
+Antibiotika ekskl. metenamin,2005,Kvinne,Oslo,74952,274.149774321684870,273398,16826130,1294332.5
+Antibiotika ekskl. metenamin,2005,Kvinne,Rogaland,53871,272.630657348036660,197597,11386921,908906.875
+Antibiotika ekskl. metenamin,2005,Kvinne,Troms og Finnmark,27215,241.597571152104824,112646,5776777,470166.875
+Antibiotika ekskl. metenamin,2005,Kvinne,Trøndelag,54273,266.093684117629755,203962,11893524,931224.6875
+Antibiotika ekskl. metenamin,2005,Kvinne,Vestfold og Telemark,54351,280.459046508387816,193793,11790257,945692
+Antibiotika ekskl. metenamin,2005,Kvinne,Vestland,79217,284.317103459166900,278622,18232320,1364497.625
+Antibiotika ekskl. metenamin,2005,Kvinne,Viken,147407,284.576090565804613,517988,33575712,2604384.75
+Antibiotika ekskl. metenamin,2005,Mann,Agder,27802,210.637169482536556,131990,6320710.5,508626.25
+Antibiotika ekskl. metenamin,2005,Mann,Innlandet,35229,199.527644680055731,176562,8405311,628695.5625
+Antibiotika ekskl. metenamin,2005,Mann,Møre og Romsdal,24813,204.397179478730765,121396,5272532.5,440371.25
+Antibiotika ekskl. metenamin,2005,Mann,Nordland,21574,183.447701164085950,117603,5640014.5,386069.625
+Antibiotika ekskl. metenamin,2005,Mann,Oslo,50823,194.925037682515696,260731,13340135,914291.6875
+Antibiotika ekskl. metenamin,2005,Mann,Rogaland,39821,201.368380597920628,197752,7854583,670407
+Antibiotika ekskl. metenamin,2005,Mann,Troms og Finnmark,17883,155.597706449956931,114931,4502057.5,309917.5
+Antibiotika ekskl. metenamin,2005,Mann,Trøndelag,36795,181.810545456342246,202381,8171650,629741
+Antibiotika ekskl. metenamin,2005,Mann,Vestfold og Telemark,37059,197.766132303029009,187388,8392214,651599.5625
+Antibiotika ekskl. metenamin,2005,Mann,Vestland,56845,204.850537847528784,277495,12890422,986291.75
+Antibiotika ekskl. metenamin,2005,Mann,Viken,101915,201.893838092691092,504795,23986658,1835468.75
+Antibiotika ekskl. metenamin,2006,Begge kjønn,Agder,67266,251.526561991691315,267431,14864619,1240798.625
+Antibiotika ekskl. metenamin,2006,Begge kjønn,Innlandet,88761,248.681102858567718,356927,19345080,1609737.75
+Antibiotika ekskl. metenamin,2006,Begge kjønn,Møre og Romsdal,61532,253.606343867978964,242628,13534034,1106694.5
+Antibiotika ekskl. metenamin,2006,Begge kjønn,Nordland,55548,236.906752192159405,234472,13522481,1013600.6875
+Antibiotika ekskl. metenamin,2006,Begge kjønn,Oslo,130779,240.617536990767487,543514,31232230,2317126.5
+Antibiotika ekskl. metenamin,2006,Begge kjønn,Rogaland,93166,232.287822878228782,401080,19597158,1618699.875
+Antibiotika ekskl. metenamin,2006,Begge kjønn,Troms og Finnmark,45950,201.503271413285622,228036,11084878,820735.25
+Antibiotika ekskl. metenamin,2006,Begge kjønn,Trøndelag,95244,232.439635101694171,409758,20586022,1650966.625
+Antibiotika ekskl. metenamin,2006,Begge kjønn,Vestfold og Telemark,95509,249.602763926783120,382644,20422292,1689821.625
+Antibiotika ekskl. metenamin,2006,Begge kjønn,Vestland,139701,249.519539901407444,559880,30998388,2426336.5
+Antibiotika ekskl. metenamin,2006,Begge kjønn,Viken,258941,250.351926118718989,1034308,58670428,4687691
+Antibiotika ekskl. metenamin,2006,Kvinne,Agder,38737,287.958193022754473,134523,8436893,711289.8125
+Antibiotika ekskl. metenamin,2006,Kvinne,Innlandet,52096,288.958283644592848,180289,11193523,942592.375
+Antibiotika ekskl. metenamin,2006,Kvinne,Møre og Romsdal,36061,298.113488310571740,120964,8047282.5,651165
+Antibiotika ekskl. metenamin,2006,Kvinne,Nordland,32721,279.284738818709457,117160,7684421.5,598762.625
+Antibiotika ekskl. metenamin,2006,Kvinne,Oslo,77730,279.966863564327907,277640,17413894,1366141.125
+Antibiotika ekskl. metenamin,2006,Kvinne,Rogaland,53674,268.266717313834174,200077,11680775,933088.25
+Antibiotika ekskl. metenamin,2006,Kvinne,Troms og Finnmark,27444,243.203005919676722,112844,6079993,491043.75
+Antibiotika ekskl. metenamin,2006,Kvinne,Trøndelag,56571,275.397242668536044,205416,12190349,980618.3125
+Antibiotika ekskl. metenamin,2006,Kvinne,Vestfold og Telemark,56792,292.293281454260981,194298,12130444,1004129.875
+Antibiotika ekskl. metenamin,2006,Kvinne,Vestland,81301,290.101694915254237,280250,17830608,1411304.375
+Antibiotika ekskl. metenamin,2006,Kvinne,Viken,152798,291.971444513234429,523332,34681124,2752426
+Antibiotika ekskl. metenamin,2006,Mann,Agder,28529,214.652240647666055,132908,6427726,529508.8125
+Antibiotika ekskl. metenamin,2006,Mann,Innlandet,36665,207.571417248836604,176638,8151556,667145.3125
+Antibiotika ekskl. metenamin,2006,Mann,Møre og Romsdal,25471,209.353552788394362,121665,5486751.5,455529.46875
+Antibiotika ekskl. metenamin,2006,Mann,Nordland,22827,194.583674304418985,117312,5838059.5,414838.0625
+Antibiotika ekskl. metenamin,2006,Mann,Oslo,53049,199.526843542429873,265874,13818335,950985.4375
+Antibiotika ekskl. metenamin,2006,Mann,Rogaland,39492,196.474679482395785,201003,7916382.5,685611.625
+Antibiotika ekskl. metenamin,2006,Mann,Troms og Finnmark,18506,160.654912276132684,115191,5004885,329691.5
+Antibiotika ekskl. metenamin,2006,Mann,Trøndelag,38673,189.256246880230202,204342,8395673,670348.3125
+Antibiotika ekskl. metenamin,2006,Mann,Vestfold og Telemark,38717,205.563165663194334,188346,8291848,685691.8125
+Antibiotika ekskl. metenamin,2006,Mann,Vestland,58400,208.847405500125165,279630,13167780,1015032.25
+Antibiotika ekskl. metenamin,2006,Mann,Viken,106143,207.725998872745491,510976,23989304,1935264.75
+Antibiotika ekskl. metenamin,2007,Begge kjønn,Agder,69707,257.918066511758699,270268,15528422,1324581.25
+Antibiotika ekskl. metenamin,2007,Begge kjønn,Innlandet,89729,250.976169165361378,357520,19920644,1660460.5
+Antibiotika ekskl. metenamin,2007,Begge kjønn,Møre og Romsdal,61503,252.516833634422730,243560,13608616,1129631.5
+Antibiotika ekskl. metenamin,2007,Begge kjønn,Nordland,54262,232.016795583890264,233871,13636952,1013133.9375
+Antibiotika ekskl. metenamin,2007,Begge kjønn,Oslo,135650,244.612749075827247,554550,31621944,2460290
+Antibiotika ekskl. metenamin,2007,Begge kjønn,Rogaland,97009,237.402906325099235,408626,20605436,1726713.75
+Antibiotika ekskl. metenamin,2007,Begge kjønn,Troms og Finnmark,47370,207.521050003066598,228266,10881178,856954
+Antibiotika ekskl. metenamin,2007,Begge kjønn,Trøndelag,97711,235.959343252008568,414101,21488642,1733768.5
+Antibiotika ekskl. metenamin,2007,Begge kjønn,Vestfold og Telemark,98508,255.795836968714945,385104,21022426,1799734.5
+Antibiotika ekskl. metenamin,2007,Begge kjønn,Vestland,141993,251.442768273441553,564713,32040618,2530927.75
+Antibiotika ekskl. metenamin,2007,Begge kjønn,Viken,270415,257.888824038787990,1048572,62138752,4989539
+Antibiotika ekskl. metenamin,2007,Kvinne,Agder,40174,295.762412391778079,135832,8839199,759026.0625
+Antibiotika ekskl. metenamin,2007,Kvinne,Innlandet,52702,292.032848292753206,180466,11543713,974954.6875
+Antibiotika ekskl. metenamin,2007,Kvinne,Møre og Romsdal,36278,298.992862676578700,121334,8193030,668295.6875
+Antibiotika ekskl. metenamin,2007,Kvinne,Nordland,32265,276.298211961361924,116776,7584900.5,599923.9375
+Antibiotika ekskl. metenamin,2007,Kvinne,Oslo,81090,287.316817370106862,282232,17975414,1448777.5
+Antibiotika ekskl. metenamin,2007,Kvinne,Rogaland,55865,275.102181513763727,203070,11950405,989337.125
+Antibiotika ekskl. metenamin,2007,Kvinne,Troms og Finnmark,28273,250.451775210828432,112888,6149538.5,509831.25
+Antibiotika ekskl. metenamin,2007,Kvinne,Trøndelag,58235,281.249698152208560,207058,13042259,1035674.9375
+Antibiotika ekskl. metenamin,2007,Kvinne,Vestfold og Telemark,58094,297.692008116916392,195148,12470491,1059507.5
+Antibiotika ekskl. metenamin,2007,Kvinne,Vestland,82776,293.348831934679066,282176,18681494,1476630.875
+Antibiotika ekskl. metenamin,2007,Kvinne,Viken,159314,300.914942806630502,529432,36404536,2922928.75
+Antibiotika ekskl. metenamin,2007,Mann,Agder,29533,219.682374381671440,134435,6689223,565555.125
+Antibiotika ekskl. metenamin,2007,Mann,Innlandet,37027,209.127107396006891,177055,8376931,685505.8125
+Antibiotika ekskl. metenamin,2007,Mann,Møre og Romsdal,25225,206.378296121151628,122227,5415586,461335.8125
+Antibiotika ekskl. metenamin,2007,Mann,Nordland,21997,187.857618665345791,117094,6052051.5,413210.03125
+Antibiotika ekskl. metenamin,2007,Mann,Oslo,54560,200.353997899514538,272318,13646530,1011512.5625
+Antibiotika ekskl. metenamin,2007,Mann,Rogaland,41144,200.158593480153923,205557,8655031,737376.6875
+Antibiotika ekskl. metenamin,2007,Mann,Troms og Finnmark,19097,165.516822964516632,115378,4731639.5,347122.78125
+Antibiotika ekskl. metenamin,2007,Mann,Trøndelag,39476,190.666628027163571,207042,8446382,698093.5
+Antibiotika ekskl. metenamin,2007,Mann,Vestfold og Telemark,40414,212.754532628608730,189956,8551936,740227
+Antibiotika ekskl. metenamin,2007,Mann,Vestland,59217,209.590990174703401,282536,13359125,1054296.875
+Antibiotika ekskl. metenamin,2007,Mann,Viken,111101,214.009708363832492,519140,25734218,2066610.5
+Antibiotika ekskl. metenamin,2008,Begge kjønn,Agder,71137,259.782422133197971,273833,15354659,1353328
+Antibiotika ekskl. metenamin,2008,Begge kjønn,Innlandet,90012,250.859776931780811,358814,19751488,1672578.25
+Antibiotika ekskl. metenamin,2008,Begge kjønn,Møre og Romsdal,62986,256.808989497031770,245264,13909274,1168294.375
+Antibiotika ekskl. metenamin,2008,Begge kjønn,Nordland,54183,231.697825975403246,233852,14276794,1027354.4375
+Antibiotika ekskl. metenamin,2008,Begge kjønn,Oslo,139115,244.929398922497271,567980,31976122,2523855.75
+Antibiotika ekskl. metenamin,2008,Begge kjønn,Rogaland,97029,232.890094328300890,416630,20654826,1723047.875
+Antibiotika ekskl. metenamin,2008,Begge kjønn,Troms og Finnmark,48546,212.104265154361712,228878,11376221,884462.8125
+Antibiotika ekskl. metenamin,2008,Begge kjønn,Trøndelag,101054,241.268249591137533,418845,22916276,1822259
+Antibiotika ekskl. metenamin,2008,Begge kjønn,Vestfold og Telemark,97792,251.741483079426044,388462,21192860,1798778.75
+Antibiotika ekskl. metenamin,2008,Begge kjønn,Vestland,141038,246.864268235903647,571318,32844274,2530649
+Antibiotika ekskl. metenamin,2008,Begge kjønn,Viken,273327,256.805664387306992,1064334,62868180,5065981
+Antibiotika ekskl. metenamin,2008,Kvinne,Agder,40671,295.963440281183825,137419,8715710,768605.5
+Antibiotika ekskl. metenamin,2008,Kvinne,Innlandet,52718,291.370743543118647,180931,11645658,974309.875
+Antibiotika ekskl. metenamin,2008,Kvinne,Møre og Romsdal,36837,301.907977773042438,122014,8315249,682454
+Antibiotika ekskl. metenamin,2008,Kvinne,Nordland,32165,275.625974738213166,116698,8288164,610116.125
+Antibiotika ekskl. metenamin,2008,Kvinne,Oslo,82388,286.317984361424848,287750,18543600,1488598
+Antibiotika ekskl. metenamin,2008,Kvinne,Rogaland,55963,271.372598461851791,206222,12001623,993778.875
+Antibiotika ekskl. metenamin,2008,Kvinne,Troms og Finnmark,28979,256.195132301326992,113113,6363775.5,524671
+Antibiotika ekskl. metenamin,2008,Kvinne,Trøndelag,59784,286.201217877522883,208888,13479161,1090662.875
+Antibiotika ekskl. metenamin,2008,Kvinne,Vestfold og Telemark,57822,294.240075720181362,196513,12574178,1058636.75
+Antibiotika ekskl. metenamin,2008,Kvinne,Vestland,82728,290.391878799792196,284884,18628022,1480307.75
+Antibiotika ekskl. metenamin,2008,Kvinne,Viken,160650,299.492177596158148,536408,37043244,2969067
+Antibiotika ekskl. metenamin,2008,Mann,Agder,30466,223.334848329350360,136414,6638948.5,584722.5
+Antibiotika ekskl. metenamin,2008,Mann,Innlandet,37294,209.654660647729125,177883,8105829.5,698268.375
+Antibiotika ekskl. metenamin,2008,Mann,Møre og Romsdal,26149,212.160550421497594,123251,5594025.5,485840.28125
+Antibiotika ekskl. metenamin,2008,Mann,Nordland,22018,187.940659303139457,117154,5988630.5,417238.34375
+Antibiotika ekskl. metenamin,2008,Mann,Oslo,56727,202.430869039250042,280229,13432523,1035257.75
+Antibiotika ekskl. metenamin,2008,Mann,Rogaland,41066,195.173187331280179,210408,8653202,729269.0625
+Antibiotika ekskl. metenamin,2008,Mann,Troms og Finnmark,19567,169.021992640326175,115766,5012445,359791.78125
+Antibiotika ekskl. metenamin,2008,Mann,Trøndelag,41270,196.563122148239172,209958,9437115,731596.1875
+Antibiotika ekskl. metenamin,2008,Mann,Vestfold og Telemark,39970,208.232395063272015,191949,8618681,740141.9375
+Antibiotika ekskl. metenamin,2008,Mann,Vestland,58310,203.572201624108870,286434,14216251,1050341.25
+Antibiotika ekskl. metenamin,2008,Mann,Viken,112677,213.433726381588294,527925,25824936,2096914
+Antibiotika ekskl. metenamin,2009,Begge kjønn,Agder,68121,245.716614845221005,277234,14691214,1309178.5
+Antibiotika ekskl. metenamin,2009,Begge kjønn,Innlandet,87655,243.279323685978030,360306,19289552,1633092.875
+Antibiotika ekskl. metenamin,2009,Begge kjønn,Møre og Romsdal,59511,240.419343109926070,247530,12775067,1111718.875
+Antibiotika ekskl. metenamin,2009,Begge kjønn,Nordland,51390,219.160205726567897,234486,13499047,965849.1875
+Antibiotika ekskl. metenamin,2009,Begge kjønn,Oslo,134084,230.714698675770173,581168,31697254,2463883.75
+Antibiotika ekskl. metenamin,2009,Begge kjønn,Rogaland,95016,223.957007495403762,424260,20415002,1710573
+Antibiotika ekskl. metenamin,2009,Begge kjønn,Troms og Finnmark,46834,203.594220035124937,230036,11296000,854397
+Antibiotika ekskl. metenamin,2009,Begge kjønn,Trøndelag,95158,224.715970141147077,423459,21904250,1751029.25
+Antibiotika ekskl. metenamin,2009,Begge kjønn,Vestfold og Telemark,94111,240.301605823760268,391637,20761190,1730253.5
+Antibiotika ekskl. metenamin,2009,Begge kjønn,Vestland,137632,237.717886184478697,578972,31842772,2482621
+Antibiotika ekskl. metenamin,2009,Begge kjønn,Viken,262914,243.520964473211342,1079636,59579044,4912748.5
+Antibiotika ekskl. metenamin,2009,Kvinne,Agder,39356,283.328293954184844,138906,8361463,748385.5
+Antibiotika ekskl. metenamin,2009,Kvinne,Innlandet,51631,284.411907280098713,181536,11314357,961881.0625
+Antibiotika ekskl. metenamin,2009,Kvinne,Møre og Romsdal,35091,285.645675957280542,122848,7474501,652414.5
+Antibiotika ekskl. metenamin,2009,Kvinne,Nordland,30519,261.071523280780845,116899,7201140,570668
+Antibiotika ekskl. metenamin,2009,Kvinne,Oslo,80138,272.663554581705840,293908,17860738,1452940.875
+Antibiotika ekskl. metenamin,2009,Kvinne,Rogaland,54894,261.848883800801374,209640,11752622,988547.5
+Antibiotika ekskl. metenamin,2009,Kvinne,Troms og Finnmark,28215,248.415213946117274,113580,6503014.5,515720.375
+Antibiotika ekskl. metenamin,2009,Kvinne,Trøndelag,57055,270.608044014418516,210840,13354235,1058133.25
+Antibiotika ekskl. metenamin,2009,Kvinne,Vestfold og Telemark,55595,280.876453767417422,197934,12408230,1021432.125
+Antibiotika ekskl. metenamin,2009,Kvinne,Vestland,80986,280.922417321687491,288286,18085000,1462082.75
+Antibiotika ekskl. metenamin,2009,Kvinne,Viken,155494,286.125944436061725,543446,35129152,2898576.75
+Antibiotika ekskl. metenamin,2009,Mann,Agder,28765,207.947776299809149,138328,6329750.5,560792.9375
+Antibiotika ekskl. metenamin,2009,Mann,Innlandet,36024,201.510320523577782,178770,7975194.5,671211.8125
+Antibiotika ekskl. metenamin,2009,Mann,Møre og Romsdal,24420,195.858263422145939,124682,5300566.5,459304.375
+Antibiotika ekskl. metenamin,2009,Mann,Nordland,20871,177.492601285845494,117588,6297907.5,395181.21875
+Antibiotika ekskl. metenamin,2009,Mann,Oslo,53946,187.795028893685163,287260,13836516,1010942.9375
+Antibiotika ekskl. metenamin,2009,Mann,Rogaland,40122,186.944366787811015,214620,8662380,722025.5
+Antibiotika ekskl. metenamin,2009,Mann,Troms og Finnmark,18619,159.880126399670262,116456,4792986,338676.625
+Antibiotika ekskl. metenamin,2009,Mann,Trøndelag,38103,179.207036026714326,212620,8550015,692895.9375
+Antibiotika ekskl. metenamin,2009,Mann,Vestfold og Telemark,38516,198.839466402345847,193704,8352959.5,708821.375
+Antibiotika ekskl. metenamin,2009,Mann,Vestland,56646,194.870736364105475,290685,13757773,1020538.1875
+Antibiotika ekskl. metenamin,2009,Mann,Viken,107420,200.339431917790336,536190,24449892,2014171.625
+Antibiotika ekskl. metenamin,2010,Begge kjønn,Agder,70071,249.659737909116174,280666,15282937,1351351.75
+Antibiotika ekskl. metenamin,2010,Begge kjønn,Innlandet,88844,245.509511545391239,361876,19378774,1663480.625
+Antibiotika ekskl. metenamin,2010,Begge kjønn,Møre og Romsdal,61138,244.460083008788695,250094,13338941,1149792.125
+Antibiotika ekskl. metenamin,2010,Begge kjønn,Nordland,52280,222.052327556914713,235440,12966792,998913.25
+Antibiotika ekskl. metenamin,2010,Begge kjønn,Oslo,141215,238.118523889418172,593045,33949500,2598344.75
+Antibiotika ekskl. metenamin,2010,Begge kjønn,Rogaland,101315,234.516234314853351,432017,21344252,1841784.625
+Antibiotika ekskl. metenamin,2010,Begge kjønn,Troms og Finnmark,47495,205.165532017831842,231496,11407673,885904.6875
+Antibiotika ekskl. metenamin,2010,Begge kjønn,Trøndelag,100138,234.043846117889029,427860,23630980,1866822.875
+Antibiotika ekskl. metenamin,2010,Begge kjønn,Vestfold og Telemark,97411,246.782561992683495,394724,20555320,1804323
+Antibiotika ekskl. metenamin,2010,Begge kjønn,Vestland,142827,243.357494096118262,586902,32227718,2600909.5
+Antibiotika ekskl. metenamin,2010,Begge kjønn,Viken,271354,247.782002534854246,1095132,61565052,5171003.5
+Antibiotika ekskl. metenamin,2010,Kvinne,Agder,40367,287.387336076661303,140462,8555131,773817.8125
+Antibiotika ekskl. metenamin,2010,Kvinne,Innlandet,52406,287.651081861394399,182186,11144825,980687.25
+Antibiotika ekskl. metenamin,2010,Kvinne,Møre og Romsdal,36056,291.175734278723078,123829,7574177,675585
+Antibiotika ekskl. metenamin,2010,Kvinne,Nordland,31251,266.505773396326176,117262,7460652.5,597142.375
+Antibiotika ekskl. metenamin,2010,Kvinne,Oslo,84659,282.477260745674036,299702,18684696,1552326
+Antibiotika ekskl. metenamin,2010,Kvinne,Rogaland,58256,273.077986790480521,213331,12041131,1062802.75
+Antibiotika ekskl. metenamin,2010,Kvinne,Troms og Finnmark,28658,251.110624315443593,114125,6495946.5,531903.8125
+Antibiotika ekskl. metenamin,2010,Kvinne,Trøndelag,59778,280.835110731097727,212858,13181890,1119095.125
+Antibiotika ekskl. metenamin,2010,Kvinne,Vestfold og Telemark,58049,291.246889299189211,199312,11975245,1072452.75
+Antibiotika ekskl. metenamin,2010,Kvinne,Vestland,84263,288.708362171163084,291862,18151218,1539896.375
+Antibiotika ekskl. metenamin,2010,Kvinne,Viken,160748,291.993024776574875,550520,35488024,3061696.5
+Antibiotika ekskl. metenamin,2010,Mann,Agder,29704,211.862714330546917,140204,6727806,577533.9375
+Antibiotika ekskl. metenamin,2010,Mann,Innlandet,36438,202.782569981635038,179690,8233949,682793.375
+Antibiotika ekskl. metenamin,2010,Mann,Møre og Romsdal,25082,198.647278717607552,126264,5764764,474207.03125
+Antibiotika ekskl. metenamin,2010,Mann,Nordland,21029,177.943441249640373,118178,5506140,401770.90625
+Antibiotika ekskl. metenamin,2010,Mann,Oslo,56556,192.798849124912219,293342,15264805,1046018.75
+Antibiotika ekskl. metenamin,2010,Mann,Rogaland,43059,196.898749805657427,218686,9303120,778981.9375
+Antibiotika ekskl. metenamin,2010,Mann,Troms og Finnmark,18837,160.492459742694044,117370,4911727,354000.875
+Antibiotika ekskl. metenamin,2010,Mann,Trøndelag,40360,187.719184007590627,215002,10449090,747727.6875
+Antibiotika ekskl. metenamin,2010,Mann,Vestfold og Telemark,39362,201.431853887447482,195411,8580075,731870.25
+Antibiotika ekskl. metenamin,2010,Mann,Vestland,58564,198.495792081724789,295039,14076499,1061013.25
+Antibiotika ekskl. metenamin,2010,Mann,Viken,110606,203.091375144139314,544612,26077028,2109307
+Antibiotika ekskl. metenamin,2011,Begge kjønn,Agder,75507,265.740590839662418,284138,16965404,1472906.375
+Antibiotika ekskl. metenamin,2011,Begge kjønn,Innlandet,89816,246.958931831679901,363688,19854556,1697984.625
+Antibiotika ekskl. metenamin,2011,Begge kjønn,Møre og Romsdal,63896,252.799164404915451,252754,13681633,1227585.75
+Antibiotika ekskl. metenamin,2011,Begge kjønn,Nordland,53935,228.058825519247683,236496,13588471,1053688
+Antibiotika ekskl. metenamin,2011,Begge kjønn,Oslo,151968,250.665558227685243,606258,33705600,2809243.5
+Antibiotika ekskl. metenamin,2011,Begge kjønn,Rogaland,107818,245.263318327301348,439601,22846304,1997279.125
+Antibiotika ekskl. metenamin,2011,Begge kjønn,Troms og Finnmark,49083,210.649419762411591,233008,10985890,919380.5
+Antibiotika ekskl. metenamin,2011,Begge kjønn,Trøndelag,105822,244.676275959657617,432498,24138002,2010212.625
+Antibiotika ekskl. metenamin,2011,Begge kjønn,Vestfold og Telemark,104308,261.994167748806297,398131,21942436,1950066.5
+Antibiotika ekskl. metenamin,2011,Begge kjønn,Vestland,151680,255.283482815321721,594163,33172674,2777694
+Antibiotika ekskl. metenamin,2011,Begge kjønn,Viken,289943,260.657128935572668,1112354,65155608,5550471.5
+Antibiotika ekskl. metenamin,2011,Kvinne,Agder,43398,305.488487339945516,142061,9616817,844951.0625
+Antibiotika ekskl. metenamin,2011,Kvinne,Innlandet,52729,288.287844989721384,182904,11313946,993999.4375
+Antibiotika ekskl. metenamin,2011,Kvinne,Møre og Romsdal,37371,299.308013903794711,124858,7762959,721967.3125
+Antibiotika ekskl. metenamin,2011,Kvinne,Nordland,32034,272.198902163383920,117686,7937543.5,629563.3125
+Antibiotika ekskl. metenamin,2011,Kvinne,Oslo,90238,295.264022407057176,305618,18901838,1677380.375
+Antibiotika ekskl. metenamin,2011,Kvinne,Rogaland,61846,285.264896080294462,216802,13150221,1156177.75
+Antibiotika ekskl. metenamin,2011,Kvinne,Troms og Finnmark,29288,255.197532370214175,114766,6180125.5,551200.125
+Antibiotika ekskl. metenamin,2011,Kvinne,Trøndelag,62671,291.639521247882657,214892,14065627,1201283.25
+Antibiotika ekskl. metenamin,2011,Kvinne,Vestfold og Telemark,61261,305.166728104171441,200746,12531466,1138225.625
+Antibiotika ekskl. metenamin,2011,Kvinne,Vestland,88458,299.920661291525677,294938,18498526,1626616.375
+Antibiotika ekskl. metenamin,2011,Kvinne,Viken,170374,305.354921731899045,557954,37231696,3279292.5
+Antibiotika ekskl. metenamin,2011,Mann,Agder,32109,225.998761226385878,142076,7348587.5,627955.25
+Antibiotika ekskl. metenamin,2011,Mann,Innlandet,37087,205.145366846623595,180784,8540610,703985.1875
+Antibiotika ekskl. metenamin,2011,Mann,Møre og Romsdal,26525,207.395070995183587,127896,5918674,505618.4375
+Antibiotika ekskl. metenamin,2011,Mann,Nordland,21901,184.336335325309317,118810,5650928,424124.6875
+Antibiotika ekskl. metenamin,2011,Mann,Oslo,61730,205.329315225236912,300639,14803764,1131863.125
+Antibiotika ekskl. metenamin,2011,Mann,Rogaland,45972,206.337522441651706,222800,9696082,841101.3125
+Antibiotika ekskl. metenamin,2011,Mann,Troms og Finnmark,19795,167.410903063209350,118242,4805764.5,368180.34375
+Antibiotika ekskl. metenamin,2011,Mann,Trøndelag,43151,198.298760144481310,217606,10072374,808929.375
+Antibiotika ekskl. metenamin,2011,Mann,Vestfold og Telemark,43047,218.087585619908402,197384,9410969,811840.9375
+Antibiotika ekskl. metenamin,2011,Mann,Vestland,63222,211.286527818624175,299224,14674148,1151077.5
+Antibiotika ekskl. metenamin,2011,Mann,Viken,119569,215.673188443702099,554399,27923910,2271179
+Antibiotika ekskl. metenamin,2012,Begge kjønn,Agder,77115,268.252212389380531,287472,17367424,1521124.125
+Antibiotika ekskl. metenamin,2012,Begge kjønn,Innlandet,91167,249.660426548071551,365164,20412750,1766902
+Antibiotika ekskl. metenamin,2012,Begge kjønn,Møre og Romsdal,63452,248.298747392847500,255547,14183770,1240659.125
+Antibiotika ekskl. metenamin,2012,Begge kjønn,Nordland,54384,228.807997172716716,237684,13783641,1062079.75
+Antibiotika ekskl. metenamin,2012,Begge kjønn,Oslo,154663,250.010507156181602,618626,34198396,2914657.25
+Antibiotika ekskl. metenamin,2012,Begge kjønn,Rogaland,108962,243.415982146247964,447637,24043366,2056286.625
+Antibiotika ekskl. metenamin,2012,Begge kjønn,Troms og Finnmark,50017,212.860036769712652,234976,11131536,964411.1875
+Antibiotika ekskl. metenamin,2012,Begge kjønn,Trøndelag,103873,237.170837072199504,437967,23751212,2016123
+Antibiotika ekskl. metenamin,2012,Begge kjønn,Vestfold og Telemark,102458,255.205206825863757,401473,22249800,1957266.875
+Antibiotika ekskl. metenamin,2012,Begge kjønn,Vestland,153189,254.646976099365997,601574,34867020,2883643.75
+Antibiotika ekskl. metenamin,2012,Begge kjønn,Viken,293972,260.047963073210474,1130453,65985048,5729682
+Antibiotika ekskl. metenamin,2012,Kvinne,Agder,43959,306.287537799083067,143522,9799737,864573.875
+Antibiotika ekskl. metenamin,2012,Kvinne,Innlandet,53316,290.764322526109127,183365,11632073,1031148.0625
+Antibiotika ekskl. metenamin,2012,Kvinne,Møre og Romsdal,37019,294.037283854518304,125899,8178450,734138.4375
+Antibiotika ekskl. metenamin,2012,Kvinne,Nordland,32228,272.852728273292977,118115,7879336,630109.25
+Antibiotika ekskl. metenamin,2012,Kvinne,Oslo,91706,294.762758824626026,311118,19784526,1746352.875
+Antibiotika ekskl. metenamin,2012,Kvinne,Rogaland,62668,284.328537659874686,220407,13572352,1199359.625
+Antibiotika ekskl. metenamin,2012,Kvinne,Troms og Finnmark,29853,258.176943699731903,115630,6412897.5,575415.875
+Antibiotika ekskl. metenamin,2012,Kvinne,Trøndelag,61557,283.529086638109714,217110,13721437,1206690.75
+Antibiotika ekskl. metenamin,2012,Kvinne,Vestfold og Telemark,60172,297.645429362880886,202160,12670261,1149745.875
+Antibiotika ekskl. metenamin,2012,Kvinne,Vestland,89281,299.540361001140710,298060,20303306,1691974.25
+Antibiotika ekskl. metenamin,2012,Kvinne,Viken,172340,304.596340036550147,565798,37917560,3382367.75
+Antibiotika ekskl. metenamin,2012,Mann,Agder,33156,230.329975686002084,143950,7567688,656550.25
+Antibiotika ekskl. metenamin,2012,Mann,Innlandet,37851,208.202465360095490,181799,8780677,735753.9375
+Antibiotika ekskl. metenamin,2012,Mann,Møre og Romsdal,26433,203.882821177341725,129648,6005320.5,506520.6875
+Antibiotika ekskl. metenamin,2012,Mann,Nordland,22156,185.297315380112068,119570,5904304.5,431970.5
+Antibiotika ekskl. metenamin,2012,Mann,Oslo,62957,204.732884998113870,307508,14413870,1168304.5
+Antibiotika ekskl. metenamin,2012,Mann,Rogaland,46294,203.731901597500330,227230,10471014,856927.0625
+Antibiotika ekskl. metenamin,2012,Mann,Troms og Finnmark,20164,168.955549038501822,119345,4718639,388995.34375
+Antibiotika ekskl. metenamin,2012,Mann,Trøndelag,42316,191.599089003291723,220857,10029774,809432.25
+Antibiotika ekskl. metenamin,2012,Mann,Vestfold og Telemark,42286,212.157700914135485,199314,9579540,807521
+Antibiotika ekskl. metenamin,2012,Mann,Vestland,63908,210.560303643324525,303514,14563715,1191669.375
+Antibiotika ekskl. metenamin,2012,Mann,Viken,121632,215.409027797455442,564656,28067486,2347314.5
+Antibiotika ekskl. metenamin,2013,Begge kjønn,Agder,72934,250.912531177431840,290675,16014897,1441855.375
+Antibiotika ekskl. metenamin,2013,Begge kjønn,Innlandet,84820,231.611312418593348,366217,19175672,1649257
+Antibiotika ekskl. metenamin,2013,Begge kjønn,Møre og Romsdal,59970,232.396822321255571,258050,13704414,1209232
+Antibiotika ekskl. metenamin,2013,Begge kjønn,Nordland,51249,214.451599944764559,238977,13152742,1004461.5625
+Antibiotika ekskl. metenamin,2013,Begge kjønn,Oslo,142905,227.116688439863067,629214,32272200,2714904.25
+Antibiotika ekskl. metenamin,2013,Begge kjønn,Rogaland,105877,232.241408052784431,455892,23959518,2035699.25
+Antibiotika ekskl. metenamin,2013,Begge kjønn,Troms og Finnmark,47637,200.685000758303422,237372,11157652,924481.8125
+Antibiotika ekskl. metenamin,2013,Begge kjønn,Trøndelag,100876,227.754246854934118,442916,24596124,1983826.75
+Antibiotika ekskl. metenamin,2013,Begge kjønn,Vestfold og Telemark,96931,239.682602481615374,404414,21645032,1888011
+Antibiotika ekskl. metenamin,2013,Begge kjønn,Vestland,147971,242.857283535644650,609292,34220844,2836337
+Antibiotika ekskl. metenamin,2013,Begge kjønn,Viken,274969,239.698347028189960,1147146,64138736,5381059.5
+Antibiotika ekskl. metenamin,2013,Kvinne,Agder,41858,288.827247384836190,144924,9210691,825115.75
+Antibiotika ekskl. metenamin,2013,Kvinne,Innlandet,50378,274.345150574524860,183630,11278406,975112.6875
+Antibiotika ekskl. metenamin,2013,Kvinne,Møre og Romsdal,35359,278.592814371257485,126920,7979845.5,717056.4375
+Antibiotika ekskl. metenamin,2013,Kvinne,Nordland,30714,259.128644708423326,118528,7622986,603339.875
+Antibiotika ekskl. metenamin,2013,Kvinne,Oslo,85087,269.315498610486868,315938,19098504,1645694.5
+Antibiotika ekskl. metenamin,2013,Kvinne,Rogaland,61376,273.767786252732058,224190,14075947,1185402.375
+Antibiotika ekskl. metenamin,2013,Kvinne,Troms og Finnmark,28914,247.899447854864707,116636,6497201,561000.75
+Antibiotika ekskl. metenamin,2013,Kvinne,Trøndelag,60431,275.666231787535695,219218,14248646,1197409.5
+Antibiotika ekskl. metenamin,2013,Kvinne,Vestfold og Telemark,57372,282.001120690502640,203446,12380830,1113827.875
+Antibiotika ekskl. metenamin,2013,Kvinne,Vestland,86879,288.303146549149483,301346,20107554,1682445.875
+Antibiotika ekskl. metenamin,2013,Kvinne,Viken,162948,284.019584432154305,573721,37200620,3200794.25
+Antibiotika ekskl. metenamin,2013,Mann,Agder,31076,213.211482518250178,145752,6804206,616739.625
+Antibiotika ekskl. metenamin,2013,Mann,Innlandet,34442,188.632330711766381,182588,7897266.5,674144.25
+Antibiotika ekskl. metenamin,2013,Mann,Møre og Romsdal,24611,187.683977732021658,131130,5724568.5,492175.5625
+Antibiotika ekskl. metenamin,2013,Mann,Nordland,20535,170.487094122823768,120449,5529756,401121.65625
+Antibiotika ekskl. metenamin,2013,Mann,Oslo,57818,184.558713215461078,313277,13173695,1069209.75
+Antibiotika ekskl. metenamin,2013,Mann,Rogaland,44501,192.061354671086137,231702,9883571,850296.875
+Antibiotika ekskl. metenamin,2013,Mann,Troms og Finnmark,18723,155.073880201431222,120736,4660451.5,363481.0625
+Antibiotika ekskl. metenamin,2013,Mann,Trøndelag,40445,180.801795277561713,223698,10347478,786417.1875
+Antibiotika ekskl. metenamin,2013,Mann,Vestfold og Telemark,39559,196.841303882688375,200969,9264203,774183.0625
+Antibiotika ekskl. metenamin,2013,Mann,Vestland,61092,198.384786992566903,307947,14113290,1153891.125
+Antibiotika ekskl. metenamin,2013,Mann,Viken,112021,195.354571835151650,573424,26938116,2180265.5
+Antibiotika ekskl. metenamin,2014,Begge kjønn,Agder,70227,238.920982261323971,293934,15643702,1365396.5
+Antibiotika ekskl. metenamin,2014,Begge kjønn,Innlandet,82864,225.436105035203987,367572,19455062,1597502
+Antibiotika ekskl. metenamin,2014,Begge kjønn,Møre og Romsdal,58598,225.175996802852839,260232,13843210,1160254.25
+Antibiotika ekskl. metenamin,2014,Begge kjønn,Nordland,51165,213.176841157942103,240012,13804879,1022464.5
+Antibiotika ekskl. metenamin,2014,Begge kjønn,Oslo,142006,221.514031229038951,641070,32971694,2683756.25
+Antibiotika ekskl. metenamin,2014,Begge kjønn,Rogaland,103849,224.313337538123915,462964,23790430,2009260.375
+Antibiotika ekskl. metenamin,2014,Begge kjønn,Troms og Finnmark,46096,192.527127379649662,239426,10841093,901478.0625
+Antibiotika ekskl. metenamin,2014,Begge kjønn,Trøndelag,99545,222.608100613628638,447176,27467610,1968891.25
+Antibiotika ekskl. metenamin,2014,Begge kjønn,Vestfold og Telemark,94271,231.691252009182023,406882,21671778,1830194.25
+Antibiotika ekskl. metenamin,2014,Begge kjønn,Vestland,141269,229.278078120967886,616147,33839908,2732264
+Antibiotika ekskl. metenamin,2014,Begge kjønn,Viken,272300,234.334122765951588,1162016,64794068,5290185.5
+Antibiotika ekskl. metenamin,2014,Kvinne,Agder,40426,276.028295187633146,146456,8969083,785077.375
+Antibiotika ekskl. metenamin,2014,Kvinne,Innlandet,49202,267.378923571863316,184016,11281445,951926.4375
+Antibiotika ekskl. metenamin,2014,Kvinne,Møre og Romsdal,34479,269.750739332488382,127818,7967098,689976.625
+Antibiotika ekskl. metenamin,2014,Kvinne,Nordland,30620,257.824406591278428,118763,8184764,622124.8125
+Antibiotika ekskl. metenamin,2014,Kvinne,Oslo,84838,263.839130218440563,321552,19479546,1619705.125
+Antibiotika ekskl. metenamin,2014,Kvinne,Rogaland,60467,265.760974666408818,227524,14142229,1178097.5
+Antibiotika ekskl. metenamin,2014,Kvinne,Troms og Finnmark,27969,238.113075829424234,117461,6390393,542636.75
+Antibiotika ekskl. metenamin,2014,Kvinne,Trøndelag,59705,269.997105801060000,221132,15648781,1194873
+Antibiotika ekskl. metenamin,2014,Kvinne,Vestfold og Telemark,55981,273.842135128260317,204428,12570606,1086827.375
+Antibiotika ekskl. metenamin,2014,Kvinne,Vestland,83633,274.825590756885181,304313,20367434,1634487.5
+Antibiotika ekskl. metenamin,2014,Kvinne,Viken,161461,277.979402174100179,580838,37773528,3161243.5
+Antibiotika ekskl. metenamin,2014,Mann,Agder,29801,202.070817342247657,147478,6674619,580319.0625
+Antibiotika ekskl. metenamin,2014,Mann,Innlandet,33662,183.388175815554926,183556,8173617.5,645575.5625
+Antibiotika ekskl. metenamin,2014,Mann,Møre og Romsdal,24119,182.148413309770870,132414,5876111.5,470277.59375
+Antibiotika ekskl. metenamin,2014,Mann,Nordland,20545,169.446093956188968,121248,5620115,400339.71875
+Antibiotika ekskl. metenamin,2014,Mann,Oslo,57168,178.919497493098980,319518,13492148,1064051.25
+Antibiotika ekskl. metenamin,2014,Mann,Rogaland,43382,184.260041879212875,235439,9648201,831162.9375
+Antibiotika ekskl. metenamin,2014,Mann,Troms og Finnmark,18127,148.625824013643370,121964,4450700.5,358841.34375
+Antibiotika ekskl. metenamin,2014,Mann,Trøndelag,39840,176.248871901045814,226044,11818829,774018.125
+Antibiotika ekskl. metenamin,2014,Mann,Vestfold og Telemark,38290,189.129382477007123,202454,9101171,743366.875
+Antibiotika ekskl. metenamin,2014,Mann,Vestland,57636,184.829107794531706,311834,13472472,1097776.5
+Antibiotika ekskl. metenamin,2014,Mann,Viken,110839,190.714376662571536,581178,27020538,2128942
+Antibiotika ekskl. metenamin,2015,Begge kjønn,Agder,69115,232.659518960496861,297065,16908348,1379726
+Antibiotika ekskl. metenamin,2015,Begge kjønn,Innlandet,81652,221.581179765371224,368497,19500412,1578442.5
+Antibiotika ekskl. metenamin,2015,Begge kjønn,Møre og Romsdal,59303,226.241115812042438,262123,15460314,1179167.5
+Antibiotika ekskl. metenamin,2015,Begge kjønn,Nordland,49706,206.667442788717403,240512,14016658,999613.25
+Antibiotika ekskl. metenamin,2015,Begge kjønn,Oslo,138573,212.199077228868985,653033,32759258,2608975.25
+Antibiotika ekskl. metenamin,2015,Begge kjønn,Rogaland,100492,214.617352713790850,468238,24349942,1975218.125
+Antibiotika ekskl. metenamin,2015,Begge kjønn,Troms og Finnmark,45267,187.943733548124590,240854,10757255,873176.3125
+Antibiotika ekskl. metenamin,2015,Begge kjønn,Trøndelag,96830,214.525144615602755,451369,27372052,1923185.875
+Antibiotika ekskl. metenamin,2015,Begge kjønn,Vestfold og Telemark,94301,230.319268457097080,409436,22629268,1839725.875
+Antibiotika ekskl. metenamin,2015,Begge kjønn,Vestland,139585,224.389373474840290,622066,34192956,2739884.5
+Antibiotika ekskl. metenamin,2015,Begge kjønn,Viken,265656,225.763767964449702,1176699,65187632,5152937
+Antibiotika ekskl. metenamin,2015,Kvinne,Agder,39776,268.956656974778552,147890,9495173,794314.875
+Antibiotika ekskl. metenamin,2015,Kvinne,Innlandet,48314,262.202733064875015,184262,11393911,934116.75
+Antibiotika ekskl. metenamin,2015,Kvinne,Møre og Romsdal,34801,270.673241452260212,128572,8796891,696048.5625
+Antibiotika ekskl. metenamin,2015,Kvinne,Nordland,29968,252.187962838292716,118832,7898359.5,605675.9375
+Antibiotika ekskl. metenamin,2015,Kvinne,Oslo,82903,253.235586101565483,327375,18999138,1572007.75
+Antibiotika ekskl. metenamin,2015,Kvinne,Rogaland,58411,253.920021561748762,230037,14511334,1160239.625
+Antibiotika ekskl. metenamin,2015,Kvinne,Troms og Finnmark,27354,231.846961002856344,117983,6250014,523370.78125
+Antibiotika ekskl. metenamin,2015,Kvinne,Trøndelag,58086,260.456648850306704,223016,15453450,1160796.875
+Antibiotika ekskl. metenamin,2015,Kvinne,Vestfold og Telemark,55827,271.796494644595910,205400,13198919,1091140.25
+Antibiotika ekskl. metenamin,2015,Kvinne,Vestland,82316,268.211542910393051,306907,20219276,1635830
+Antibiotika ekskl. metenamin,2015,Kvinne,Viken,157487,267.994098538077873,587651,37821316,3062465.25
+Antibiotika ekskl. metenamin,2015,Mann,Agder,29339,196.676364513923338,149174,7413174,585411.125
+Antibiotika ekskl. metenamin,2015,Mann,Innlandet,33338,180.953673297690450,184235,8106500.5,644325.6875
+Antibiotika ekskl. metenamin,2015,Mann,Møre og Romsdal,24502,183.465492583357669,133551,6663422.5,483118.875
+Antibiotika ekskl. metenamin,2015,Mann,Nordland,19738,162.212360289283366,121680,6118298.5,393937.3125
+Antibiotika ekskl. metenamin,2015,Mann,Oslo,55670,170.946207370922870,325658,13760119,1036967.5
+Antibiotika ekskl. metenamin,2015,Mann,Rogaland,42081,176.660985214229939,238202,9838608,814978.5625
+Antibiotika ekskl. metenamin,2015,Mann,Troms og Finnmark,17913,145.785858454326454,122872,4507241.5,349805.5625
+Antibiotika ekskl. metenamin,2015,Mann,Trøndelag,38744,169.667881165919283,228352,11918603,762388.9375
+Antibiotika ekskl. metenamin,2015,Mann,Vestfold og Telemark,38474,188.564763081024917,204036,9430350,748585.6875
+Antibiotika ekskl. metenamin,2015,Mann,Vestland,57269,181.714050006345983,315160,13973680,1104054.5
+Antibiotika ekskl. metenamin,2015,Mann,Viken,108169,183.633591829528324,589048,27366318,2090472
+Antibiotika ekskl. metenamin,2016,Begge kjønn,Agder,65859,219.795219564941696,299638,15698336,1288363.25
+Antibiotika ekskl. metenamin,2016,Begge kjønn,Innlandet,78606,212.872091511763941,369264,19557594,1503697.875
+Antibiotika ekskl. metenamin,2016,Begge kjønn,Møre og Romsdal,56728,215.387068726578251,263377,14790433,1100509.125
+Antibiotika ekskl. metenamin,2016,Begge kjønn,Nordland,47599,197.409567099926177,241118,12998444,941545.0625
+Antibiotika ekskl. metenamin,2016,Begge kjønn,Oslo,134640,203.207490785934854,662574,32331322,2494805
+Antibiotika ekskl. metenamin,2016,Begge kjønn,Rogaland,96616,205.085969008703035,471100,23274746,1865413.5
+Antibiotika ekskl. metenamin,2016,Begge kjønn,Troms og Finnmark,43497,179.589763916070057,242202,10493062,831895.3125
+Antibiotika ekskl. metenamin,2016,Begge kjønn,Trøndelag,93056,204.165990179601831,455786,25254234,1830059.5
+Antibiotika ekskl. metenamin,2016,Begge kjønn,Vestfold og Telemark,89511,217.112156786649850,412280,21462338,1735271
+Antibiotika ekskl. metenamin,2016,Begge kjønn,Vestland,134461,214.475642377366496,626929,32490524,2600067.75
+Antibiotika ekskl. metenamin,2016,Begge kjønn,Viken,257393,215.955102938042524,1191882,64182412,4979003
+Antibiotika ekskl. metenamin,2016,Kvinne,Agder,38013,255.175608184308039,148968,9140780,743933.4375
+Antibiotika ekskl. metenamin,2016,Kvinne,Innlandet,46667,252.897918484357472,184529,11376660,889218.5625
+Antibiotika ekskl. metenamin,2016,Kvinne,Møre og Romsdal,33765,261.411848502678765,129164,8625701,657956.0625
+Antibiotika ekskl. metenamin,2016,Kvinne,Nordland,28557,239.970756794003462,119002,7144949.5,561322.25
+Antibiotika ekskl. metenamin,2016,Kvinne,Oslo,81232,244.620175021230208,332074,19404746,1515916.875
+Antibiotika ekskl. metenamin,2016,Kvinne,Rogaland,56574,244.356907766864488,231522,13958379,1103037.75
+Antibiotika ekskl. metenamin,2016,Kvinne,Troms og Finnmark,26333,222.196908329958148,118512,6254782,501952.625
+Antibiotika ekskl. metenamin,2016,Kvinne,Trøndelag,56225,250.013339973675785,224888,14914859,1112113.625
+Antibiotika ekskl. metenamin,2016,Kvinne,Vestfold og Telemark,53109,257.053246017801914,206607,12311258,1024050.9375
+Antibiotika ekskl. metenamin,2016,Kvinne,Vestland,79853,258.387991315124433,309043,19373954,1557584.5
+Antibiotika ekskl. metenamin,2016,Kvinne,Viken,152873,257.049512209065748,594722,36974872,2963904
+Antibiotika ekskl. metenamin,2016,Mann,Agder,27846,184.814495254529767,150670,6557556,544429.8125
+Antibiotika ekskl. metenamin,2016,Mann,Innlandet,31939,172.889961891564178,184736,8180934,614479.375
+Antibiotika ekskl. metenamin,2016,Mann,Møre og Romsdal,22963,171.094984055077042,134212,6164732,442553
+Antibiotika ekskl. metenamin,2016,Mann,Nordland,19042,155.933702381342330,122116,5853494,380222.8125
+Antibiotika ekskl. metenamin,2016,Mann,Oslo,53408,161.597090477789780,330501,12926576,978888.0625
+Antibiotika ekskl. metenamin,2016,Mann,Rogaland,40042,167.136244297240553,239577,9316367,762375.6875
+Antibiotika ekskl. metenamin,2016,Mann,Troms og Finnmark,17164,138.766270514997170,123690,4238280,329942.71875
+Antibiotika ekskl. metenamin,2016,Mann,Trøndelag,36831,159.511301478135462,230899,10339375,717945.8125
+Antibiotika ekskl. metenamin,2016,Mann,Vestfold og Telemark,36402,176.990548057100626,205672,9151079,711220.125
+Antibiotika ekskl. metenamin,2016,Mann,Vestland,54608,171.784853689687498,317886,13116570,1042483.1875
+Antibiotika ekskl. metenamin,2016,Mann,Viken,104520,175.028468082256012,597160,27207542,2015099.25
+Antibiotika ekskl. metenamin,2017,Begge kjønn,Agder,64465,213.268182299385983,302272,15327767,1276807.25
+Antibiotika ekskl. metenamin,2017,Begge kjønn,Innlandet,74704,201.660709850881645,370444,17872718,1423981.875
+Antibiotika ekskl. metenamin,2017,Begge kjønn,Møre og Romsdal,53926,204.161524074901376,264134,13081095,1041470.8125
+Antibiotika ekskl. metenamin,2017,Begge kjønn,Nordland,45023,186.164692261572495,241845,13041570,904806.9375
+Antibiotika ekskl. metenamin,2017,Begge kjønn,Oslo,127816,190.737695377204476,670114,29867820,2396246
+Antibiotika ekskl. metenamin,2017,Begge kjønn,Rogaland,94164,199.172968113796203,472775,22813326,1834813.875
+Antibiotika ekskl. metenamin,2017,Begge kjønn,Troms og Finnmark,42605,174.984290226261813,243479,9945470,812826.5625
+Antibiotika ekskl. metenamin,2017,Begge kjønn,Trøndelag,88972,193.296370967741935,460288,23180526,1738426.625
+Antibiotika ekskl. metenamin,2017,Begge kjønn,Vestfold og Telemark,85265,205.586632589091961,414740,20435056,1644549.625
+Antibiotika ekskl. metenamin,2017,Begge kjønn,Vestland,127765,202.701201944433868,630312,30600150,2462426.5
+Antibiotika ekskl. metenamin,2017,Begge kjønn,Viken,245959,203.850431721099385,1206566,60382108,4747192
+Antibiotika ekskl. metenamin,2017,Kvinne,Agder,37259,248.112139575148165,150170,8891028,738395.375
+Antibiotika ekskl. metenamin,2017,Kvinne,Innlandet,44260,239.336390378958297,184928,10485331,839025.875
+Antibiotika ekskl. metenamin,2017,Kvinne,Møre og Romsdal,31962,246.688895063443549,129564,7553731,621396.0625
+Antibiotika ekskl. metenamin,2017,Kvinne,Nordland,27047,226.891038277953476,119207,6978681,538177.5625
+Antibiotika ekskl. metenamin,2017,Kvinne,Oslo,76535,227.835628508999113,335922,17536628,1439167.25
+Antibiotika ekskl. metenamin,2017,Kvinne,Rogaland,55162,237.235506623086186,232520,13633245,1081717.875
+Antibiotika ekskl. metenamin,2017,Kvinne,Troms og Finnmark,25713,215.901457647612010,119096,5845638,488495.71875
+Antibiotika ekskl. metenamin,2017,Kvinne,Trøndelag,53758,236.995825085636443,226831,13254649,1048893.75
+Antibiotika ekskl. metenamin,2017,Kvinne,Vestfold og Telemark,50760,244.412130083493033,207682,11560193,962718.6875
+Antibiotika ekskl. metenamin,2017,Kvinne,Vestland,76058,244.795622787254586,310700,18330248,1465055.375
+Antibiotika ekskl. metenamin,2017,Kvinne,Viken,145995,242.679472602876349,601596,34444508,2815237
+Antibiotika ekskl. metenamin,2017,Mann,Agder,27206,178.867989033602672,152101,6436738,538411.9375
+Antibiotika ekskl. metenamin,2017,Mann,Innlandet,30444,164.105328410101609,185515,7387387.5,584956
+Antibiotika ekskl. metenamin,2017,Mann,Møre og Romsdal,21964,163.216170023036338,134570,5527364.5,420074.78125
+Antibiotika ekskl. metenamin,2017,Mann,Nordland,17976,146.577732839739722,122638,6062888.5,366629.40625
+Antibiotika ekskl. metenamin,2017,Mann,Oslo,51281,153.447718676688850,334192,12331190,957078.625
+Antibiotika ekskl. metenamin,2017,Mann,Rogaland,39002,162.336527175406029,240254,9180080,753095.9375
+Antibiotika ekskl. metenamin,2017,Mann,Troms og Finnmark,16892,135.806340094707476,124383,4099832.5,324330.8125
+Antibiotika ekskl. metenamin,2017,Mann,Trøndelag,35214,150.837845247070112,233456,9925876,689532.8125
+Antibiotika ekskl. metenamin,2017,Mann,Vestfold og Telemark,34505,166.644933520721347,207057,8874863,681830.9375
+Antibiotika ekskl. metenamin,2017,Mann,Vestland,51707,161.780533897350538,319612,12269902,997371.0625
+Antibiotika ekskl. metenamin,2017,Mann,Viken,99964,165.237672549593286,604971,25937598,1931954.875
+Antibiotika ekskl. metenamin,2018,Begge kjønn,Agder,62767,206.132039842495378,304499,15328243,1262675.375
+Antibiotika ekskl. metenamin,2018,Begge kjønn,Innlandet,71035,191.456617361680107,371024,17505076,1355030.875
+Antibiotika ekskl. metenamin,2018,Begge kjønn,Møre og Romsdal,51695,195.299513404055974,264696,13708430,1008424.8125
+Antibiotika ekskl. metenamin,2018,Begge kjønn,Nordland,44124,182.254513612087517,242101,12392201,895171.6875
+Antibiotika ekskl. metenamin,2018,Begge kjønn,Oslo,122005,180.142336143635478,677270,29315840,2269250.5
+Antibiotika ekskl. metenamin,2018,Begge kjønn,Rogaland,91449,192.690532881013085,474590,22560170,1769896.125
+Antibiotika ekskl. metenamin,2018,Begge kjønn,Troms og Finnmark,40416,165.553853338030361,244126,9577583,773032.125
+Antibiotika ekskl. metenamin,2018,Begge kjønn,Trøndelag,85682,184.661870627637426,463994,22472868,1665294
+Antibiotika ekskl. metenamin,2018,Begge kjønn,Vestfold og Telemark,81894,196.509127905860672,416744,20673546,1586346.625
+Antibiotika ekskl. metenamin,2018,Begge kjønn,Vestland,123190,194.811150680945543,632356,31269650,2431096
+Antibiotika ekskl. metenamin,2018,Begge kjønn,Viken,237940,194.950172754660525,1220517,59328324,4570416.5
+Antibiotika ekskl. metenamin,2018,Kvinne,Agder,36380,240.363650778968511,151354,8831058,729380.125
+Antibiotika ekskl. metenamin,2018,Kvinne,Innlandet,42217,228.172865929457038,185022,10394189,794257.125
+Antibiotika ekskl. metenamin,2018,Kvinne,Møre og Romsdal,30829,237.485941423883402,129814,7902381,599876.1875
+Antibiotika ekskl. metenamin,2018,Kvinne,Nordland,26701,223.911512142761304,119248,7246245,537033.5625
+Antibiotika ekskl. metenamin,2018,Kvinne,Oslo,72939,214.799392168873392,339568,17275068,1352307.75
+Antibiotika ekskl. metenamin,2018,Kvinne,Rogaland,53801,230.271098518245863,233642,13541488,1049198.625
+Antibiotika ekskl. metenamin,2018,Kvinne,Troms og Finnmark,24782,207.488404025519516,119438,5882385,469734.75
+Antibiotika ekskl. metenamin,2018,Kvinne,Trøndelag,51950,227.336379071924942,228516,13025931,1007075.25
+Antibiotika ekskl. metenamin,2018,Kvinne,Vestfold og Telemark,48645,233.290331243975311,208517,11822015,923452.0625
+Antibiotika ekskl. metenamin,2018,Kvinne,Vestland,73866,236.819831488772330,311908,18890882,1459334.25
+Antibiotika ekskl. metenamin,2018,Kvinne,Viken,141422,232.538484558492254,608166,34525612,2700487.25
+Antibiotika ekskl. metenamin,2018,Mann,Agder,26387,172.301885806822337,153144,6497185.5,533295.3125
+Antibiotika ekskl. metenamin,2018,Mann,Innlandet,28818,154.933817915936388,186002,7110886.5,560773.75
+Antibiotika ekskl. metenamin,2018,Mann,Møre og Romsdal,20866,154.698180631959787,134882,5806049.5,408548.59375
+Antibiotika ekskl. metenamin,2018,Mann,Nordland,17423,141.821052974310553,122852,5145955.5,358138.125
+Antibiotika ekskl. metenamin,2018,Mann,Oslo,49066,145.293779722951004,337702,12040770,916942.8125
+Antibiotika ekskl. metenamin,2018,Mann,Rogaland,37648,156.249481215864004,240948,9018682,720697.5
+Antibiotika ekskl. metenamin,2018,Mann,Troms og Finnmark,15634,125.384960862312332,124688,3695198.25,303297.40625
+Antibiotika ekskl. metenamin,2018,Mann,Trøndelag,33732,143.249050866747637,235478,9446937,658218.8125
+Antibiotika ekskl. metenamin,2018,Mann,Vestfold og Telemark,33249,159.676698987163048,208227,8851532,662894.5625
+Antibiotika ekskl. metenamin,2018,Mann,Vestland,49324,153.922489522448330,320447,12378768,971761.875
+Antibiotika ekskl. metenamin,2018,Mann,Viken,96518,157.619008736833510,612350,24802710,1869929
+Antibiotika ekskl. metenamin,2019,Begge kjønn,Agder,61503,200.833991862538287,306238,15944157,1254368.75
+Antibiotika ekskl. metenamin,2019,Begge kjønn,Innlandet,72081,194.173266526588007,371220,19134268,1406084.125
+Antibiotika ekskl. metenamin,2019,Begge kjønn,Møre og Romsdal,52533,198.159967409016839,265104,14680097,1049861.25
+Antibiotika ekskl. metenamin,2019,Begge kjønn,Nordland,44178,182.452691484880273,242134,12709579,903859.5
+Antibiotika ekskl. metenamin,2019,Begge kjønn,Oslo,127787,185.930957016188406,687282,32055372,2428269.75
+Antibiotika ekskl. metenamin,2019,Begge kjønn,Rogaland,89764,187.880018335067072,477773,23056070,1763847.75
+Antibiotika ekskl. metenamin,2019,Begge kjønn,Troms og Finnmark,41438,169.954638295777998,243818,10484770,804819.125
+Antibiotika ekskl. metenamin,2019,Begge kjønn,Trøndelag,88483,189.200458444879701,467668,23636998,1725807.375
+Antibiotika ekskl. metenamin,2019,Begge kjønn,Vestfold og Telemark,83949,200.569102194698892,418554,22205192,1648982.375
+Antibiotika ekskl. metenamin,2019,Begge kjønn,Vestland,124326,195.843257343767721,634824,32408936,2465129.25
+Antibiotika ekskl. metenamin,2019,Begge kjønn,Viken,245805,199.155752348620806,1234235,64482620,4818350
+Antibiotika ekskl. metenamin,2019,Kvinne,Agder,35930,236.086470858794927,152190,9122458,725714.0625
+Antibiotika ekskl. metenamin,2019,Kvinne,Innlandet,42984,232.323341512717682,185018,11126629,825948.8125
+Antibiotika ekskl. metenamin,2019,Kvinne,Møre og Romsdal,31244,240.392087465665418,129971,8394314,621955.0625
+Antibiotika ekskl. metenamin,2019,Kvinne,Nordland,26675,223.723497047772410,119232,7599017,544831.25
+Antibiotika ekskl. metenamin,2019,Kvinne,Oslo,76849,223.144623407696485,344391,19159870,1451603.875
+Antibiotika ekskl. metenamin,2019,Kvinne,Rogaland,53174,225.978088106550619,235306,14225275,1044719.3125
+Antibiotika ekskl. metenamin,2019,Kvinne,Troms og Finnmark,25229,211.361884655339968,119364,6558517.5,486231.5625
+Antibiotika ekskl. metenamin,2019,Kvinne,Trøndelag,53612,232.947780973816621,230146,13748319,1045079.375
+Antibiotika ekskl. metenamin,2019,Kvinne,Vestfold og Telemark,49875,238.401384281521562,209206,12707892,962699.625
+Antibiotika ekskl. metenamin,2019,Kvinne,Vestland,74568,238.105577765572912,313172,19609812,1489058.125
+Antibiotika ekskl. metenamin,2019,Kvinne,Viken,145898,237.417435693816810,614521,37511276,2841740.25
+Antibiotika ekskl. metenamin,2019,Mann,Agder,25573,166.006699210635646,154048,6821699.5,528654.75
+Antibiotika ekskl. metenamin,2019,Mann,Innlandet,29097,156.265775877810120,186202,8007639,580135.25
+Antibiotika ekskl. metenamin,2019,Mann,Møre og Romsdal,21289,157.541089149208557,135133,6285782.5,427906.15625
+Antibiotika ekskl. metenamin,2019,Mann,Nordland,17503,142.414281297293779,122902,5110562,359028.21875
+Antibiotika ekskl. metenamin,2019,Mann,Oslo,50938,148.554063670193530,342892,12895502,976665.9375
+Antibiotika ekskl. metenamin,2019,Mann,Rogaland,36590,150.907756139005056,242466,8830795,719128.4375
+Antibiotika ekskl. metenamin,2019,Mann,Troms og Finnmark,16209,130.239845727371339,124455,3926252.5,318587.5625
+Antibiotika ekskl. metenamin,2019,Mann,Trøndelag,34871,146.811663761672603,237522,9888680,680728
+Antibiotika ekskl. metenamin,2019,Mann,Vestfold og Telemark,34074,162.763259086588296,209347,9497300,686282.75
+Antibiotika ekskl. metenamin,2019,Mann,Vestland,49758,154.695136358548991,321652,12799125,976071.25
+Antibiotika ekskl. metenamin,2019,Mann,Viken,99907,161.214689356703253,619714,26971344,1976609.875
+Antibiotika ekskl. metenamin,2020,Begge kjønn,Agder,52867,171.625486548693826,308037,14301607,1111375
+Antibiotika ekskl. metenamin,2020,Begge kjønn,Innlandet,60553,163.218273071801700,370994,17989728,1204728.375
+Antibiotika ekskl. metenamin,2020,Begge kjønn,Møre og Romsdal,45104,169.953012724621408,265391,13237371,916678.125
+Antibiotika ekskl. metenamin,2020,Begge kjønn,Nordland,36982,153.586112380082229,240790,11659509,773986.875
+Antibiotika ekskl. metenamin,2020,Begge kjønn,Oslo,107489,154.604373665951339,695252,28765552,2131415.25
+Antibiotika ekskl. metenamin,2020,Begge kjønn,Rogaland,78192,162.470806286725899,481268,21155470,1594689
+Antibiotika ekskl. metenamin,2020,Begge kjønn,Troms og Finnmark,35724,147.169811320754717,242740,9548488,713881.75
+Antibiotika ekskl. metenamin,2020,Begge kjønn,Trøndelag,75789,161.283046010644524,469913,20949050,1520079.375
+Antibiotika ekskl. metenamin,2020,Begge kjønn,Vestfold og Telemark,71937,171.018379180247195,420639,20646858,1452313.25
+Antibiotika ekskl. metenamin,2020,Begge kjønn,Vestland,105051,164.740401081426932,637676,28556000,2151535.25
+Antibiotika ekskl. metenamin,2020,Begge kjønn,Viken,206416,165.560077447877482,1246774,59293052,4191926.75
+Antibiotika ekskl. metenamin,2020,Kvinne,Agder,31363,205.032490880326347,152966,8131148,645750.375
+Antibiotika ekskl. metenamin,2020,Kvinne,Innlandet,36662,198.295165669655896,184886,9894082,707737.5
+Antibiotika ekskl. metenamin,2020,Kvinne,Møre og Romsdal,27302,209.895905407691007,130074,7738777.5,549418.5
+Antibiotika ekskl. metenamin,2020,Kvinne,Nordland,22817,192.485173655927585,118539,6521908,467050
+Antibiotika ekskl. metenamin,2020,Kvinne,Oslo,65539,188.149338998377998,348335,17313898,1286285
+Antibiotika ekskl. metenamin,2020,Kvinne,Rogaland,46673,197.017281699296744,236898,12906056,951082.5
+Antibiotika ekskl. metenamin,2020,Kvinne,Troms og Finnmark,22275,187.367517916624609,118884,6004689,438034.28125
+Antibiotika ekskl. metenamin,2020,Kvinne,Trøndelag,46904,202.877237298545810,231194,12414679,927298.875
+Antibiotika ekskl. metenamin,2020,Kvinne,Vestfold og Telemark,43347,206.369081058434819,210046,11448903,848014.1875
+Antibiotika ekskl. metenamin,2020,Kvinne,Vestland,64184,204.144336126969991,314405,17354456,1312131.75
+Antibiotika ekskl. metenamin,2020,Kvinne,Viken,124538,200.758296283638919,620338,33534220,2495538
+Antibiotika ekskl. metenamin,2020,Mann,Agder,21504,138.672857419230025,155070,6170459.5,465624.53125
+Antibiotika ekskl. metenamin,2020,Mann,Innlandet,23891,128.371698153760182,186108,8095645.5,496990.875
+Antibiotika ekskl. metenamin,2020,Mann,Møre og Romsdal,17802,131.557749580614409,135317,5498594,367259.625
+Antibiotika ekskl. metenamin,2020,Mann,Nordland,14165,115.868172857481738,122251,5137601,306936.90625
+Antibiotika ekskl. metenamin,2020,Mann,Oslo,41950,120.922295534666793,346917,11451653,845130.25
+Antibiotika ekskl. metenamin,2020,Mann,Rogaland,31519,128.980116298578800,244371,8249414,643606.5625
+Antibiotika ekskl. metenamin,2020,Mann,Troms og Finnmark,13449,108.585777031391293,123856,3543799,275847.5
+Antibiotika ekskl. metenamin,2020,Mann,Trøndelag,28885,120.999497319034853,238720,8534371,592780.5
+Antibiotika ekskl. metenamin,2020,Mann,Vestfold og Telemark,28590,135.759498178951817,210593,9197954,604299
+Antibiotika ekskl. metenamin,2020,Mann,Vestland,40867,126.417154647339229,323271,11201544,839403.625
+Antibiotika ekskl. metenamin,2020,Mann,Viken,81878,130.704493356065105,626436,25758832,1696388.75
