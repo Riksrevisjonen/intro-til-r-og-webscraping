@@ -32,6 +32,7 @@ Datasettet vi skal bruker inneholder data fra reseptregisteret om antibiotikabru
 - **SumPrevalens_pr_1000**: antall legemiddelbrukere per 1000 av befolkningsgrunnlaget
 - **SumBefolkning**: innbyggertall brukt for å beregne brukere per 1000
 - **SumSum_AUP**: omsetning i kroner beregnet fra apotekets utsalgspris (AUP)
+- **SumSum_DDD**: døgndose
 
 ## Oppgaver
 
@@ -42,32 +43,38 @@ Datasettet vi skal bruker inneholder data fra reseptregisteret om antibiotikabru
 2. **Oppgave 2**
 - Hvor mange rader og kolonner er det i datasettet?
 - Hvilke datatyper har de ulike kolonnene?
-- Hvilke verdier har variabelen `Valuegender` og `Valuegeography`, og hva innebærer det for videre databehandling/analyse?
+- Hvilke verdier har variabelen `Valuegender`, og hva innebærer det for videre databehandling/analyse?
 - Tell antall missingverdier per kolonne i datasettet
 - Sjekk for duplikater
 
 3. **Oppgave 3**
-- Fjern første kolonne i datasettet
-- Endre navn på variablene til hhv. år, kjønn, fylke, unike_pas, prevalens_1000, befolkning, omsetning_apo med `colnames()`
-- Avgrens datasettet ved å lage et nytt objekt `norge`, som ikke inkluderer data på fylkesnivå (hint: `norge <- data[ , ]`)
-- Avgrens datasettet ved å lage et nytt objekt `fylker`, som ikke skiller mellom Kvinne/Mann og ikke inkluderer nasjonale tall.
+- Fjern den første og de to siste kolonnene i datasettet
+- Endre navn på variablene til hhv. år, kjønn, fylke, unike_pas, prevalens_1000, befolkning med `colnames()`
+- Finn min og maks for `prevalens_1000` i perioden. Beskriv.
+- Gir det mening å beregne gjennomsnittet for alle observasjonene i `prevalens_1000`?
 
 4. **Oppgave 4**
-- Hvilke fylker har høyeste og laveste verdi av `prevalens_1000` i løpet av perioden?
-- Hvilke fylker hadde i 2015 høyere prevalens enn landet totalt? 
-- Gjelder det samme for 2019 og 2020?
+- Lag et nytt objekt `norge` som gir gjennomsnittlig prevalens i befolkningen fordelt på år og kjønn.
+- Ta utgangspunkt i hele befolkningen og finn ut *hvilke* og *hvor mange* fylker som i 2014 og 2019 hadde høyere prevalens enn snittet for befolkningen
+- Print navnet på fylket som hadde høyere prevalens enn landssnittet i 2014, men ikke i 2019.
 
 
 5. **Oppgave 5**
-- Bruk fylker-datasettet til å aggregere total `omsetning_apo` per år
-- Test hvorvidt de aggregerte verdiene er like verdiene for hele landet i norge-datasettet
-- Hva utgjør forskjellene i kroner?
-- Bruk `round()` og `table()` for å teste om verdiene blir like når man runder opp til 1000 kr med 0 desimaler
-
-6. **Oppgave 6**
-- Bruk norge-datasettet til å plotte utviklingen i antibiotikabruk i perioden for begge kjønn
-- Gjør det samme for hhv. kvinner og menn
+- Lag et nytt objekt `andeler` som summerer antall `unike_pas` og `befolkning` fordelt på år og kjønn
+- Lag en ny variabel som viser andelen som har brukt antibiotika et gitt år
+- Hva er høyeste og laveste andel for hhv. kvinner og menn i perioden?
+- Lag et linjeplott av utviklingen i andelen av befolkningen totalt for perioden (hint: plot(x,y, type="l"))
+- Legg på en linje som viser utviklingen for kvinner
+- Legg på en linje som viser utviklingen for menn
 - Kommenter
 
+Se til dette eksempelet for hvordan man kan legge til nye linjer i eksisterende plot:
+
+```{r echo=FALSE, eval=FALSE}
+plot(x, y1, type = "l", col = "red")
+lines(x, y2, col="blue")
+lines(x, y3, col="green")
+```
+- Kommenter utviklingen
 
 
