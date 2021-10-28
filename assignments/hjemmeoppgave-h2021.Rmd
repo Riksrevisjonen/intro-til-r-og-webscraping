@@ -1,6 +1,6 @@
 ---
 title: "Hjemmeoppgave"
-author: "Eivor Hovde Hoff og Ove Haugland Jakobsen"
+author: "Eivor Hovde Hoff"
 date: "`r format(Sys.Date(), '%e. %B %Y')`"
 output:
   html_document:
@@ -23,10 +23,10 @@ Oppgaven kan enten løses med å skrive et R-skript, eller et Rmarkdown-dokument
 # Eventuelle svar på oppgaven som ikke er kode
 ```
 
-Det kan være flere måter å løse oppgaven på, og hvilken måte du løser oppgaven på er ikke viktig så lenge du løser eller forsøker å løse oppgaven. Vis uansett framgangsmåten du brukte for å løse oppgavene.
+Det kan være flere måter å løse oppgaven på, og hvilken måte du løser oppgaven på er ikke viktig så lenge du løser eller forsøker å løse oppgaven. Vis uansett framgangsmåten du brukte for å løse oppgavene. Husk at dere kan bruke `help()` eller `?` for informasjon om funksjoner.
 
 ## Om datasettet
-Datasettet vi skal bruker inneholder data fra reseptregisteret om antibiotikabruk i Norge i perioden 2015-2020. (Ekskludert metenamin, som er brukt mot urinveisinfeksjon.)
+Datasettet vi skal bruker inneholder data fra reseptregisteret om antibiotikabruk på fylkesnivå i perioden 2004-2020. (Ekskludert metenamin, som er brukt mot urinveisinfeksjon.)
 
 - **SumAntall_unike_pasienter**: personer som har hentet legemiddel på resept minst én gang per år
 - **SumPrevalens_pr_1000**: antall legemiddelbrukere per 1000 av befolkningsgrunnlaget
@@ -37,11 +37,12 @@ Datasettet vi skal bruker inneholder data fra reseptregisteret om antibiotikabru
 ## Oppgaver
 
 1. **Oppgave 1**
-- Les inn datasettet `antibiotika.csv`. Tilordne datasettet et objekt når du leser det inn. Bruk gjerne `readLines()` først for å vurdere om du bør bruke `read.csv()` eller `read.csv2()`.
+- Les inn datasettet `antibiotika.csv`. Tilordne datasettet et objekt når du leser det inn. Bruk gjerne `readLines()` først for å vurdere om du bør bruke `read.csv()` eller `read.csv2()`. Spesifiser `encoding="UTF-8"` ved innlesing.
 - Valgfri: Se om du kan gi R riktig filbane for filen å bruke en kombinasjon av `list.files()` og `getwd()`, og eventuelt `paste0()` i stedet for å skrive inn filbanen/filnavnet.
 
 2. **Oppgave 2**
 - Hvor mange rader og kolonner er det i datasettet?
+- Se på de 15 øverste og nederste observasjonene
 - Hvilke datatyper har de ulike kolonnene?
 - Hvilke verdier har variabelen `Valuegender`, og hva innebærer det for videre databehandling/analyse?
 - Tell antall missingverdier per kolonne i datasettet
@@ -52,29 +53,52 @@ Datasettet vi skal bruker inneholder data fra reseptregisteret om antibiotikabru
 - Endre navn på variablene til hhv. år, kjønn, fylke, unike_pas, prevalens_1000, befolkning med `colnames()`
 - Finn min og maks for `prevalens_1000` i perioden. Beskriv.
 - Gir det mening å beregne gjennomsnittet for alle observasjonene i `prevalens_1000`?
+- Bruk `tapply()` og `summary()` for å se på deskriptiv statistikk for `prevalens_1000` for alle verdier av `kjønn`. Tilordne resultatene et objekt. Print ut median for kvinner.
 
 4. **Oppgave 4**
-- Lag et nytt objekt `norge` som gir gjennomsnittlig prevalens i befolkningen fordelt på år og kjønn.
-- Ta utgangspunkt i hele befolkningen og finn ut *hvilke* og *hvor mange* fylker som i 2014 og 2019 hadde høyere prevalens enn snittet for befolkningen
-- Print navnet på fylket som hadde høyere prevalens enn landssnittet i 2014, men ikke i 2019.
+- Lag et nytt datasett som summerer `unike_pas` og `befolkning` fordelt på år og kjønn (hint: `aggregate()`)
+- Lag en ny variabel gir prevalens per 1000 innbygger 
+- Lag en ny variabel gir andelen av befolkningen som har brukt antibiotika (rund opp til 1 desimal, hint: `round()`)
+- Ta utgangspunkt i begge kjønn: hvilke fylker hadde høyere prevalens enn landssnittet i 2004 og 2020?
+
+
+Se til disse eksemplene for hvordan man kan bruke `aggregate()`, hvor `col1` og `col2` er grupperingsvariabler:
+
+```{r echo=TRUE, eval=FALSE}
+# Ved bruk av formula-metoden
+# Aggreger opp én variabel
+aggregate(col3 ~ col1 + col2, data=df, FUN)
+
+# Aggreger for hele datasettet
+aggregate(. ~ col1 + col2, data=df, FUN)
+
+# Aggregere spesifikke variabler
+aggregate(cbind(col3, col4) ~ col1 + col2, data=df , FUN)
+
+
+# Tilsvarende med data.frame-metoden 
+aggregate(df$col3, by=list(col1 = df$col1, col2=df$col2), FUN)
+
+aggregate(df, by=list(col1 = df$col1, col2=df$col2), FUN)
+
+aggregate(df[, c('col3', 'col4')], by=list(col1 = df$col1, col2=df$col2), FUN)
+
+```
 
 
 5. **Oppgave 5**
-- Lag et nytt objekt `andeler` som summerer antall `unike_pas` og `befolkning` fordelt på år og kjønn
-- Lag en ny variabel som viser andelen som har brukt antibiotika et gitt år
-- Hva er høyeste og laveste andel for hhv. kvinner og menn i perioden?
-- Lag et linjeplott av utviklingen i andelen av befolkningen totalt for perioden (hint: plot(x,y, type="l"))
+- Lag et linjeplott av utviklingen i andelen av befolkningen totalt som har brukt antibiotika i perioden (hint: `plot(x,y, type="l")`). Sett argumentet `ylim = c(0, 50)`.
 - Legg på en linje som viser utviklingen for kvinner
 - Legg på en linje som viser utviklingen for menn
 - Kommenter
 
 Se til dette eksempelet for hvordan man kan legge til nye linjer i eksisterende plot:
 
-```{r echo=FALSE, eval=FALSE}
+```{r echo=TRUE, eval=FALSE}
 plot(x, y1, type = "l", col = "red")
 lines(x, y2, col="blue")
 lines(x, y3, col="green")
 ```
-- Kommenter utviklingen
+
 
 
